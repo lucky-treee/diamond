@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%-5level] : %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="ASYNC_SLACK" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="SLACK"/>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+    <appender name="SLACK" class="com.github.maricn.logback.SlackAppender">
+        <webhookUri>${webhook}</webhookUri>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger{35} : %msg %n</pattern>
+        </layout>
+        <!-- Username of the messages sender -->
+        <username>이거 에러야</username>
+        <!-- Emoji to be used for messages -->
+        <iconEmoji>:crying:</iconEmoji>
+        <!-- If color coding of log levels should be used -->
+        <colorCoding>true</colorCoding>
+    </appender>
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ASYNC_SLACK"/>
+    </root>
+</configuration>

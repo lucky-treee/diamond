@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: shop-service
+  profiles:
+    active: main
+  config:
+    import: "optional:configserver:http://192.168.0.14:31185"
+  cloud:
+    config:
+      name: eureka, actuator, shopService
+      label: develop
+      profile: develop
+server:
+  port: 10300
