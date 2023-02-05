@@ -1,4 +1,9 @@
 # diamond
 
 
-[백엔드에서 제공하는 서비스 모듈]
+## 릴리즈
+
+*Release/0.0.0*
+
+> shopService <br>
+memberService
