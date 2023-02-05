@@ -1,0 +1,22 @@
+spring:
+  mail:
+    host: smtp.gmail.com  # SMTP 서버 호스트
+    port: 587             # SMTP 서버 포트
+    username: <ihcho620@gmail.com> # SMTP 서버 로그인 아이디
+    password: <oomnclqrbwpddimu>   # SMTP 서버 로그인 패스워드(앱 비밀번호)
+    properties:
+      mail.smtp.auth: true  # 사용자 인증 시도 여부 (기본값: false)
+      mail.smtp.timeout: 5000
+      mail.smtp.starttls.enable: true
+  application:
+    name: member-service
+  profiles:
+    active: main
+  config:
+    import: "optional:configserver:http://localhost:8888/"
+  cloud:
+    config:
+      name: mysql, eureka, actuator
+      profile: develop
+server:
+  port: 10100

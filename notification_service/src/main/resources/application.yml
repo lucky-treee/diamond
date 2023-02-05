@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: notification-service
+  profiles:
+    active: main
+  config:
+    import: "optional:configserver:http://localhost:8888/"
+  cloud:
+    config:
+      name: mysql, eureka, actuator
+      profile: develop
+server:
+  port: 10200
