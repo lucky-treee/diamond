@@ -1,7 +1,7 @@
 package com.luckytree.member_service.member.adapter.out.persistence;
 
 import com.luckytree.member_service.member.application.port.in.MemberRequest;
-import com.luckytree.member_service.member.domain.MemberStatus;
+import com.luckytree.member_service.member.domain.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,7 @@ public class MemberEntity {
 
     @Column(length = 20, nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private MemberStatus status;
+    private Status status;
 
     @Column(length = 50)
     private String photo;
@@ -39,7 +39,7 @@ public class MemberEntity {
         this.nickname = memberRequest.getNickname();
         this.email = memberRequest.getEmail();
         this.password = memberRequest.getPassword();
-        this.status = MemberStatus.NORMAL;
+        this.status = Status.NORMAL;
         this.photo = memberRequest.getPhoto();
     }
 }
