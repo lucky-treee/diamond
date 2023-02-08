@@ -1,6 +1,6 @@
 package com.luckytree.member_service.member.domain;
 
-public enum MemberStatus {
+public enum Status {
 
     NORMAL, DORMANT, LEAVE
 }
