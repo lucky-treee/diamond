@@ -3,17 +3,19 @@ package com.luckytree.member_service.member.adapter.out.persistence;
 import com.luckytree.member_service.member.domain.Photo;
 import com.luckytree.member_service.member.domain.Status;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Table(name = "member")
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 @Entity
-public class MemberEntity extends BaseTimeEntity {
+public class MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +27,7 @@ public class MemberEntity extends BaseTimeEntity {
     @Column(length = 50, unique = true, nullable = false)
     private String email;
 
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String password;
 
     @Column(length = 20, nullable = false)
@@ -34,4 +36,10 @@ public class MemberEntity extends BaseTimeEntity {
 
     @Column(length = 50)
     private Photo photo;
+
+    @CreatedDate
+    private LocalDateTime createAt;
+
+    @LastModifiedDate
+    private LocalDateTime updateAt;
 }
