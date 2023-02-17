@@ -1,9 +1,13 @@
 package com.luckytree.member_service.member.adapter.out.persistence;
 
-import com.luckytree.member_service.Photo;
+import com.luckytree.member_service.member.domain.Photo;
 import com.luckytree.member_service.member.domain.Status;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Table(name = "member")
 @Getter
@@ -26,10 +30,16 @@ public class MemberEntity {
     @Column(length = 50, nullable = false)
     private String password;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 20,nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Status status;
 
     @Column(length = 50)
     private Photo photo;
+
+    @CreatedDate
+    private LocalDateTime creatAt;
+
+    @LastModifiedDate
+    private LocalDateTime updateAt;
 }
