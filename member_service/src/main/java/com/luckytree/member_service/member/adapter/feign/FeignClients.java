@@ -1,9 +1,7 @@
-package com.luckytree.member_service.config;
+package com.luckytree.member_service.member.adapter.feign;
 
+import com.luckytree.member_service.common.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 @FeignClient(name = "notification-service", configuration = FeignClientConfig.class)
 public interface FeignClients {
