@@ -2,9 +2,9 @@ package com.luckytree.member_service.member.adapter.persistence;
 
 import com.luckytree.member_service.member.application.port.outgoing.GetMemberPort;
 import com.luckytree.member_service.member.domain.MemberProfile;
+import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.webjars.NotFoundException;
 
 @RequiredArgsConstructor
 @Repository
