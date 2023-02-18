@@ -1,12 +1,12 @@
-package com.luckytree.member_service.member.adapter.out;
+package com.luckytree.member_service.common;
 
 import com.luckytree.member_service.common.dto.ResultResponse;
 import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.NoContentException;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.webjars.NotFoundException;
 
 @RestControllerAdvice
 public class ControllerAdvice {
@@ -15,6 +15,7 @@ public class ControllerAdvice {
     public ResultResponse notFoundExceptionHandler(NotFoundException e) {
         return new ResultResponse<>(-10404, e.getMessage());
     }
+
     @ExceptionHandler(NoContentException.class)
     public ResultResponse noContentExceptionHandler(NoContentException e) {
         return new ResultResponse<>(-10204, e.getMessage());

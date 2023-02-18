@@ -1,7 +1,6 @@
-package com.luckytree.member_service.config;
+package com.luckytree.member_service.common.config;
 
 import feign.Logger;
-import feign.codec.Decoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
