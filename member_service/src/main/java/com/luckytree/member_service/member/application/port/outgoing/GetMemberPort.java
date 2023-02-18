@@ -1,8 +1,8 @@
 package com.luckytree.member_service.member.application.port.outgoing;
 
-import com.luckytree.member_service.member.domain.MemberInfo;
+import com.luckytree.member_service.member.domain.MemberProfile;
 
 public interface GetMemberPort {
 
-    MemberInfo getMemberInfo(String nickname, String  email);
+    MemberProfile getMemberProfile(String nickname, String email);
 }

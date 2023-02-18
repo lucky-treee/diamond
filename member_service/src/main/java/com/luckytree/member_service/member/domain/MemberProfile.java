@@ -4,11 +4,9 @@ import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import lombok.*;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class MemberInfo {
+public class MemberProfile {
 
     private String nickname;
 
@@ -16,7 +14,7 @@ public class MemberInfo {
 
     private Photo photo;
 
-    public MemberInfo(MemberEntity memberEntity) {
+    public MemberProfile(MemberEntity memberEntity) {
         this.nickname = memberEntity.getNickname();
         this.email = memberEntity.getEmail();
         this.photo = memberEntity.getPhoto();
