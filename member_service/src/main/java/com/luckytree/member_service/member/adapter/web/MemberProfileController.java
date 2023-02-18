@@ -1,24 +1,24 @@
 package com.luckytree.member_service.member.adapter.web;
 
+import com.luckytree.member_service.common.dto.ResultResponse;
 import com.luckytree.member_service.member.application.port.incoming.GetMemberUseCase;
+import com.luckytree.member_service.member.application.port.incoming.MemberInfoUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "회원 조회", description = "회원 조회 API 모음")
+@Tag(name = "회원 정보", description = "회원 정보 API 모음")
 @RestController
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberProfileController {
 
     private final GetMemberUseCase getMemberUseCase;
+    private final MemberInfoUseCase memberInfoUseCase;
 
     @Operation(summary = "회원 상세정보 조회")
     @GetMapping("/get/{nickname}/{email}")
@@ -27,4 +27,10 @@ public class MemberProfileController {
         return new ResponseEntity<>(memberProfile, HttpStatus.OK);
     }
 
+    @Operation(summary = "닉네임 변경")
+    @PostMapping("/updateNickname/{email}/{newNickname}")
+    public ResultResponse updateNickname(@PathVariable("email") String email, @PathVariable("newNickname") String newNickname) {
+        memberInfoUseCase.updateNicknameRequest(email, newNickname);
+        return new ResultResponse<>(HttpStatus.OK);
+    }
 }
