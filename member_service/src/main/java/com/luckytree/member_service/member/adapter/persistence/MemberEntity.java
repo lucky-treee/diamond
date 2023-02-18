@@ -39,4 +39,8 @@ public class MemberEntity {
 
     @CreatedDate
     private LocalDateTime createAt;
+
+    public void updateNickname(String email, String newNickname) {
+        this.nickname = newNickname;
+    }
 }
