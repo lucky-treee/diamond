@@ -1,4 +1,4 @@
-package com.luckytree.member_service.member.adapter.out.persistence;
+package com.luckytree.member_service.member.adapter.persistence;
 
 import com.luckytree.member_service.member.domain.Photo;
 import com.luckytree.member_service.member.domain.Status;
