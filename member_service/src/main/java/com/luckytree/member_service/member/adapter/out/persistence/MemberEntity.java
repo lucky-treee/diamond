@@ -27,9 +27,6 @@ public class MemberEntity {
     @Column(length = 50, unique = true, nullable = false)
     private String email;
 
-    @Column(length = 50, nullable = false)
-    private String password;
-
     @Column(length = 20, nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Status status;
@@ -37,9 +34,9 @@ public class MemberEntity {
     @Column(length = 50)
     private Photo photo;
 
-    @CreatedDate
-    private LocalDateTime createAt;
-
     @LastModifiedDate
     private LocalDateTime updateAt;
+
+    @CreatedDate
+    private LocalDateTime createAt;
 }
