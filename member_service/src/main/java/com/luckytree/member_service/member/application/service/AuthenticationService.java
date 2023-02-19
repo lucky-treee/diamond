@@ -39,7 +39,7 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     @Override
     @Transactional
-    public TokenDto signUp(SignupDto signUpDto) {
+    public TokenDto signup(SignupDto signUpDto) {
         String email = authenticationPort.saveMember(new Member(signUpDto));
         String accessToken = tokenProvider.createAccessToken(email);
         String refreshToken = tokenProvider.createRefreshToken();

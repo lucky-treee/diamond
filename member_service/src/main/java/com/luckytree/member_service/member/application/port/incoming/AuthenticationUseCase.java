@@ -9,5 +9,5 @@ public interface AuthenticationUseCase {
 
     AuthenticateResult authenticate(Authentication authentication);
 
-    TokenDto signUp(SignupDto signUpDto);
+    TokenDto signup(SignupDto signUpDto);
 }

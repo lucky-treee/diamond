@@ -28,7 +28,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> signup(@Valid @RequestBody SignupDto signupDto) {
-        TokenDto tokenDto = authenticationUseCase.signUp(signupDto);
+        TokenDto tokenDto = authenticationUseCase.signup(signupDto);
         return new ResponseEntity<>(tokenDto, HttpStatus.OK);
     }
 }
