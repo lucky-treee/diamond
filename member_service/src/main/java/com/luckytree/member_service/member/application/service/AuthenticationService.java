@@ -21,7 +21,7 @@ public class AuthenticationService implements AuthenticationUseCase {
     private final TokenProvider tokenProvider;
 
     @Override
-    public AuthenticateResult authenticate(Authentication authentication) {
+    public AuthenticateResult login(Authentication authentication) {
         // 1. 전달받은 인가코드로 카카오 서버에 토큰 요청
 
         // 2. 받은 토큰으로 카카오 서버에 리소스 요청
@@ -45,8 +45,4 @@ public class AuthenticationService implements AuthenticationUseCase {
         String refreshToken = tokenProvider.createRefreshToken();
         return new TokenDto(accessToken, refreshToken);
     }
-
-    /*public TokenDto login() {
-        ㅅㅂ
-    }*/
 }

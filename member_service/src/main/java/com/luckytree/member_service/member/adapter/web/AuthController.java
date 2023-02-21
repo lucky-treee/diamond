@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/member")
+@RequestMapping("/auth")
 @RestController
 public class AuthController {
 
     private final AuthenticationUseCase authenticationUseCase;
 
-    @PostMapping("/auth")
-    public ResponseEntity<Object> authenticate(@Valid @RequestBody Authentication authentication) {
-        authenticationUseCase.authenticate(authentication);
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@Valid @RequestBody Authentication authentication) {
+        authenticationUseCase.login(authentication);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

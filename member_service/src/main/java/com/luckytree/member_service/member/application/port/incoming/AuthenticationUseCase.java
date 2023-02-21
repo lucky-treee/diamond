@@ -7,7 +7,7 @@ import com.luckytree.member_service.member.domain.Authentication;
 
 public interface AuthenticationUseCase {
 
-    AuthenticateResult authenticate(Authentication authentication);
+    AuthenticateResult login(Authentication authentication);
 
     TokenDto signup(SignupDto signUpDto);
 }
