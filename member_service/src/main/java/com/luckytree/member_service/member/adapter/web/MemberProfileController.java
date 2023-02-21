@@ -2,7 +2,7 @@ package com.luckytree.member_service.member.adapter.web;
 
 import com.luckytree.member_service.common.dto.ResultResponse;
 import com.luckytree.member_service.member.application.port.incoming.GetMemberUseCase;
-import com.luckytree.member_service.member.application.port.incoming.MemberInfoUseCase;
+import com.luckytree.member_service.member.application.port.incoming.MemberProfileUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberProfileController {
 
     private final GetMemberUseCase getMemberUseCase;
-    private final MemberInfoUseCase memberInfoUseCase;
+    private final MemberProfileUseCase memberInfoUseCase;
 
     @Operation(summary = "회원 상세정보 조회")
     @GetMapping("/get/{nickname}/{email}")
@@ -28,7 +28,7 @@ public class MemberProfileController {
     }
 
     @Operation(summary = "닉네임 변경")
-    @PostMapping("/updateNickname/{email}/{newNickname}")
+    @PostMapping("/update/nickname/{email}/{newNickname}")
     public ResultResponse updateNickname(@PathVariable("email") String email, @PathVariable("newNickname") String newNickname) {
         memberInfoUseCase.updateNicknameRequest(email, newNickname);
         return new ResultResponse<>(HttpStatus.OK);
