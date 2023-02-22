@@ -7,7 +7,10 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.NotAllowedException;
 import jakarta.ws.rs.NotAuthorizedException;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,17 +20,19 @@ import java.util.Date;
 import java.util.Random;
 
 @Slf4j
+@NoArgsConstructor
 @Component
-public class TokenProvider {
+public class TokenProvider implements InitializingBean {
     @Value("${jwt.secret}")
-    private String secret;
+    String secret;
     @Value("${jwt.token-validity-in-seconds}")
-    private long tokenValidityInMilliseconds;
+    long tokenValidityInMilliseconds;
     @Value("${jwt.refresh-token.expire-length}")
-    private long refreshTokenValidityInMilliseconds;
-    private final Key key;
+    long refreshTokenValidityInMilliseconds;
+    private Key key;
 
-    public TokenProvider() {
+    @Override
+    public void afterPropertiesSet() throws Exception {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }

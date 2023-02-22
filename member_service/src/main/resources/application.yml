@@ -2,7 +2,7 @@ spring:
   application:
     name: member-service
   profiles:
-    active: main
+    active: develop
   config:
     import: "optional:configserver:http://192.168.0.14:31185/"
   cloud:
