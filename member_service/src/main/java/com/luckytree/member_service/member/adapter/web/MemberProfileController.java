@@ -4,6 +4,7 @@ import com.luckytree.member_service.common.dto.ResultResponse;
 import com.luckytree.member_service.member.application.port.incoming.GetMemberUseCase;
 import com.luckytree.member_service.member.application.port.incoming.MemberProfileUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
+import com.luckytree.member_service.member.domain.Photo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +28,10 @@ public class MemberProfileController {
         return new ResponseEntity<>(memberProfile, HttpStatus.OK);
     }
 
-    @Operation(summary = "닉네임 변경")
-    @PostMapping("/update/nickname/{email}/{newNickname}")
-    public ResultResponse updateNickname(@PathVariable("email") String email, @PathVariable("newNickname") String newNickname) {
-        memberInfoUseCase.updateNicknameRequest(email, newNickname);
+    @Operation(summary = "프로필 정보 변경")
+    @PutMapping("/update/profile/{email}/{nickname}/{photo]")
+    public ResultResponse updateProfile(@RequestParam("email") String email, @RequestParam("nickname") String nickname, @RequestParam("photo") Photo photo) {
+        memberInfoUseCase.updateProfileRequest(email, nickname, photo);
         return new ResultResponse<>(HttpStatus.OK);
     }
 }

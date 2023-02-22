@@ -43,4 +43,8 @@ public class MemberEntity {
     public void updateNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    public void updatePhoto(Photo photo) {
+        this.photo = photo;
+    }
 }
