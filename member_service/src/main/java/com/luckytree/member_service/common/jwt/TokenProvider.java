@@ -19,19 +19,17 @@ import java.util.Random;
 @Slf4j
 @Component
 public class TokenProvider {
-    private final long tokenValidityInMilliseconds;
-    private final long refreshTokenValidityInMilliseconds;
+    @Value("${jwt.secret}")
+    private String secret;
+    @Value("${jwt.token-validity-in-seconds}")
+    private long tokenValidityInMilliseconds;
+    @Value("${jwt.refresh-token.expire-length}")
+    private long refreshTokenValidityInMilliseconds;
     private final Key key;
 
-    public TokenProvider(@Value("${jwt.secret}") String secret,
-                         @Value("${jwt.token-validity-in-seconds}") long tokenValidityInMilliseconds,
-                         @Value("${jwt.refresh-token.expire-length}") long refreshTokenValidityInMilliseconds) {
-
+    public TokenProvider() {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
-
         this.key = Keys.hmacShaKeyFor(keyBytes);
-        this.tokenValidityInMilliseconds = tokenValidityInMilliseconds;
-        this.refreshTokenValidityInMilliseconds = refreshTokenValidityInMilliseconds;
     }
 
     private String createToken(String payload, long tokenValidity) {
