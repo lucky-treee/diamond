@@ -3,7 +3,7 @@ package com.luckytree.member_service.member.adapter.web;
 import com.luckytree.member_service.member.adapter.data.SignupDto;
 import com.luckytree.member_service.member.adapter.data.TokenDto;
 import com.luckytree.member_service.member.application.port.incoming.AuthenticationUseCase;
-import com.luckytree.member_service.member.domain.Authentication;
+import com.luckytree.member_service.member.adapter.data.LoginDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/member")
+@RequestMapping("/v1/auth")
 @RestController
 public class AuthController {
 
     private final AuthenticationUseCase authenticationUseCase;
 
-    @PostMapping("/auth")
-    public ResponseEntity<Object> authenticate(@Valid @RequestBody Authentication authentication) {
-        authenticationUseCase.authenticate(authentication);
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@Valid @RequestBody LoginDto loginDto) {
+        authenticationUseCase.login(loginDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Object> signup(@Valid @RequestBody SignupDto signupDto) {
+    public ResponseEntity<TokenDto> signup(@Valid @RequestBody SignupDto signupDto) {
         TokenDto tokenDto = authenticationUseCase.signup(signupDto);
         return new ResponseEntity<>(tokenDto, HttpStatus.OK);
     }

@@ -2,6 +2,7 @@ package com.luckytree.member_service.common.advice;
 
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.InternalServerErrorException;
+import jakarta.ws.rs.NotAuthorizedException;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.NoContentException;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,12 @@ public class ControllerAdvice {
     }
 
     @ExceptionHandler(InternalServerErrorException.class)
-    public ResponseEntity<Object> nullPointerException(InternalServerErrorException e) {
+    public ResponseEntity<Object> internalServerErrorHandler(InternalServerErrorException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(NotAuthorizedException.class)
+    public ResponseEntity<Object> notAuthorizedExceptionHandler(NotAuthorizedException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }
