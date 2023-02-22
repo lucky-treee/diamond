@@ -29,7 +29,7 @@ public class MemberProfileController {
     }
 
     @Operation(summary = "프로필 정보 변경")
-    @PutMapping("/update/profile/{email}/{nickname}/{photo]")
+    @PutMapping("/update/profile/{email}/{nickname}/{photo}")
     public ResultResponse updateProfile(@RequestParam("email") String email, @RequestParam("nickname") String nickname, @RequestParam("photo") Photo photo) {
         memberInfoUseCase.updateProfileRequest(email, nickname, photo);
         return new ResultResponse<>(HttpStatus.OK);
