@@ -23,6 +23,7 @@ public class CreateShopController {
 
     @Operation(summary = "샵 등록요청 API")
     @PostMapping("/request")
+    @Deprecated
     public ResultResponse requestShopRegistration(@RequestBody @Valid ShopRequest shopRequest) {
         createShopUseCase.requestShopRegistration(shopRequest);
         return new ResultResponse<>(HttpStatus.OK);
