@@ -4,5 +4,5 @@ import com.luckytree.member_service.member.domain.MemberProfile;
 
 public interface GetMemberPort {
 
-    MemberProfile getMemberProfile(String nickname, String email);
+    MemberProfile getMemberProfile(String nickname);
 }
