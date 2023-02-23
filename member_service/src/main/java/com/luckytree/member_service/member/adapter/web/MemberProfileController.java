@@ -18,7 +18,7 @@ public class MemberProfileController {
     private final GetMemberUseCase getMemberUseCase;
 
     @Operation(summary = "회원 상세정보 조회")
-    @GetMapping("/get/porfile")
+    @GetMapping("/get/profile")
     public ResponseEntity<MemberProfile> getMemberProfile(@RequestParam String nickname) {
         MemberProfile memberProfile = getMemberUseCase.getMemberProfile(nickname);
         return new ResponseEntity<>(memberProfile, HttpStatus.OK);
