@@ -1,6 +1,6 @@
 package com.luckytree.member_service.member.adapter.persistence;
 
-import com.luckytree.member_service.member.application.port.outgoing.UpdateProfilePort;
+import com.luckytree.member_service.member.application.port.outgoing.UpdateMemberPort;
 import com.luckytree.member_service.member.domain.MemberProfile;
 import com.luckytree.member_service.member.domain.Photo;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import org.webjars.NotFoundException;
 
 @RequiredArgsConstructor
 @Repository
-public class UpdateProfileAdapter implements UpdateProfilePort {
+public class UpdateMemberAdapter implements UpdateMemberPort {
 
     private final MemberRepository memberRepository;
 
@@ -19,8 +19,8 @@ public class UpdateProfileAdapter implements UpdateProfilePort {
     }
 
     @Override
-    public MemberProfile updateProfile(String email, String nickname, Photo photo){
-        MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("해당 이메일이 존재하지 않습니다."));
+    public MemberProfile updateMember(String email, String nickname, Photo photo){
+        MemberEntity memberEntity = findByEmail(email);
         if(photo != null){
             memberEntity.updatePhoto(photo);
         }

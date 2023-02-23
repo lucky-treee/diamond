@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "회원 정보", description = "회원 정보 API 모음")
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/v1/member")
 @RequiredArgsConstructor
 public class MemberProfileController {
 
     private final GetMemberUseCase getMemberUseCase;
-    private final MemberProfileUseCase memberInfoUseCase;
+    private final MemberProfileUseCase memberProfileUseCase;
 
     @Operation(summary = "회원 상세정보 조회")
     @GetMapping("/get/{nickname}/{email}")
@@ -29,9 +29,9 @@ public class MemberProfileController {
     }
 
     @Operation(summary = "프로필 정보 변경")
-    @PutMapping("/update/profile/{email}/{nickname}/{photo}")
-    public ResultResponse updateProfile(@RequestParam("email") String email, @RequestParam("nickname") String nickname, @RequestParam("photo") Photo photo) {
-        memberInfoUseCase.updateProfileRequest(email, nickname, photo);
-        return new ResultResponse<>(HttpStatus.OK);
+    @PutMapping("/update")
+    public ResponseEntity updateMember(@RequestParam("email") String email, @RequestParam("nickname") String nickname, @RequestParam("photo") Photo photo) {
+        memberProfileUseCase.updateMemberRequest(email, nickname, photo);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
