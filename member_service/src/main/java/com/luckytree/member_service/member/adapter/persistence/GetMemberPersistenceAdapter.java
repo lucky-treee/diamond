@@ -13,8 +13,8 @@ public class GetMemberPersistenceAdapter implements GetMemberPort {
     private final MemberRepository memberRepository;
 
     @Override
-    public MemberProfile getMemberProfile(String nickname, String email) {
-        MemberEntity memberEntity = memberRepository.findByNicknameAndEmail(nickname, email).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다."));
+    public MemberProfile getMemberProfile(String nickname) {
+        MemberEntity memberEntity = memberRepository.findByNickname(nickname).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다."));
         return new MemberProfile(memberEntity);
     } 
 }
