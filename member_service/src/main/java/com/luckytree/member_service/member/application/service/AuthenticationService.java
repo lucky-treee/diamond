@@ -50,6 +50,7 @@ public class AuthenticationService implements AuthenticationUseCase {
         String email = authenticationPort.saveMember(new Member(signUpDto));
         String accessToken = tokenProvider.createAccessToken(email);
         String refreshToken = tokenProvider.createRefreshToken();
+
         return new TokenDto(accessToken, refreshToken);
     }
 

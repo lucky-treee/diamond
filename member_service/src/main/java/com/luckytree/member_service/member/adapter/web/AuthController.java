@@ -25,8 +25,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<TokenDto> signup(@Valid @RequestBody SignupDto signupDto) {
-        TokenDto tokenDto = authenticationUseCase.signup(signupDto);
-        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
+        return new ResponseEntity<>(authenticationUseCase.signup(signupDto), HttpStatus.OK);
     }
 
     @GetMapping("/login/kakao")
