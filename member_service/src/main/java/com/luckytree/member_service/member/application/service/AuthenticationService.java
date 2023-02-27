@@ -31,16 +31,6 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     @Override
     public void login(LoginDto loginDto) {
-        // 1. 전달받은 인가코드로 카카오 서버에 토큰 요청
-
-        // 2. 받은 토큰으로 카카오 서버에 리소스 요청
-
-        // 3. 얻은 리소스와 일치하는 회원이 있는지 DB 조회
-        String email = "test@gmail.com";
-        boolean isMember = authenticationPort.existsByEmail(email); // 더미
-        if (!isMember) {
-            throw new NotFoundException("일치하는 유저가 없습니다.");
-        }
         tokenProvider.validateToken(loginDto.getAccessToken());
     }
 
