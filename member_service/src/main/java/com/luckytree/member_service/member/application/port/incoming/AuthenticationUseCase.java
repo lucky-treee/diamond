@@ -9,4 +9,6 @@ public interface AuthenticationUseCase {
     void login(LoginDto loginDto);
 
     TokenDto signup(SignupDto signUpDto);
+
+    TokenDto login(String code);
 }
