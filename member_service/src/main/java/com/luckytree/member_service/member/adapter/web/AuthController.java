@@ -8,10 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/v1/auth")
@@ -28,7 +25,11 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<TokenDto> signup(@Valid @RequestBody SignupDto signupDto) {
-        TokenDto tokenDto = authenticationUseCase.signup(signupDto);
-        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
+        return new ResponseEntity<>(authenticationUseCase.signup(signupDto), HttpStatus.OK);
+    }
+
+    @GetMapping("/login/kakao")
+    public ResponseEntity<TokenDto> loginByKakao(@RequestParam(value = "code") String code) {
+        return new ResponseEntity<>(authenticationUseCase.login(code), HttpStatus.OK);
     }
 }
