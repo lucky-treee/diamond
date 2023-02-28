@@ -8,13 +8,13 @@ import lombok.Getter;
 @Getter
 public class Member {
 
-    private final String nickname;
+    private String nickname;
 
-    private final String email;
+    private String email;
 
-    private final Status status;
+    private Status status;
 
-    private final Photo photo;
+    private Photo photo;
 
     public Member(SignupDto signUpDto) {
         this.nickname = signUpDto.getNickname();
@@ -23,7 +23,19 @@ public class Member {
         this.photo = signUpDto.getPhoto();
     }
 
+    public Member(MemberEntity memberEntity) {
+        this.email = memberEntity.getEmail();
+        this.nickname = memberEntity.getNickname();
+        this.photo = memberEntity.getPhoto();
+        this.status = memberEntity.getStatus();
+    }
+
     public MemberEntity toEntity() {
         return new MemberEntity(nickname, email, photo);
+    }
+
+    public void updateNicknameAndPhoto(String nickname, Photo photo) {
+        this.nickname = nickname;
+        this.photo = photo;
     }
 }

@@ -19,4 +19,12 @@ public class MemberProfile {
         this.email = memberEntity.getEmail();
         this.photo = memberEntity.getPhoto();
     }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updatePhoto(Photo photo) {
+        this.photo = photo;
+    }
 }
