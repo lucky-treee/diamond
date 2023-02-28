@@ -4,10 +4,6 @@ import com.luckytree.member_service.member.domain.Photo;
 import com.luckytree.member_service.member.domain.Status;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import java.time.LocalDateTime;
 
 @Table(name = "member")
 @Getter
@@ -45,6 +41,13 @@ public class MemberEntity {
     }
 
     public void updatePhoto(Photo photo) {
+        this.photo = photo;
+    }
+    
+    public MemberEntity(String nickname, String email, Photo photo) {
+        this.nickname = nickname;
+        this.email = email;
+        this.status = Status.NORMAL;
         this.photo = photo;
     }
 }

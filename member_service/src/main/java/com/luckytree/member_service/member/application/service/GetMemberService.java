@@ -15,7 +15,7 @@ public class GetMemberService implements GetMemberUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public MemberProfile getMemberProfile(String nickname, String email) {
-        return getMemberPort.getMemberProfile(nickname, email);
+    public MemberProfile getMemberProfile(String nickname) {
+        return getMemberPort.getMemberProfile(nickname);
     }
 }

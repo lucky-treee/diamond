@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "회원 정보", description = "회원 정보 API 모음")
 @RestController
-@RequestMapping("/v1/member")
+@RequestMapping("v1/member")
 @RequiredArgsConstructor
 public class MemberProfileController {
 
@@ -22,9 +22,9 @@ public class MemberProfileController {
     private final MemberProfileUseCase memberProfileUseCase;
 
     @Operation(summary = "회원 상세정보 조회")
-    @GetMapping("/get/{nickname}/{email}")
-    public ResponseEntity<MemberProfile> getMemberProfile(@PathVariable("nickname") String nickname, @PathVariable("email") String email) {
-        MemberProfile memberProfile = getMemberUseCase.getMemberProfile(nickname, email);
+    @GetMapping("/get/profile")
+    public ResponseEntity<MemberProfile> getMemberProfile(@RequestParam String nickname) {
+        MemberProfile memberProfile = getMemberUseCase.getMemberProfile(nickname);
         return new ResponseEntity<>(memberProfile, HttpStatus.OK);
     }
 

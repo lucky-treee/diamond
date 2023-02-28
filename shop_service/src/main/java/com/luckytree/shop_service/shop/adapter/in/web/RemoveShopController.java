@@ -20,6 +20,7 @@ public class RemoveShopController {
 
     @Operation(summary = "샵 삭제요청 API")
     @PostMapping("/request")
+    @Deprecated
     public ResultResponse removeShopRequest(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
         removeShopUseCase.removeShopRequest(removeRequestForm);
         return new ResultResponse<>(HttpStatus.OK);
