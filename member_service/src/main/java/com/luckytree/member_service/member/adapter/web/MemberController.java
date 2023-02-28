@@ -1,12 +1,11 @@
 package com.luckytree.member_service.member.adapter.web;
 
-import com.luckytree.member_service.common.dto.ResultResponse;
-import com.luckytree.member_service.member.application.port.incoming.GetMemberUseCase;
-import com.luckytree.member_service.member.application.port.incoming.MemberProfileUseCase;
+import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
+import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
-import com.luckytree.member_service.member.domain.Photo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,22 +15,21 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("v1/member")
 @RequiredArgsConstructor
-public class MemberProfileController {
+public class MemberController {
 
-    private final GetMemberUseCase getMemberUseCase;
-    private final MemberProfileUseCase memberProfileUseCase;
+    private final MemberUseCase memberUseCase;
 
     @Operation(summary = "회원 상세정보 조회")
     @GetMapping("/get/profile")
     public ResponseEntity<MemberProfile> getMemberProfile(@RequestParam String nickname) {
-        MemberProfile memberProfile = getMemberUseCase.getMemberProfile(nickname);
+        MemberProfile memberProfile = memberUseCase.getMemberProfile(nickname);
         return new ResponseEntity<>(memberProfile, HttpStatus.OK);
     }
 
     @Operation(summary = "프로필 정보 변경")
-    @PutMapping("/update")
-    public ResponseEntity updateMember(@RequestParam("email") String email, @RequestParam("nickname") String nickname, @RequestParam("photo") Photo photo) {
-        memberProfileUseCase.updateMemberRequest(email, nickname, photo);
+    @PutMapping("/update/profile")
+    public ResponseEntity<Object> updateMember(@RequestBody @Valid UpdateMemberDto updateMemberDto) {
+        memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
