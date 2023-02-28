@@ -1,8 +1,7 @@
 package com.luckytree.shop_service.shop.application.service;
 
-import com.luckytree.shop_service.shop.adapter.out.persistence.ShopEntity;
-import com.luckytree.shop_service.shop.application.port.in.GetShopListUseCase;
-import com.luckytree.shop_service.shop.application.port.out.GetShopPort;
+import com.luckytree.shop_service.shop.application.port.incoming.GetShopListUseCase;
+import com.luckytree.shop_service.shop.application.port.outgoing.GetShopPort;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopSummary;
