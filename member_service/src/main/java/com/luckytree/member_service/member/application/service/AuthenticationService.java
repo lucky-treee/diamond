@@ -22,11 +22,11 @@ public class AuthenticationService implements AuthenticationUseCase {
     private final KakaoTokenFeignClient kakaoTokenFeignClient;
     private final KakaoUserInfoFeignClient kakaoUserInfoFeignClient;
 
-    @Value("${}")
+    @Value("${oauth2.kakao.clientId}")
     String clientId;
-    @Value("${}")
+    @Value("${oauth2.kakao.secretKey}")
     String clientSecret;
-    @Value("${}")
+    @Value("${oauth2.kakao.redirectUri}")
     String redirectUri;
 
     @Override
@@ -38,10 +38,7 @@ public class AuthenticationService implements AuthenticationUseCase {
     @Transactional
     public TokenDto signup(SignupDto signUpDto) {
         String email = authenticationPort.saveMember(new Member(signUpDto));
-        String accessToken = tokenProvider.createAccessToken(email);
-        String refreshToken = tokenProvider.createRefreshToken();
-
-        return new TokenDto(accessToken, refreshToken);
+        return issueTokens(email);
     }
 
     @Override
@@ -50,12 +47,21 @@ public class AuthenticationService implements AuthenticationUseCase {
         KakaoUserInfo kakaoUserInfo = kakaoUserInfoFeignClient.getUser(kakaoTokenResponse.getAccessToken());
         String email = kakaoUserInfo.getKakaoAccount().getEmail();
 
-        boolean isMember = authenticationPort.existsByEmail(email);
-        if (!isMember) {
-            throw new NotFoundException(email);
+        isMember(email);
+
+        return issueTokens(email);
+    }
+
+    private void isMember(String email) {
+        if(!authenticationPort.existsByEmail(email)) {
+            throw new NotFoundException("없는 유저입니다. email= " + email);
         }
+    }
+
+    private TokenDto issueTokens(String email) {
         String accessToken = tokenProvider.createAccessToken(email);
         String refreshToken = tokenProvider.createRefreshToken();
+
         return new TokenDto(accessToken, refreshToken);
     }
 }
