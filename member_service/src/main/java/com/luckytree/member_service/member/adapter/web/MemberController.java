@@ -1,6 +1,7 @@
 package com.luckytree.member_service.member.adapter.web;
 
 import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
+import com.luckytree.member_service.member.adapter.data.WithdrawalMemberDto;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,6 +31,13 @@ public class MemberController {
     @PutMapping("/update/profile")
     public ResponseEntity<Object> updateMember(@RequestBody @Valid UpdateMemberDto updateMemberDto) {
         memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Operation(summary = "회원 탈퇴")
+    @PutMapping("/withdrawal/profile")
+    public ResponseEntity<Object> withdrawalMember(@RequestBody @Valid WithdrawalMemberDto withdrawalMemberDto) {
+        memberUseCase.withdrawalMemberRequest(withdrawalMemberDto.getEmail(), withdrawalMemberDto.getStatus());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

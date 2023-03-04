@@ -32,4 +32,11 @@ public class MemberAdapter implements MemberPort {
         MemberEntity memberEntity = memberRepository.findByEmail(member.getEmail()).orElseThrow(() -> new NotFoundException("해당 이메일이 존재하지 않습니다."));
         memberEntity.updateNicknameAndPhoto(member.getNickname(), member.getPhoto());
     }
+
+    @Transactional
+    @Override
+    public void withdrawalMember(Member member) {
+        MemberEntity memberEntity = memberRepository.findByEmail(member.getEmail()).orElseThrow(() -> new NotFoundException("해당 이메일이 존재하지 않습니다."));
+        memberEntity.withdrawalMember(member.getStatus());
+    }
 }

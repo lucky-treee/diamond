@@ -38,4 +38,8 @@ public class Member {
         this.nickname = nickname;
         this.photo = photo;
     }
+
+    public void withdrawalMember(Status status) {
+        this.status = Status.LEAVE;
+    }
 }

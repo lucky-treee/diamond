@@ -1,11 +1,11 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.member.domain.MemberProfile;
 import com.luckytree.member_service.member.domain.Photo;
+import com.luckytree.member_service.member.domain.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +28,14 @@ public class MemberService implements MemberUseCase {
         Member member = getMember(email);
         member.updateNicknameAndPhoto(nickname, photo);
         memberPort.updateMember(member);
+    }
+
+    @Transactional
+    @Override
+    public void withdrawalMemberRequest(String email, Status status) {
+        Member member = getMember(email);
+        member.withdrawalMember(status);
+        memberPort.withdrawalMember(member);
     }
 
     private Member getMember(String email) {
