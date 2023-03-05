@@ -46,7 +46,7 @@ public class AuthenticationService implements AuthenticationUseCase {
     @Override
     public TokenDto login(String code) {
         KakaoTokenResponse kakaoTokenResponse = kakaoTokenFeignClient.getToken(new KakaoTokenRequest(code, clientId, clientSecret, redirectUri).toString());
-        log.info("카카오 토큰 요청 성공");
+        log.info("카카오 토큰 요청 성공 :: {}", kakaoTokenResponse.getAccessToken());
         KakaoUserInfo kakaoUserInfo = kakaoUserInfoFeignClient.getUser(kakaoTokenResponse.getAccessToken());
         log.info("카카오 유저 리소스 요청 성공");
         String email = kakaoUserInfo.getKakaoAccount().getEmail();
