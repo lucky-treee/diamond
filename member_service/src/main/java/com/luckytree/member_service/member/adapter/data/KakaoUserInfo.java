@@ -12,6 +12,9 @@ public class KakaoUserInfo {
 
     private String id;
 
+    @JsonProperty(value = "connected_at")
+    private String connectedAt;
+
     @JsonProperty(value = "kakao_account")
     private KakaoAccount kakaoAccount;
 }

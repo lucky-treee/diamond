@@ -48,9 +48,12 @@ public class AuthenticationService implements AuthenticationUseCase {
         KakaoTokenResponse kakaoTokenResponse = kakaoTokenFeignClient.getToken(new KakaoTokenRequest(code, clientId, clientSecret, redirectUri).toString());
         log.info("카카오 토큰 요청 성공 :: {}", kakaoTokenResponse.getAccessToken());
         KakaoUserInfo kakaoUserInfo = kakaoUserInfoFeignClient.getUser(kakaoTokenResponse.getAccessToken());
-        log.info("카카오 유저 리소스 요청 성공");
+        log.info("카카오 유저 리소스 요청 성공1 {}", kakaoUserInfo.getId());
+        log.info("카카오 유저 리소스 요청 성공2 {}", kakaoUserInfo.getConnectedAt());
+        log.info("카카오 유저 리소스 요청 성공3 {}", kakaoUserInfo.getKakaoAccount().isHasEmail());
+        log.info("카카오 유저 리소스 요청 성공4 {}", kakaoUserInfo.getKakaoAccount().isEmailNeedsAgreement());
+        log.info("카카오 유저 리소스 요청 성공5 {}", kakaoUserInfo.getKakaoAccount().getEmail());
         String email = kakaoUserInfo.getKakaoAccount().getEmail();
-        log.info("유저 이메일 :: {}", email);
         isMember(email);
 
         return issueTokens(email);
