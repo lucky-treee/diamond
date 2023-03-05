@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(name = "kakaoUserInfoFeignClient", url = "${oauth2.kakao.infoUrl}", configuration = FeignClientProperties.FeignClientConfiguration.class)
 public interface KakaoUserInfoFeignClient {
 
-    @GetMapping("/v1/kakao/get/user")
+    @GetMapping("/v2/user/me")
     KakaoUserInfo getUser(@RequestHeader(name = "Authorization") String Authorization);
 }
