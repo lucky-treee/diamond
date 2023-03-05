@@ -10,6 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class KakaoAccount {
 
+    @JsonProperty(value = "has_email")
+    private boolean hasEmail;
+
     @JsonProperty(value = "email_needs_agreement")
     private boolean emailNeedsAgreement;
 
