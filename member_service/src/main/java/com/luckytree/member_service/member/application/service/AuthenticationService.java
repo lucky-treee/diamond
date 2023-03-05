@@ -9,10 +9,12 @@ import com.luckytree.member_service.member.application.port.outgoing.Authenticat
 import com.luckytree.member_service.member.domain.Member;
 import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class AuthenticationService implements AuthenticationUseCase {
@@ -44,9 +46,11 @@ public class AuthenticationService implements AuthenticationUseCase {
     @Override
     public TokenDto login(String code) {
         KakaoTokenResponse kakaoTokenResponse = kakaoTokenFeignClient.getToken(new KakaoTokenRequest(code, clientId, clientSecret, redirectUri).toString());
+        log.info("카카오 토큰 요청 성공");
         KakaoUserInfo kakaoUserInfo = kakaoUserInfoFeignClient.getUser(kakaoTokenResponse.getAccessToken());
+        log.info("카카오 유저 리소스 요청 성공");
         String email = kakaoUserInfo.getKakaoAccount().getEmail();
-
+        log.info("유저 이메일 :: {}", email);
         isMember(email);
 
         return issueTokens(email);
