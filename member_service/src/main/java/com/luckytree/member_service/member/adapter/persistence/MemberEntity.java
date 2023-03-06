@@ -36,9 +36,11 @@ public class MemberEntity {
     @Column(length = 50)
     private Photo photo;
 
+    @Column(name = "update_at")
     @LastModifiedDate
     private LocalDateTime updateAt;
 
+    @Column(name = "create_at")
     @CreatedDate
     private LocalDateTime createAt;
 
