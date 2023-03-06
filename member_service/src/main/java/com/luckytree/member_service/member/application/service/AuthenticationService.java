@@ -7,7 +7,7 @@ import com.luckytree.member_service.member.adapter.feign.KakaoUserInfoFeignClien
 import com.luckytree.member_service.member.application.port.incoming.AuthenticationUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.AuthenticationPort;
 import com.luckytree.member_service.member.domain.Member;
-import jakarta.ws.rs.NotFoundException;
+import org.webjars.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

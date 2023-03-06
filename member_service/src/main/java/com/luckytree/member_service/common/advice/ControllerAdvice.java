@@ -3,7 +3,7 @@ package com.luckytree.member_service.common.advice;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.NotAuthorizedException;
-import jakarta.ws.rs.NotFoundException;
+import org.webjars.NotFoundException;
 import jakarta.ws.rs.core.NoContentException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
