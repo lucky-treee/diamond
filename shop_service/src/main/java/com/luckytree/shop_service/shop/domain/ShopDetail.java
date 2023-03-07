@@ -14,30 +14,43 @@ public class ShopDetail{
 
     @Schema(description = "샵 이름")
     private String shopName;
+
     @Schema(description = "샵 카테고리")
     private String category;
+
     @Schema(description = "샵 해시태그")
     private Hashtag hashTag;
+
     @Schema(description = "샵 주소")
     private String shopAddress;
+
     @Schema(description = "샵 사진")
     private String photo;
+
     @Schema(description = "샵 전화번호")
     private String contact;
+
     @Schema(description = "샵 홈페이지")
     private String homepage;
+
     @Schema(description = "샵 대표상품")
     private String flagshipProduct;
+
     @Schema(description = "샵 SNS")
     private  String sns;
+
     @Schema(description = "샵 위도")
     private  Double lat;
+
     @Schema(description = "샵 경도")
     private  Double lng;
+
     @Schema(description = "샵 운영 시작시간")
     private String operatingStart;
+
     @Schema(description = "샵 운영 종료시간")
     private  String operationEnd;
+
     @Schema(description = "샵 휴무일")
     private String holiday;
 

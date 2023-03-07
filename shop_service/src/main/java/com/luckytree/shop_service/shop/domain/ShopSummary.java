@@ -14,14 +14,19 @@ public class ShopSummary {
 
     @Schema(description = "샵 이름")
     private String name;
+
     @Schema(description ="샵 상태", hidden = true)
     private ShopStatus status;
+
     @Schema(description = "샵 위도")
     private Double lat;
+
     @Schema(description = "샵 경도")
     private Double lng;
+
     @Schema(description = "샵 카테고리")
     private String category;
+
     @Schema(description = "샵 해시태그")
     private Hashtag hashtag;
 
