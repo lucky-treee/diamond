@@ -49,8 +49,8 @@ public class MemberEntity {
         this.photo = photo;
     }
 
-    public void withdrawalMember(Status status) {
-        this.status = Status.LEAVE;
+    public void deleteMember(Status status) {
+        this.status = status;
     }
 
     public MemberEntity(String nickname, String email, Photo photo) {
