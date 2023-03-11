@@ -8,5 +8,5 @@ public interface MemberUseCase {
 
     MemberProfile getMemberProfile(String nickname);
     void updateMemberRequest(String email, String nickname, Photo photo);
-    void withdrawalMemberRequest(String email, Status status);
+    void deleteMemberRequest(String email, Status status);
 }

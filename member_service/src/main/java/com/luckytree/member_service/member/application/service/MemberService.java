@@ -32,10 +32,13 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void withdrawalMemberRequest(String email, Status status) {
+    public void deleteMemberRequest(String email, Status status) {
         Member member = getMember(email);
-        member.withdrawalMember(status);
-        memberPort.withdrawalMember(member);
+        try {
+
+        } catch (Exception e) {
+
+        }
     }
 
     private Member getMember(String email) {
