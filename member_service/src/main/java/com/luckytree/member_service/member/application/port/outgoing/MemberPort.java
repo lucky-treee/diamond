@@ -2,6 +2,7 @@ package com.luckytree.member_service.member.application.port.outgoing;
 
 import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.member.domain.MemberProfile;
+import com.luckytree.member_service.member.domain.Status;
 
 public interface MemberPort {
 
@@ -11,5 +12,5 @@ public interface MemberPort {
 
     void updateMember(Member member);
 
-    void deleteMember(Member member);
+    void updateMemberStatus(Member member, Status status);
 }
