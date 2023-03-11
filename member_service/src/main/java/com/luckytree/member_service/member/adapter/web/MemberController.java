@@ -36,7 +36,7 @@ public class MemberController {
 
     @Operation(summary = "회원 탈퇴")
     @PutMapping("/delete/profile")
-    public ResponseEntity<Object> delteMember(@RequestParam String email, @RequestParam Status status) {
+    public ResponseEntity<Object> deleteMember(@RequestParam String email, @RequestParam Status status) {
         memberUseCase.deleteMemberRequest(email, status);
         return new ResponseEntity<>(HttpStatus.OK);
     }
