@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.application.service;
 
+import com.luckytree.member_service.common.advice.NotFoundException;
 import com.luckytree.member_service.common.jwt.TokenProvider;
 import com.luckytree.member_service.member.adapter.data.*;
 import com.luckytree.member_service.member.adapter.feign.KakaoTokenFeignClient;
@@ -7,7 +8,6 @@ import com.luckytree.member_service.member.adapter.feign.KakaoUserInfoFeignClien
 import com.luckytree.member_service.member.application.port.incoming.AuthenticationUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.AuthenticationPort;
 import com.luckytree.member_service.member.domain.Member;
-import org.webjars.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

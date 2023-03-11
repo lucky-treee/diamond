@@ -1,13 +1,11 @@
 package com.luckytree.member_service.common.jwt;
 
 
+import com.luckytree.member_service.common.advice.BadRequestException;
+import com.luckytree.member_service.common.advice.UnAuthorizedException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.NotAllowedException;
-import jakarta.ws.rs.NotAuthorizedException;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -67,7 +65,7 @@ public class TokenProvider implements InitializingBean {
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             throw new BadRequestException("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
-            throw new NotAuthorizedException("만료된 토큰입니다.");
+            throw new UnAuthorizedException("만료된 토큰입니다.");
         } catch (UnsupportedJwtException e) {
             throw new BadRequestException("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
