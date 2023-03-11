@@ -6,7 +6,10 @@ import com.luckytree.member_service.member.domain.MemberProfile;
 public interface MemberPort {
 
     MemberProfile getMemberProfile(String nickname);
+
     Member findByEmail(String email);
+
     void updateMember(Member member);
-    void withdrawalMember(Member member);
+
+    void deleteMember(Member member);
 }
