@@ -49,7 +49,7 @@ public class MemberEntity {
         this.photo = photo;
     }
 
-    public void deleteMember(Status status) {
+    public void updateMemberStatus(Status status) {
         this.status = status;
     }
 
