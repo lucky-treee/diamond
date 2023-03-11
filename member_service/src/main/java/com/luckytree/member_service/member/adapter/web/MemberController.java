@@ -1,9 +1,9 @@
 package com.luckytree.member_service.member.adapter.web;
 
 import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
-import com.luckytree.member_service.member.adapter.data.WithdrawalMemberDto;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
+import com.luckytree.member_service.member.domain.Status;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -35,9 +35,9 @@ public class MemberController {
     }
 
     @Operation(summary = "회원 탈퇴")
-    @PutMapping("/withdrawal/profile")
-    public ResponseEntity<Object> withdrawalMember(@RequestBody @Valid WithdrawalMemberDto withdrawalMemberDto) {
-        memberUseCase.withdrawalMemberRequest(withdrawalMemberDto.getEmail(), withdrawalMemberDto.getStatus());
+    @PutMapping("/delete/profile")
+    public ResponseEntity<Object> delteMember(@RequestParam String email, @RequestParam Status status) {
+        memberUseCase.deleteMemberRequest(email, status);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
