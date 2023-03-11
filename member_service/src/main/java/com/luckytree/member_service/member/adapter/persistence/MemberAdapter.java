@@ -35,8 +35,8 @@ public class MemberAdapter implements MemberPort {
 
     @Transactional
     @Override
-    public void withdrawalMember(Member member) {
+    public void deleteMember(Member member) {
         MemberEntity memberEntity = memberRepository.findByEmail(member.getEmail()).orElseThrow(() -> new NotFoundException("해당 이메일이 존재하지 않습니다."));
-        memberEntity.withdrawalMember(member.getStatus());
+        memberEntity.deleteMember(member.getStatus());
     }
 }
