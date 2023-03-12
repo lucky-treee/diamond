@@ -31,4 +31,11 @@ public class MemberController {
         memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
         return ResponseEntity.ok().build();
     }
+
+    @Operation(summary = "즐겨찾기 해제")
+    @DeleteMapping
+    public ResponseEntity<Object> deleteBookmark(@RequestHeader(name = "memberId") String memberId, @RequestParam(name = "shopId") String shopId) {
+        memberUseCase.deleteBookmark(memberId, shopId);
+        return ResponseEntity.ok().build();
+    }
 }
