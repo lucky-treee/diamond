@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.web;
 
+import com.luckytree.member_service.member.adapter.data.ShopDetailDto;
 import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
@@ -11,9 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "회원 정보", description = "회원 정보 API 모음")
 @RestController
-@RequestMapping("v1/member")
+@RequestMapping("v1/members")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -31,6 +34,13 @@ public class MemberController {
     public ResponseEntity<Object> updateMember(@RequestBody @Valid UpdateMemberDto updateMemberDto) {
         memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "내 북마크 목록 조회")
+    @GetMapping("/member/bookmark")
+    public ResponseEntity<List<ShopDetailDto>> getBookmark(@RequestHeader(name = "memberId") String memberId) {
+        List<ShopDetailDto> myBookmarks = memberUseCase.getBookmarkRequest(memberId);
+        return ResponseEntity.ok(myBookmarks);
     }
 
     @Operation(summary = "즐겨찾기 해제")
