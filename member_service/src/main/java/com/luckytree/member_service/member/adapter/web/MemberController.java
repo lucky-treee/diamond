@@ -41,4 +41,11 @@ public class MemberController {
         List<ShopDetailDto> myBookmarks = memberUseCase.getBookmarkRequest(memberId);
         return ResponseEntity.ok(myBookmarks);
     }
+
+    @Operation(summary = "즐겨찾기 해제")
+    @DeleteMapping
+    public ResponseEntity<Object> deleteBookmark(@RequestHeader(name = "memberId") String memberId, @RequestParam(name = "shopId") String shopId) {
+        memberUseCase.deleteBookmark(memberId, shopId);
+        return ResponseEntity.ok().build();
+    }
 }
