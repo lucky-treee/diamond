@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.persistence;
 
+import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.domain.ShopStatus;
@@ -27,7 +28,8 @@ public class ShopEntity extends BaseTimeEntity {
     private String name;
 
     @Column(length = 50)
-    private String category;
+    @Enumerated(value = EnumType.STRING)
+    private Category category;
 
     @Column(length = 10, nullable = false)
     @Enumerated(value = EnumType.STRING)

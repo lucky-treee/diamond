@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.persistence;
 
+import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.application.port.outgoing.GetShopPort;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
 import com.luckytree.shop_service.shop.domain.Hashtag;
@@ -18,7 +19,7 @@ public class GetShopListPersistenceAdapter implements GetShopPort {
     private final ShopRepository shopRepository;
 
     @Override
-    public List<ShopSummary> getShopSummaryByCategory(String category) {
+    public List<ShopSummary> getShopSummaryByCategoryAndEnable(Category category) {
         return shopRepository.findByCategoryAndStatus(category, ShopStatus.ENABLE).stream().map(ShopSummary::new).toList();
     }
 

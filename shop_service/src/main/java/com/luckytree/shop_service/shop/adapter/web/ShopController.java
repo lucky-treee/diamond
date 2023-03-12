@@ -1,9 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
-import com.luckytree.shop_service.shop.adapter.data.ReviewRequest;
-import com.luckytree.shop_service.shop.adapter.data.ShopLatLngRequest;
-import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
-import com.luckytree.shop_service.shop.adapter.data.UpdateReviewDto;
+import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.domain.Hashtag;
@@ -54,8 +51,8 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @GetMapping
-    public ResponseEntity<List<ShopSummary>> findShopsByCategory(@RequestParam(name = "category") String category) {
+    @GetMapping("/{category}")
+    public ResponseEntity<List<ShopSummary>> findShopsByCategory(@PathVariable Category category) {
         List<ShopSummary> shopSummaryList = shopUseCase.findShopsByCategory(category);
         return ResponseEntity.ok(shopSummaryList);
     }
@@ -99,8 +96,8 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @GetMapping
-    public ResponseEntity<List<ShopSummary>> findShopsByHashtag(@RequestParam(name = "hashtag") Hashtag hashtag) {
+    @GetMapping("/{hashtag}")
+    public ResponseEntity<List<ShopSummary>> findShopsByHashtag(@PathVariable Hashtag hashtag) {
         List<ShopSummary> shopSummaryList = shopUseCase.findShopsByHashtag(hashtag);
         return ResponseEntity.ok(shopSummaryList);
     }

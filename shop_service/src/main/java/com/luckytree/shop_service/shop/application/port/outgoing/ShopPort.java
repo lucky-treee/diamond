@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.application.port.outgoing;
 
+import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
 import com.luckytree.shop_service.shop.domain.Hashtag;
@@ -12,7 +13,7 @@ public interface ShopPort {
 
     void saveShopWithDisable(ShopRequest shopRequest);
 
-    List<ShopSummary> getShopSummaryByCategory(String category);
+    List<ShopSummary> getShopSummaryByCategory(Category category);
 
     List<ShopSummary> getShopAll(double maxLat, double minLat, double maxLng, double minLng);
 

@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.application.port.incoming;
 
+import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
@@ -11,7 +12,7 @@ public interface ShopUseCase {
 
     void createShop(ShopRequest shopRequest);
 
-    List<ShopSummary> findShopsByCategory(String category);
+    List<ShopSummary> findShopsByCategory(Category category);
 
     List<ShopSummary> findShopsByLatAndLng(double maxLat, double minLat, double maxLng, double minLng);
 

@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.application.service;
 
+import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
@@ -28,7 +29,7 @@ public class ShopService implements ShopUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummary> findShopsByCategory(String category) {
+    public List<ShopSummary> findShopsByCategory(Category category) {
         return shopPort.getShopSummaryByCategory(category);
     }
 

@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.application.service;
 
+import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.application.port.incoming.GetShopListUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.GetShopPort;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
@@ -19,8 +20,8 @@ public class GetShopListService implements GetShopListUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummary> getShopSummaryByCategory(String category) {
-        return getShopPort.getShopSummaryByCategory(category);
+    public List<ShopSummary> getShopSummaryByCategory(Category category) {
+        return getShopPort.getShopSummaryByCategoryAndEnable(category);
     }
 
     @Transactional(readOnly = true)
