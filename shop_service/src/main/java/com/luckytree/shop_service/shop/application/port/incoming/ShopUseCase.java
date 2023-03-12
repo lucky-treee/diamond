@@ -20,4 +20,6 @@ public interface ShopUseCase {
     ShopDetail getShopDetail(String name, String address);
 
     void removeShopRequest(RemoveRequestForm removeRequestForm);
+
+    List<ShopDetail> getShopsByIds(List<Long> ids);
 }
