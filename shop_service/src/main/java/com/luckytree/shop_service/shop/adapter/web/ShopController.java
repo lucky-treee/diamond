@@ -2,6 +2,7 @@ package com.luckytree.shop_service.shop.adapter.web;
 
 import com.luckytree.shop_service.shop.adapter.data.ReviewRequest;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
+import com.luckytree.shop_service.shop.adapter.data.UpdateReviewDto;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.domain.Hashtag;
@@ -128,6 +129,20 @@ public class ShopController {
     @Operation(summary = "샵 리뷰 등록")
     @PostMapping("/shop/review")
     public ResponseEntity<Object> requestShopReviewRegistration(@RequestBody @Valid ReviewRequest reviewRequest){
+
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "샵 리뷰 수정")
+    @PutMapping("/shop/review")
+    public ResponseEntity<Object> updateReview(@RequestBody @Valid UpdateReviewDto updateReviewDto) {
+
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "샵 리뷰 조회")
+    @GetMapping("/shop/review")
+    public ResponseEntity<Object> getShopReview(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
     }
