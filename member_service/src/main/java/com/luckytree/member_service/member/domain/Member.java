@@ -38,8 +38,4 @@ public class Member {
         this.nickname = nickname;
         this.photo = photo;
     }
-
-    public void updateStatus(Status status) {
-        this.status = status;
-    }
 }
