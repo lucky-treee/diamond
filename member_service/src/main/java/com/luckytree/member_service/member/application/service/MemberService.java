@@ -1,7 +1,6 @@
 package com.luckytree.member_service.member.application.service;
 
 import com.luckytree.member_service.member.adapter.data.ShopDetailDto;
-import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.domain.Member;
@@ -21,8 +20,9 @@ public class MemberService implements MemberUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public MemberProfile getMemberProfile(String nickname) {
-        return memberPort.getMemberProfile(nickname);
+    public MemberProfile getMemberProfile(long memberId) {
+        Member member = memberPort.findMemberById(memberId);
+        return new MemberProfile(member);
     }
 
     @Transactional

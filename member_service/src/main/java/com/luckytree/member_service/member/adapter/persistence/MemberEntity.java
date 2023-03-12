@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.persistence;
 
+import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.member.domain.Photo;
 import com.luckytree.member_service.member.domain.Status;
 import jakarta.persistence.*;
@@ -55,5 +56,14 @@ public class MemberEntity {
         this.email = email;
         this.status = Status.NORMAL;
         this.photo = photo;
+    }
+
+    public Member toDomain() {
+        return new Member(
+                this.nickname,
+                this.email,
+                this.status,
+                this.photo
+        );
     }
 }
