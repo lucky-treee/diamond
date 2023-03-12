@@ -37,7 +37,7 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @PostMapping
+    @PostMapping("/shop")
     public ResponseEntity<Object> requestShopRegistration(@RequestBody @Valid ShopRequest shopRequest) {
         shopUseCase.requestShopRegistration(shopRequest);
         return ResponseEntity.ok().build();
@@ -112,7 +112,7 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @DeleteMapping("/delete")
+    @DeleteMapping("/shop")
     public ResponseEntity<Object> removeShopRequest(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
         shopUseCase.removeShopRequest(removeRequestForm);
         return ResponseEntity.ok().build();
