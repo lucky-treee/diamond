@@ -15,9 +15,9 @@ public class MemberAdapter implements MemberPort {
     private final MemberRepository memberRepository;
 
     @Override
-    public MemberProfile getMemberProfile(String nickname) {
-        MemberEntity memberEntity = memberRepository.findByNickname(nickname).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다."));
-        return new MemberProfile(memberEntity);
+    public Member findMemberById(long memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다."));
+        return memberEntity.toDomain();
     }
 
     @Override
