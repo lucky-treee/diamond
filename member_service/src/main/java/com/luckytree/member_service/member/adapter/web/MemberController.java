@@ -32,7 +32,7 @@ public class MemberController {
     @Operation(summary = "프로필 수정")
     @PutMapping
     public ResponseEntity<Object> updateMember(@RequestBody @Valid UpdateMemberDto updateMemberDto) {
-        memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
+        memberUseCase.updateMember(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
         return ResponseEntity.ok().build();
     }
 
@@ -48,5 +48,12 @@ public class MemberController {
     public ResponseEntity<Object> deleteBookmark(@RequestHeader(name = "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
         memberUseCase.deleteBookMark(memberId, shopId);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "회원 탈퇴")
+    @DeleteMapping("/delete")
+    public ResponseEntity deleteMember(@LoginMemberId long memberId) {
+        memberUseCase.deleteMember(memberId);
+        return ResponseEntity.noContent().build();
     }
 }

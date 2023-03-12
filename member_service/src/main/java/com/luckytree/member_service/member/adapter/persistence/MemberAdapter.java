@@ -32,4 +32,18 @@ public class MemberAdapter implements MemberPort {
         MemberEntity memberEntity = memberRepository.findByEmail(member.getEmail()).orElseThrow(() -> new NotFoundException("해당 이메일이 존재하지 않습니다."));
         memberEntity.updateNicknameAndPhoto(member.getNickname(), member.getPhoto());
     }
+
+    @Transactional
+    @Override
+    public void deleteMemberById(long memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("해당 회원의 ID는 존재하지 않습니다."));
+        memberEntity.deleteMember(memberId);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Member findById(long memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("해당하는 회원ID가 존재하지 않습니다."));
+        return new Member(memberEntity);
+    }
 }
