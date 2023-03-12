@@ -119,6 +119,12 @@ public class ShopController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping
+    public ResponseEntity<List<ShopDetail>> getShopDetailById(@RequestParam List<Long> id) {
+        List<ShopDetail> shopDetailList = shopUseCase.getShopDetailById(id);
+        return ResponseEntity.ok(shopDetailList);
+    }
+
     @Operation(summary = "샵 리뷰 등록")
     @PostMapping("/shop/review")
     public ResponseEntity<Object> requestShopReviewRegistration(@RequestBody @Valid ReviewRequest reviewRequest){
