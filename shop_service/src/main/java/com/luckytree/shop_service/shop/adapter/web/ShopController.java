@@ -119,7 +119,7 @@ public class ShopController {
     }
 
     @Operation(summary = "id로 샾 조회")
-    @GetMapping("/get/id")
+    @GetMapping()
     public ResponseEntity<List<ShopDetail>> getShopDetailById(@RequestParam List<Long> id) {
         List<ShopDetail> shopDetailList = shopUseCase.getShopDetailById(id);
         return ResponseEntity.ok(shopDetailList);
