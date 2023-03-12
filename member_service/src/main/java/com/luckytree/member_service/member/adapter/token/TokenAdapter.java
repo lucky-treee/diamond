@@ -17,8 +17,8 @@ public class TokenAdapter implements TokenPort {
     }
 
     @Override
-    public String createAccessToken(long userId) {
-        return tokenProvider.createAccessToken(String.valueOf(userId));
+    public String createAccessToken(long memberId) {
+        return tokenProvider.createAccessToken(String.valueOf(memberId));
     }
 
     @Override
