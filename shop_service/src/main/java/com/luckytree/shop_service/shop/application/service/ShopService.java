@@ -56,4 +56,9 @@ public class ShopService implements ShopUseCase {
         ShopEntity shopEntity = shopPort.getShopEntity(removeRequestForm.getName(), removeRequestForm.getAddress());
         shopPort.saveRemoveRequest(shopEntity, removeRequestForm.getComment());
     }
+
+    @Override
+    public List<ShopDetail> getShopsByIds(List<Long> ids) {
+        return null;
+    }
 }

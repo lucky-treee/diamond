@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.application.service;
 
+import com.luckytree.member_service.member.adapter.data.ShopDetailDto;
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
@@ -9,6 +10,8 @@ import com.luckytree.member_service.member.domain.Photo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +31,17 @@ public class MemberService implements MemberUseCase {
         Member member = getMember(email);
         member.updateNicknameAndPhoto(nickname, photo);
         memberPort.updateMember(member);
+    }
+
+    @Override
+    public List<ShopDetailDto> getBookMark(long memberId) {
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public void deleteBookMark(long memberId, String shopId) {
+
     }
 
     private Member getMember(String email) {
