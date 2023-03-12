@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.luckytree.member_service.member.domain.Status.LEAVE;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService implements MemberUseCase {
@@ -33,16 +35,17 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void deleteMemberRequest(String email, Status status) {
+    public void deleteMemberRequest(String email) {
         Member member = getMember(email);
-        validMemberStatus(member, status);
+        Status status = validMemberStatus(member);
+        member.updateStatus(status);
+        memberPort.updateMemberStatus(member,status);
     }
 
-    private void validMemberStatus(Member member, Status status) {
-        if (member.getStatus() != status) {
-            member.updateStatus(status);
-            memberPort.updateMemberStatus(member, status);
-        } else
+    private Status validMemberStatus(Member member) {
+        if (member.getStatus() != LEAVE)
+            return LEAVE;
+        else
             throw new NotFoundException("이미 탈퇴한 회원입니다.");
     }
 
