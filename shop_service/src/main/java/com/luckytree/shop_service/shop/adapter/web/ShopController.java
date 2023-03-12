@@ -120,8 +120,8 @@ public class ShopController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ShopDetail>> getShopDetailById(@RequestParam List<Long> id) {
-        List<ShopDetail> shopDetailList = shopUseCase.getShopDetailById(id);
+    public ResponseEntity<List<ShopDetail>> getShopsByIds(@RequestParam List<Long> id) {
+        List<ShopDetail> shopDetailList = shopUseCase.getShopsByIds(id);
         return ResponseEntity.ok(shopDetailList);
     }
 
