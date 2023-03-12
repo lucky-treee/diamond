@@ -20,15 +20,7 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     private final AuthenticationPort authenticationPort;
     private final TokenPort tokenPort;
-    private final KakaoTokenFeignClient kakaoTokenFeignClient;
-    private final KakaoUserInfoFeignClient kakaoUserInfoFeignClient;
 
-    @Value("${oauth2.kakao.clientId}")
-    String clientId;
-    @Value("${oauth2.kakao.secretKey}")
-    String clientSecret;
-    @Value("${oauth2.kakao.redirectUri}")
-    String redirectUri;
 
     @Override
     public void login(LoginDto loginDto) {
@@ -44,9 +36,9 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     @Override
     public Tokens login(String code) {
-        KakaoTokenResponse kakaoTokenResponse = kakaoTokenFeignClient.getToken(new KakaoTokenRequest(code, clientId, clientSecret, redirectUri).toString());
-        KakaoUserInfo kakaoUserInfo = kakaoUserInfoFeignClient.getUser(kakaoTokenResponse.getAccessToken());
-        long memberId = authenticationPort.findMemberIdByEmail(kakaoUserInfo.getKakaoAccount().getEmail());
+        String accessToken = authenticationPort.getUserKakaoAccessToken(code);
+        String email = authenticationPort.getUserKakaoEmail(accessToken);
+        long memberId = authenticationPort.findMemberIdByEmail(email);
 
         return issueTokens(memberId);
     }
