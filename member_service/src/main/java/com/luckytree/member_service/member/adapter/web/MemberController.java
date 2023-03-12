@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.web;
 
+import com.luckytree.member_service.common.annotation.LoginMemberId;
 import com.luckytree.member_service.member.adapter.data.ShopDetailDto;
 import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
@@ -21,14 +22,14 @@ public class MemberController {
 
     private final MemberUseCase memberUseCase;
 
-    @Operation(summary = "회원 상세정보 조회")
+    @Operation(summary = "내 프로필 조회")
     @GetMapping
-    public ResponseEntity<MemberProfile> getMemberProfile(@RequestParam(name = "nickname") String nickname) {
-        MemberProfile memberProfile = memberUseCase.getMemberProfile(nickname);
+    public ResponseEntity<MemberProfile> getMemberProfile(@LoginMemberId long memberId) {
+        MemberProfile memberProfile = memberUseCase.getMemberProfile(memberId);
         return ResponseEntity.ok(memberProfile);
     }
 
-    @Operation(summary = "프로필 정보 변경")
+    @Operation(summary = "프로필 수정")
     @PutMapping
     public ResponseEntity<Object> updateMember(@RequestBody @Valid UpdateMemberDto updateMemberDto) {
         memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());

@@ -30,6 +30,13 @@ public class Member {
         this.status = memberEntity.getStatus();
     }
 
+    public Member(String nickname, String email, Status status, Photo photo) {
+        this.nickname = nickname;
+        this.email = email;
+        this.status = status;
+        this.photo = photo;
+    }
+
     public MemberEntity toEntity() {
         return new MemberEntity(nickname, email, photo);
     }

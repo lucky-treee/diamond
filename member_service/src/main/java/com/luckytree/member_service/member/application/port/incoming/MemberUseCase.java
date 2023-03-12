@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MemberUseCase {
 
-    MemberProfile getMemberProfile(String nickname);
+    MemberProfile getMemberProfile(long memberId);
     void updateMemberRequest(String email, String nickname, Photo photo);
     List<ShopDetailDto> getBookMark(long memberId);
     void deleteBookMark(long memberId, String shopId);
