@@ -118,6 +118,13 @@ public class ShopController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "샵 리뷰 삭제")
+    @DeleteMapping("/shop/review")
+    ResponseEntity<Object> deleteShopReview(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
+
+        return ResponseEntity.ok().build();
+    }
+
     @Operation(summary = "샵 리뷰 등록")
     @PostMapping("/shop/review")
     public ResponseEntity<Object> requestShopReviewRegistration(@RequestBody @Valid ReviewRequest reviewRequest){
