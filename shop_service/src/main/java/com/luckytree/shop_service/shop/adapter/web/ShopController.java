@@ -132,4 +132,11 @@ public class ShopController {
 
         return ResponseEntity.ok().build();
     }
+
+    @Operation(summary = "샵 리뷰 조회")
+    @GetMapping("/shop/review")
+    public ResponseEntity<Object> getShopReview(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
+
+        return ResponseEntity.ok().build();
+    }
 }
