@@ -1,11 +1,8 @@
 package com.luckytree.member_service.common.jwt;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luckytree.member_service.common.advice.BadRequestException;
 import com.luckytree.member_service.common.advice.UnAuthorizedException;
-import com.luckytree.member_service.member.adapter.data.DecodedToken;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -17,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 import java.util.Random;
 
@@ -74,18 +70,14 @@ public class TokenProvider implements InitializingBean {
             throw new BadRequestException("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
             throw new BadRequestException("JWT 토큰이 잘못되었습니다.");
+        } catch (MissingClaimException e) {
+            throw new BadRequestException("JWT 토큰의 페이로드가 없습니다.");
         }
     }
 
-    public long getMemberIdByDecoding(String token) throws JsonProcessingException {
-        String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getUrlDecoder();
+    public long getMemberIdByDecoding(String token) {
+        String memberId = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
 
-        String header = new String(decoder.decode(chunks[0]));
-        String payload = new String(decoder.decode(chunks[1]));
-
-        ObjectMapper mapper = new ObjectMapper();
-        DecodedToken decodedToken = mapper.readValue(payload, DecodedToken.class);
-        return decodedToken.getMemberId();
+        return Long.parseLong(memberId);
     }
 }
