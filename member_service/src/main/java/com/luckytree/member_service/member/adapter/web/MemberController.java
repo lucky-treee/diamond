@@ -20,16 +20,16 @@ public class MemberController {
     private final MemberUseCase memberUseCase;
 
     @Operation(summary = "회원 상세정보 조회")
-    @GetMapping("/get/profile")
-    public ResponseEntity<MemberProfile> getMemberProfile(@RequestParam String nickname) {
+    @GetMapping
+    public ResponseEntity<MemberProfile> getMemberProfile(@RequestParam(name = "nickname") String nickname) {
         MemberProfile memberProfile = memberUseCase.getMemberProfile(nickname);
-        return new ResponseEntity<>(memberProfile, HttpStatus.OK);
+        return ResponseEntity.ok(memberProfile);
     }
 
     @Operation(summary = "프로필 정보 변경")
-    @PutMapping("/update/profile")
+    @PutMapping
     public ResponseEntity<Object> updateMember(@RequestBody @Valid UpdateMemberDto updateMemberDto) {
         memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }
