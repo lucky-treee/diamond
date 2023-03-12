@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -114,13 +115,6 @@ public class ShopController {
     @DeleteMapping("/shop")
     public ResponseEntity<Object> removeShopRequest(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
         shopUseCase.removeShopRequest(removeRequestForm);
-        return ResponseEntity.ok().build();
-    }
-
-    @Operation(summary = "샵 리뷰 조회")
-    @GetMapping("shop/review")
-    public ResponseEntity<Object> getShopReview(@RequestParam(name = "shopid") Long id ) {
-
         return ResponseEntity.ok().build();
     }
 }
