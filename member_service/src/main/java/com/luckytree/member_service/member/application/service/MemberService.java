@@ -27,7 +27,7 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void updateMemberRequest(String email, String nickname, Photo photo) {
+    public void updateMember(String email, String nickname, Photo photo) {
         Member member = getMember(email);
         member.updateNicknameAndPhoto(nickname, photo);
         memberPort.updateMember(member);
