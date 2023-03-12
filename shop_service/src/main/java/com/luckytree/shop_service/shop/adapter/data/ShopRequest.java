@@ -25,7 +25,7 @@ public class ShopRequest {
 
     @Schema(description = "샵 카테고리")
     @Size(max = 50)
-    private String category;
+    private Category category;
 
     @NotBlank
     @Schema(description = "샵 주소")

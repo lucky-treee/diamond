@@ -1,6 +1,7 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
 import com.luckytree.shop_service.common.dto.ResultResponse;
+import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.application.port.incoming.GetShopListUseCase;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
@@ -26,7 +27,7 @@ public class GetShopListController {
     @Operation(summary = "특정 카테고리의 샵 전체 검색")
     @GetMapping("/{category}")
     @Deprecated
-    public ResultResponse getShopListByCategory(@PathVariable("category") String category) {
+    public ResultResponse getShopListByCategory(@PathVariable("category") Category category) {
         List<ShopSummary> shopSummaryList = getShopListUseCase.getShopSummaryByCategory(category);
         return new ResultResponse<>(shopSummaryList);
     }

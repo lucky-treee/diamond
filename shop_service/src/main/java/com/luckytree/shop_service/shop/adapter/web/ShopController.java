@@ -1,8 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
-import com.luckytree.shop_service.shop.adapter.data.ReviewRequest;
-import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
-import com.luckytree.shop_service.shop.adapter.data.UpdateReviewDto;
+import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.domain.Hashtag;
@@ -39,8 +37,8 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @PostMapping("/shop")
-    public ResponseEntity<Object> requestShopRegistration(@RequestBody @Valid ShopRequest shopRequest) {
-        shopUseCase.requestShopRegistration(shopRequest);
+    public ResponseEntity<Object> createShop(@RequestBody @Valid ShopRequest shopRequest) {
+        shopUseCase.createShop(shopRequest);
         return ResponseEntity.ok().build();
     }
 
@@ -53,9 +51,9 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopListByCategory(@RequestParam(name = "category") String category) {
-        List<ShopSummary> shopSummaryList = shopUseCase.getShopSummaryByCategory(category);
+    @GetMapping("/{category}")
+    public ResponseEntity<List<ShopSummary>> findShopsByCategory(@PathVariable Category category) {
+        List<ShopSummary> shopSummaryList = shopUseCase.findShopsByCategory(category);
         return ResponseEntity.ok(shopSummaryList);
     }
 
@@ -69,8 +67,8 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopAll(@RequestParam(name = "maxLat") double maxLat, @RequestParam(name = "minLat") double minLat, @RequestParam(name = "maxLng") double maxLng, @RequestParam(name = "minLng") double minLng) {
-        List<ShopSummary> shopSummary = shopUseCase.getShopAll(maxLat, minLat, maxLng, minLng);
+    public ResponseEntity<List<ShopSummary>> findShopsByLatAndLng(ShopLatLngRequest shopLatLngRequest) {
+        List<ShopSummary> shopSummary = shopUseCase.findShopsByLatAndLng(shopLatLngRequest.getMaxLat(), shopLatLngRequest.getMinLat(), shopLatLngRequest.getMaxLng(), shopLatLngRequest.getMinLng());
         return ResponseEntity.ok(shopSummary);
     }
 
@@ -84,8 +82,8 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping("/shop")
-    public ResponseEntity<ShopDetail> getShopDetail(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
-        ShopDetail shopDetail = shopUseCase.getShopDetail(name, address);
+    public ResponseEntity<ShopDetail> findShopByNameAndAddress(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
+        ShopDetail shopDetail = shopUseCase.findShopByNameAndAddress(name, address);
         return ResponseEntity.ok(shopDetail);
     }
 
@@ -98,9 +96,9 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopSummaryByHashtag(@RequestParam(name = "hashtag") Hashtag hashtag) {
-        List<ShopSummary> shopSummaryList = shopUseCase.getShopSummaryByHashtag(hashtag);
+    @GetMapping("/{hashtag}")
+    public ResponseEntity<List<ShopSummary>> findShopsByHashtag(@PathVariable Hashtag hashtag) {
+        List<ShopSummary> shopSummaryList = shopUseCase.findShopsByHashtag(hashtag);
         return ResponseEntity.ok(shopSummaryList);
     }
 
@@ -114,20 +112,20 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @DeleteMapping("/shop")
-    public ResponseEntity<Object> removeShopRequest(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
-        shopUseCase.removeShopRequest(removeRequestForm);
+    public ResponseEntity<Object> deleteShop(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
+        shopUseCase.deleteShop(removeRequestForm);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<List<ShopDetail>> getShopsByIds(@RequestParam List<Long> id) {
-        List<ShopDetail> shopDetailList = shopUseCase.getShopsByIds(id);
+    @PostMapping
+    public ResponseEntity<List<ShopDetail>> findShopsByIds(@RequestParam List<Long> id) {
+        List<ShopDetail> shopDetailList = shopUseCase.findShopsByIds(id);
         return ResponseEntity.ok(shopDetailList);
     }
 
     @Operation(summary = "샵 리뷰 등록")
     @PostMapping("/shop/review")
-    public ResponseEntity<Object> requestShopReviewRegistration(@RequestBody @Valid ReviewRequest reviewRequest){
+    public ResponseEntity<Object> createShopReview(@RequestBody @Valid ReviewRequest reviewRequest){
 
         return ResponseEntity.ok().build();
     }
@@ -141,7 +139,7 @@ public class ShopController {
 
     @Operation(summary = "샵 리뷰 조회")
     @GetMapping("/shop/review")
-    public ResponseEntity<Object> getShopReview(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
+    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
     }
