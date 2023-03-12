@@ -1,6 +1,5 @@
 package com.luckytree.member_service.member.adapter.web;
 
-import com.luckytree.member_service.member.adapter.data.ShopDetailDto;
 import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
@@ -8,11 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name = "회원 정보", description = "회원 정보 API 모음")
 @RestController
@@ -36,7 +32,7 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "내 북마크 목록 조회")
+   /* @Operation(summary = "내 북마크 목록 조회")
     @GetMapping("/member/bookmark")
     public ResponseEntity<List<ShopDetailDto>> getBookmark(@RequestHeader(name = "memberId") long memberId) {
         List<ShopDetailDto> myBookmarks = memberUseCase.getBookMark(memberId);
@@ -48,13 +44,12 @@ public class MemberController {
     public ResponseEntity<Object> deleteBookmark(@RequestHeader(name = "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
         memberUseCase.deleteBookMark(memberId, shopId);
         return ResponseEntity.ok().build();
-    }
+    }*/
 
     @Operation(summary = "회원 탈퇴")
     @DeleteMapping("/delete")
-    public ResponseEntity deleteMember(@RequestParam(value = "userId") String email) {
-        memberUseCase.deleteMemberRequest(email);
+    public ResponseEntity deleteMember(@RequestHeader(value = "memberId") long memberId) {
+        memberUseCase.deleteMemberRequest(memberId);
         return ResponseEntity.noContent().build();
     }
-}
 }
