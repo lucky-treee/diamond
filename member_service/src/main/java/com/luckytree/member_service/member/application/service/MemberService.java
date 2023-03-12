@@ -1,6 +1,7 @@
 package com.luckytree.member_service.member.application.service;
 
 import com.luckytree.member_service.common.advice.NotFoundException;
+import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.domain.Member;
@@ -47,6 +48,17 @@ public class MemberService implements MemberUseCase {
             return LEAVE;
         else
             throw new NotFoundException("이미 탈퇴한 회원입니다.");
+    }
+
+    @Override
+    public List<ShopDetailDto> getBookMark(long memberId) {
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public void deleteBookMark(long memberId, String shopId) {
+
     }
 
     private Member getMember(String email) {
