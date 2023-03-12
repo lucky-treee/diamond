@@ -2,7 +2,6 @@ package com.luckytree.member_service.member.application.port.outgoing;
 
 import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.member.domain.MemberProfile;
-import com.luckytree.member_service.member.domain.Status;
 
 public interface MemberPort {
 
@@ -10,7 +9,9 @@ public interface MemberPort {
 
     Member findByEmail(String email);
 
+    Member findById(long memberId);
+
     void updateMember(Member member);
 
-    void updateMemberStatus(Member member, Status status);
+    void updateMemberStatus(Member member);
 }
