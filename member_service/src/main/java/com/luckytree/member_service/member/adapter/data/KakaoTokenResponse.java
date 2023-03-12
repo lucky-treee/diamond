@@ -1,6 +1,7 @@
 package com.luckytree.member_service.member.adapter.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.luckytree.member_service.common.advice.InternalServerErrorException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,6 +30,9 @@ public class KakaoTokenResponse {
     private String scope;
 
     public String getAccessToken() {
+        if (accessToken == null) {
+            throw new InternalServerErrorException("정상적으로 토큰을 받지 못했습니다.");
+        }
         return "Bearer " + accessToken;
     }
 }

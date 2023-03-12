@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
+import com.luckytree.shop_service.shop.adapter.data.ReviewRequest;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
@@ -14,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -123,5 +123,12 @@ public class ShopController {
     public ResponseEntity<List<ShopDetail>> getShopDetailById(@RequestParam List<Long> id) {
         List<ShopDetail> shopDetailList = shopUseCase.getShopDetailById(id);
         return ResponseEntity.ok(shopDetailList);
+    }
+
+    @Operation(summary = "샵 리뷰 등록")
+    @PostMapping("/shop/review")
+    public ResponseEntity<Object> requestShopReviewRegistration(@RequestBody @Valid ReviewRequest reviewRequest){
+
+        return ResponseEntity.ok().build();
     }
 }
