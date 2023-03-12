@@ -1,7 +1,5 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.common.advice.NotFoundException;
-import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.domain.Member;
@@ -11,8 +9,6 @@ import com.luckytree.member_service.member.domain.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import static com.luckytree.member_service.member.domain.Status.LEAVE;
 
 @Service
 @RequiredArgsConstructor
@@ -36,20 +32,14 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void deleteMemberRequest(String email) {
-        Member member = getMember(email);
-        Status status = validMemberStatus(member);
-        member.updateStatus(status);
-        memberPort.updateMemberStatus(member,status);
+    public void deleteMemberRequest(long memberId) {
+        Member member = getMember(memberId);  // id를 통해서 가져온 회원 객체
+        Status status = member.getStatus();   // 가져온 회원 status값을 변수에담고
+        member.updateStatus(status.isMemberStatus(status));
+        memberPort.updateMemberStatus(member);
     }
 
-    private Status validMemberStatus(Member member) {
-        if (member.getStatus() != LEAVE)
-            return LEAVE;
-        else
-            throw new NotFoundException("이미 탈퇴한 회원입니다.");
-    }
-
+/*
     @Override
     public List<ShopDetailDto> getBookMark(long memberId) {
         return null;
@@ -60,8 +50,13 @@ public class MemberService implements MemberUseCase {
     public void deleteBookMark(long memberId, String shopId) {
 
     }
+*/
 
     private Member getMember(String email) {
         return memberPort.findByEmail(email);
+    }
+
+    private Member getMember(long memberId) {
+        return memberPort.findById(memberId);
     }
 }
