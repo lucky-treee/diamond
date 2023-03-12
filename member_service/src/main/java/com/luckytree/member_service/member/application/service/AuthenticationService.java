@@ -1,12 +1,11 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.common.advice.NotFoundException;
-import com.luckytree.member_service.common.jwt.TokenProvider;
 import com.luckytree.member_service.member.adapter.data.*;
 import com.luckytree.member_service.member.adapter.feign.KakaoTokenFeignClient;
 import com.luckytree.member_service.member.adapter.feign.KakaoUserInfoFeignClient;
 import com.luckytree.member_service.member.application.port.incoming.AuthenticationUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.AuthenticationPort;
+import com.luckytree.member_service.member.application.port.outgoing.TokenPort;
 import com.luckytree.member_service.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthenticationService implements AuthenticationUseCase {
 
     private final AuthenticationPort authenticationPort;
-    private final TokenProvider tokenProvider;
+    private final TokenPort tokenPort;
     private final KakaoTokenFeignClient kakaoTokenFeignClient;
     private final KakaoUserInfoFeignClient kakaoUserInfoFeignClient;
 
@@ -33,42 +32,29 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     @Override
     public void login(LoginDto loginDto) {
-        tokenProvider.validateToken(loginDto.getAccessToken());
+        tokenPort.validateToken(loginDto.getAccessToken());
     }
 
     @Override
     @Transactional
-    public TokenDto signup(SignupDto signUpDto) {
-        String email = authenticationPort.saveMember(new Member(signUpDto));
-        return issueTokens(email);
+    public Tokens signup(SignupDto signUpDto) {
+        long memberId = authenticationPort.saveMember(new Member(signUpDto));
+        return issueTokens(memberId);
     }
 
     @Override
-    public TokenDto login(String code) {
+    public Tokens login(String code) {
         KakaoTokenResponse kakaoTokenResponse = kakaoTokenFeignClient.getToken(new KakaoTokenRequest(code, clientId, clientSecret, redirectUri).toString());
-        log.info("카카오 토큰 요청 성공 :: {}", kakaoTokenResponse.getAccessToken());
         KakaoUserInfo kakaoUserInfo = kakaoUserInfoFeignClient.getUser(kakaoTokenResponse.getAccessToken());
-        log.info("카카오 유저 리소스 요청 성공1 {}", kakaoUserInfo.getId());
-        log.info("카카오 유저 리소스 요청 성공2 {}", kakaoUserInfo.getConnectedAt());
-        log.info("카카오 유저 리소스 요청 성공3 {}", kakaoUserInfo.getKakaoAccount().isHasEmail());
-        log.info("카카오 유저 리소스 요청 성공4 {}", kakaoUserInfo.getKakaoAccount().isEmailNeedsAgreement());
-        log.info("카카오 유저 리소스 요청 성공5 {}", kakaoUserInfo.getKakaoAccount().getEmail());
-        String email = kakaoUserInfo.getKakaoAccount().getEmail();
-        isMember(email);
+        long memberId = authenticationPort.findMemberIdByEmail(kakaoUserInfo.getKakaoAccount().getEmail());
 
-        return issueTokens(email);
+        return issueTokens(memberId);
     }
 
-    private void isMember(String email) {
-        if(!authenticationPort.existsByEmail(email)) {
-            throw new NotFoundException("없는 유저입니다. email= " + email);
-        }
-    }
+    private Tokens issueTokens(long userId) {
+        String accessToken = tokenPort.createAccessToken(userId);
+        String refreshToken = tokenPort.createRefreshToken();
 
-    private TokenDto issueTokens(String email) {
-        String accessToken = tokenProvider.createAccessToken(email);
-        String refreshToken = tokenProvider.createRefreshToken();
-
-        return new TokenDto(accessToken, refreshToken);
+        return new Tokens(accessToken, refreshToken);
     }
 }

@@ -21,7 +21,7 @@ public class MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(length = 20, unique = true, nullable = false)
     private String nickname;
@@ -34,6 +34,7 @@ public class MemberEntity {
     private Status status;
 
     @Column(length = 50)
+    @Enumerated(value = EnumType.STRING)
     private Photo photo;
 
     @Column(name = "update_at")
