@@ -1,6 +1,8 @@
 package com.luckytree.member_service.member.adapter.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.luckytree.member_service.common.advice.InternalServerErrorException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,4 +25,12 @@ public class KakaoAccount {
     private boolean isEmailVerified;
 
     private String email;
+
+    @JsonIgnore
+    public String getEmail() {
+        if (email == null) {
+            throw new InternalServerErrorException("회원의 이메일을 받지 못했습니다.");
+        }
+        return email;
+    }
 }

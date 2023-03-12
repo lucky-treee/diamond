@@ -33,10 +33,18 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "즐겨찾기 해제")
+    @DeleteMapping
+    public ResponseEntity<Object> deleteBookmark(@RequestHeader(name = "memberId") String memberId, @RequestParam(name = "shopId") String shopId) {
+        memberUseCase.deleteBookmark(memberId, shopId);
+        return ResponseEntity.ok().build();
+    }
+
     @Operation(summary = "회원 탈퇴")
     @DeleteMapping("/delete")
     public ResponseEntity deleteMember(@RequestParam(value = "userId") String email) {
         memberUseCase.deleteMemberRequest(email);
         return ResponseEntity.noContent().build();
     }
+}
 }
