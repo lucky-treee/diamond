@@ -58,7 +58,7 @@ public class ShopService implements ShopUseCase {
     }
 
     @Override
-    public List<ShopDetail> getShopsByIds(List<Long> ids) {
+    public List<ShopDetail> findShopsByIds(List<Long> ids) {
         return null;
     }
 }

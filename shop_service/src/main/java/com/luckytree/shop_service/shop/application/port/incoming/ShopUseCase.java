@@ -21,5 +21,5 @@ public interface ShopUseCase {
 
     void deleteShop(RemoveRequestForm removeRequestForm);
 
-    List<ShopDetail> getShopsByIds(List<Long> ids);
+    List<ShopDetail> findShopsByIds(List<Long> ids);
 }

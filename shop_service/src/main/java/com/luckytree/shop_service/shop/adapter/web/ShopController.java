@@ -55,7 +55,7 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopsByCategory(@RequestParam(name = "category") String category) {
+    public ResponseEntity<List<ShopSummary>> findShopsByCategory(@RequestParam(name = "category") String category) {
         List<ShopSummary> shopSummaryList = shopUseCase.findShopsByCategory(category);
         return ResponseEntity.ok(shopSummaryList);
     }
@@ -70,7 +70,7 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopsByLatAndLng(ShopLatLngRequest shopLatLngRequest) {
+    public ResponseEntity<List<ShopSummary>> findShopsByLatAndLng(ShopLatLngRequest shopLatLngRequest) {
         List<ShopSummary> shopSummary = shopUseCase.findShopsByLatAndLng(shopLatLngRequest.getMaxLat(), shopLatLngRequest.getMinLat(), shopLatLngRequest.getMaxLng(), shopLatLngRequest.getMinLng());
         return ResponseEntity.ok(shopSummary);
     }
@@ -85,7 +85,7 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping("/shop")
-    public ResponseEntity<ShopDetail> getShopByNameAndAddress(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
+    public ResponseEntity<ShopDetail> findShopByNameAndAddress(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
         ShopDetail shopDetail = shopUseCase.findShopByNameAndAddress(name, address);
         return ResponseEntity.ok(shopDetail);
     }
@@ -100,7 +100,7 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopsByHashtag(@RequestParam(name = "hashtag") Hashtag hashtag) {
+    public ResponseEntity<List<ShopSummary>> findShopsByHashtag(@RequestParam(name = "hashtag") Hashtag hashtag) {
         List<ShopSummary> shopSummaryList = shopUseCase.findShopsByHashtag(hashtag);
         return ResponseEntity.ok(shopSummaryList);
     }
@@ -115,20 +115,20 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @DeleteMapping("/shop")
-    public ResponseEntity<Object> removeShopRequest(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
+    public ResponseEntity<Object> deleteShop(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
         shopUseCase.deleteShop(removeRequestForm);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<ShopDetail>> getShopsByIds(@RequestParam List<Long> id) {
-        List<ShopDetail> shopDetailList = shopUseCase.getShopsByIds(id);
+    public ResponseEntity<List<ShopDetail>> findShopsByIds(@RequestParam List<Long> id) {
+        List<ShopDetail> shopDetailList = shopUseCase.findShopsByIds(id);
         return ResponseEntity.ok(shopDetailList);
     }
 
     @Operation(summary = "샵 리뷰 등록")
     @PostMapping("/shop/review")
-    public ResponseEntity<Object> requestShopReviewRegistration(@RequestBody @Valid ReviewRequest reviewRequest){
+    public ResponseEntity<Object> createShopReview(@RequestBody @Valid ReviewRequest reviewRequest){
 
         return ResponseEntity.ok().build();
     }
@@ -142,7 +142,7 @@ public class ShopController {
 
     @Operation(summary = "샵 리뷰 조회")
     @GetMapping("/shop/review")
-    public ResponseEntity<Object> getShopReview(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
+    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
     }
