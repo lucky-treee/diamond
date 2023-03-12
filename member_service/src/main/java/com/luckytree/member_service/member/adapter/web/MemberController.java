@@ -3,7 +3,6 @@ package com.luckytree.member_service.member.adapter.web;
 import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.domain.MemberProfile;
-import com.luckytree.member_service.member.domain.Status;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -35,9 +34,9 @@ public class MemberController {
     }
 
     @Operation(summary = "회원 탈퇴")
-    @PutMapping("/delete/profile")
-    public ResponseEntity<Object> deleteMember(@RequestParam String email, @RequestParam Status status) {
-        memberUseCase.deleteMemberRequest(email, status);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @DeleteMapping("/delete")
+    public ResponseEntity deleteMember(@RequestParam(value = "userId") String email) {
+        memberUseCase.deleteMemberRequest(email);
+        return ResponseEntity.noContent().build();
     }
 }
