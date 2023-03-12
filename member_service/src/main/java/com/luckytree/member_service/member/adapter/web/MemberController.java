@@ -35,8 +35,8 @@ public class MemberController {
 
     @Operation(summary = "즐겨찾기 해제")
     @DeleteMapping
-    public ResponseEntity<Object> deleteBookmark(@RequestParam(name = "nickname") String nickname, @RequestParam(name = "shop_id") String shopId) {
-        memberUseCase.deleteBookmark(nickname, shopId);
+    public ResponseEntity<Object> deleteBookmark(@RequestHeader(name = "id") String memberId, @RequestParam(name = "shop_id") String shopId) {
+        memberUseCase.deleteBookmark(memberId, shopId);
         return ResponseEntity.ok().build();
     }
 }
