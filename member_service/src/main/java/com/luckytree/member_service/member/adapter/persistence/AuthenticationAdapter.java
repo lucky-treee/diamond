@@ -36,7 +36,7 @@ public class AuthenticationAdapter implements AuthenticationPort {
 
     @Override
     public long findMemberIdByEmail(String email) {
-        return memberRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("해당 이메일에 일치하는 회원이 없습니다.")).getId();
+        return memberRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("회원이 아닙니다. email : " + email)).getId();
     }
 
     @Override
