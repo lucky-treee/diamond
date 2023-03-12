@@ -52,7 +52,7 @@ public class MemberController {
 
     @Operation(summary = "회원 탈퇴")
     @DeleteMapping("/delete")
-    public ResponseEntity deleteMember(@RequestHeader(value = "memberId") long memberId) {
+    public ResponseEntity deleteMember(@LoginMemberId long memberId) {
         memberUseCase.deleteMember(memberId);
         return ResponseEntity.noContent().build();
     }
