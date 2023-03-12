@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.domain;
 
+import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -25,7 +26,7 @@ public class ShopSummary {
     private Double lng;
 
     @Schema(description = "샵 카테고리")
-    private String category;
+    private Category category;
 
     @Schema(description = "샵 해시태그")
     private Hashtag hashtag;

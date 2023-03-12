@@ -73,9 +73,6 @@ public class ShopEntity extends BaseTimeEntity {
     private String holiday;
 
     @OneToMany(mappedBy = "shopEntity")
-    private List<ShopTempEntity> shopTempEntityList;
-
-    @OneToMany(mappedBy = "shopEntity")
     private List<ShopRemoveEntity> shopRemoveEntityList;
 
 
