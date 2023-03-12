@@ -117,7 +117,7 @@ public class ShopController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity<List<ShopDetail>> findShopsByIds(@RequestParam List<Long> id) {
         List<ShopDetail> shopDetailList = shopUseCase.findShopsByIds(id);
         return ResponseEntity.ok(shopDetailList);
