@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public enum Status {
-    NORMAL, DORMANT, LEAVE;
+    NORMAL,
+    DORMANT,
+    LEAVE;
 
-    public Status isMemberStatus(Status status) {
-        if (status == LEAVE) {
-            throw new BadRequestException("이미 탈퇴 처리된 회원입니다.");
+    public void isAlreadyDeleted(long memberId) {
+        if(this == LEAVE) {
+            throw new BadRequestException("이미 탈퇴된 회원 ID입니다.");
         }
-        return LEAVE;
     }
 }
