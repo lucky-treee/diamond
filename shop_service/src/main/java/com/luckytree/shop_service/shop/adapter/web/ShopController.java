@@ -22,7 +22,7 @@ import java.util.List;
 
 @Tag(name = "샵", description = "샵 전체 API 모음")
 @RestController
-@RequestMapping("/v1/shop")
+@RequestMapping("/v1/shops")
 @RequiredArgsConstructor
 public class ShopController {
 
@@ -37,10 +37,10 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @PostMapping("/create/request")
+    @PostMapping
     public ResponseEntity<Object> requestShopRegistration(@RequestBody @Valid ShopRequest shopRequest) {
         shopUseCase.requestShopRegistration(shopRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "특정 카테고리의 샵 전체 검색")
@@ -52,10 +52,10 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @GetMapping("/get/category")
-    public ResponseEntity<List<ShopSummary>> getShopListByCategory(@RequestParam String category) {
+    @GetMapping
+    public ResponseEntity<List<ShopSummary>> getShopListByCategory(@RequestParam(name = "category") String category) {
         List<ShopSummary> shopSummaryList = shopUseCase.getShopSummaryByCategory(category);
-        return new ResponseEntity<>(shopSummaryList, HttpStatus.OK);
+        return ResponseEntity.ok(shopSummaryList);
     }
 
     @Operation(summary = "범위 내 샵 전체 검색")
@@ -67,13 +67,13 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @GetMapping("/get")
-    public ResponseEntity<List<ShopSummary>> getShopAll(@RequestParam double maxLat, @RequestParam double minLat, @RequestParam double maxLng, @RequestParam double minLng) {
+    @GetMapping
+    public ResponseEntity<List<ShopSummary>> getShopAll(@RequestParam(name = "maxLat") double maxLat, @RequestParam(name = "minLat") double minLat, @RequestParam(name = "maxLng") double maxLng, @RequestParam(name = "minLng") double minLng) {
         List<ShopSummary> shopSummary = shopUseCase.getShopAll(maxLat, minLat, maxLng, minLng);
-        return new ResponseEntity<>(shopSummary, HttpStatus.OK);
+        return ResponseEntity.ok(shopSummary);
     }
 
-    @Operation(summary = "선택된 샵 상세정보 검색")
+    @Operation(summary = "샵이름과 주소로 상세조회")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "샵 조회 성공",
                     content = { @Content(mediaType = "application/json",
@@ -82,13 +82,13 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @GetMapping("/get/detail")
-    public ResponseEntity<ShopDetail> getShopDetail(@RequestParam String name, @RequestParam String address) {
+    @GetMapping("/shop")
+    public ResponseEntity<ShopDetail> getShopDetail(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
         ShopDetail shopDetail = shopUseCase.getShopDetail(name, address);
-        return new ResponseEntity<>(shopDetail, HttpStatus.OK);
+        return ResponseEntity.ok(shopDetail);
     }
 
-    @Operation(summary = "특정 해쉬태크의 샵 상세정보 조회")
+    @Operation(summary = "해쉬태그로 샵 목록 조회")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "샵 조회 성공",
                     content = { @Content(mediaType = "application/json",
@@ -97,10 +97,10 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @GetMapping("/get/hashtag")
-    public ResponseEntity<List<ShopSummary>> getShopSummaryByHashtag(@RequestParam Hashtag hashtag) {
+    @GetMapping
+    public ResponseEntity<List<ShopSummary>> getShopSummaryByHashtag(@RequestParam(name = "hashtag") Hashtag hashtag) {
         List<ShopSummary> shopSummaryList = shopUseCase.getShopSummaryByHashtag(hashtag);
-        return new ResponseEntity<>(shopSummaryList, HttpStatus.OK);
+        return ResponseEntity.ok(shopSummaryList);
     }
 
     @Operation(summary = "샵 삭제요청 API")
@@ -112,9 +112,9 @@ public class ShopController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
-    @PostMapping("/remove/request")
+    @DeleteMapping("/delete")
     public ResponseEntity<Object> removeShopRequest(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
         shopUseCase.removeShopRequest(removeRequestForm);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }
