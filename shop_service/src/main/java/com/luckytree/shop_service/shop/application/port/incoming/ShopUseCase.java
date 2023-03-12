@@ -9,17 +9,17 @@ import java.util.List;
 
 public interface ShopUseCase {
 
-    void requestShopRegistration(ShopRequest shopRequest);
+    void createShop(ShopRequest shopRequest);
 
-    List<ShopSummary> getShopSummaryByCategory(String category);
+    List<ShopSummary> findShopsByCategory(String category);
 
-    List<ShopSummary> getShopAll(double maxLat, double minLat, double maxLng, double minLng);
+    List<ShopSummary> findShopsByLatAndLng(double maxLat, double minLat, double maxLng, double minLng);
 
-    List<ShopSummary> getShopSummaryByHashtag(Hashtag hashtag);
+    List<ShopSummary> findShopsByHashtag(Hashtag hashtag);
 
-    ShopDetail getShopDetail(String name, String address);
+    ShopDetail findShopByNameAndAddress(String name, String address);
 
-    void removeShopRequest(RemoveRequestForm removeRequestForm);
+    void deleteShop(RemoveRequestForm removeRequestForm);
 
     List<ShopDetail> getShopsByIds(List<Long> ids);
 }

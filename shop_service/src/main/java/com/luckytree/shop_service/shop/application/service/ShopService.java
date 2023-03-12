@@ -22,37 +22,37 @@ public class ShopService implements ShopUseCase {
 
     @Transactional
     @Override
-    public void requestShopRegistration(ShopRequest shopRequest) {
+    public void createShop(ShopRequest shopRequest) {
         shopPort.saveShopWithDisable(shopRequest);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummary> getShopSummaryByCategory(String category) {
+    public List<ShopSummary> findShopsByCategory(String category) {
         return shopPort.getShopSummaryByCategory(category);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummary> getShopAll(double maxLat, double minLat, double maxLng, double minLng) {
+    public List<ShopSummary> findShopsByLatAndLng(double maxLat, double minLat, double maxLng, double minLng) {
         return shopPort.getShopAll(maxLat, minLat, maxLng, minLng);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummary> getShopSummaryByHashtag(Hashtag hashtag) {
+    public List<ShopSummary> findShopsByHashtag(Hashtag hashtag) {
         return shopPort.getShopSummaryByHashtag(hashtag);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public ShopDetail getShopDetail(String name, String address) {
+    public ShopDetail findShopByNameAndAddress(String name, String address) {
         return shopPort.getShopDetail(name, address);
     }
 
     @Transactional
     @Override
-    public void removeShopRequest(RemoveRequestForm removeRequestForm) {
+    public void deleteShop(RemoveRequestForm removeRequestForm) {
         ShopEntity shopEntity = shopPort.getShopEntity(removeRequestForm.getName(), removeRequestForm.getAddress());
         shopPort.saveRemoveRequest(shopEntity, removeRequestForm.getComment());
     }

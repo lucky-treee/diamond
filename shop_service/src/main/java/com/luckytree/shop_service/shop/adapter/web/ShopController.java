@@ -1,6 +1,7 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
 import com.luckytree.shop_service.shop.adapter.data.ReviewRequest;
+import com.luckytree.shop_service.shop.adapter.data.ShopLatLngRequest;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.adapter.data.UpdateReviewDto;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
@@ -39,8 +40,8 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @PostMapping("/shop")
-    public ResponseEntity<Object> requestShopRegistration(@RequestBody @Valid ShopRequest shopRequest) {
-        shopUseCase.requestShopRegistration(shopRequest);
+    public ResponseEntity<Object> createShop(@RequestBody @Valid ShopRequest shopRequest) {
+        shopUseCase.createShop(shopRequest);
         return ResponseEntity.ok().build();
     }
 
@@ -54,8 +55,8 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopListByCategory(@RequestParam(name = "category") String category) {
-        List<ShopSummary> shopSummaryList = shopUseCase.getShopSummaryByCategory(category);
+    public ResponseEntity<List<ShopSummary>> getShopsByCategory(@RequestParam(name = "category") String category) {
+        List<ShopSummary> shopSummaryList = shopUseCase.findShopsByCategory(category);
         return ResponseEntity.ok(shopSummaryList);
     }
 
@@ -69,8 +70,8 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopAll(@RequestParam(name = "maxLat") double maxLat, @RequestParam(name = "minLat") double minLat, @RequestParam(name = "maxLng") double maxLng, @RequestParam(name = "minLng") double minLng) {
-        List<ShopSummary> shopSummary = shopUseCase.getShopAll(maxLat, minLat, maxLng, minLng);
+    public ResponseEntity<List<ShopSummary>> getShopsByLatAndLng(ShopLatLngRequest shopLatLngRequest) {
+        List<ShopSummary> shopSummary = shopUseCase.findShopsByLatAndLng(shopLatLngRequest.getMaxLat(), shopLatLngRequest.getMinLat(), shopLatLngRequest.getMaxLng(), shopLatLngRequest.getMinLng());
         return ResponseEntity.ok(shopSummary);
     }
 
@@ -84,8 +85,8 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping("/shop")
-    public ResponseEntity<ShopDetail> getShopDetail(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
-        ShopDetail shopDetail = shopUseCase.getShopDetail(name, address);
+    public ResponseEntity<ShopDetail> getShopByNameAndAddress(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
+        ShopDetail shopDetail = shopUseCase.findShopByNameAndAddress(name, address);
         return ResponseEntity.ok(shopDetail);
     }
 
@@ -99,8 +100,8 @@ public class ShopController {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     @GetMapping
-    public ResponseEntity<List<ShopSummary>> getShopSummaryByHashtag(@RequestParam(name = "hashtag") Hashtag hashtag) {
-        List<ShopSummary> shopSummaryList = shopUseCase.getShopSummaryByHashtag(hashtag);
+    public ResponseEntity<List<ShopSummary>> getShopsByHashtag(@RequestParam(name = "hashtag") Hashtag hashtag) {
+        List<ShopSummary> shopSummaryList = shopUseCase.findShopsByHashtag(hashtag);
         return ResponseEntity.ok(shopSummaryList);
     }
 
@@ -115,7 +116,7 @@ public class ShopController {
                     content = @Content)})
     @DeleteMapping("/shop")
     public ResponseEntity<Object> removeShopRequest(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
-        shopUseCase.removeShopRequest(removeRequestForm);
+        shopUseCase.deleteShop(removeRequestForm);
         return ResponseEntity.ok().build();
     }
 
