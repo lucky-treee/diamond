@@ -34,6 +34,7 @@ public class MemberEntity {
     private Status status;
 
     @Column(length = 50)
+    @Enumerated(value = EnumType.STRING)
     private Photo photo;
 
     @Column(name = "update_at")
