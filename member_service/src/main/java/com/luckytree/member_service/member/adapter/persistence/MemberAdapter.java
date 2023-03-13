@@ -42,12 +42,12 @@ public class MemberAdapter implements MemberPort {
 
     @Override
     public List<Long> getBookmarkIds(long memberId){
-        List bookmarkIdList = Collections.singletonList(bookmarkRepository.findAllByMember_id(memberId));
+        List<Long> bookmarkIdList = bookmarkRepository.findAllByMemberId(memberId);
         return bookmarkIdList;
     }
 
     @Override
-    public List<ShopDetailDto> getBookmark(List bookmarkIds){
+    public List<ShopDetailDto> getBookmark(List<Long> bookmarkIds){
         return bookmarkFeignClient.findShopByIds(bookmarkIds);
     }
 

@@ -11,5 +11,5 @@ public interface MemberPort {
     Member findByEmail(String email);
     void updateMember(Member member);
     List<Long> getBookmarkIds(long memberId);
-    List<ShopDetailDto> getBookmark(List bookmarkIds);
+    List<ShopDetailDto> getBookmark(List<Long> bookmarkIds);
 }

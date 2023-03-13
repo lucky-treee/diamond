@@ -19,11 +19,11 @@ public class BookmarkEntity {
     @Id
     private Long id;
 
-    @Column(length = 20, unique = true, nullable = false)
-    private Long member_id;
+    @Column(name = "member_id", length = 20, unique = true, nullable = false)
+    private Long memberId;
 
     @Column(length = 20, nullable = false)
-    private Long shop_id;
+    private Long shopId;
 
     @Column(length = 50)
     private String category;

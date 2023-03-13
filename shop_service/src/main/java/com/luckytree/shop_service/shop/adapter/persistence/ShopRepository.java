@@ -18,5 +18,5 @@ public interface ShopRepository extends JpaRepository<ShopEntity, Long> {
 
     Optional<ShopEntity> findByNameAndAddress(String name, String address);
 
-    List<ShopEntity> findByIds(List<Long> ids);
+    List<ShopEntity> findByIdIn(List<Long> id);
 }
