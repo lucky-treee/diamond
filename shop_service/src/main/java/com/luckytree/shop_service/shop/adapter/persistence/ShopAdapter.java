@@ -55,4 +55,9 @@ public class ShopAdapter implements ShopPort {
     public ShopEntity getShopEntity(String name, String address) {
         return shopRepository.findByNameAndAddress(name, address).orElseThrow(() -> new NotFoundException("해당 shopName과 address애 일치하는 ShopEntity가 없습니다. name: " + name + ", address: " + address));
     }
+
+    @Override
+    public List<ShopDetail> findShopsByIds(List<Long> ids){
+        return shopRepository.findByIds(ids).stream().map(ShopDetail::new).toList();
+    }
 }

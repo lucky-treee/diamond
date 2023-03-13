@@ -17,4 +17,6 @@ public interface ShopRepository extends JpaRepository<ShopEntity, Long> {
     List<ShopEntity> findByHashtagAndStatus(Hashtag hashtag, ShopStatus shopStatus);
 
     Optional<ShopEntity> findByNameAndAddress(String name, String address);
+
+    List<ShopEntity> findByIds(List<Long> ids);
 }

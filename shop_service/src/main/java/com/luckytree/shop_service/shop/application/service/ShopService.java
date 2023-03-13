@@ -60,6 +60,6 @@ public class ShopService implements ShopUseCase {
 
     @Override
     public List<ShopDetail> findShopsByIds(List<Long> ids) {
-        return null;
+        return shopPort.findShopsByIds(ids);
     }
 }

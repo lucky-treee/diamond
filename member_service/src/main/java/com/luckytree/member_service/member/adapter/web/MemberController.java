@@ -38,8 +38,9 @@ public class MemberController {
 
     @Operation(summary = "내 북마크 목록 조회")
     @GetMapping("/member/bookmark")
-    public ResponseEntity<List<ShopDetailDto>> getBookmark(@RequestHeader(name = "memberId") long memberId) {
-        List<ShopDetailDto> myBookmarks = memberUseCase.getBookMark(memberId);
+    public ResponseEntity<List<ShopDetailDto>> getBookmark(@LoginMemberId long memberId) {
+        List<Long> myBookmarkIds = memberUseCase.getBookmarkIds(memberId);
+        List<ShopDetailDto> myBookmarks = memberUseCase.getBookmark(myBookmarkIds);
         return ResponseEntity.ok(myBookmarks);
     }
 

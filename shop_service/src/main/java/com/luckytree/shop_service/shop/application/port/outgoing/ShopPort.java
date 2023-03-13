@@ -24,4 +24,6 @@ public interface ShopPort {
     void saveRemoveRequest(ShopEntity shopEntity, String comment);
 
     ShopEntity getShopEntity(String name, String address);
+
+    List<ShopDetail> findShopsByIds(List<Long> ids);
 }

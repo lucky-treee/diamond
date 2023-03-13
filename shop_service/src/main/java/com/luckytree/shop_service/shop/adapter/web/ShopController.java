@@ -118,9 +118,9 @@ public class ShopController {
     }
 
     @PostMapping
-    public ResponseEntity<List<ShopDetail>> findShopsByIds(@RequestParam List<Long> id) {
+    public List<ShopDetail> findShopsByIds(@RequestParam List<Long> id) {
         List<ShopDetail> shopDetailList = shopUseCase.findShopsByIds(id);
-        return ResponseEntity.ok(shopDetailList);
+        return shopDetailList;
     }
 
     @Operation(summary = "샵 리뷰 등록")
