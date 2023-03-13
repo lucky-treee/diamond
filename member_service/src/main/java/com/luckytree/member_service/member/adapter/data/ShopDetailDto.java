@@ -1,5 +1,12 @@
 package com.luckytree.member_service.member.adapter.data;
 
+import lombok.*;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@ToString
 public class ShopDetailDto {
 
     private String shopName;
