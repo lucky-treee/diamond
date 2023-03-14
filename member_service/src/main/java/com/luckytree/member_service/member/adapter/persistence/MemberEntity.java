@@ -54,7 +54,6 @@ public class MemberEntity {
     }
 
     public void leave() {
-        //status.isAlreadyDeleted();
         status = LEAVE;
     }
 
