@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,9 +52,9 @@ public class MemberController {
     }
 
     @Operation(summary = "회원 탈퇴")
-    @DeleteMapping("/delete")
-    public ResponseEntity deleteMember(@LoginMemberId long memberId) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/leave")
+    public void leaveMember(@LoginMemberId long memberId) {
         memberUseCase.deleteMember(memberId);
-        return ResponseEntity.noContent().build();
     }
 }

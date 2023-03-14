@@ -34,8 +34,12 @@ public class MemberAdapter implements MemberPort {
 
     @Transactional
     @Override
-    public void deleteMemberById(long memberId) {
-        MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("해당 회원의 ID"+memberId+"는 존재하지 않습니다."));
-        memberEntity.leave(memberId);
+    public void deleteById(MemberEntity memberEntity) {
+        memberEntity.leave();
+    }
+
+    @Override
+    public MemberEntity findById(long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다."));
     }
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public enum Status {
     NORMAL,
     DORMANT,
-    LEAVE
+    LEAVE,
     ;
 
     public void isAlreadyDeleted() {
