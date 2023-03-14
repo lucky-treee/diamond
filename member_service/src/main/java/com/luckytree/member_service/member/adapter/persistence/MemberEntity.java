@@ -11,6 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+import static com.luckytree.member_service.member.domain.Status.LEAVE;
+
 @Table(name = "member")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
@@ -49,6 +51,14 @@ public class MemberEntity {
     public void updateNicknameAndPhoto(String nickname, Photo photo) {
         this.nickname = nickname;
         this.photo = photo;
+    }
+
+    public void leave() {
+        status = LEAVE;
+    }
+
+    public void isAlreadyDeleted() {
+        status.isAlreadyDeleted();
     }
 
     public MemberEntity(String nickname, String email, Photo photo) {

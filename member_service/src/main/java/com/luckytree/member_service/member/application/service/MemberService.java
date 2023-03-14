@@ -1,5 +1,7 @@
 package com.luckytree.member_service.member.application.service;
 
+import com.luckytree.member_service.member.adapter.data.ShopDetailDto;
+import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.adapter.data.MyBookmarksDto;
 import com.luckytree.member_service.member.adapter.persistence.BookmarkEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
@@ -8,6 +10,7 @@ import com.luckytree.member_service.member.application.port.outgoing.ShopFeignCl
 import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.member.domain.MemberProfile;
 import com.luckytree.member_service.member.domain.Photo;
+import com.luckytree.member_service.member.domain.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,10 +33,23 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void updateMemberRequest(String email, String nickname, Photo photo) {
+    public void updateMember(String email, String nickname, Photo photo) {
         Member member = getMember(email);
         member.updateNicknameAndPhoto(nickname, photo);
         memberPort.updateMember(member);
+    }
+
+    @Transactional
+    @Override
+    public void deleteMember(long memberId) {
+        MemberEntity memberEntity = memberPort.findById(memberId);
+        memberEntity.isAlreadyDeleted();
+        memberPort.deleteById(memberEntity);
+    }
+
+    @Override
+    public List<ShopDetailDto> getBookMark(long memberId) {
+        return null;
     }
 
     @Transactional

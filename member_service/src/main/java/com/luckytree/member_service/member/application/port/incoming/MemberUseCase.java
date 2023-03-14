@@ -7,6 +7,9 @@ import com.luckytree.member_service.member.domain.Photo;
 public interface MemberUseCase {
 
     MemberProfile getMemberProfile(long memberId);
+    void updateMember(String email, String nickname, Photo photo);
+    void deleteMember(long memberId);
+    List<ShopDetailDto> getBookMark(long memberId);
     void updateMemberRequest(String email, String nickname, Photo photo);
     MyBookmarksDto findMyBookmarks(long memberId);
     void deleteBookMark(long memberId, String shopId);

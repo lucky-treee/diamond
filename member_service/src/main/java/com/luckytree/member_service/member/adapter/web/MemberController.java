@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,28 @@ public class MemberController {
     @Operation(summary = "프로필 수정")
     @PutMapping
     public ResponseEntity<Object> updateMember(@RequestBody @Valid UpdateMemberDto updateMemberDto) {
-        memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
+        memberUseCase.updateMember(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "내 북마크 목록 조회")
+    @GetMapping("/member/bookmark")
+    public ResponseEntity<List<ShopDetailDto>> getBookmark(@RequestHeader(name = "memberId") long memberId) {
+        List<ShopDetailDto> myBookmarks = memberUseCase.getBookMark(memberId);
+        return ResponseEntity.ok(myBookmarks);
+    }
+
+    @Operation(summary = "즐겨찾기 해제")
+    @DeleteMapping
+    public ResponseEntity<Object> deleteBookmark(@RequestHeader(name = "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
+        memberUseCase.deleteBookMark(memberId, shopId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "회원 탈퇴")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/leave")
+    public void leaveMember(@LoginMemberId long memberId) {
+        memberUseCase.deleteMember(memberId);
     }
 }

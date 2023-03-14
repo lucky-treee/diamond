@@ -35,6 +35,17 @@ public class MemberAdapter implements MemberPort {
         memberEntity.updateNicknameAndPhoto(member.getNickname(), member.getPhoto());
     }
 
+    @Transactional
+    @Override
+    public void deleteById(MemberEntity memberEntity) {
+        memberEntity.leave();
+    }
+
+    @Override
+    public MemberEntity findById(long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다."));
+    }
+
     @Override
     public List<BookmarkEntity> findBookmarksByMemberId(long memberId) {
         return bookmarkRepository.findAllByMemberId(memberId);
