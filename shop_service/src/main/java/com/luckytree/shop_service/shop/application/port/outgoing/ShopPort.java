@@ -1,11 +1,11 @@
 package com.luckytree.shop_service.shop.application.port.outgoing;
 
+import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
-import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
 import com.luckytree.shop_service.shop.domain.ShopSummary;
 
 import java.util.List;
@@ -26,5 +26,5 @@ public interface ShopPort {
 
     ShopEntity getShopEntity(String name, String address);
 
-    List<ShopDetailDto> findShopsByIds(List<Long> ids);
+    List<BookmarkDto> findBookmarkDtosByIds(List<Long> shopIds);
 }

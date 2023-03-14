@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.persistence;
 
+import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
@@ -58,7 +59,7 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
-    public List<ShopDetailDto> findShopsByIds(List<Long> id){
-        return shopRepository.findByIdIn(id).stream().map(ShopDetailDto::new).toList();
+    public List<BookmarkDto> findBookmarkDtosByIds(List<Long> shopIds){
+        return shopRepository.findAllByIdIn(shopIds).stream().map(BookmarkDto::new).toList();
     }
 }

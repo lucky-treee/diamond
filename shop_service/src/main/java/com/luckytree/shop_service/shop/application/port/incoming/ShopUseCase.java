@@ -1,10 +1,10 @@
 package com.luckytree.shop_service.shop.application.port.incoming;
 
 import com.luckytree.shop_service.shop.adapter.data.Category;
+import com.luckytree.shop_service.shop.adapter.data.MyBookmarksDto;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
-import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
 import com.luckytree.shop_service.shop.domain.ShopSummary;
 
 import java.util.List;
@@ -23,5 +23,5 @@ public interface ShopUseCase {
 
     void deleteShop(RemoveRequestForm removeRequestForm);
 
-    List<ShopDetailDto> findShopsByIds(List<Long> ids);
+    MyBookmarksDto findMyBookmarksDtoByIds(List<Long> ids);
 }

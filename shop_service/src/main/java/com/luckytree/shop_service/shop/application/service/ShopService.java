@@ -1,6 +1,8 @@
 package com.luckytree.shop_service.shop.application.service;
 
+import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.shop.adapter.data.Category;
+import com.luckytree.shop_service.shop.adapter.data.MyBookmarksDto;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
@@ -8,7 +10,6 @@ import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
-import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
 import com.luckytree.shop_service.shop.domain.ShopSummary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,8 @@ public class ShopService implements ShopUseCase {
     }
 
     @Override
-    public List<ShopDetailDto> findShopsByIds(List<Long> ids) {
-        return shopPort.findShopsByIds(ids);
+    public MyBookmarksDto findMyBookmarksDtoByIds(List<Long> shopIds) {
+        List<BookmarkDto> bookmarkDtos = shopPort.findBookmarkDtosByIds(shopIds);
+        return new MyBookmarksDto(bookmarkDtos);
     }
 }
