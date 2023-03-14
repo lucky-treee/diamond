@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 public enum Status {
     NORMAL,
     DORMANT,
-    LEAVE;
+    LEAVE
+    ;
 
-    public void isAlreadyDeleted(long memberId) {
+    public void isAlreadyDeleted() {
         if(this == LEAVE) {
             throw new BadRequestException("이미 탈퇴된 회원 ID입니다.");
         }
