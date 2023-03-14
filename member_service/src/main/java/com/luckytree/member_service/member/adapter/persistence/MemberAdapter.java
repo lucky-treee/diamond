@@ -1,16 +1,12 @@
 package com.luckytree.member_service.member.adapter.persistence;
 
 import com.luckytree.member_service.common.advice.NotFoundException;
-import com.luckytree.member_service.member.adapter.data.ShopDetailDto;
-import com.luckytree.member_service.member.adapter.feign.BookmarkFeignClient;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.domain.Member;
-import com.luckytree.member_service.member.domain.MemberProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,7 +15,6 @@ public class MemberAdapter implements MemberPort {
 
     private final MemberRepository memberRepository;
     private final BookmarkRepository bookmarkRepository;
-    private final BookmarkFeignClient bookmarkFeignClient;
 
     @Override
     public Member findMemberById(long memberId) {
@@ -41,14 +36,7 @@ public class MemberAdapter implements MemberPort {
     }
 
     @Override
-    public List<Long> getBookmarkIds(long memberId){
-        List<Long> bookmarkIdList = bookmarkRepository.findAllByMemberId(memberId);
-        return bookmarkIdList;
+    public List<BookmarkEntity> findBookmarksByMemberId(long memberId) {
+        return bookmarkRepository.findAllByMemberId(memberId);
     }
-
-    @Override
-    public List<ShopDetailDto> getBookmark(List<Long> bookmarkIds){
-        return bookmarkFeignClient.findShopByIds(bookmarkIds);
-    }
-
 }

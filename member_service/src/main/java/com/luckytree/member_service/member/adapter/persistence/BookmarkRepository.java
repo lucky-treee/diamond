@@ -9,6 +9,5 @@ import java.util.Optional;
 
 public interface BookmarkRepository extends JpaRepository<BookmarkEntity, Long> {
 
-    @Query(value = "select shop_id from bookmark WHERE member_id = :memberId", nativeQuery = true)
-    List<Long> findAllByMemberId(@Param("memberId") long memberId);
+    List<BookmarkEntity> findAllByMemberId(long memberId);
 }
