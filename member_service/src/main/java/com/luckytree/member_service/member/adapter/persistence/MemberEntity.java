@@ -53,8 +53,8 @@ public class MemberEntity {
         this.photo = photo;
     }
 
-    public void deleteMember(long memberId) {
-        this.status.isAlreadyDeleted(memberId);
+    public void leave(long memberId) {
+        this.status.isAlreadyDeleted();
         this.status = LEAVE;
     }
 
