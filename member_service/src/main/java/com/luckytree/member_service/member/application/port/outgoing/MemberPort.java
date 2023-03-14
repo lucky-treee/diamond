@@ -7,4 +7,5 @@ public interface MemberPort {
     Member findMemberById(long memberId);
     Member findByEmail(String email);
     void updateMember(Member member);
+    void deleteMemberById(long memberId);
 }
