@@ -1,16 +1,14 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.member.adapter.data.ShopDetailDto;
-import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.adapter.data.MyBookmarksDto;
 import com.luckytree.member_service.member.adapter.persistence.BookmarkEntity;
+import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.application.port.outgoing.ShopFeignClientPort;
 import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.member.domain.MemberProfile;
 import com.luckytree.member_service.member.domain.Photo;
-import com.luckytree.member_service.member.domain.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,15 +39,16 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void deleteMember(long memberId) {
+    public void leaveMember(long memberId) {
         MemberEntity memberEntity = memberPort.findById(memberId);
         memberEntity.isAlreadyDeleted();
         memberPort.deleteById(memberEntity);
     }
 
     @Override
-    public List<ShopDetailDto> getBookMark(long memberId) {
-        return null;
+    public MyBookmarksDto findMyBookmarks(long memberId) {
+        List<Long> shopIds = findShopIds(memberId);
+        return findMyBookmarksFeign(shopIds);
     }
 
     @Transactional
@@ -60,12 +59,6 @@ public class MemberService implements MemberUseCase {
 
     private Member getMember(String email) {
         return memberPort.findByEmail(email);
-    }
-
-    @Override
-    public MyBookmarksDto findMyBookmarks(long memberId) {
-        List<Long> shopIds = findShopIds(memberId);
-        return findMyBookmarksFeign(shopIds);
     }
 
     private List<Long> findShopIds(long memberId) {
