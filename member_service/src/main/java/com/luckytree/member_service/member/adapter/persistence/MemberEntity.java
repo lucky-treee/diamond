@@ -53,9 +53,12 @@ public class MemberEntity {
         this.photo = photo;
     }
 
-    public void leave(long memberId) {
-        this.status.isAlreadyDeleted();
-        this.status = LEAVE;
+    public void leave() {
+        status = LEAVE;
+    }
+
+    public void isAlreadyDeleted() {
+        status.isAlreadyDeleted();
     }
 
     public MemberEntity(String nickname, String email, Photo photo) {
