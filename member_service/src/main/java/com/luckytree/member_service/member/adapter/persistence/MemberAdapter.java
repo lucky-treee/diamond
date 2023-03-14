@@ -3,7 +3,6 @@ package com.luckytree.member_service.member.adapter.persistence;
 import com.luckytree.member_service.common.advice.NotFoundException;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.domain.Member;
-import com.luckytree.member_service.member.domain.MemberProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,5 +30,12 @@ public class MemberAdapter implements MemberPort {
     public void updateMember(Member member){
         MemberEntity memberEntity = memberRepository.findByEmail(member.getEmail()).orElseThrow(() -> new NotFoundException("해당 이메일이 존재하지 않습니다."));
         memberEntity.updateNicknameAndPhoto(member.getNickname(), member.getPhoto());
+    }
+
+    @Transactional
+    @Override
+    public void deleteMemberById(long memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("해당 회원의 ID"+memberId+"는 존재하지 않습니다."));
+        memberEntity.leave(memberId);
     }
 }
