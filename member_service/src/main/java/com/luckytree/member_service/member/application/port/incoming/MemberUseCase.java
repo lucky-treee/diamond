@@ -10,7 +10,7 @@ public interface MemberUseCase {
 
     MemberProfile getMemberProfile(long memberId);
     void updateMember(String email, String nickname, Photo photo);
-    void deleteMember(long userId);
+    void deleteMember(long memberId);
     List<ShopDetailDto> getBookMark(long memberId);
     void deleteBookMark(long memberId, String shopId);
 }
