@@ -11,6 +11,6 @@ import java.util.List;
 @FeignClient(name="shop-service", configuration={FeignClientConfig.class})
 public interface ShopFeignClient {
 
-    @PostMapping("/v1/shops")
+    @PostMapping("/v1/bookmarks/shops")
     MyBookmarksDto findBookmarksByIds(@RequestBody List<Long> shopIds);
 }
