@@ -1,10 +1,12 @@
 package com.luckytree.shop_service.shop.adapter.persistence;
 
+import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.shop.adapter.data.Category;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
+import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
 import com.luckytree.shop_service.shop.domain.ShopStatus;
 import com.luckytree.shop_service.shop.domain.ShopSummary;
 import lombok.RequiredArgsConstructor;
@@ -54,5 +56,10 @@ public class ShopAdapter implements ShopPort {
     @Override
     public ShopEntity getShopEntity(String name, String address) {
         return shopRepository.findByNameAndAddress(name, address).orElseThrow(() -> new NotFoundException("해당 shopName과 address애 일치하는 ShopEntity가 없습니다. name: " + name + ", address: " + address));
+    }
+
+    @Override
+    public List<BookmarkDto> findBookmarkDtosByIds(List<Long> shopIds){
+        return shopRepository.findAllByIdIn(shopIds).stream().map(BookmarkDto::new).toList();
     }
 }

@@ -28,8 +28,6 @@ import com.luckytree.member_service.member.adapter.data.LoginDto;
 public interface AuthenticationUseCase {
 
     void login(LoginDto loginDto);
-
     Tokens signup(SignupDto signUpDto);
-
     Tokens login(String code);
 }

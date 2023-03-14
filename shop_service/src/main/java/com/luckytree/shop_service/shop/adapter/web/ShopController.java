@@ -5,6 +5,7 @@ import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestFo
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
+import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
 import com.luckytree.shop_service.shop.domain.ShopSummary;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -115,12 +116,6 @@ public class ShopController {
     public ResponseEntity<Object> deleteShop(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
         shopUseCase.deleteShop(removeRequestForm);
         return ResponseEntity.ok().build();
-    }
-
-    @PostMapping
-    public ResponseEntity<List<ShopDetail>> findShopsByIds(@RequestParam List<Long> id) {
-        List<ShopDetail> shopDetailList = shopUseCase.findShopsByIds(id);
-        return ResponseEntity.ok(shopDetailList);
     }
 
     @Operation(summary = "샵 리뷰 등록")

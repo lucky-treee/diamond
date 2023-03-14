@@ -1,6 +1,8 @@
 package com.luckytree.shop_service.shop.application.service;
 
+import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.shop.adapter.data.Category;
+import com.luckytree.shop_service.shop.adapter.data.MyBookmarksDto;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
 import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
@@ -59,7 +61,8 @@ public class ShopService implements ShopUseCase {
     }
 
     @Override
-    public List<ShopDetail> findShopsByIds(List<Long> ids) {
-        return null;
+    public MyBookmarksDto findMyBookmarksDtoByIds(List<Long> shopIds) {
+        List<BookmarkDto> bookmarkDtos = shopPort.findBookmarkDtosByIds(shopIds);
+        return new MyBookmarksDto(bookmarkDtos);
     }
 }

@@ -7,11 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 public class MemberAdapter implements MemberPort {
 
     private final MemberRepository memberRepository;
+    private final BookmarkRepository bookmarkRepository;
 
     @Override
     public Member findMemberById(long memberId) {
@@ -41,5 +44,10 @@ public class MemberAdapter implements MemberPort {
     @Override
     public MemberEntity findById(long memberId) {
         return memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다."));
+    }
+
+    @Override
+    public List<BookmarkEntity> findBookmarksByMemberId(long memberId) {
+        return bookmarkRepository.findAllByMemberId(memberId);
     }
 }
