@@ -5,13 +5,8 @@ import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestFo
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.domain.Hashtag;
 import com.luckytree.shop_service.shop.domain.ShopDetail;
-import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
 import com.luckytree.shop_service.shop.domain.ShopSummary;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,14 +24,6 @@ public class ShopController {
     private final ShopUseCase shopUseCase;
 
     @Operation(summary = "샵 등록요청 API")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "샵 등록 완료",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ShopRequest.class)) }),
-            @ApiResponse(responseCode = "400", description = "Bad request",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
     @PostMapping("/shop")
     public ResponseEntity<Object> createShop(@RequestBody @Valid ShopRequest shopRequest) {
         shopUseCase.createShop(shopRequest);
@@ -44,14 +31,6 @@ public class ShopController {
     }
 
     @Operation(summary = "특정 카테고리의 샵 전체 검색")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "샵 조회 성공",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ShopSummary.class)) }),
-            @ApiResponse(responseCode = "400", description = "Bad request",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
     @GetMapping("/{category}")
     public ResponseEntity<List<ShopSummary>> findShopsByCategory(@PathVariable Category category) {
         List<ShopSummary> shopSummaryList = shopUseCase.findShopsByCategory(category);
@@ -59,14 +38,6 @@ public class ShopController {
     }
 
     @Operation(summary = "범위 내 샵 전체 검색")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "샵 조회 성공",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ShopSummary.class)) }),
-            @ApiResponse(responseCode = "400", description = "Bad request",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
     @GetMapping
     public ResponseEntity<List<ShopSummary>> findShopsByLatAndLng(ShopLatLngRequest shopLatLngRequest) {
         List<ShopSummary> shopSummary = shopUseCase.findShopsByLatAndLng(shopLatLngRequest.getMaxLat(), shopLatLngRequest.getMinLat(), shopLatLngRequest.getMaxLng(), shopLatLngRequest.getMinLng());
@@ -74,14 +45,6 @@ public class ShopController {
     }
 
     @Operation(summary = "샵이름과 주소로 상세조회")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "샵 조회 성공",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ShopDetail.class)) }),
-            @ApiResponse(responseCode = "400", description = "Bad request",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
     @GetMapping("/shop")
     public ResponseEntity<ShopDetail> findShopByNameAndAddress(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
         ShopDetail shopDetail = shopUseCase.findShopByNameAndAddress(name, address);
@@ -89,14 +52,6 @@ public class ShopController {
     }
 
     @Operation(summary = "해쉬태그로 샵 목록 조회")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "샵 조회 성공",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ShopSummary.class)) }),
-            @ApiResponse(responseCode = "400", description = "Bad request",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
     @GetMapping("/{hashtag}")
     public ResponseEntity<List<ShopSummary>> findShopsByHashtag(@PathVariable Hashtag hashtag) {
         List<ShopSummary> shopSummaryList = shopUseCase.findShopsByHashtag(hashtag);
@@ -104,14 +59,6 @@ public class ShopController {
     }
 
     @Operation(summary = "샵 삭제요청 API")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "샵 삭제요청 완료",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Object.class)) }),
-            @ApiResponse(responseCode = "400", description = "Bad request",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
     @DeleteMapping("/shop")
     public ResponseEntity<Object> deleteShop(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
         shopUseCase.deleteShop(removeRequestForm);
