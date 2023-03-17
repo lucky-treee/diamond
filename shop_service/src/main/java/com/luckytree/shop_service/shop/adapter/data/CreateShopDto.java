@@ -1,8 +1,11 @@
 package com.luckytree.shop_service.shop.adapter.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.luckytree.shop_service.common.enums.Category;
+import com.luckytree.shop_service.common.enums.ShopStatus;
+import com.luckytree.shop_service.shop.domain.Shop;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +20,7 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 @Schema(description = "샵 등록 DTO")
-public class ShopRequest {
+public class CreateShopDto {
 
     @NotBlank
     @Schema(description = "샵 이름")
@@ -33,7 +36,6 @@ public class ShopRequest {
     private String address;
 
     @Schema(description = "샵 사진")
-    @Size(max = 150)
     private String photo;
 
     @Schema(description = "샵 전화번호")
@@ -71,4 +73,24 @@ public class ShopRequest {
     @Schema(description = "샵 휴무일")
     @Size(max = 20)
     private String holiday;
+
+    @JsonIgnore
+    public Shop toDomain() {
+        return new Shop(
+                shopName,
+                category,
+                ShopStatus.DISABLE,
+                address,
+                lat,
+                lng,
+                photo,
+                contact,
+                sns,
+                homepage,
+                flagshipProduct,
+                operatingStart,
+                operatingEnd,
+                holiday
+        );
+    }
 }

@@ -2,8 +2,9 @@ package com.luckytree.shop_service.shop.adapter.jpa;
 
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.common.enums.Hashtag;
-import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
+import com.luckytree.shop_service.shop.adapter.data.CreateShopDto;
 import com.luckytree.shop_service.common.enums.ShopStatus;
+import com.luckytree.shop_service.shop.domain.Shop;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -77,20 +78,20 @@ public class ShopEntity extends BaseTimeEntity {
     private List<ShopRemoveEntity> shopRemoveEntityList;
 
 
-    public ShopEntity(ShopRequest shopRequest) {
-        this.name = shopRequest.getShopName();
-        this.category = shopRequest.getCategory();
-        this.status = ShopStatus.DISABLE;
-        this.address = shopRequest.getAddress();
-        this.lat = shopRequest.getLat();
-        this.lng = shopRequest.getLng();
-        this.photo = shopRequest.getPhoto();
-        this.contact = shopRequest.getContact();
-        this.sns = shopRequest.getSns();
-        this.homepage = shopRequest.getHomepage();
-        this.flagshipProduct = shopRequest.getFlagshipProduct();
-        this.operatingStart = shopRequest.getOperatingStart();
-        this.operatingEnd = shopRequest.getOperatingEnd();
-        this.holiday = shopRequest.getHoliday();
+    public ShopEntity(Shop shop) {
+        this.name = shop.getName();
+        this.category = shop.getCategory();
+        this.status = shop.getStatus();
+        this.address = shop.getAddress();
+        this.lat = shop.getLat();
+        this.lng = shop.getLng();
+        this.photo = shop.getPhoto();
+        this.contact = shop.getContact();
+        this.sns = shop.getSns();
+        this.homepage = shop.getHomepage();
+        this.flagshipProduct = shop.getFlagshipProduct();
+        this.operatingStart = shop.getOperatingStart();
+        this.operatingEnd = shop.getOperatingEnd();
+        this.holiday = shop.getHoliday();
     }
 }
