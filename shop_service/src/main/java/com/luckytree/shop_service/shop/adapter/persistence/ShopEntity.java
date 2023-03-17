@@ -1,9 +1,9 @@
 package com.luckytree.shop_service.shop.adapter.persistence;
 
-import com.luckytree.shop_service.shop.adapter.data.Category;
-import com.luckytree.shop_service.shop.domain.Hashtag;
+import com.luckytree.shop_service.common.enums.Category;
+import com.luckytree.shop_service.common.enums.Hashtag;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
-import com.luckytree.shop_service.shop.domain.ShopStatus;
+import com.luckytree.shop_service.common.enums.ShopStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;

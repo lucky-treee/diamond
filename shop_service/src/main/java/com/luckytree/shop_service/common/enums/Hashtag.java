@@ -1,4 +1,4 @@
-package com.luckytree.shop_service.shop.domain;
+package com.luckytree.shop_service.common.enums;
 
 public enum Hashtag {
     GOOD,

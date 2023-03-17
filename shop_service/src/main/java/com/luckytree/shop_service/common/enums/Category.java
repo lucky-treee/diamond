@@ -1,4 +1,4 @@
-package com.luckytree.shop_service.shop.adapter.data;
+package com.luckytree.shop_service.common.enums;
 
 public enum Category {
     REFILL,

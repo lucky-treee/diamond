@@ -1,11 +1,12 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
+import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
-import com.luckytree.shop_service.shop.domain.Hashtag;
-import com.luckytree.shop_service.shop.domain.ShopDetail;
-import com.luckytree.shop_service.shop.domain.ShopSummary;
+import com.luckytree.shop_service.common.enums.Hashtag;
+import com.luckytree.shop_service.shop.adapter.data.ShopDetail;
+import com.luckytree.shop_service.shop.adapter.data.ShopSummary;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

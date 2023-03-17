@@ -1,8 +1,8 @@
 package com.luckytree.shop_service.shop.adapter.persistence;
 
-import com.luckytree.shop_service.shop.adapter.data.Category;
-import com.luckytree.shop_service.shop.domain.Hashtag;
-import com.luckytree.shop_service.shop.domain.ShopStatus;
+import com.luckytree.shop_service.common.enums.Category;
+import com.luckytree.shop_service.common.enums.Hashtag;
+import com.luckytree.shop_service.common.enums.ShopStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
