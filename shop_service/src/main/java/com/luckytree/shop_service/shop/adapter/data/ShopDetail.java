@@ -1,7 +1,8 @@
-package com.luckytree.shop_service.shop.domain;
+package com.luckytree.shop_service.shop.adapter.data;
 
-import com.luckytree.shop_service.shop.adapter.data.Category;
-import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
+import com.luckytree.shop_service.common.enums.Category;
+import com.luckytree.shop_service.common.enums.Hashtag;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
