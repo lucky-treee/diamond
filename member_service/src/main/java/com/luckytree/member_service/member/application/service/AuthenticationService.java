@@ -34,8 +34,8 @@ public class AuthenticationService implements AuthenticationUseCase {
     }
 
     @Override
-    public Tokens login(String code) {
-        String accessToken = authenticationPort.getUserKakaoAccessToken(code);
+    public Tokens login(String code, String redirectUri) {
+        String accessToken = authenticationPort.getUserKakaoAccessToken(code, redirectUri);
         String email = authenticationPort.getUserKakaoEmail(accessToken);
         long memberId = authenticationPort.findMemberIdByEmail(email);
 
