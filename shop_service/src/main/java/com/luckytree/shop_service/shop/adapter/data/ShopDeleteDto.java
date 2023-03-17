@@ -1,4 +1,4 @@
-package com.luckytree.shop_service.shop.application.port.incoming;
+package com.luckytree.shop_service.shop.adapter.data;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -11,12 +11,12 @@ import lombok.Setter;
 @Setter
 @Schema(description = "샵 삭제 요청")
 @NoArgsConstructor
-public class RemoveRequestForm {
+public class ShopDeleteDto {
 
     @NotBlank
     @Size(max = 50)
     @Schema(description = "샵 이름")
-    private  String name;
+    private String name;
 
     @NotBlank
     @Size(max = 50)

@@ -13,7 +13,7 @@ import lombok.*;
 @Schema(description = "샵 요약정보")
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class ShopSummary {
+public class ShopSummaryDto {
 
     @Schema(description = "샵 이름")
     private String name;
@@ -33,7 +33,7 @@ public class ShopSummary {
     @Schema(description = "샵 해시태그")
     private Hashtag hashtag;
 
-    public ShopSummary(ShopEntity shopEntity) {
+    public ShopSummaryDto(ShopEntity shopEntity) {
         this.name = shopEntity.getName();
         this.status = shopEntity.getStatus();
         this.lat = shopEntity.getLat();
