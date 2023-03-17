@@ -18,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ShopService implements ShopUseCase {
 
     private final ShopPort shopPort;
 
-    @Transactional
     @Override
     public void createShop(CreateShopDto createShopDto) {
         shopPort.createShop(createShopDto.toDomain());
@@ -53,13 +53,13 @@ public class ShopService implements ShopUseCase {
         return shopPort.getShopDetail(name, address);
     }
 
-    @Transactional
     @Override
     public void deleteShop(RemoveRequestForm removeRequestForm) {
         ShopEntity shopEntity = shopPort.getShopEntity(removeRequestForm.getName(), removeRequestForm.getAddress());
         shopPort.saveRemoveRequest(shopEntity, removeRequestForm.getComment());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public MyBookmarksDto findMyBookmarksDtoByIds(List<Long> shopIds) {
         List<BookmarkDto> bookmarkDtos = shopPort.findBookmarkDtosByIds(shopIds);
