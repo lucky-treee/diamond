@@ -29,5 +29,5 @@ public interface AuthenticationUseCase {
 
     void login(LoginDto loginDto);
     Tokens signup(SignupDto signUpDto);
-    Tokens login(String code);
+    Tokens login(String code, String redirectUri);
 }

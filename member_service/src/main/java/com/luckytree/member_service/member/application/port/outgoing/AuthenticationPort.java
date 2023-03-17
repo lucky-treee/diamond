@@ -7,6 +7,6 @@ public interface AuthenticationPort {
 
     long saveMember(Member member);
     long findMemberIdByEmail(String email);
-    String getUserKakaoAccessToken(String code);
+    String getUserKakaoAccessToken(String code, String redirectUri);
     String getUserKakaoEmail(String accessToken);
 }

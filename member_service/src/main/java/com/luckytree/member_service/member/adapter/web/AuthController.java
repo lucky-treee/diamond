@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.web;
 
+import com.luckytree.member_service.member.adapter.data.KakaoLoginDto;
 import com.luckytree.member_service.member.adapter.data.LoginDto;
 import com.luckytree.member_service.member.adapter.data.SignupDto;
 import com.luckytree.member_service.member.adapter.data.Tokens;
@@ -42,8 +43,8 @@ public class AuthController {
     }
 
     @GetMapping("/login/kakao")
-    public ResponseEntity<?> loginByKakao(@RequestParam(name = "code") String code) {
-        Tokens tokens = authenticationUseCase.login(code);
+    public ResponseEntity<?> loginByKakao(@Valid @RequestBody KakaoLoginDto kakaoLoginDto) {
+        Tokens tokens = authenticationUseCase.login(kakaoLoginDto.getCode(), kakaoLoginDto.getRedirectUri());
 
         ResponseCookie responseCookie = ResponseCookie
                 .from("refresh-token", tokens.refreshToken())
