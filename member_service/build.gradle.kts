@@ -31,7 +31,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
 	implementation("io.micrometer:micrometer-tracing-bridge-brave")
-	implementation("io.zipkin.reporter2:zipkin-reporter-brave")
+	//implementation("io.zipkin.reporter2:zipkin-reporter-brave")
 	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
