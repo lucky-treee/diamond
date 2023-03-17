@@ -1,38 +1,34 @@
 package com.luckytree.shop_service.common.advice;
 
-import com.luckytree.shop_service.common.dto.ResultResponse;
-import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.core.NoContentException;
-import org.apache.commons.lang3.NotImplementedException;
+import com.luckytree.shop_service.common.exceptions.BadRequestException;
+import com.luckytree.shop_service.common.exceptions.InternalServerErrorException;
+import com.luckytree.shop_service.common.exceptions.NotFoundException;
+import com.luckytree.shop_service.common.exceptions.UnAuthorizedException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.webjars.NotFoundException;
 
 @RestControllerAdvice
 public class ControllerAdvice {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResultResponse notFoundExceptionHandler(NotFoundException e) {
-        return new ResultResponse<>(-10404, e.getMessage());
-    }
-
-    @ExceptionHandler(NoContentException.class)
-    public ResultResponse noContentExceptionHandler(NoContentException e) {
-        return new ResultResponse<>(-10204, e.getMessage());
+    public ResponseEntity<Object> notFoundExceptionHandler(NotFoundException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResultResponse badRequestExceptionHandler(BadRequestException e) {
-        return new ResultResponse<>(-10400, e.getMessage());
+    public ResponseEntity<Object> badRequestExceptionHandler(BadRequestException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    public ResultResponse nullPointerException(NullPointerException e) {
-        return new ResultResponse<>(-10500, e.getMessage());
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ResponseEntity<Object> internalServerErrorExceptionHandler(InternalServerErrorException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(NotImplementedException.class)
-    public ResultResponse notImplementedExceptionHandler(NotImplementedException e) {
-        return new ResultResponse<>(-10501, e.getMessage());
+    @ExceptionHandler(UnAuthorizedException.class)
+    public ResponseEntity<Object> unAuthorizedExceptionHandler(UnAuthorizedException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }
