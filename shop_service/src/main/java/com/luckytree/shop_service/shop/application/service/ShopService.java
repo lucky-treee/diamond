@@ -3,7 +3,7 @@ package com.luckytree.shop_service.shop.application.service;
 import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.shop.adapter.data.MyBookmarksDto;
-import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
+import com.luckytree.shop_service.shop.adapter.data.CreateShopDto;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
@@ -25,8 +25,8 @@ public class ShopService implements ShopUseCase {
 
     @Transactional
     @Override
-    public void createShop(ShopRequest shopRequest) {
-        shopPort.saveShopWithDisable(shopRequest);
+    public void createShop(CreateShopDto createShopDto) {
+        shopPort.createShop(createShopDto.toDomain());
     }
 
     @Transactional(readOnly = true)

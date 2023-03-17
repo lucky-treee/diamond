@@ -2,7 +2,7 @@ package com.luckytree.shop_service.shop.adapter;
 
 import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.common.enums.Category;
-import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
+import com.luckytree.shop_service.shop.adapter.data.CreateShopDto;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopRemoveEntity;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopRemoveRepository;
@@ -12,6 +12,7 @@ import com.luckytree.shop_service.common.enums.Hashtag;
 import com.luckytree.shop_service.shop.adapter.data.ShopDetail;
 import com.luckytree.shop_service.common.enums.ShopStatus;
 import com.luckytree.shop_service.shop.adapter.data.ShopSummary;
+import com.luckytree.shop_service.shop.domain.Shop;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.webjars.NotFoundException;
@@ -26,8 +27,8 @@ public class ShopAdapter implements ShopPort {
     private final ShopRemoveRepository shopRemoveRepository;
 
     @Override
-    public void saveShopWithDisable(ShopRequest shopRequest) {
-        shopRepository.save(new ShopEntity(shopRequest));
+    public void createShop(Shop shop) {
+        shopRepository.save(new ShopEntity(shop));
     }
 
     @Override
