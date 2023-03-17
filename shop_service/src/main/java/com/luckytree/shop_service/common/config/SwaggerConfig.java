@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-// SwaggerConfig.java
 @Configuration
 public class SwaggerConfig{
 
