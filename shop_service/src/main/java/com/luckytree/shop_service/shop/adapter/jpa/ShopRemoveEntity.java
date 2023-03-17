@@ -1,4 +1,4 @@
-package com.luckytree.shop_service.shop.adapter.persistence;
+package com.luckytree.shop_service.shop.adapter.jpa;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -1,8 +1,12 @@
-package com.luckytree.shop_service.shop.adapter.persistence;
+package com.luckytree.shop_service.shop.adapter;
 
 import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopRemoveEntity;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopRemoveRepository;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopRepository;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop_service.common.enums.Hashtag;
 import com.luckytree.shop_service.shop.adapter.data.ShopDetail;

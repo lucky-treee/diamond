@@ -1,7 +1,7 @@
 package com.luckytree.shop_service.shop.adapter.data;
 
 import com.luckytree.shop_service.common.enums.Category;
-import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.common.enums.Hashtag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

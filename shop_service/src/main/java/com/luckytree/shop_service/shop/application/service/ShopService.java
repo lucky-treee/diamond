@@ -4,7 +4,7 @@ import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.shop.adapter.data.MyBookmarksDto;
 import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
-import com.luckytree.shop_service.shop.adapter.persistence.ShopEntity;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
