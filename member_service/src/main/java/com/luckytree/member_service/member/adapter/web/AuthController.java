@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.web;
 
+import com.luckytree.member_service.common.annotation.LoginMemberId;
 import com.luckytree.member_service.member.adapter.data.KakaoLoginDto;
 import com.luckytree.member_service.member.adapter.data.LoginDto;
 import com.luckytree.member_service.member.adapter.data.SignupDto;
@@ -20,8 +21,8 @@ public class AuthController {
     private final AuthenticationUseCase authenticationUseCase;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@Valid @RequestBody LoginDto loginDto) {
-        authenticationUseCase.login(loginDto);
+    public ResponseEntity<Object> login(@RequestHeader(name = "Authorization") String authorization) {
+        authenticationUseCase.login(authorization);
         return ResponseEntity.ok().build();
     }
 
