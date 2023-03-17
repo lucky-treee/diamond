@@ -1,7 +1,7 @@
 package com.luckytree.shop_service.common.annotation;
 
-import com.luckytree.member_service.common.advice.NotFoundException;
-import com.luckytree.member_service.common.jwt.TokenProvider;
+import com.luckytree.shop_service.common.exceptions.NotFoundException;
+import com.luckytree.shop_service.common.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
