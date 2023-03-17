@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Schema(description = "샵 리뷰 DTO")
-public class ReviewRequest {
+public class CreateReviewDto {
 }

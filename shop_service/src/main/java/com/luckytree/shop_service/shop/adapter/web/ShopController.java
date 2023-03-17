@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
+import com.luckytree.shop_service.common.annotation.LoginMemberId;
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.shop.application.port.incoming.RemoveRequestForm;
@@ -26,7 +27,7 @@ public class ShopController {
 
     @Operation(summary = "샵 등록요청 API")
     @PostMapping("/shop")
-    public ResponseEntity<Object> createShop(@RequestBody @Valid CreateShopDto createShopDto) {
+    public ResponseEntity<Object> createShop(@LoginMemberId long memberId, @RequestBody @Valid CreateShopDto createShopDto) {
         shopUseCase.createShop(createShopDto);
         return ResponseEntity.ok().build();
     }
@@ -61,35 +62,35 @@ public class ShopController {
 
     @Operation(summary = "샵 삭제요청 API")
     @DeleteMapping("/shop")
-    public ResponseEntity<Object> deleteShop(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
+    public ResponseEntity<Object> deleteShop(@LoginMemberId long memberId, @RequestBody @Valid RemoveRequestForm removeRequestForm) {
         shopUseCase.deleteShop(removeRequestForm);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 등록")
     @PostMapping("/shop/review")
-    public ResponseEntity<Object> createShopReview(@RequestBody @Valid ReviewRequest reviewRequest){
+    public ResponseEntity<Object> createShopReview(@LoginMemberId long memberId, @RequestBody @Valid CreateReviewDto createReviewDto){
 
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 수정")
     @PutMapping("/shop/review")
-    public ResponseEntity<Object> updateReview(@RequestBody @Valid UpdateReviewDto updateReviewDto) {
+    public ResponseEntity<Object> updateReview(@LoginMemberId long memberId, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
 
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 조회")
     @GetMapping("/shop/review")
-    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
+    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@LoginMemberId long memberId, @RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 삭제")
     @DeleteMapping("/shop/review")
-    ResponseEntity<Object> deleteShopReview(@RequestHeader(name= "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
+    ResponseEntity<Object> deleteShopReview(@LoginMemberId long memberId, @RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
     }
