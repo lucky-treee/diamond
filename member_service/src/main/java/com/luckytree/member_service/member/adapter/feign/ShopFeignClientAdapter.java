@@ -1,6 +1,7 @@
 package com.luckytree.member_service.member.adapter.feign;
 
 import com.luckytree.member_service.member.adapter.data.MyBookmarksDto;
+import com.luckytree.member_service.member.adapter.data.ShopFeignRequestDto;
 import com.luckytree.member_service.member.application.port.outgoing.ShopFeignClientPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,6 @@ public class ShopFeignClientAdapter implements ShopFeignClientPort {
 
     @Override
     public MyBookmarksDto findBookmarksByIds(List<Long> shopIds) {
-        return shopFeignClient.findBookmarksByIds(shopIds);
+        return shopFeignClient.findBookmarksByIds(new ShopFeignRequestDto(shopIds));
     }
 }
