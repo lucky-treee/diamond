@@ -10,5 +10,5 @@ public interface MemberUseCase {
     void updateMember(String email, String nickname, Photo photo);
     void leaveMember(long memberId);
     MyBookmarksDto findMyBookmarks(long memberId);
-    void deleteBookMark(long memberId, String shopId);
+    void deleteBookMark(long memberId, long shopId);
 }
