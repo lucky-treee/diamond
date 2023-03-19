@@ -4,6 +4,7 @@ import com.luckytree.member_service.member.adapter.data.MyBookmarksDto;
 import com.luckytree.member_service.member.adapter.persistence.BookmarkEntity;
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
+import com.luckytree.member_service.member.application.port.outgoing.BookmarkPort;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.application.port.outgoing.ShopFeignClientPort;
 import com.luckytree.member_service.member.domain.Member;
@@ -21,6 +22,7 @@ public class MemberService implements MemberUseCase {
 
     private final MemberPort memberPort;
     private final ShopFeignClientPort shopFeignClientPort;
+    private final BookmarkPort bookmarkPort;
 
     @Transactional(readOnly = true)
     @Override
@@ -53,8 +55,8 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void deleteBookMark(long memberId, String shopId) {
-
+    public void deleteBookMark(long memberId, long shopId) {
+        bookmarkPort.deleteBookmarkByMemberIdAndShopId(memberId, shopId);
     }
 
     private Member getMember(String email) {
