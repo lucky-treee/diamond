@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -22,8 +24,9 @@ public class AuthenticationService implements AuthenticationUseCase {
 
 
     @Override
-    public void login(LoginDto loginDto) {
-        tokenPort.validateToken(loginDto.getAccessToken());
+    public void login(String authorization) {
+        String accessToken = Objects.requireNonNull(authorization).substring(7);
+        tokenPort.validateToken(accessToken);
     }
 
     @Override
@@ -34,8 +37,8 @@ public class AuthenticationService implements AuthenticationUseCase {
     }
 
     @Override
-    public Tokens login(String code) {
-        String accessToken = authenticationPort.getUserKakaoAccessToken(code);
+    public Tokens login(String code, String redirectUri) {
+        String accessToken = authenticationPort.getUserKakaoAccessToken(code, redirectUri);
         String email = authenticationPort.getUserKakaoEmail(accessToken);
         long memberId = authenticationPort.findMemberIdByEmail(email);
 

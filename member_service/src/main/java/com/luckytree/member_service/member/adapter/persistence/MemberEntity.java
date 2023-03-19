@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.persistence;
 
+import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.member.domain.Photo;
 import com.luckytree.member_service.member.domain.Status;
 import jakarta.persistence.*;
@@ -9,6 +10,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+
+import static com.luckytree.member_service.member.domain.Status.LEAVE;
 
 @Table(name = "member")
 @EntityListeners(AuditingEntityListener.class)
@@ -50,10 +53,27 @@ public class MemberEntity {
         this.photo = photo;
     }
 
+    public void leave() {
+        status = LEAVE;
+    }
+
+    public void isAlreadyDeleted() {
+        status.isAlreadyDeleted();
+    }
+
     public MemberEntity(String nickname, String email, Photo photo) {
         this.nickname = nickname;
         this.email = email;
         this.status = Status.NORMAL;
         this.photo = photo;
+    }
+
+    public Member toDomain() {
+        return new Member(
+                this.nickname,
+                this.email,
+                this.status,
+                this.photo
+        );
     }
 }

@@ -1,23 +1,24 @@
 package com.luckytree.shop_service.shop.application.port.incoming;
 
-import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
-import com.luckytree.shop_service.shop.domain.Hashtag;
-import com.luckytree.shop_service.shop.domain.ShopDetail;
-import com.luckytree.shop_service.shop.domain.ShopSummary;
+import com.luckytree.shop_service.common.enums.Category;
+import com.luckytree.shop_service.shop.adapter.data.*;
+import com.luckytree.shop_service.common.enums.Hashtag;
 
 import java.util.List;
 
 public interface ShopUseCase {
 
-    void requestShopRegistration(ShopRequest shopRequest);
+    void createShop(CreateShopDto createShopDto);
 
-    List<ShopSummary> getShopSummaryByCategory(String category);
+    List<ShopSummaryDto> findShopsByCategory(Category category);
 
-    List<ShopSummary> getShopAll(double maxLat, double minLat, double maxLng, double minLng);
+    List<ShopSummaryDto> findShopsByLatAndLng(double maxLat, double minLat, double maxLng, double minLng);
 
-    List<ShopSummary> getShopSummaryByHashtag(Hashtag hashtag);
+    List<ShopSummaryDto> findShopsByHashtag(Hashtag hashtag);
 
-    ShopDetail getShopDetail(String name, String address);
+    ShopDetailDto findShopByNameAndAddress(String name, String address);
 
-    void removeShopRequest(RemoveRequestForm removeRequestForm);
+    void deleteShop(String name, String address, String comment);
+
+    MyBookmarksDto findMyBookmarksDtoByIds(List<Long> ids);
 }

@@ -26,9 +26,6 @@ public class AuthenticationAdapter implements AuthenticationPort {
     @Value("${oauth2.kakao.secretKey}")
     String clientSecret;
 
-    @Value("${oauth2.kakao.redirectUri}")
-    String redirectUri;
-
     @Override
     public long saveMember(Member member) {
         return memberRepository.save(member.toEntity()).getId();
@@ -36,11 +33,11 @@ public class AuthenticationAdapter implements AuthenticationPort {
 
     @Override
     public long findMemberIdByEmail(String email) {
-        return memberRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("해당 이메일에 일치하는 회원이 없습니다.")).getId();
+        return memberRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("회원이 아닙니다.", email)).getId();
     }
 
     @Override
-    public String getUserKakaoAccessToken(String code) {
+    public String getUserKakaoAccessToken(String code, String redirectUri) {
         KakaoTokenResponse kakaoTokenResponse = kakaoTokenFeignClient.getToken(new KakaoTokenRequest(code, clientId, clientSecret, redirectUri).toString());
         return kakaoTokenResponse.getAccessToken();
     }

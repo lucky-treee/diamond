@@ -1,11 +1,15 @@
 package com.luckytree.member_service.member.adapter.web;
 
+import com.luckytree.member_service.common.annotation.LoginMemberId;
+import com.luckytree.member_service.member.adapter.data.KakaoLoginDto;
 import com.luckytree.member_service.member.adapter.data.LoginDto;
 import com.luckytree.member_service.member.adapter.data.SignupDto;
-import com.luckytree.member_service.member.adapter.data.TokenDto;
+import com.luckytree.member_service.member.adapter.data.Tokens;
 import com.luckytree.member_service.member.application.port.incoming.AuthenticationUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,18 +21,42 @@ public class AuthController {
     private final AuthenticationUseCase authenticationUseCase;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@Valid @RequestBody LoginDto loginDto) {
-        authenticationUseCase.login(loginDto);
+    public ResponseEntity<Object> login(@RequestHeader(name = "Authorization") String authorization) {
+        authenticationUseCase.login(authorization);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<TokenDto> signup(@Valid @RequestBody SignupDto signupDto) {
-        return ResponseEntity.ok(authenticationUseCase.signup(signupDto));
+    public ResponseEntity<?> signup(@Valid @RequestBody SignupDto signupDto) {
+        Tokens tokens = authenticationUseCase.signup(signupDto);
+
+        ResponseCookie responseCookie = ResponseCookie
+                .from("refresh-token", tokens.refreshToken())
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(60)
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, responseCookie.toString())
+                .body(tokens.accessToken());
     }
 
     @GetMapping("/login/kakao")
-    public ResponseEntity<TokenDto> loginByKakao(@RequestParam(value = "code") String code) {
-        return ResponseEntity.ok(authenticationUseCase.login(code));
+    public ResponseEntity<?> loginByKakao(@Valid @RequestBody KakaoLoginDto kakaoLoginDto) {
+        Tokens tokens = authenticationUseCase.login(kakaoLoginDto.getCode(), kakaoLoginDto.getRedirectUri());
+
+        ResponseCookie responseCookie = ResponseCookie
+                .from("refresh-token", tokens.refreshToken())
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(60)
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, responseCookie.toString())
+                .body(tokens.accessToken());
     }
 }
