@@ -1,16 +1,13 @@
 package com.luckytree.shop_service.shop.adapter;
 
-import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.common.enums.Category;
+import com.luckytree.shop_service.common.enums.Hashtag;
+import com.luckytree.shop_service.common.enums.ShopStatus;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopRemoveEntity;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopRemoveRepository;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopRepository;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
-import com.luckytree.shop_service.common.enums.Hashtag;
-import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
-import com.luckytree.shop_service.common.enums.ShopStatus;
-import com.luckytree.shop_service.shop.adapter.data.ShopSummaryDto;
 import com.luckytree.shop_service.shop.domain.Shop;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -58,6 +55,11 @@ public class ShopAdapter implements ShopPort {
     @Override
     public ShopEntity getShopEntity(String name, String address) {
         return shopRepository.findByNameAndAddress(name, address).orElseThrow(() -> new NotFoundException("해당 shopName과 address애 일치하는 ShopEntity가 없습니다. name: " + name + ", address: " + address));
+    }
+
+    @Override
+    public ShopEntity findCategoryById(long shopId) {
+        return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId에 일치하는 ShopEntity가 없습니다. id: " + shopId));
     }
 
     @Override

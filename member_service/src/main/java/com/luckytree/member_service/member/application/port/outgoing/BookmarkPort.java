@@ -1,0 +1,8 @@
+package com.luckytree.member_service.member.application.port.outgoing;
+
+import com.luckytree.member_service.member.domain.Bookmark;
+
+public interface BookmarkPort {
+
+    void createBookmark(Bookmark bookmark);
+}
