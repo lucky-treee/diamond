@@ -4,10 +4,10 @@ spring:
   profiles:
     active: main
   config:
-    import: "optional:configserver:http://192.168.0.14:31185"
+    import: "optional:configserver:http://192.168.0.14:31185/"
   cloud:
     config:
-      name: eureka, actuator, shopService, auth
+      name: shop, actuator, auth
       label: develop
       profile: develop
 server:
