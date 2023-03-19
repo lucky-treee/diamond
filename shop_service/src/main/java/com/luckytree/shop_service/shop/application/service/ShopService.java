@@ -4,8 +4,8 @@ import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.shop.adapter.data.MyBookmarksDto;
 import com.luckytree.shop_service.shop.adapter.data.CreateShopDto;
+import com.luckytree.shop_service.shop.adapter.feign.MemberFeignClientPort;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
-import com.luckytree.shop_service.shop.adapter.data.ShopDeleteDto;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop_service.common.enums.Hashtag;
@@ -23,6 +23,7 @@ import java.util.List;
 public class ShopService implements ShopUseCase {
 
     private final ShopPort shopPort;
+    private final MemberFeignClientPort memberFeignClientPort;
 
     @Override
     public void createShop(CreateShopDto createShopDto) {
@@ -66,5 +67,10 @@ public class ShopService implements ShopUseCase {
         List<ShopEntity> shopEntities = shopPort.findBookmarkDtosByIds(shopIds);
         List<BookmarkDto> bookmarkDtos = shopEntities.stream().map(BookmarkDto::new).toList();
         return new MyBookmarksDto(bookmarkDtos);
+    }
+
+    @Override
+    public void deleteBookmark(long memberId, long shopId){
+        memberFeignClientPort.deleteBookmark(memberId, shopId);
     }
 }

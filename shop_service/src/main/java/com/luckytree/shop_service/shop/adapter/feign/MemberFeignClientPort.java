@@ -1,9 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.feign;
 
-import lombok.RequiredArgsConstructor;
+public interface MemberFeignClientPort {
 
-@RequiredArgsConstructor
-public class MemberFeignClientPort {
-
-    private final MemberFeignClient memberFeignClient;
+    void deleteBookmark(long memberId, long shopId);
 }
