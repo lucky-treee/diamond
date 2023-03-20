@@ -22,5 +22,4 @@ public class internalBookmarkController {
     public void createBookmark(@RequestBody MemberFeignRequestDto memberFeignRequestDto) {
         memberUseCase.createBookmark(new CreateBookmarkDto(memberFeignRequestDto));
     }
-
 }
