@@ -23,6 +23,4 @@ public class BookmarkService implements BookmarkUseCase {
         Category category = shopPort.findCategoryById(shopId).getCategory();
         memberFeignClientPort.saveBookmark(new MemberFeignRequestDto(memberId, shopId, category));
     }
-
-
 }
