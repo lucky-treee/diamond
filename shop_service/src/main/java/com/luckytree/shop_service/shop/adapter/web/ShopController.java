@@ -97,9 +97,9 @@ public class ShopController {
     }
 
     @Operation(summary = "샵 북마크 해제")
-    @DeleteMapping("/bookmark")
-    ResponseEntity<Object> deleteBookmark(@LoginMemberId long memberId, @RequestParam(name = "shopId") long shopId) {
+    @DeleteMapping("/bookmark/{memberId}")
+    ResponseEntity<Object> deleteBookmark(@PathVariable@LoginMemberId long memberId, @RequestParam(name = "shopId") long shopId) {
         shopUseCase.deleteBookmark(memberId, shopId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }
