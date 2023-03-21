@@ -1,15 +1,12 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
-import com.luckytree.shop_service.shop.adapter.data.BookmarkRequest;
-import com.luckytree.shop_service.shop.application.port.incoming.BookmarkUseCase;
+import com.luckytree.shop_service.common.annotation.LoginMemberId;
+import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "즐겨찾기", description = "샵 즐겨찾기")
 @RestController
@@ -17,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class BookmarkController {
 
-    private final BookmarkUseCase bookmarkUseCase;
+    private final ShopUseCase shopUseCase;
 
     @Operation(summary = "즐겨찾기 추가")
-    @PostMapping
-    public ResponseEntity<Object> createBookmark(@RequestBody BookmarkRequest bookmarkRequest) {
-        bookmarkUseCase.createBookmark(bookmarkRequest.getMemberId(), bookmarkRequest.getShopId());
+    @PostMapping("{shopId}")
+    public ResponseEntity<Object> createBookmark(@LoginMemberId long memberId, @PathVariable long shopId) {
+        shopUseCase.createBookmark(memberId, shopId);
         return ResponseEntity.ok().build();
     }
 }
