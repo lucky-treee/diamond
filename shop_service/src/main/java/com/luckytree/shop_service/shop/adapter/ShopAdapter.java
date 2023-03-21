@@ -17,7 +17,8 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class ShopAdapter implements ShopPort {
+public class
+ShopAdapter implements ShopPort {
 
     private final ShopRepository shopRepository;
     private final ShopRemoveRepository shopRemoveRepository;
@@ -58,7 +59,7 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
-    public ShopEntity findCategoryById(long shopId) {
+    public ShopEntity findShopById(long shopId) {
         return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId에 일치하는 ShopEntity가 없습니다. id: " + shopId));
     }
 

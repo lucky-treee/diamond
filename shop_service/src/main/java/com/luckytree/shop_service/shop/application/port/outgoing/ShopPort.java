@@ -23,7 +23,7 @@ public interface ShopPort {
 
     ShopEntity getShopEntity(String name, String address);
 
-    ShopEntity findCategoryById(long shopId);
+    ShopEntity findShopById(long shopId);
 
     List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds);
 }
