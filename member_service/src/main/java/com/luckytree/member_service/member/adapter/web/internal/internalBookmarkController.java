@@ -1,7 +1,6 @@
 package com.luckytree.member_service.member.adapter.web.internal;
 
-import com.luckytree.member_service.member.adapter.data.CreateBookmarkDto;
-import com.luckytree.member_service.member.adapter.data.MemberFeignRequestDto;
+import com.luckytree.member_service.member.adapter.data.MemberFeignResponseDto;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +17,8 @@ public class internalBookmarkController {
 
     private final MemberUseCase memberUseCase;
 
-    @PostMapping("/member")
-    public void createBookmark(@RequestBody MemberFeignRequestDto memberFeignRequestDto) {
-        memberUseCase.createBookmark(new CreateBookmarkDto(memberFeignRequestDto));
+    @PostMapping("/shops")
+    public void createBookmark(@RequestBody MemberFeignResponseDto memberFeignResponseDto) {
+        memberUseCase.createBookmark(memberFeignResponseDto);
     }
-}
+} 

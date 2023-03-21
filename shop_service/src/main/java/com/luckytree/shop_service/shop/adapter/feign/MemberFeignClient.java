@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(name = "member-service", configuration = FeignClientConfig.class)
 public interface MemberFeignClient {
 
-    @PostMapping("v1/bookmarks")
+    @PostMapping("v1/bookmarks/shops")
     void saveBookmark(MemberFeignRequestDto memberFeignRequestDto);
 }
