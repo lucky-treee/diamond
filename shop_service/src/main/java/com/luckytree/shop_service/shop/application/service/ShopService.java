@@ -1,16 +1,12 @@
 package com.luckytree.shop_service.shop.application.service;
 
-import com.luckytree.shop_service.shop.adapter.data.BookmarkDto;
+import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.common.enums.Category;
-import com.luckytree.shop_service.shop.adapter.data.MyBookmarksDto;
-import com.luckytree.shop_service.shop.adapter.data.CreateShopDto;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
-import com.luckytree.shop_service.shop.adapter.data.ShopDeleteDto;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
+import com.luckytree.shop_service.shop.application.port.outgoing.MemberFeignClientPort;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop_service.common.enums.Hashtag;
-import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
-import com.luckytree.shop_service.shop.adapter.data.ShopSummaryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +19,7 @@ import java.util.List;
 public class ShopService implements ShopUseCase {
 
     private final ShopPort shopPort;
+    private final MemberFeignClientPort memberFeignClientPort;
 
     @Override
     public void createShop(CreateShopDto createShopDto) {
@@ -58,6 +55,13 @@ public class ShopService implements ShopUseCase {
     public void deleteShop(String name, String address, String comment) {
         ShopEntity shopEntity = shopPort.getShopEntity(name, address);
         shopPort.deleteShop(shopEntity, comment);
+    }
+
+    @Override
+    public void createBookmark(long memberId, long shopId) {
+        ShopEntity shopEntity = shopPort.findShopById(shopId);
+        Category category = shopEntity.getCategory();
+        memberFeignClientPort.saveBookmark(new MemberFeignRequestDto(memberId, shopId, category));
     }
 
     @Transactional(readOnly = true)

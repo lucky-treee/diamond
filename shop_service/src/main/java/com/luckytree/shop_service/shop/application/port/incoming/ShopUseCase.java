@@ -20,5 +20,7 @@ public interface ShopUseCase {
 
     void deleteShop(String name, String address, String comment);
 
+    void createBookmark(long memberId, long shopId);
+
     MyBookmarksDto findMyBookmarksDtoByIds(List<Long> ids);
 }
