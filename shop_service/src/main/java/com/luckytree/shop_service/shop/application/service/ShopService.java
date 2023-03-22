@@ -3,7 +3,6 @@ package com.luckytree.shop_service.shop.application.service;
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.common.enums.Hashtag;
 import com.luckytree.shop_service.shop.adapter.data.*;
-import com.luckytree.shop_service.shop.adapter.feign.MemberFeignClientPort;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.MemberFeignClientPort;
