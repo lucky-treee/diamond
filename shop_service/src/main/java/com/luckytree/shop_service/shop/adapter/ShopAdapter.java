@@ -17,8 +17,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class
-ShopAdapter implements ShopPort {
+public class ShopAdapter implements ShopPort {
 
     private final ShopRepository shopRepository;
     private final ShopRemoveRepository shopRemoveRepository;
@@ -39,7 +38,7 @@ ShopAdapter implements ShopPort {
     }
 
     @Override
-    public ShopEntity getShopDetail(String name, String address){
+    public ShopEntity getShopDetail(String name, String address) {
         return shopRepository.findByNameAndAddress(name, address).orElseThrow(() -> new NotFoundException("해당 shopName과 address애 일치하는 ShopEntity가 없습니다. name: " + name + ", address: " + address));
     }
 
@@ -59,12 +58,12 @@ ShopAdapter implements ShopPort {
     }
 
     @Override
-    public ShopEntity findShopById(long shopId) {
-        return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId에 일치하는 ShopEntity가 없습니다. id: " + shopId));
+    public Category findCategoryById(long shopId) {
+        return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId에 일치하는 ShopEntity가 없습니다. id: " + shopId)).getCategory();
     }
 
     @Override
-    public List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds){
+    public List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds) {
         return shopRepository.findAllByIdIn(shopIds);
     }
 }
