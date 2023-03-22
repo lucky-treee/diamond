@@ -34,7 +34,7 @@ public class AuthController {
         Tokens tokens = authenticationUseCase.signup(signupDto);
 
         ResponseCookie responseCookie = ResponseCookie
-                .from("refresh-token", tokens.refreshToken())
+                .from("refresh-token", tokens.getRefreshToken())
                 .httpOnly(true)
                 .secure(true)
                 .path("/")
@@ -43,7 +43,7 @@ public class AuthController {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, responseCookie.toString())
-                .body(tokens.accessToken());
+                .body(tokens.getAccessToken());
     }
 
     @PostMapping("/login/kakao")
@@ -51,7 +51,7 @@ public class AuthController {
         Tokens tokens = authenticationUseCase.login(kakaoLoginDto.getCode(), kakaoLoginDto.getRedirectUri());
 
         ResponseCookie responseCookie = ResponseCookie
-                .from("refresh-token", tokens.refreshToken())
+                .from("refresh-token", tokens.getRefreshToken())
                 .httpOnly(true)
                 .secure(true)
                 .path("/")
@@ -60,6 +60,6 @@ public class AuthController {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, responseCookie.toString())
-                .body(tokens.accessToken());
+                .body(tokens.getAccessToken());
     }
 }
