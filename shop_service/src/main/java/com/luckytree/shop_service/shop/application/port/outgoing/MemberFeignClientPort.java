@@ -1,8 +1,8 @@
 package com.luckytree.shop_service.shop.application.port.outgoing;
 
-import com.luckytree.shop_service.shop.adapter.data.MemberFeignRequestDto;
+import com.luckytree.shop_service.common.enums.Category;
 
 public interface MemberFeignClientPort {
 
-    void saveBookmark (MemberFeignRequestDto memberFeignRequestDto);
+    void saveBookmark(long memberId, long shopId, Category category);
 }
