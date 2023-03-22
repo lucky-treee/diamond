@@ -21,7 +21,7 @@ public class AuthController {
     private final AuthenticationUseCase authenticationUseCase;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestHeader(name = "Authorization") String authorization) {
+    public ResponseEntity<Object> login(@RequestHeader("Authorization") String authorization) {
         authenticationUseCase.login(authorization);
         return ResponseEntity.ok().build();
     }
