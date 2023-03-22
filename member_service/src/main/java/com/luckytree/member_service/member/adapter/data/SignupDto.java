@@ -1,6 +1,5 @@
 package com.luckytree.member_service.member.adapter.data;
 
-import com.luckytree.member_service.member.domain.Photo;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,5 +17,5 @@ public class SignupDto {
     private String nickname;
 
     @NotNull
-    private Photo photo;
+    private String photo;
 }

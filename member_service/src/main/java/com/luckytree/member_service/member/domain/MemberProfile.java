@@ -12,7 +12,7 @@ public class MemberProfile {
 
     private String email;
 
-    private Photo photo;
+    private String photo;
 
     public MemberProfile(MemberEntity memberEntity) {
         this.nickname = memberEntity.getNickname();
@@ -30,7 +30,7 @@ public class MemberProfile {
         this.nickname = nickname;
     }
 
-    public void updatePhoto(Photo photo) {
+    public void updatePhoto(String photo) {
         this.photo = photo;
     }
 }

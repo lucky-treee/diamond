@@ -14,7 +14,7 @@ public class Member {
 
     private Status status;
 
-    private Photo photo;
+    private String photo;
 
     public Member(SignupDto signUpDto) {
         this.nickname = signUpDto.getNickname();
@@ -30,7 +30,7 @@ public class Member {
         this.status = memberEntity.getStatus();
     }
 
-    public Member(String nickname, String email, Status status, Photo photo) {
+    public Member(String nickname, String email, Status status, String photo) {
         this.nickname = nickname;
         this.email = email;
         this.status = status;
@@ -41,7 +41,7 @@ public class Member {
         return new MemberEntity(nickname, email, photo);
     }
 
-    public void updateNicknameAndPhoto(String nickname, Photo photo) {
+    public void updateNicknameAndPhoto(String nickname, String photo) {
         this.nickname = nickname;
         this.photo = photo;
     }
