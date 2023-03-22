@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.application.service;
 
+import com.luckytree.member_service.member.adapter.data.MemberFeignResponseDto;
 import com.luckytree.member_service.member.adapter.data.MyBookmarksDto;
 import com.luckytree.member_service.member.adapter.persistence.BookmarkEntity;
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
@@ -42,6 +43,12 @@ public class MemberService implements MemberUseCase {
         MemberEntity memberEntity = memberPort.findById(memberId);
         memberEntity.isAlreadyDeleted();
         memberPort.deleteById(memberEntity);
+    }
+
+    @Transactional
+    @Override
+        public void createBookmark(MemberFeignResponseDto memberFeignResponseDto) {
+        memberPort.createBookmark(memberFeignResponseDto.toDomain());
     }
 
     @Override
