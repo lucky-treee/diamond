@@ -30,7 +30,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@Valid @RequestBody SignupDto signupDto) {
+    public ResponseEntity<Object> signup(@Valid @RequestBody SignupDto signupDto) {
         Tokens tokens = authenticationUseCase.signup(signupDto);
 
         ResponseCookie responseCookie = ResponseCookie
