@@ -8,11 +8,13 @@ import com.luckytree.member_service.member.adapter.data.Tokens;
 import com.luckytree.member_service.member.application.port.incoming.AuthenticationUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/v1/auth")
 @RestController
@@ -22,6 +24,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestHeader("Authorization") String authorization) {
+        log.info("로그인 요청 :: Authorization :: " + authorization);
         authenticationUseCase.login(authorization);
         return ResponseEntity.ok().build();
     }
