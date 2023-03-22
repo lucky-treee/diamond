@@ -1,7 +1,6 @@
 package com.luckytree.member_service.member.adapter.persistence;
 
 import com.luckytree.member_service.member.domain.Member;
-import com.luckytree.member_service.member.domain.Photo;
 import com.luckytree.member_service.member.domain.Status;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,9 +35,8 @@ public class MemberEntity {
     @Enumerated(value = EnumType.STRING)
     private Status status;
 
-    @Column(length = 50)
-    @Enumerated(value = EnumType.STRING)
-    private Photo photo;
+    @Column(length = 200)
+    private String photo;
 
     @Column(name = "update_at")
     @LastModifiedDate
@@ -48,7 +46,7 @@ public class MemberEntity {
     @CreatedDate
     private LocalDateTime createAt;
 
-    public void updateNicknameAndPhoto(String nickname, Photo photo) {
+    public void updateNicknameAndPhoto(String nickname, String photo) {
         this.nickname = nickname;
         this.photo = photo;
     }
@@ -61,7 +59,7 @@ public class MemberEntity {
         status.isAlreadyDeleted();
     }
 
-    public MemberEntity(String nickname, String email, Photo photo) {
+    public MemberEntity(String nickname, String email, String photo) {
         this.nickname = nickname;
         this.email = email;
         this.status = Status.NORMAL;
