@@ -12,6 +12,6 @@ public class BookmarkAdapter implements BookmarkPort {
 
     @Override
     public void deleteBookmarkByMemberIdAndShopId(long memberId, long shopId){
-        bookmarkRepository.deleteBookmarkEntityByMemberIdAndShopId(memberId, shopId);
+        bookmarkRepository.deleteBookmarkByMemberIdAndShopId(memberId, shopId);
     }
 }
