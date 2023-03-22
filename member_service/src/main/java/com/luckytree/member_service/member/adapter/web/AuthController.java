@@ -21,7 +21,7 @@ public class AuthController {
     private final AuthenticationUseCase authenticationUseCase;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestHeader(name = "Authorization") String authorization) {
+    public ResponseEntity<Object> login(@RequestHeader("Authorization") String authorization) {
         authenticationUseCase.login(authorization);
         return ResponseEntity.ok().build();
     }
@@ -43,7 +43,7 @@ public class AuthController {
                 .body(tokens.accessToken());
     }
 
-    @GetMapping("/login/kakao")
+    @PostMapping("/login/kakao")
     public ResponseEntity<?> loginByKakao(@Valid @RequestBody KakaoLoginDto kakaoLoginDto) {
         Tokens tokens = authenticationUseCase.login(kakaoLoginDto.getCode(), kakaoLoginDto.getRedirectUri());
 

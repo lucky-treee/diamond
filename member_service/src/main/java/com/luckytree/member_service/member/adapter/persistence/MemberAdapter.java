@@ -2,6 +2,7 @@ package com.luckytree.member_service.member.adapter.persistence;
 
 import com.luckytree.member_service.common.advice.NotFoundException;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
+import com.luckytree.member_service.member.domain.Bookmark;
 import com.luckytree.member_service.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -39,6 +40,11 @@ public class MemberAdapter implements MemberPort {
     @Override
     public void deleteById(MemberEntity memberEntity) {
         memberEntity.leave();
+    }
+
+    @Override
+    public void createBookmark(Bookmark bookmark) {
+        bookmarkRepository.save(new BookmarkEntity(bookmark));
     }
 
     @Override
