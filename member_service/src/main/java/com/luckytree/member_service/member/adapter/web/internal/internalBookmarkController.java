@@ -17,7 +17,7 @@ public class internalBookmarkController {
 
     private final MemberUseCase memberUseCase;
 
-    @PostMapping("/shops")
+    @PostMapping
     public void createBookmark(@RequestBody MemberFeignResponseDto memberFeignResponseDto) {
         memberUseCase.createBookmark(memberFeignResponseDto);
     }
