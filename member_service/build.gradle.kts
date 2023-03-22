@@ -33,7 +33,7 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-	implementation("org.springdoc:springdoc-openapi-starter-common:2.0.2")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.mysql:mysql-connector-j")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
