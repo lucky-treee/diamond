@@ -1,13 +1,12 @@
 package com.luckytree.shop_service.shop.application.service;
 
-import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.common.enums.Category;
+import com.luckytree.shop_service.common.enums.Hashtag;
+import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
-import com.luckytree.shop_service.shop.adapter.jpa.ShopRepository;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.MemberFeignClientPort;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
-import com.luckytree.shop_service.common.enums.Hashtag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,6 @@ public class ShopService implements ShopUseCase {
 
     private final ShopPort shopPort;
     private final MemberFeignClientPort memberFeignClientPort;
-    private final ShopRepository shopRepository;
 
     @Override
     public void createShop(CreateShopDto createShopDto) {
@@ -61,8 +59,8 @@ public class ShopService implements ShopUseCase {
 
     @Override
     public void createBookmark(long memberId, long shopId) {
-        Category category = findCategoryById(shopId);
-        memberFeignClientPort.saveBookmark(new MemberFeignRequestDto(memberId, shopId, category));
+        Category category = shopPort.findCategoryById(shopId);
+        memberFeignClientPort.saveBookmark(memberId, shopId, category);
     }
 
     @Transactional(readOnly = true)
@@ -71,9 +69,5 @@ public class ShopService implements ShopUseCase {
         List<ShopEntity> shopEntities = shopPort.findBookmarkDtosByIds(shopIds);
         List<BookmarkDto> bookmarkDtos = shopEntities.stream().map(BookmarkDto::new).toList();
         return new MyBookmarksDto(bookmarkDtos);
-    }
-
-    private Category findCategoryById(long shopId) {
-        return shopPort.findShopById(shopId).getCategory();
     }
 }
