@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 public class BookmarkEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     @Id
     private Long id;
 

@@ -15,11 +15,9 @@ import lombok.Setter;
 public class MemberFeignResponseDto {
 
     @Schema(description = "멤버 id")
-    @Size(max = 20)
     private long memberId;
 
     @Schema(description = "샵 id")
-    @Size(max = 20)
     private long shopId;
 
     @Schema(description = "샵 카테고리")
