@@ -24,6 +24,7 @@ public class KakaoAccount {
     @JsonProperty(value = "is_email_verified")
     private boolean isEmailVerified;
 
+    @JsonProperty(value = "email")
     private String email;
 
     @JsonIgnore
