@@ -37,7 +37,6 @@ public class AuthController {
                 .from("refresh-token", tokens.getRefreshToken())
                 .domain(".c0dewave.com")
                 .httpOnly(true)
-                .secure(true)
                 .path("/")
                 .maxAge(60)
                 .build();
@@ -56,7 +55,6 @@ public class AuthController {
                 .from("refresh-token", tokens.getRefreshToken())
                 .domain(".c0dewave.com")
                 .httpOnly(true)
-                .secure(true)
                 .path("/")
                 .maxAge(60)
                 .build();
