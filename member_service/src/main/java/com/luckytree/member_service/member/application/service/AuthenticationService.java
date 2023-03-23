@@ -8,13 +8,14 @@ import com.luckytree.member_service.member.application.port.outgoing.Authenticat
 import com.luckytree.member_service.member.application.port.outgoing.TokenPort;
 import com.luckytree.member_service.member.domain.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
-@Slf4j
+@Log4j2
 @RequiredArgsConstructor
 @Service
 public class AuthenticationService implements AuthenticationUseCase {
@@ -38,10 +39,13 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     @Override
     public Tokens login(String code, String redirectUri) {
+        log.info("카카오 로그인 :: 액세스 토큰 요청 ::");
         String accessToken = authenticationPort.getUserKakaoAccessToken(code, redirectUri);
+        log.info("카카오 로그인 :: 이메일 리소스 요청 :: 액세스 토큰 응답 :: " + accessToken);
         String email = authenticationPort.getUserKakaoEmail(accessToken);
+        log.info("카카오 로그인 :: 이메일 리소스 응답 :: 이메일 " + email);
         long memberId = authenticationPort.findMemberIdByEmail(email);
-
+        log.info("카카오 로그인 :: 이메일로 멤버 찾기 성공");
         return issueTokens(memberId);
     }
 
