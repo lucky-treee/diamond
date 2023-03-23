@@ -47,8 +47,9 @@ public class AuthenticationAdapter implements AuthenticationPort {
     @Override
     public String getUserKakaoEmail(String accessToken) {
         log.info("카카오 이메일 받기 요청 :: 액세스 토큰 :: " + accessToken);
+        KakaoUserInfo kakaoUserInfo = null;
         try {
-            KakaoUserInfo kakaoUserInfo = kakaoUserInfoFeignClient.getUser(accessToken);
+            kakaoUserInfo = kakaoUserInfoFeignClient.getUser(accessToken);
         } catch (Exception e) {
             log.info(e.getMessage());
         }
