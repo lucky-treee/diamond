@@ -13,6 +13,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "https://localhost:5173",
                         "https://127.0.0.1:5173",
+                        "http://localhost:5173",
+                        "http://127.0.0.1:5173",
                         "https://local.c0dewave.com:5173",
                         "https://dev-poom.c0dewave.com",
                         "https://stg-poom.c0dewave.com",
