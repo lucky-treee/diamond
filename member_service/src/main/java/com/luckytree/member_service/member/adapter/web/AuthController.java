@@ -35,7 +35,9 @@ public class AuthController {
 
         ResponseCookie responseCookie = ResponseCookie
                 .from("refresh-token", tokens.getRefreshToken())
-                .domain(".c0dewave.com")
+                .domain("c0dewave.com")
+                .sameSite("None")
+                .secure(true)
                 .httpOnly(true)
                 .path("/")
                 .maxAge(60)
@@ -53,7 +55,9 @@ public class AuthController {
 
         ResponseCookie responseCookie = ResponseCookie
                 .from("refresh-token", tokens.getRefreshToken())
-                .domain(".c0dewave.com")
+                .domain("c0dewave.com")
+                .sameSite("None")
+                .secure(true)
                 .httpOnly(true)
                 .path("/")
                 .maxAge(60)
