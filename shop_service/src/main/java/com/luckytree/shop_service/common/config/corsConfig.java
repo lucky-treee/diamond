@@ -15,7 +15,8 @@ public class corsConfig implements WebMvcConfigurer {
                         "http://127.0.0.1:5173",
                         "https://dev-poom.c0dewave.com",
                         "https://stg-poom.c0dewave.com",
-                        "https://poom.c0dewave.com")
+                        "https://poom.c0dewave.com",
+                        "http://local-poom.c0dewave.com:5173")
                 .allowCredentials(true)
                 .allowedMethods(
                         "GET",
