@@ -1,8 +1,6 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.member.adapter.data.MemberFeignResponseDto;
-import com.luckytree.member_service.member.adapter.data.BookmarksResponse;
-import com.luckytree.member_service.member.adapter.persistence.BookmarkEntity;
+import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.BookmarkPort;
@@ -14,15 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class MemberService implements MemberUseCase {
 
     private final MemberPort memberPort;
-    private final ShopFeignClientPort shopFeignClientPort;
-    private final BookmarkPort bookmarkPort;
 
     @Transactional(readOnly = true)
     @Override
@@ -47,34 +41,7 @@ public class MemberService implements MemberUseCase {
         memberPort.deleteById(memberEntity);
     }
 
-    @Transactional
-    @Override
-        public void createBookmark(MemberFeignResponseDto memberFeignResponseDto) {
-        memberPort.createBookmark(memberFeignResponseDto.toDomain());
-    }
-
-    @Override
-    public BookmarksResponse findMyBookmarks(long memberId) {
-        List<Long> shopIds = findShopIds(memberId);
-        return findMyBookmarksFeign(shopIds);
-    }
-
-    @Transactional
-    @Override
-    public void deleteBookMark(long memberId, long shopId) {
-        bookmarkPort.deleteBookmarkByMemberIdAndShopId(memberId, shopId);
-    }
-
     private Member getMember(String email) {
         return memberPort.findByEmail(email);
-    }
-
-    private List<Long> findShopIds(long memberId) {
-        List<BookmarkEntity> bookmarkEntities = memberPort.findBookmarksByMemberId(memberId);
-        return bookmarkEntities.stream().map(BookmarkEntity::getShopId).toList();
-    }
-
-    private BookmarksResponse findMyBookmarksFeign(List<Long> shopIds) {
-        return shopFeignClientPort.findBookmarksByIds(shopIds);
     }
 }

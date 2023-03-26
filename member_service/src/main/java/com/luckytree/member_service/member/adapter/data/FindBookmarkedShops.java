@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ShopFeignRequestDto {
+public class FindBookmarkedShops {
 
     private final List<Long> shopIds;
 }

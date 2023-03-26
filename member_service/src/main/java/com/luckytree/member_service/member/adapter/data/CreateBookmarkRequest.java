@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Schema(description = "즐겨찾기 등록 DTO")
-public class MemberFeignResponseDto {
+public class CreateBookmarkRequest {
 
     @Schema(description = "멤버 id")
     private long memberId;
@@ -22,13 +22,4 @@ public class MemberFeignResponseDto {
 
     @Schema(description = "샵 카테고리")
     private Category category;
-
-    @JsonIgnore
-    public Bookmark toDomain() {
-        return new Bookmark(
-                memberId,
-                shopId,
-                category
-        );
-    }
 }
