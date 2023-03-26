@@ -39,13 +39,10 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     @Override
     public Tokens login(String code, String redirectUri) {
-        log.info("카카오 로그인 :: 액세스 토큰 요청 ::");
         String accessToken = authenticationPort.getUserKakaoAccessToken(code, redirectUri);
-        log.info("카카오 로그인 :: 이메일 리소스 요청 :: 액세스 토큰 응답 :: " + accessToken);
         String email = authenticationPort.getUserKakaoEmail(accessToken);
-        log.info("카카오 로그인 :: 이메일 리소스 응답 :: 이메일 " + email);
         long memberId = authenticationPort.findMemberIdByEmail(email);
-        log.info("카카오 로그인 :: 이메일로 멤버 찾기 성공");
+
         return issueTokens(memberId);
     }
 

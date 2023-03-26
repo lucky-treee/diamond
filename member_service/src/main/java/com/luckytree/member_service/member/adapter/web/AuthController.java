@@ -49,7 +49,6 @@ public class AuthController {
 
     @PostMapping("/login/kakao")
     public ResponseEntity<?> loginByKakao(@Valid @RequestBody KakaoLoginDto kakaoLoginDto) {
-        log.info("카카오 로그인 요청 :: 인가코드 :: " + kakaoLoginDto.getCode());
         Tokens tokens = authenticationUseCase.login(kakaoLoginDto.getCode(), kakaoLoginDto.getRedirectUri());
 
         ResponseCookie responseCookie = ResponseCookie
