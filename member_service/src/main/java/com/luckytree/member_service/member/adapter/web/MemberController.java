@@ -28,10 +28,10 @@ public class MemberController {
     }
 
     @Operation(summary = "프로필 수정")
-    @PutMapping
-    public ResponseEntity<Object> updateMember(@LoginMemberId long memberId, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping
+    public void updateMember(@LoginMemberId long memberId, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
         memberUseCase.update(memberId, updateMemberRequest.getNickname(), updateMemberRequest.getPhoto());
-        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "회원 탈퇴")
