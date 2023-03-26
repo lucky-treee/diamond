@@ -26,7 +26,7 @@ public class ShopController {
 
     private final ShopUseCase shopUseCase;
 
-    @Operation(summary = "샵 등록요청 API")
+    @Operation(summary = "샵 등록요청 API(로그인)")
     @PostMapping("/shop")
     public ResponseEntity<Object> createShop(@LoginMemberId long memberId, @RequestBody @Valid CreateShopDto createShopDto) {
         shopUseCase.createShop(createShopDto);
@@ -61,21 +61,21 @@ public class ShopController {
         return ResponseEntity.ok(shopSummaryDtoList);
     }
 
-    @Operation(summary = "샵 삭제요청 API")
+    @Operation(summary = "샵 삭제요청 API(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/shop")
     public void deleteShop(@LoginMemberId long memberId, @RequestBody @Valid ShopDeleteDto shopDeleteDto) {
         shopUseCase.deleteShop(shopDeleteDto.getName(), shopDeleteDto.getAddress(), shopDeleteDto.getComment());
     }
 
-    @Operation(summary = "샵 리뷰 등록")
+    @Operation(summary = "샵 리뷰 등록(로그인)")
     @PostMapping("/shop/review")
     public ResponseEntity<Object> createShopReview(@LoginMemberId long memberId, @RequestBody @Valid CreateReviewDto createReviewDto){
 
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "샵 리뷰 수정")
+    @Operation(summary = "샵 리뷰 수정(로그인)")
     @PutMapping("/shop/review")
     public ResponseEntity<Object> updateReview(@LoginMemberId long memberId, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
 
@@ -89,7 +89,7 @@ public class ShopController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "샵 리뷰 삭제")
+    @Operation(summary = "샵 리뷰 삭제(로그인)")
     @DeleteMapping("/shop/review")
     ResponseEntity<Object> deleteShopReview(@LoginMemberId long memberId, @RequestParam(name = "shopId") String shopId) {
 
