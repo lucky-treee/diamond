@@ -1,4 +1,4 @@
-package com.luckytree.member_service.member.adapter.data;
+package com.luckytree.member_service.common.enums;
 
 public enum Hashtag {
     GOOD, CLEAN, NICE, CHEAP, QUALITY
