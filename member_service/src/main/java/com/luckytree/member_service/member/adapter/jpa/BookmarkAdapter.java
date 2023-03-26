@@ -1,4 +1,4 @@
-package com.luckytree.member_service.member.adapter.persistence;
+package com.luckytree.member_service.member.adapter.jpa;
 
 import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member_service.member.application.port.outgoing.BookmarkPort;

@@ -1,4 +1,4 @@
-package com.luckytree.member_service.member.adapter.feign;
+package com.luckytree.member_service.common.config;
 
 import feign.Logger;
 import feign.RequestInterceptor;
@@ -10,11 +10,6 @@ public class KakaoFeignConfiguration {
     public RequestInterceptor requestInterceptor() {
         return template -> template.header("Content-Type", "application/x-www-form-urlencoded");
     }
-
-/*    @Bean
-    public ErrorDecoder errorDecoder() {
-        return new FeignException.FeignClientException();
-    }*/
 
     @Bean
     Logger.Level feignLoggerLevel() {

@@ -3,7 +3,7 @@ package com.luckytree.member_service.member.application.service;
 import com.luckytree.member_service.member.adapter.data.FindBookmarkedShops;
 import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member_service.member.adapter.data.BookmarksResponse;
-import com.luckytree.member_service.member.adapter.persistence.BookmarkEntity;
+import com.luckytree.member_service.member.adapter.jpa.BookmarkEntity;
 import com.luckytree.member_service.member.application.port.incoming.BookmarkUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.BookmarkPort;
 import com.luckytree.member_service.member.application.port.outgoing.ShopFeignClientPort;

@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.feign;
 
+import com.luckytree.member_service.common.config.KakaoFeignConfiguration;
 import com.luckytree.member_service.member.adapter.data.KakaoTokenResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

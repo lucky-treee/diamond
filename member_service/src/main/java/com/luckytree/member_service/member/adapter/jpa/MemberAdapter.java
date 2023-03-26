@@ -1,14 +1,10 @@
-package com.luckytree.member_service.member.adapter.persistence;
+package com.luckytree.member_service.member.adapter.jpa;
 
 import com.luckytree.member_service.common.advice.NotFoundException;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
-import com.luckytree.member_service.member.domain.Bookmark;
-import com.luckytree.member_service.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
