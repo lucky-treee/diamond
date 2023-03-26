@@ -1,7 +1,7 @@
 package com.luckytree.member_service.member.application.service;
 
 import com.luckytree.member_service.member.adapter.data.MemberFeignResponseDto;
-import com.luckytree.member_service.member.adapter.data.MyBookmarksDto;
+import com.luckytree.member_service.member.adapter.data.BookmarksResponse;
 import com.luckytree.member_service.member.adapter.persistence.BookmarkEntity;
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
@@ -54,7 +54,7 @@ public class MemberService implements MemberUseCase {
     }
 
     @Override
-    public MyBookmarksDto findMyBookmarks(long memberId) {
+    public BookmarksResponse findMyBookmarks(long memberId) {
         List<Long> shopIds = findShopIds(memberId);
         return findMyBookmarksFeign(shopIds);
     }
@@ -74,7 +74,7 @@ public class MemberService implements MemberUseCase {
         return bookmarkEntities.stream().map(BookmarkEntity::getShopId).toList();
     }
 
-    private MyBookmarksDto findMyBookmarksFeign(List<Long> shopIds) {
+    private BookmarksResponse findMyBookmarksFeign(List<Long> shopIds) {
         return shopFeignClientPort.findBookmarksByIds(shopIds);
     }
 }

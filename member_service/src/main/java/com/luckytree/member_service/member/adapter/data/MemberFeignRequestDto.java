@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.data;
 
+import com.luckytree.member_service.common.enums.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

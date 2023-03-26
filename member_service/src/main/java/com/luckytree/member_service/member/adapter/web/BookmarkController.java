@@ -1,7 +1,7 @@
 package com.luckytree.member_service.member.adapter.web;
 
 import com.luckytree.member_service.common.annotation.LoginMemberId;
-import com.luckytree.member_service.member.adapter.data.MyBookmarksDto;
+import com.luckytree.member_service.member.adapter.data.BookmarksResponse;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +19,7 @@ public class BookmarkController {
 
     @Operation(summary = "내 북마크 목록 조회")
     @GetMapping
-    public ResponseEntity<MyBookmarksDto> findMyBookmarks(@LoginMemberId long memberId) {
+    public ResponseEntity<BookmarksResponse> findMyBookmarks(@LoginMemberId long memberId) {
         return ResponseEntity.ok(memberUseCase.findMyBookmarks(memberId));
     }
 

@@ -1,9 +1,9 @@
 package com.luckytree.member_service.member.adapter.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.luckytree.member_service.common.enums.Category;
 import com.luckytree.member_service.member.domain.Bookmark;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

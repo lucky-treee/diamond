@@ -4,14 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookmarkDto {
+public class BookmarksResponse {
 
-    private String name;
-    private Hashtag hashtag;
-    private String photo;
-    private String address;
-    private Category category;
+    private List<BookmarkResponse> bookmarks;
 }
