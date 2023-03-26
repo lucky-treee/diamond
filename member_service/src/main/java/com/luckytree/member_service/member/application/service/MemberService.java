@@ -9,7 +9,7 @@ import com.luckytree.member_service.member.application.port.outgoing.BookmarkPor
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import com.luckytree.member_service.member.application.port.outgoing.ShopFeignClientPort;
 import com.luckytree.member_service.member.domain.Member;
-import com.luckytree.member_service.member.domain.MemberProfile;
+import com.luckytree.member_service.member.adapter.data.MemberProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

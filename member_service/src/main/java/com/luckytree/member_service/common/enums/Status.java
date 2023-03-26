@@ -1,4 +1,4 @@
-package com.luckytree.member_service.member.domain;
+package com.luckytree.member_service.common.enums;
 
 import com.luckytree.member_service.common.advice.BadRequestException;
 import lombok.Getter;

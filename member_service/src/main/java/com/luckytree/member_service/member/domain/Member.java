@@ -1,6 +1,7 @@
 package com.luckytree.member_service.member.domain;
 
 
+import com.luckytree.member_service.common.enums.Status;
 import com.luckytree.member_service.member.adapter.data.SignupDto;
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import lombok.Getter;

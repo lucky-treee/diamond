@@ -3,7 +3,7 @@ package com.luckytree.member_service.member.adapter.web;
 import com.luckytree.member_service.common.annotation.LoginMemberId;
 import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
-import com.luckytree.member_service.member.domain.MemberProfile;
+import com.luckytree.member_service.member.adapter.data.MemberProfile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

@@ -1,7 +1,7 @@
 package com.luckytree.member_service.member.adapter.persistence;
 
 import com.luckytree.member_service.member.domain.Member;
-import com.luckytree.member_service.member.domain.Status;
+import com.luckytree.member_service.common.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-import static com.luckytree.member_service.member.domain.Status.LEAVE;
+import static com.luckytree.member_service.common.enums.Status.LEAVE;
 
 @Table(name = "member")
 @EntityListeners(AuditingEntityListener.class)
