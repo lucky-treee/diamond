@@ -4,10 +4,13 @@ import com.luckytree.member_service.member.adapter.data.SignupRequest;
 import com.luckytree.member_service.member.adapter.data.Tokens;
 import com.luckytree.member_service.member.application.port.incoming.AuthenticationUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.AuthenticationPort;
+import com.luckytree.member_service.member.application.port.outgoing.RedisPort;
 import com.luckytree.member_service.member.application.port.outgoing.TokenPort;
 import com.luckytree.member_service.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +24,7 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     private final AuthenticationPort authenticationPort;
     private final TokenPort tokenPort;
+    private final RedisPort redisPort;
 
 
     @Override
@@ -62,6 +66,12 @@ public class AuthenticationService implements AuthenticationUseCase {
         String accessToken = tokenPort.createAccessToken(memberId);
         String refreshToken = tokenPort.createRefreshToken();
 
+        saveRefreshTokenToRedis(memberId, refreshToken);
+
         return new Tokens(accessToken, refreshToken);
+    }
+
+    private void saveRefreshTokenToRedis(long memberId, String refreshToken) {
+        redisPort.save(String.valueOf(memberId), refreshToken);
     }
 }
