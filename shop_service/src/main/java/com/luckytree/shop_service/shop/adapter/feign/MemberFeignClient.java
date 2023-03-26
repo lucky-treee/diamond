@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(name = "member-service", configuration = FeignClientConfig.class)
 public interface MemberFeignClient {
 
-    @PostMapping("v1/bookmarks")
+    @PostMapping("/v1/internal/bookmarks")
     void saveBookmark(MemberFeignRequestDto memberFeignRequestDto);
-    @DeleteMapping("v1/bookmarks/{memberId}")
+    @DeleteMapping("/v1/internal/bookmarks/{memberId}")
     void deleteBookmark(@PathVariable long memberId, @RequestParam("shopId") long shopId);
 }
