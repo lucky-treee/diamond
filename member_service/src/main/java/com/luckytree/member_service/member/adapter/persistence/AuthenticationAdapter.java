@@ -4,6 +4,7 @@ import com.luckytree.member_service.common.advice.NotFoundException;
 import com.luckytree.member_service.member.adapter.data.KakaoTokenRequest;
 import com.luckytree.member_service.member.adapter.data.KakaoTokenResponse;
 import com.luckytree.member_service.member.adapter.data.KakaoUserInfo;
+import com.luckytree.member_service.member.adapter.data.SignupRequest;
 import com.luckytree.member_service.member.adapter.feign.KakaoTokenFeignClient;
 import com.luckytree.member_service.member.adapter.feign.KakaoUserInfoFeignClient;
 import com.luckytree.member_service.member.application.port.outgoing.AuthenticationPort;
@@ -29,8 +30,8 @@ public class AuthenticationAdapter implements AuthenticationPort {
     String clientSecret;
 
     @Override
-    public long saveMember(Member member) {
-        return memberRepository.save(member.toEntity()).getId();
+    public long saveMember(SignupRequest signupRequest) {
+        return memberRepository.save(new MemberEntity(signupRequest)).getId();
     }
 
     @Override

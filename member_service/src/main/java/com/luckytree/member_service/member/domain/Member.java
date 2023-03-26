@@ -2,7 +2,7 @@ package com.luckytree.member_service.member.domain;
 
 
 import com.luckytree.member_service.common.enums.Status;
-import com.luckytree.member_service.member.adapter.data.SignupDto;
+import com.luckytree.member_service.member.adapter.data.SignupRequest;
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import lombok.Getter;
 
@@ -17,11 +17,11 @@ public class Member {
 
     private String photo;
 
-    public Member(SignupDto signUpDto) {
-        this.nickname = signUpDto.getNickname();
-        this.email = signUpDto.getEmail();
+    public Member(SignupRequest signUpRequest) {
+        this.nickname = signUpRequest.getNickname();
+        this.email = signUpRequest.getEmail();
         this.status = Status.NORMAL;
-        this.photo = signUpDto.getPhoto();
+        this.photo = signUpRequest.getPhoto();
     }
 
     public Member(MemberEntity memberEntity) {

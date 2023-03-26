@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class KakaoLoginDto {
+public class LoginRequest {
 
     @NotBlank
     private final String code;

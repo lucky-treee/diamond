@@ -1,5 +1,6 @@
 package com.luckytree.member_service.member.adapter.persistence;
 
+import com.luckytree.member_service.member.adapter.data.SignupRequest;
 import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.common.enums.Status;
 import jakarta.persistence.*;
@@ -64,6 +65,13 @@ public class MemberEntity {
         this.email = email;
         this.status = Status.NORMAL;
         this.photo = photo;
+    }
+
+    public MemberEntity(SignupRequest signupRequest) {
+        this.nickname = signupRequest.getNickname();
+        this.email = signupRequest.getEmail();
+        this.status = Status.NORMAL;
+        this.photo = signupRequest.getPhoto();
     }
 
     public Member toDomain() {

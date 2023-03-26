@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class SignupDto {
+public class SignupRequest {
 
     @NotNull
     private String email;
