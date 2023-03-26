@@ -1,6 +1,7 @@
 package com.luckytree.member_service.member.adapter.persistence;
 
-import com.luckytree.member_service.member.adapter.data.Category;
+import com.luckytree.member_service.common.enums.Category;
+import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member_service.member.domain.Bookmark;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,5 +41,11 @@ public class BookmarkEntity {
         this.memberId = bookmark.getMemberId();
         this.shopId = bookmark.getShopId();
         this.category = bookmark.getCategory();
+    }
+
+    public BookmarkEntity(CreateBookmarkRequest createBookmarkRequest) {
+        this.memberId = createBookmarkRequest.getMemberId();
+        this.shopId = createBookmarkRequest.getShopId();
+        this.category = createBookmarkRequest.getCategory();
     }
 }

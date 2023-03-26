@@ -1,15 +1,17 @@
 package com.luckytree.member_service.member.adapter.data;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class MyBookmarksDto {
+public class UpdateMemberRequest {
 
-    private List<BookmarkDto> bookmarks;
+    @NotBlank
+    private String nickname;
+    @NotBlank
+    private String photo;
 }

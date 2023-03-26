@@ -1,12 +1,13 @@
-package com.luckytree.member_service.member.domain;
+package com.luckytree.member_service.member.adapter.data;
 
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
+import com.luckytree.member_service.member.domain.Member;
 import lombok.*;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class MemberProfile {
+public class MemberResponse {
 
     private String nickname;
 
@@ -14,13 +15,13 @@ public class MemberProfile {
 
     private String photo;
 
-    public MemberProfile(MemberEntity memberEntity) {
+    public MemberResponse(MemberEntity memberEntity) {
         this.nickname = memberEntity.getNickname();
         this.email = memberEntity.getEmail();
         this.photo = memberEntity.getPhoto();
     }
 
-    public MemberProfile(Member member) {
+    public MemberResponse(Member member) {
         this.nickname = member.getNickname();
         this.email = member.getEmail();
         this.photo = member.getPhoto();

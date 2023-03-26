@@ -8,5 +8,5 @@ public interface BookmarkRepository extends JpaRepository<BookmarkEntity, Long> 
 
     List<BookmarkEntity> findAllByMemberId(long memberId);
 
-    void deleteBookmarkByMemberIdAndShopId(long memberId, long shopId);
+    void deleteByMemberIdAndShopId(long memberId, long shopId);
 }

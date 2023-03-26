@@ -1,9 +1,8 @@
 package com.luckytree.member_service.member.domain;
 
-import com.luckytree.member_service.member.adapter.data.Category;
+import com.luckytree.member_service.common.enums.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor

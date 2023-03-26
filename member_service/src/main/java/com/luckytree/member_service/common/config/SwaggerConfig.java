@@ -24,7 +24,7 @@ public class SwaggerConfig {
                 .description("회원");
 
         String jwt = "JWT";
-        SecurityRequirement securityRequirement = new SecurityRequirement().addList(jwt); // 헤더에 토큰 포함
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList(jwt);
         Components components = new Components().addSecuritySchemes(jwt, new SecurityScheme()
                 .name(jwt)
                 .type(SecurityScheme.Type.HTTP)
@@ -40,7 +40,7 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public OpenApiCustomizer customerGolbalHeaderOpenApiCustomiser() {
+    public OpenApiCustomizer customerGlobalHeaderOpenApiCustomizer() {
         return openApi -> {
             openApi.getPaths().values().forEach(pathItem -> pathItem.readOperations().forEach(operation -> {
                 ApiResponses apiResponses = operation.getResponses();

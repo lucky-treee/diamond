@@ -1,10 +1,9 @@
 package com.luckytree.member_service.member.application.port.outgoing;
 
-import com.luckytree.member_service.member.adapter.data.MyBookmarksDto;
-
-import java.util.List;
+import com.luckytree.member_service.member.adapter.data.BookmarksResponse;
+import com.luckytree.member_service.member.adapter.data.FindBookmarkedShops;
 
 public interface ShopFeignClientPort {
 
-    MyBookmarksDto findBookmarksByIds(List<Long> shopIds);
+    BookmarksResponse findBookmarksByIds(FindBookmarkedShops FindBookmarkedShops);
 }

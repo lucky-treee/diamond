@@ -9,11 +9,6 @@ import java.util.List;
 
 public interface MemberPort {
 
-    Member findMemberById(long memberId);
-    Member findByEmail(String email);
-    void updateMember(Member member);
-    void deleteById(MemberEntity memberEntity);
-    void createBookmark(Bookmark bookmark);
     MemberEntity findById(long memberId);
-    List<BookmarkEntity> findBookmarksByMemberId(long memberId);
+    void deleteById(MemberEntity memberEntity);
 }

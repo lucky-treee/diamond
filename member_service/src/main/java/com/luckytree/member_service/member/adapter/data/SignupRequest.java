@@ -1,19 +1,21 @@
 package com.luckytree.member_service.member.adapter.data;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-public class UpdateMemberDto {
+@AllArgsConstructor
+public class SignupRequest {
 
-    @NotBlank
+    @NotNull
     private String email;
-    @NotBlank
+
+    @NotNull
     private String nickname;
-    @NotBlank
+
+    @NotNull
     private String photo;
 }
