@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Tag(name = "즐겨찾기", description = "회원의 즐겨찾기")
 @RestController
 @RequestMapping("v1/bookmarks")
@@ -27,8 +25,8 @@ public class BookmarkController {
 
     @Operation(summary = "즐겨찾기 해제")
     @DeleteMapping
-    public ResponseEntity<Object> deleteBookmark(@RequestHeader(name = "memberId") long memberId, @RequestParam(name = "shopId") String shopId) {
+    public ResponseEntity<Object> deleteBookmark(@LoginMemberId long memberId, @RequestParam(name = "shopId") long shopId) {
         memberUseCase.deleteBookMark(memberId, shopId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

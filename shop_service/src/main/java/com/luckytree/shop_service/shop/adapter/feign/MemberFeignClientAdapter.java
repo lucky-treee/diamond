@@ -16,4 +16,8 @@ public class MemberFeignClientAdapter implements MemberFeignClientPort {
     public void saveBookmark(long memberId, long shopId, Category category) {
         memberFeignClient.saveBookmark(new MemberFeignRequestDto(memberId, shopId, category));
     }
+    @Override
+    public void deleteBookmark(long memberId, long shopId){
+        memberFeignClient.deleteBookmark(memberId, shopId);
+    }
 }

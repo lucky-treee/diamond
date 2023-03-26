@@ -6,10 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "즐겨찾기", description = "샵 즐겨찾기")
 @RestController
@@ -24,5 +21,12 @@ public class BookmarkController {
     public ResponseEntity<Object> createBookmark(@LoginMemberId long memberId, @PathVariable long shopId) {
         shopUseCase.createBookmark(memberId, shopId);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "샵 북마크 해제")
+    @DeleteMapping("/bookmark/{memberId}")
+    ResponseEntity<Object> deleteBookmark(@PathVariable@LoginMemberId long memberId, @RequestParam(name = "shopId") long shopId) {
+        shopUseCase.deleteBookmark(memberId, shopId);
+        return ResponseEntity.noContent().build();
     }
 }

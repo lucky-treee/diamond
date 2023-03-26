@@ -23,4 +23,6 @@ public interface ShopUseCase {
     void createBookmark(long memberId, long shopId);
 
     MyBookmarksDto findMyBookmarksDtoByIds(List<Long> ids);
+
+    void deleteBookmark(long memberId, long shopId);
 }

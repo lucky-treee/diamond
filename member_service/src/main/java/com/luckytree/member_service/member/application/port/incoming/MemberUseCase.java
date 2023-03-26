@@ -11,5 +11,5 @@ public interface MemberUseCase {
     void leaveMember(long memberId);
     void createBookmark(MemberFeignResponseDto memberFeignResponseDto);
     MyBookmarksDto findMyBookmarks(long memberId);
-    void deleteBookMark(long memberId, String shopId);
+    void deleteBookMark(long memberId, long shopId);
 }

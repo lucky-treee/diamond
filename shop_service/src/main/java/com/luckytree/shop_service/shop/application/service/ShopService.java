@@ -70,4 +70,9 @@ public class ShopService implements ShopUseCase {
         List<BookmarkDto> bookmarkDtos = shopEntities.stream().map(BookmarkDto::new).toList();
         return new MyBookmarksDto(bookmarkDtos);
     }
+
+    @Override
+    public void deleteBookmark(long memberId, long shopId){
+        memberFeignClientPort.deleteBookmark(memberId, shopId);
+    }
 }

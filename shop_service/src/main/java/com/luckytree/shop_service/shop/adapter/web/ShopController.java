@@ -95,4 +95,5 @@ public class ShopController {
 
         return ResponseEntity.ok().build();
     }
+
 }
