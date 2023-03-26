@@ -1,4 +1,4 @@
-package com.luckytree.member_service.member.adapter.persistence;
+package com.luckytree.member_service.member.adapter.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

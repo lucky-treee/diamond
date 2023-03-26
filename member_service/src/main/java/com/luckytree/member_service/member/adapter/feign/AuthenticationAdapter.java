@@ -1,14 +1,13 @@
-package com.luckytree.member_service.member.adapter.persistence;
+package com.luckytree.member_service.member.adapter.feign;
 
 import com.luckytree.member_service.common.advice.NotFoundException;
 import com.luckytree.member_service.member.adapter.data.KakaoTokenRequest;
 import com.luckytree.member_service.member.adapter.data.KakaoTokenResponse;
 import com.luckytree.member_service.member.adapter.data.KakaoUserInfo;
 import com.luckytree.member_service.member.adapter.data.SignupRequest;
-import com.luckytree.member_service.member.adapter.feign.KakaoTokenFeignClient;
-import com.luckytree.member_service.member.adapter.feign.KakaoUserInfoFeignClient;
+import com.luckytree.member_service.member.adapter.jpa.MemberEntity;
+import com.luckytree.member_service.member.adapter.jpa.MemberRepository;
 import com.luckytree.member_service.member.application.port.outgoing.AuthenticationPort;
-import com.luckytree.member_service.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;

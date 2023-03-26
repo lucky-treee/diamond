@@ -3,7 +3,7 @@ package com.luckytree.member_service.member.domain;
 
 import com.luckytree.member_service.common.enums.Status;
 import com.luckytree.member_service.member.adapter.data.SignupRequest;
-import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
+import com.luckytree.member_service.member.adapter.jpa.MemberEntity;
 import lombok.Getter;
 
 @Getter

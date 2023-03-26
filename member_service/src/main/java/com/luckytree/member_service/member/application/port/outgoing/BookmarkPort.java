@@ -1,7 +1,7 @@
 package com.luckytree.member_service.member.application.port.outgoing;
 
 import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
-import com.luckytree.member_service.member.adapter.persistence.BookmarkEntity;
+import com.luckytree.member_service.member.adapter.jpa.BookmarkEntity;
 
 import java.util.List;
 
