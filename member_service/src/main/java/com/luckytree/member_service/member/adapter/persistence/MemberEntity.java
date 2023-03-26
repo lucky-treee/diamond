@@ -74,4 +74,9 @@ public class MemberEntity {
                 this.photo
         );
     }
+
+    public void update(String nickname, String photo) {
+        this.nickname = nickname;
+        this.photo = photo;
+    }
 }

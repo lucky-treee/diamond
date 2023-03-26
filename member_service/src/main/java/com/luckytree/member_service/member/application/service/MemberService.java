@@ -1,13 +1,10 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
-import com.luckytree.member_service.member.application.port.outgoing.BookmarkPort;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
-import com.luckytree.member_service.member.application.port.outgoing.ShopFeignClientPort;
 import com.luckytree.member_service.member.domain.Member;
-import com.luckytree.member_service.member.adapter.data.MemberProfile;
+import com.luckytree.member_service.member.adapter.data.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,28 +17,23 @@ public class MemberService implements MemberUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public MemberProfile getMemberProfile(long memberId) {
-        Member member = memberPort.findMemberById(memberId);
-        return new MemberProfile(member);
+    public MemberResponse getMember(long memberId) {
+        MemberEntity memberEntity = memberPort.findById(memberId);
+        return new MemberResponse(memberEntity);
     }
 
     @Transactional
     @Override
-    public void updateMember(String email, String nickname, String photo) {
-        Member member = getMember(email);
-        member.updateNicknameAndPhoto(nickname, photo);
-        memberPort.updateMember(member);
+    public void update(long memberId, String nickname, String photo) {
+        MemberEntity memberEntity = memberPort.findById(memberId);
+        memberEntity.update(nickname, photo);
     }
 
     @Transactional
     @Override
-    public void leaveMember(long memberId) {
+    public void leave(long memberId) {
         MemberEntity memberEntity = memberPort.findById(memberId);
         memberEntity.isAlreadyDeleted();
         memberPort.deleteById(memberEntity);
-    }
-
-    private Member getMember(String email) {
-        return memberPort.findByEmail(email);
     }
 }

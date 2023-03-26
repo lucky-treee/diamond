@@ -8,10 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UpdateMemberDto {
+public class UpdateMemberRequest {
 
-    @NotBlank
-    private String email;
     @NotBlank
     private String nickname;
     @NotBlank
