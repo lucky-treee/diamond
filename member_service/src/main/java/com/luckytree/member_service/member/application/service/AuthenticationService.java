@@ -72,6 +72,6 @@ public class AuthenticationService implements AuthenticationUseCase {
     }
 
     private void saveRefreshTokenToRedis(long memberId, String refreshToken) {
-        redisPort.save(String.valueOf(memberId), refreshToken);
+        redisPort.save(memberId, refreshToken);
     }
 }
