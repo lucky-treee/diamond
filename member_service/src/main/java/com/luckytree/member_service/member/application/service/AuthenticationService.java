@@ -62,6 +62,12 @@ public class AuthenticationService implements AuthenticationUseCase {
         return responseCookie.toString();
     }
 
+    @Override
+    public Tokens reissue(String refreshToken) {
+        long memberId = tokenPort.getClaims(refreshToken);
+        return issueTokens(memberId);
+    }
+
     private Tokens issueTokens(long memberId) {
         String accessToken = tokenPort.createAccessToken(memberId);
         String refreshToken = tokenPort.createRefreshToken();

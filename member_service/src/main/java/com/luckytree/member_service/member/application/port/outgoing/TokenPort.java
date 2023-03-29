@@ -5,4 +5,5 @@ public interface TokenPort {
     void validateToken(String token);
     String createAccessToken(long userId);
     String createRefreshToken();
+    long getClaims(String refreshToken);
 }

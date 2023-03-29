@@ -25,4 +25,9 @@ public class TokenAdapter implements TokenPort {
     public String createRefreshToken() {
         return tokenProvider.createRefreshToken();
     }
+
+    @Override
+    public long getClaims(String refreshToken) {
+        return tokenProvider.getMemberIdByDecoding(refreshToken);
+    }
 }
