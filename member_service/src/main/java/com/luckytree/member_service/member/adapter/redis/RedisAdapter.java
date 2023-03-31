@@ -14,7 +14,7 @@ public class RedisAdapter implements RedisPort {
     private final RedisTemplate redisTemplate;
 
     @Override
-    public void save(Long memberId, String refreshToken) {
+    public void save(String refreshToken, Long memberId) {
         ValueOperations<String, Long> valueOperations = redisTemplate.opsForValue();
         valueOperations.set(refreshToken, memberId);
     }
