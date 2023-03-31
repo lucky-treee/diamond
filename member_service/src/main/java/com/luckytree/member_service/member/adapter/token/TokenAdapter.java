@@ -17,13 +17,13 @@ public class TokenAdapter implements TokenPort {
     }
 
     @Override
-    public String createAccessToken(long memberId) {
-        return tokenProvider.createAccessToken(String.valueOf(memberId));
+    public String generateAccessToken(long memberId) {
+        return tokenProvider.generateAccessToken(String.valueOf(memberId));
     }
 
     @Override
-    public String createRefreshToken() {
-        return tokenProvider.createRefreshToken();
+    public String generateRefreshToken() {
+        return tokenProvider.generateRefreshToken();
     }
 
     @Override

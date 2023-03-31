@@ -6,11 +6,8 @@ import com.luckytree.member_service.member.application.port.incoming.Authenticat
 import com.luckytree.member_service.member.application.port.outgoing.AuthenticationPort;
 import com.luckytree.member_service.member.application.port.outgoing.RedisPort;
 import com.luckytree.member_service.member.application.port.outgoing.TokenPort;
-import com.luckytree.member_service.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,20 +61,22 @@ public class AuthenticationService implements AuthenticationUseCase {
 
     @Override
     public Tokens reissue(String refreshToken) {
-        long memberId = tokenPort.getClaims(refreshToken);
+        tokenPort.validateToken(refreshToken);
+        long memberId = redisPort.findById(refreshToken);
+
         return issueTokens(memberId);
     }
 
     private Tokens issueTokens(long memberId) {
-        String accessToken = tokenPort.createAccessToken(memberId);
-        String refreshToken = tokenPort.createRefreshToken();
+        String accessToken = tokenPort.generateAccessToken(memberId);
+        String refreshToken = tokenPort.generateRefreshToken();
 
-        saveRefreshTokenToRedis(memberId, refreshToken);
+        saveRefreshTokenToRedis(refreshToken, memberId);
 
         return new Tokens(accessToken, refreshToken);
     }
 
-    private void saveRefreshTokenToRedis(long memberId, String refreshToken) {
-        redisPort.save(memberId, refreshToken);
+    private void saveRefreshTokenToRedis(String refreshToken, long memberId) {
+        redisPort.save(refreshToken, memberId);
     }
 }
