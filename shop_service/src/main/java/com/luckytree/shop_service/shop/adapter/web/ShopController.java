@@ -28,7 +28,7 @@ public class ShopController {
 
     @Operation(summary = "샵 등록요청 API")
     @PostMapping("/shop")
-    public ResponseEntity<Object> createShop(@LoginMemberId long memberId, @RequestBody @Valid CreateShopDto createShopDto) {
+    public ResponseEntity<Object> createShop(@RequestBody @Valid CreateShopDto createShopDto) {
         shopUseCase.createShop(createShopDto);
         return ResponseEntity.ok().build();
     }
