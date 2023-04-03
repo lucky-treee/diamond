@@ -54,6 +54,13 @@ public class ShopController {
         return ResponseEntity.ok(shopDetailDto);
     }
 
+    @Operation(summary = "샵아이디로 상세조회")
+    @GetMapping("/shop/detail")
+    public ResponseEntity<ShopDetailDto> findShopByShopId(@RequestParam(name = "shopId") long shopId) {
+        ShopDetailDto shopDetailDto = shopUseCase.findShopById(shopId);
+        return ResponseEntity.ok(shopDetailDto);
+    }
+
     @Operation(summary = "해쉬태그로 샵 목록 조회")
     @GetMapping("/{hashtag}")
     public ResponseEntity<List<ShopSummaryDto>> findShopsByHashtag(@PathVariable Hashtag hashtag) {

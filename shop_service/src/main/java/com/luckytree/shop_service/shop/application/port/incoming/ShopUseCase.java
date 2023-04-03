@@ -18,6 +18,8 @@ public interface ShopUseCase {
 
     ShopDetailDto findShopByNameAndAddress(String name, String address);
 
+    ShopDetailDto findShopById(long id);
+
     void deleteShop(String name, String address, String comment);
 
     void createBookmark(long memberId, long shopId);

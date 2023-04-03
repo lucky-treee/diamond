@@ -19,6 +19,8 @@ public interface ShopPort {
 
     ShopEntity getShopDetail(String name, String address);
 
+    ShopEntity getShopDetailById(long shopId);
+
     void deleteShop(ShopEntity shopEntity, String comment);
 
     ShopEntity getShopEntity(String name, String address);

@@ -43,6 +43,11 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
+    public ShopEntity getShopDetailById(long shopId) {
+        return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId와 일치하는 ShopEntity가 없습니다. shopID: " + shopId));
+    }
+
+    @Override
     public List<ShopEntity> getShopSummaryByHashtag(Hashtag hashtag) {
         return shopRepository.findByHashtagAndStatus(hashtag, ShopStatus.ENABLE);
     }
