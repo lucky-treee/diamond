@@ -38,11 +38,6 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
-    public ShopEntity getShopDetail(String name, String address) {
-        return shopRepository.findByNameAndAddress(name, address).orElseThrow(() -> new NotFoundException("해당 shopName과 address애 일치하는 ShopEntity가 없습니다. name: " + name + ", address: " + address));
-    }
-
-    @Override
     public ShopEntity getShopDetailById(long shopId) {
         return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId와 일치하는 ShopEntity가 없습니다. shopID: " + shopId));
     }

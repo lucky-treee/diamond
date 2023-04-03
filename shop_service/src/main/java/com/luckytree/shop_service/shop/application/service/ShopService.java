@@ -46,13 +46,6 @@ public class ShopService implements ShopUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public ShopDetailDto findShopByNameAndAddress(String name, String address) {
-        ShopEntity shopEntity = shopPort.getShopDetail(name, address);
-        return new ShopDetailDto(shopEntity);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
     public ShopDetailDto findShopById(long shopId) {
         ShopEntity shopEntity = shopPort.getShopDetailById(shopId);
         return new ShopDetailDto(shopEntity);
