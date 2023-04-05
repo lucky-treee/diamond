@@ -4,8 +4,7 @@ spring:
   profiles:
     active: develop
   config:
-    #import: "optional:configserver:http://192.168.0.14:31185/"
-    import: "optional:configserver:http://localhost:8888/"
+    import: "optional:configserver:http://192.168.0.14:31185/"
   cloud:
     config:
       name: member, actuator, auth, redis
