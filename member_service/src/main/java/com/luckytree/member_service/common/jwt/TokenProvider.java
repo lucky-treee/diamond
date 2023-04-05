@@ -4,16 +4,12 @@ package com.luckytree.member_service.common.jwt;
 import com.luckytree.member_service.common.advice.BadRequestException;
 import com.luckytree.member_service.common.advice.UnAuthorizedException;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.util.Date;
 import java.util.Random;
 
@@ -28,7 +24,7 @@ public class TokenProvider {
     @Value("${jwt.refresh-token.expire-length}")
     long refreshTokenValidityInMilliseconds;
 
-    private String createToken(String payload, long tokenValidity) {
+    private String generate(String payload, long tokenValidity) {
         Claims claims = Jwts.claims().setSubject(payload);
 
         long now = (new Date()).getTime();
@@ -41,15 +37,15 @@ public class TokenProvider {
                 .compact();
     }
 
-    public String createAccessToken(String payload) {
-        return createToken(payload, tokenValidityInMilliseconds);
+    public String generateAccessToken(String payload) {
+        return generate(payload, tokenValidityInMilliseconds);
     }
 
-    public String createRefreshToken() {
+    public String generateRefreshToken() {
         byte[] array = new byte[7];
         new Random().nextBytes(array);
         String generatedString = new String(array, StandardCharsets.UTF_8);
-        return createToken(generatedString, refreshTokenValidityInMilliseconds);
+        return generate(generatedString, refreshTokenValidityInMilliseconds);
     }
 
     public void validateToken(String token) {
@@ -69,6 +65,7 @@ public class TokenProvider {
     }
 
     public long getMemberIdByDecoding(String token) {
+        validateToken(token);
         String memberId = Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody().getSubject();
 
         return Long.parseLong(memberId);

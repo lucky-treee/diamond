@@ -9,4 +9,5 @@ public interface AuthenticationUseCase {
     Tokens signup(SignupRequest signUpRequest);
     Tokens login(String code, String redirectUri);
     String makeCookie(String refreshToken);
+    Tokens reissue(String refreshToken);
 }

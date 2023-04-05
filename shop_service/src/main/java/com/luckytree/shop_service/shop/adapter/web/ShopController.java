@@ -28,7 +28,7 @@ public class ShopController {
 
     @Operation(summary = "샵 등록요청 API(로그인)")
     @PostMapping("/shop")
-    public ResponseEntity<Object> createShop(@LoginMemberId long memberId, @RequestBody @Valid CreateShopDto createShopDto) {
+    public ResponseEntity<Object> createShop(@RequestBody @Valid CreateShopDto createShopDto) {
         shopUseCase.createShop(createShopDto);
         return ResponseEntity.ok().build();
     }
@@ -47,10 +47,10 @@ public class ShopController {
         return ResponseEntity.ok(shopSummaryDto);
     }
 
-    @Operation(summary = "샵이름과 주소로 상세조회")
+    @Operation(summary = "샵아이디로 상세조회")
     @GetMapping("/shop")
-    public ResponseEntity<ShopDetailDto> findShopByNameAndAddress(@RequestParam(name = "name") String name, @RequestParam(name = "address") String address) {
-        ShopDetailDto shopDetailDto = shopUseCase.findShopByNameAndAddress(name, address);
+    public ResponseEntity<ShopDetailDto> findShopByShopId(@RequestParam(name = "shopId") long shopId) {
+        ShopDetailDto shopDetailDto = shopUseCase.findShopById(shopId);
         return ResponseEntity.ok(shopDetailDto);
     }
 

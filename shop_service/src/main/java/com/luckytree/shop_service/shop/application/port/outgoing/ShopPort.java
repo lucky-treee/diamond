@@ -17,7 +17,7 @@ public interface ShopPort {
 
     List<ShopEntity> getShopSummaryByHashtag(Hashtag hashtag);
 
-    ShopEntity getShopDetail(String name, String address);
+    ShopEntity getShopDetailById(long shopId);
 
     void deleteShop(ShopEntity shopEntity, String comment);
 

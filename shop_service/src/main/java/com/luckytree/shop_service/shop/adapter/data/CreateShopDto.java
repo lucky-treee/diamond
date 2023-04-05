@@ -1,5 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
@@ -62,11 +63,11 @@ public class CreateShopDto {
     @Schema(description = "샵 경도")
     private double lng;
 
-    @Schema(description = "샵 영업 시작시간")
+    @Schema(description = "샵 영업 시작시간", format = "time", example = "00:00:00")
     @JsonDeserialize(using = LocalTimeDeserializer.class)
     private LocalTime operatingStart;
 
-    @Schema(description = "샵 영업 종료시간")
+    @Schema(description = "샵 영업 종료시간", format = "time", example = "00:00:00")
     @JsonDeserialize(using = LocalTimeDeserializer.class)
     private LocalTime operatingEnd;
 
