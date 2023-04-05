@@ -16,7 +16,7 @@ public interface ShopUseCase {
 
     List<ShopSummaryDto> findShopsByHashtag(Hashtag hashtag);
 
-    ShopDetailDto findShopById(long id);
+    ShopDetailDto findShopById(long shopId);
 
     void deleteShop(String name, String address, String comment);
 
