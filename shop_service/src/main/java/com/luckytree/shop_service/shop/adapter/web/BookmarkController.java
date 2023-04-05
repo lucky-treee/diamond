@@ -24,7 +24,7 @@ public class BookmarkController {
     }
 
     @Operation(summary = "샵 북마크 해제(로그인)")
-    @DeleteMapping("/bookmark")
+    @DeleteMapping
     ResponseEntity<Object> deleteBookmark(@LoginMemberId long memberId, @RequestParam(name = "shopId") long shopId) {
         shopUseCase.deleteBookmark(memberId, shopId);
         return ResponseEntity.noContent().build();
