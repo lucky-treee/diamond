@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Date;
 import java.util.Random;
 
@@ -19,10 +20,6 @@ import java.util.Random;
 public class TokenProvider {
     @Value("${jwt.secret}")
     String secret;
-    @Value("${jwt.token-validity-in-seconds}")
-    long tokenValidityInMilliseconds;
-    @Value("${jwt.refresh-token.expire-length}")
-    long refreshTokenValidityInMilliseconds;
 
     private String generate(String payload, long tokenValidity) {
         Claims claims = Jwts.claims().setSubject(payload);
@@ -38,14 +35,14 @@ public class TokenProvider {
     }
 
     public String generateAccessToken(String payload) {
-        return generate(payload, tokenValidityInMilliseconds);
+        return generate(payload, Duration.ofMinutes(30).toMillis());
     }
 
     public String generateRefreshToken() {
         byte[] array = new byte[7];
         new Random().nextBytes(array);
         String generatedString = new String(array, StandardCharsets.UTF_8);
-        return generate(generatedString, refreshTokenValidityInMilliseconds);
+        return generate(generatedString, Duration.ofDays(14).toMillis());
     }
 
     public void validateToken(String token) {
