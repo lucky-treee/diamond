@@ -49,7 +49,7 @@ public class AuthController {
     }
 
     @PostMapping("/token")
-    public ResponseEntity reissueToken(@RequestHeader("refresh-token") String refreshToken) {
+    public ResponseEntity reissueToken(@CookieValue("refresh-token") String refreshToken) {
         Tokens tokens = authenticationUseCase.reissue(refreshToken);
         String refreshTokenCookie = authenticationUseCase.makeCookie(tokens.getRefreshToken());
 
