@@ -2,8 +2,9 @@ package com.luckytree.member_service.common.annotation;
 
 import com.luckytree.member_service.common.advice.NotFoundException;
 import com.luckytree.member_service.common.jwt.TokenProvider;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -14,11 +15,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import java.util.Objects;
 
 @Log4j2
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Component
 public class AuthorizationArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private final TokenProvider tokenProvider;
+    @Autowired
+    private TokenProvider tokenProvider;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
