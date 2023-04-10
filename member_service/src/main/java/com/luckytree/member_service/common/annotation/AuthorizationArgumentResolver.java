@@ -26,6 +26,8 @@ public class AuthorizationArgumentResolver implements HandlerMethodArgumentResol
     @Value("${jwt.secret}")
     String secret;
 
+    String testSecret = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MCIsImV4cCI6MTY4MTEzOTY5M30.WiskhvlUSGV_Vx5kEfa24uWfXWXuvZTaG8l70KyYijWmf0Z3GK_HYuyB9-4ZnzoWeH3tWOFh8kcUm9124pLEeg";
+
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return parameter.hasParameterAnnotation(LoginMemberId.class);
@@ -48,15 +50,16 @@ public class AuthorizationArgumentResolver implements HandlerMethodArgumentResol
     }
 
     private Long getMemberIdByDecoding(String token) {
+        log.info("secret :: {} ", secret);
         validateToken(token);
-        String memberId = Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody().getSubject();
+        String memberId = Jwts.parserBuilder().setSigningKey(testSecret).build().parseClaimsJws(token).getBody().getSubject();
         log.info("member id :: {}", memberId);
         return Long.parseLong(memberId);
     }
 
     private void validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(testSecret).build().parseClaimsJws(token);
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             throw new BadRequestException("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
