@@ -22,7 +22,7 @@ public class MemberController {
 
     @Operation(summary = "프로필 조회(로그인)")
     @GetMapping
-    public ResponseEntity<MemberResponse> getMember(@LoginMemberId long memberId) {
+    public ResponseEntity<MemberResponse> getMember(@LoginMemberId Long memberId) {
         MemberResponse memberResponse = memberUseCase.getMember(memberId);
         return ResponseEntity.ok(memberResponse);
     }
@@ -30,14 +30,14 @@ public class MemberController {
     @Operation(summary = "프로필 수정(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping
-    public void updateMember(@LoginMemberId long memberId, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
+    public void updateMember(@LoginMemberId Long memberId, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
         memberUseCase.update(memberId, updateMemberRequest.getNickname(), updateMemberRequest.getPhoto());
     }
 
     @Operation(summary = "회원 탈퇴(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/leave")
-    public void leaveMember(@LoginMemberId long memberId) {
+    public void leaveMember(@LoginMemberId Long memberId) {
         memberUseCase.leave(memberId);
     }
 }

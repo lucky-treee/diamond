@@ -20,14 +20,14 @@ public class BookmarkController {
 
     @Operation(summary = "북마크 목록 조회(로그인)")
     @GetMapping
-    public ResponseEntity<BookmarksResponse> getBookmarks(@LoginMemberId long memberId) {
+    public ResponseEntity<BookmarksResponse> getBookmarks(@LoginMemberId Long memberId) {
         return ResponseEntity.ok(bookmarkUseCase.getBookmarks(memberId));
     }
 
     @Operation(summary = "즐겨찾기 해제(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping
-    public void deleteBookmark(@LoginMemberId long memberId, @RequestParam(name = "shopId") long shopId) {
+    public void deleteBookmark(@LoginMemberId Long memberId, @RequestParam(name = "shopId") long shopId) {
         bookmarkUseCase.delete(memberId, shopId);
     }
 }

@@ -61,7 +61,7 @@ public class TokenProvider {
         }
     }
 
-    public long getMemberIdByDecoding(String token) {
+    public Long getMemberIdByDecoding(String token) {
         validateToken(token);
         String memberId = Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody().getSubject();
 
