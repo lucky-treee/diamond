@@ -5,7 +5,7 @@ import com.luckytree.member_service.common.advice.BadRequestException;
 import com.luckytree.member_service.common.advice.UnAuthorizedException;
 import io.jsonwebtoken.*;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Random;
 
-@Slf4j
+@Log4j2
 @NoArgsConstructor
 @Component
 public class TokenProvider {
@@ -64,7 +64,7 @@ public class TokenProvider {
     public Long getMemberIdByDecoding(String token) {
         validateToken(token);
         String memberId = Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody().getSubject();
-
+        log.info("member id :: {}", memberId);
         return Long.parseLong(memberId);
     }
 }
