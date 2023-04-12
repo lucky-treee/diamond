@@ -12,7 +12,7 @@ public interface ShopUseCase {
 
     List<ShopSummaryDto> findShopsByCategory(Category category);
 
-    List<ShopSummaryDto> findShopsByLatAndLng(double maxLat, double minLat, double maxLng, double minLng);
+    List<ShopSummaryDto> findShopsByLatAndLng(ShopSearchDto shopSearchDto);
 
     List<ShopSummaryDto> findShopsByHashtag(Hashtag hashtag);
 

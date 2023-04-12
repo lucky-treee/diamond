@@ -39,7 +39,7 @@ public class ShopController {
     @Operation(summary = "범위 내 샵 전체 검색")
     @GetMapping
     public ResponseEntity<List<ShopSummaryDto>> findShopsByLatAndLng(ShopSearchDto shopSearchDto) {
-        List<ShopSummaryDto> shopSummaryDto = shopUseCase.findShopsByLatAndLng(shopSearchDto.getMaxLat(), shopSearchDto.getMinLat(), shopSearchDto.getMaxLng(), shopSearchDto.getMinLng());
+        List<ShopSummaryDto> shopSummaryDto = shopUseCase.findShopsByLatAndLng(shopSearchDto);
         return ResponseEntity.ok(shopSummaryDto);
     }
 

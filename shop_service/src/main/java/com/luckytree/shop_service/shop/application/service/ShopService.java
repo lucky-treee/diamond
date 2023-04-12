@@ -35,8 +35,11 @@ public class ShopService implements ShopUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummaryDto> findShopsByLatAndLng(double maxLat, double minLat, double maxLng, double minLng) {
-        return shopPort.getShopAll(maxLat, minLat, maxLng, minLng).stream().map(ShopSummaryDto::new).toList();
+    public List<ShopSummaryDto> findShopsByLatAndLng(ShopSearchDto shopSearchDto) {
+        return shopPort.getShopAll(shopSearchDto.getMaxLat(), shopSearchDto.getMinLat(), shopSearchDto.getMaxLng(), shopSearchDto.getMinLng())
+                .stream()
+                .map(ShopSummaryDto::new)
+                .toList();
     }
 
     @Transactional(readOnly = true)
