@@ -1,6 +1,5 @@
 package com.luckytree.member_service.member.adapter.web;
 
-import com.luckytree.member_service.common.annotation.LoginMemberId;
 import com.luckytree.member_service.member.adapter.data.BookmarksResponse;
 import com.luckytree.member_service.member.application.port.incoming.BookmarkUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,13 +20,13 @@ public class BookmarkController {
     @Operation(summary = "북마크 목록 조회(로그인)")
     @GetMapping
     public ResponseEntity<BookmarksResponse> getBookmarks(@RequestHeader("Authorization") String authorization) {
-        return ResponseEntity.ok(bookmarkUseCase.getBookmarks(memberId));
+        return ResponseEntity.ok(bookmarkUseCase.getBookmarks(authorization));
     }
 
     @Operation(summary = "즐겨찾기 해제(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping
     public void deleteBookmark(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") long shopId) {
-        bookmarkUseCase.delete(memberId, shopId);
+        bookmarkUseCase.delete(authorization, shopId);
     }
 }

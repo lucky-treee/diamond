@@ -1,9 +1,8 @@
 package com.luckytree.member_service.member.adapter.web;
 
-import com.luckytree.member_service.common.annotation.LoginMemberId;
+import com.luckytree.member_service.member.adapter.data.MemberResponse;
 import com.luckytree.member_service.member.adapter.data.UpdateMemberRequest;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
-import com.luckytree.member_service.member.adapter.data.MemberResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -23,7 +22,7 @@ public class MemberController {
     @Operation(summary = "프로필 조회(로그인)")
     @GetMapping
     public ResponseEntity<MemberResponse> getMember(@RequestHeader("Authorization") String authorization) {
-        MemberResponse memberResponse = memberUseCase.getMember(memberId);
+        MemberResponse memberResponse = memberUseCase.getMember(authorization);
         return ResponseEntity.ok(memberResponse);
     }
 
@@ -31,13 +30,13 @@ public class MemberController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping
     public void updateMember(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
-        memberUseCase.update(memberId, updateMemberRequest.getNickname(), updateMemberRequest.getPhoto());
+        memberUseCase.update(authorization, updateMemberRequest);
     }
 
     @Operation(summary = "회원 탈퇴(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/leave")
     public void leaveMember(@RequestHeader("Authorization") String authorization) {
-        memberUseCase.leave(memberId);
+        memberUseCase.leave(authorization);
     }
 }
