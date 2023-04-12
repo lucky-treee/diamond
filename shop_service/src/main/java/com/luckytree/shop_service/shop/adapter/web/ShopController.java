@@ -1,13 +1,9 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
-import com.luckytree.shop_service.common.annotation.LoginMemberId;
 import com.luckytree.shop_service.common.enums.Category;
-import com.luckytree.shop_service.shop.adapter.data.*;
-import com.luckytree.shop_service.shop.adapter.data.ShopDeleteDto;
-import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.common.enums.Hashtag;
-import com.luckytree.shop_service.shop.adapter.data.ShopDetailDto;
-import com.luckytree.shop_service.shop.adapter.data.ShopSummaryDto;
+import com.luckytree.shop_service.shop.adapter.data.*;
+import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -64,34 +60,34 @@ public class ShopController {
     @Operation(summary = "샵 삭제요청 API(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/shop")
-    public void deleteShop(@LoginMemberId long memberId, @RequestBody @Valid ShopDeleteDto shopDeleteDto) {
-        shopUseCase.deleteShop(shopDeleteDto.getName(), shopDeleteDto.getAddress(), shopDeleteDto.getComment());
+    public void deleteShop(@RequestHeader("Authorization") String authorization, @RequestBody @Valid ShopDeleteDto shopDeleteDto) {
+        shopUseCase.deleteShop(authorization, shopDeleteDto);
     }
 
     @Operation(summary = "샵 리뷰 등록(로그인)")
     @PostMapping("/shop/review")
-    public ResponseEntity<Object> createShopReview(@LoginMemberId long memberId, @RequestBody @Valid CreateReviewDto createReviewDto){
+    public ResponseEntity<Object> createShopReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto){
 
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 수정(로그인)")
     @PutMapping("/shop/review")
-    public ResponseEntity<Object> updateReview(@LoginMemberId long memberId, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
+    public ResponseEntity<Object> updateReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
 
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 조회")
     @GetMapping("/shop/review")
-    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@LoginMemberId long memberId, @RequestParam(name = "shopId") String shopId) {
+    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 삭제(로그인)")
     @DeleteMapping("/shop/review")
-    ResponseEntity<Object> deleteShopReview(@LoginMemberId long memberId, @RequestParam(name = "shopId") String shopId) {
+    ResponseEntity<Object> deleteShopReview(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
     }
