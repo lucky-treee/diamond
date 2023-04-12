@@ -20,7 +20,12 @@ public class TokenUtil {
         return Long.parseLong(memberId);
     }
 
-    public static void validate(String token) {
+    public static void validateAuthorization(String authorization) {
+        String accessToken = Objects.requireNonNull(authorization).substring(7);
+        validate(accessToken);
+    }
+
+    private static void validate(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token);
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
