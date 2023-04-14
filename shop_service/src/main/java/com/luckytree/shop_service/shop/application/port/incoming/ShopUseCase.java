@@ -12,17 +12,17 @@ public interface ShopUseCase {
 
     List<ShopSummaryDto> findShopsByCategory(Category category);
 
-    List<ShopSummaryDto> findShopsByLatAndLng(double maxLat, double minLat, double maxLng, double minLng);
+    List<ShopSummaryDto> findShopsByLatAndLng(ShopSearchDto shopSearchDto);
 
     List<ShopSummaryDto> findShopsByHashtag(Hashtag hashtag);
 
     ShopDetailDto findShopById(long shopId);
 
-    void deleteShop(String name, String address, String comment);
+    void deleteShop(String authorization, ShopDeleteDto shopDeleteDto);
 
-    void createBookmark(long memberId, long shopId);
+    void createBookmark(String authorization, long shopId);
 
     MyBookmarksDto findMyBookmarksDtoByIds(List<Long> ids);
 
-    void deleteBookmark(long memberId, long shopId);
+    void deleteBookmark(String authorization, long shopId);
 }

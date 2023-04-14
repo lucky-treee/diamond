@@ -1,8 +1,9 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.member.adapter.data.FindBookmarkedShops;
-import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
+import com.luckytree.member_service.common.utils.TokenUtil;
 import com.luckytree.member_service.member.adapter.data.BookmarksResponse;
+import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
+import com.luckytree.member_service.member.adapter.data.FindBookmarkedShops;
 import com.luckytree.member_service.member.adapter.jpa.BookmarkEntity;
 import com.luckytree.member_service.member.application.port.incoming.BookmarkUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.BookmarkPort;
@@ -28,13 +29,20 @@ public class BookmarkService implements BookmarkUseCase {
     }
 
     @Override
-    public BookmarksResponse getBookmarks(long memberId) {
+    public BookmarksResponse getBookmarks(String authorization) {
+        Long memberId = TokenUtil.parseMemberId(authorization);
         List<Long> shopIds = findShopIds(memberId);
         return findBookmarkedShops(shopIds);
     }
 
     @Override
     @Transactional
+    public void delete(String authorization, long shopId) {
+        Long memberId = TokenUtil.parseMemberId(authorization);
+        bookmarkPort.deleteByMemberIdAndShopId(memberId, shopId);
+    }
+
+    @Override
     public void delete(long memberId, long shopId) {
         bookmarkPort.deleteByMemberIdAndShopId(memberId, shopId);
     }

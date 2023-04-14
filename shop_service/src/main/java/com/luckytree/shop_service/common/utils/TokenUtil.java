@@ -1,30 +1,31 @@
-package com.luckytree.shop_service.common.jwt;
-
+package com.luckytree.shop_service.common.utils;
 
 import com.luckytree.shop_service.common.exceptions.BadRequestException;
 import com.luckytree.shop_service.common.exceptions.UnAuthorizedException;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.util.Date;
-import java.util.Random;
+import java.util.Objects;
 
-@Slf4j
-@NoArgsConstructor
-@Component
-public class TokenProvider {
+public class TokenUtil {
+
     @Value("${jwt.secret}")
-    String secret;
+    static String secret;
 
-    public void validateToken(String token) {
+    public static Long parseMemberId(String authorization) {
+        String accessToken = Objects.requireNonNull(authorization).substring(7);
+        validate(accessToken);
+        String memberId = Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(accessToken).getBody().getSubject();
+
+        return Long.parseLong(memberId);
+    }
+
+    public static void validateAuthorization(String authorization) {
+        String accessToken = Objects.requireNonNull(authorization).substring(7);
+        validate(accessToken);
+    }
+
+    private static void validate(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token);
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
@@ -38,11 +39,5 @@ public class TokenProvider {
         } catch (MissingClaimException e) {
             throw new BadRequestException("JWT 토큰의 페이로드가 없습니다.");
         }
-    }
-
-    public long getMemberIdByDecoding(String token) {
-        String memberId = Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody().getSubject();
-
-        return Long.parseLong(memberId);
     }
 }
