@@ -1,9 +1,11 @@
 package com.luckytree.member_service.member.application.service;
 
+import com.luckytree.member_service.common.utils.TokenUtil;
+import com.luckytree.member_service.member.adapter.data.MemberResponse;
+import com.luckytree.member_service.member.adapter.data.UpdateMemberRequest;
 import com.luckytree.member_service.member.adapter.jpa.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
-import com.luckytree.member_service.member.adapter.data.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,21 +18,28 @@ public class MemberService implements MemberUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public MemberResponse getMember(long memberId) {
+    public MemberResponse getMember(String authorization) {
+        Long memberId = TokenUtil.parseMemberId(authorization);
+
         MemberEntity memberEntity = memberPort.findById(memberId);
+
         return new MemberResponse(memberEntity);
     }
 
     @Transactional
     @Override
-    public void update(long memberId, String nickname, String photo) {
+    public void update(String authorization, UpdateMemberRequest updateMemberRequest) {
+        Long memberId = TokenUtil.parseMemberId(authorization);
+
         MemberEntity memberEntity = memberPort.findById(memberId);
-        memberEntity.update(nickname, photo);
+        memberEntity.update(updateMemberRequest.getNickname(), updateMemberRequest.getPhoto());
     }
 
     @Transactional
     @Override
-    public void leave(long memberId) {
+    public void leave(String authorization) {
+        Long memberId = TokenUtil.parseMemberId(authorization);
+
         MemberEntity memberEntity = memberPort.findById(memberId);
         memberEntity.isAlreadyDeleted();
         memberPort.deleteById(memberEntity);

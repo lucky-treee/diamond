@@ -1,6 +1,5 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
-import com.luckytree.shop_service.common.annotation.LoginMemberId;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,15 +17,15 @@ public class BookmarkController {
 
     @Operation(summary = "즐겨찾기 추가(로그인)")
     @PostMapping("/{shopId}")
-    public ResponseEntity<Object> createBookmark(@LoginMemberId long memberId, @PathVariable long shopId) {
-        shopUseCase.createBookmark(memberId, shopId);
+    public ResponseEntity<Object> createBookmark(@RequestHeader("Authorization") String authorization, @PathVariable long shopId) {
+        shopUseCase.createBookmark(authorization, shopId);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 북마크 해제(로그인)")
     @DeleteMapping
-    ResponseEntity<Object> deleteBookmark(@LoginMemberId long memberId, @RequestParam(name = "shopId") long shopId) {
-        shopUseCase.deleteBookmark(memberId, shopId);
+    ResponseEntity<Object> deleteBookmark(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") long shopId) {
+        shopUseCase.deleteBookmark(authorization, shopId);
         return ResponseEntity.noContent().build();
     }
 }
