@@ -25,4 +25,8 @@ public interface ShopUseCase {
     MyBookmarksDto findMyBookmarksDtoByIds(List<Long> ids);
 
     void deleteBookmark(String authorization, long shopId);
+
+    void createShopReview(String authorization, CreateReviewDto createReviewDto);
+
+    void createShopReviewPhoto(CreateReviewPhotoDto createReviewPhotoDto);
 }

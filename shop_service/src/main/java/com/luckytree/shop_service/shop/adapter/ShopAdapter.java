@@ -3,11 +3,10 @@ package com.luckytree.shop_service.shop.adapter;
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.common.enums.Hashtag;
 import com.luckytree.shop_service.common.enums.ShopStatus;
-import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
-import com.luckytree.shop_service.shop.adapter.jpa.ShopRemoveEntity;
-import com.luckytree.shop_service.shop.adapter.jpa.ShopRemoveRepository;
-import com.luckytree.shop_service.shop.adapter.jpa.ShopRepository;
+import com.luckytree.shop_service.shop.adapter.jpa.*;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
+import com.luckytree.shop_service.shop.domain.Review;
+import com.luckytree.shop_service.shop.domain.ReviewPhoto;
 import com.luckytree.shop_service.shop.domain.Shop;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,6 +20,8 @@ public class ShopAdapter implements ShopPort {
 
     private final ShopRepository shopRepository;
     private final ShopRemoveRepository shopRemoveRepository;
+    private final ReviewRepository reviewRepository;
+    private final ReviewPhotoRepository reviewPhotoRepository;
 
     @Override
     public void createShop(Shop shop) {
@@ -65,5 +66,15 @@ public class ShopAdapter implements ShopPort {
     @Override
     public List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds) {
         return shopRepository.findAllByIdIn(shopIds);
+    }
+
+    @Override
+    public ReviewEntity createShopReview(Review review) {
+        return reviewRepository.save(new ReviewEntity(review));
+    }
+
+    @Override
+    public void createShopReviewPhoto(ReviewPhoto reviewPhoto) {
+        reviewPhotoRepository.save(new ReviewPhotoEntity(reviewPhoto));
     }
 }

@@ -2,8 +2,10 @@ package com.luckytree.shop_service.shop.application.service;
 
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.common.enums.Hashtag;
+import com.luckytree.shop_service.common.utils.S3UploadUtil;
 import com.luckytree.shop_service.common.utils.TokenUtil;
 import com.luckytree.shop_service.shop.adapter.data.*;
+import com.luckytree.shop_service.shop.adapter.jpa.ReviewEntity;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.MemberFeignClientPort;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -84,5 +87,27 @@ public class ShopService implements ShopUseCase {
         Long memberId = TokenUtil.parseMemberId(authorization);
 
         memberFeignClientPort.deleteBookmark(memberId, shopId);
+    }
+
+    @Override
+    public void createShopReview(String authorization, CreateReviewDto createReviewDto) {
+        Long memberId = TokenUtil.parseMemberId(authorization);
+        createReviewDto.setMemberId(memberId);
+        ReviewEntity reviewEntity = shopPort.createShopReview(createReviewDto.toDomain());
+        if(createReviewDto.getMultipartFile() != null){
+            String photoUrl;
+            try {
+                photoUrl = S3UploadUtil.upload(createReviewDto.getMultipartFile());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            CreateReviewPhotoDto createReviewPhotoDto = new CreateReviewPhotoDto(reviewEntity.getId(), photoUrl);
+            createShopReviewPhoto(createReviewPhotoDto);
+        }
+    }
+
+    @Override
+    public void createShopReviewPhoto(CreateReviewPhotoDto createReviewPhotoDto) {
+        shopPort.createShopReviewPhoto(createReviewPhotoDto.toDomain());
     }
 }

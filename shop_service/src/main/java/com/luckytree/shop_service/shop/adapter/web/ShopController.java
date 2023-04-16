@@ -67,7 +67,14 @@ public class ShopController {
     @Operation(summary = "샵 리뷰 등록(로그인)")
     @PostMapping("/shop/review")
     public ResponseEntity<Object> createShopReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto){
+        shopUseCase.createShopReview(authorization, createReviewDto);
+        return ResponseEntity.ok().build();
+    }
 
+    @Operation(summary = "샵 리뷰 사진 등록")
+    @PostMapping("/shop/review/photo")
+    public ResponseEntity<Object> createShopReviewPhoto(@RequestBody @Valid CreateReviewPhotoDto createReviewPhotoDto){
+        shopUseCase.createShopReviewPhoto(createReviewPhotoDto);
         return ResponseEntity.ok().build();
     }
 
@@ -91,5 +98,4 @@ public class ShopController {
 
         return ResponseEntity.ok().build();
     }
-
 }
