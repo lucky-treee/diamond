@@ -31,7 +31,7 @@ public class CreateReviewDto {
     private String content;
 
     @Schema(description = "리뷰 사진")
-    private MultipartFile multipartFile;
+    private String photoUrl;
 
     @JsonIgnore
     public Review toDomain() {

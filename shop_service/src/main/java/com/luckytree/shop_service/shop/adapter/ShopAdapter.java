@@ -69,12 +69,12 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
-    public ReviewEntity createShopReview(Review review) {
+    public ReviewEntity createReview(Review review) {
         return reviewRepository.save(new ReviewEntity(review));
     }
 
     @Override
-    public void createShopReviewPhoto(ReviewPhoto reviewPhoto) {
+    public void createReviewPhoto(ReviewPhoto reviewPhoto) {
         reviewPhotoRepository.save(new ReviewPhotoEntity(reviewPhoto));
     }
 }

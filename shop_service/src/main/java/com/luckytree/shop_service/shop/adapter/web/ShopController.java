@@ -66,22 +66,22 @@ public class ShopController {
 
     @Operation(summary = "샵 리뷰 등록(로그인)")
     @PostMapping("/shop/review")
-    public ResponseEntity<Object> createShopReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto){
-        shopUseCase.createShopReview(authorization, createReviewDto);
+    public ResponseEntity<Object> createReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto){
+        shopUseCase.createReview(authorization, createReviewDto);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 사진 등록")
     @PostMapping("/shop/review/photo")
-    public ResponseEntity<Object> createShopReviewPhoto(@RequestBody @Valid CreateReviewPhotoDto createReviewPhotoDto){
-        shopUseCase.createShopReviewPhoto(createReviewPhotoDto);
+    public ResponseEntity<Object> createReviewPhoto(@RequestBody @Valid CreateReviewPhotoDto createReviewPhotoDto){
+        shopUseCase.createReviewPhoto(createReviewPhotoDto);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 수정(로그인)")
-    @PutMapping("/shop/review")
+    @PatchMapping("/shop/review")
     public ResponseEntity<Object> updateReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
-
+        shopUseCase.updateReview(authorization, updateReviewDto);
         return ResponseEntity.ok().build();
     }
 

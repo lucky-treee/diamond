@@ -2,7 +2,6 @@ package com.luckytree.shop_service.shop.application.service;
 
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.common.enums.Hashtag;
-import com.luckytree.shop_service.common.utils.S3UploadUtil;
 import com.luckytree.shop_service.common.utils.TokenUtil;
 import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.shop.adapter.jpa.ReviewEntity;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -90,24 +88,23 @@ public class ShopService implements ShopUseCase {
     }
 
     @Override
-    public void createShopReview(String authorization, CreateReviewDto createReviewDto) {
+    public void createReview(String authorization, CreateReviewDto createReviewDto) {
         Long memberId = TokenUtil.parseMemberId(authorization);
         createReviewDto.setMemberId(memberId);
-        ReviewEntity reviewEntity = shopPort.createShopReview(createReviewDto.toDomain());
-        if(createReviewDto.getMultipartFile() != null){
-            String photoUrl;
-            try {
-                photoUrl = S3UploadUtil.upload(createReviewDto.getMultipartFile());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            CreateReviewPhotoDto createReviewPhotoDto = new CreateReviewPhotoDto(reviewEntity.getId(), photoUrl);
-            createShopReviewPhoto(createReviewPhotoDto);
+        ReviewEntity reviewEntity = shopPort.createReview(createReviewDto.toDomain());
+        if(createReviewDto.getPhotoUrl() != null){
+            createReviewPhoto(new CreateReviewPhotoDto(reviewEntity.getId(), createReviewDto.getPhotoUrl()));
         }
     }
 
     @Override
-    public void createShopReviewPhoto(CreateReviewPhotoDto createReviewPhotoDto) {
-        shopPort.createShopReviewPhoto(createReviewPhotoDto.toDomain());
+    public void createReviewPhoto(CreateReviewPhotoDto createReviewPhotoDto) {
+        shopPort.createReviewPhoto(createReviewPhotoDto.toDomain());
+    }
+
+    @Override
+    public void updateReview(String authorization, UpdateReviewDto updateReviewDto) {
+        TokenUtil.validateAuthorization(authorization);
+        shopPort.updateReview(updateReviewDto.toDomain());
     }
 }

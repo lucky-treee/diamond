@@ -26,7 +26,9 @@ public interface ShopUseCase {
 
     void deleteBookmark(String authorization, long shopId);
 
-    void createShopReview(String authorization, CreateReviewDto createReviewDto);
+    void createReview(String authorization, CreateReviewDto createReviewDto);
 
-    void createShopReviewPhoto(CreateReviewPhotoDto createReviewPhotoDto);
+    void createReviewPhoto(CreateReviewPhotoDto createReviewPhotoDto);
+
+    void updateReview(String authorization, UpdateReviewDto updateReviewDto);
 }

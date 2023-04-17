@@ -30,7 +30,7 @@ public interface ShopPort {
 
     List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds);
 
-    ReviewEntity createShopReview(Review review);
+    ReviewEntity createReview(Review review);
 
-    void createShopReviewPhoto(ReviewPhoto reviewPhoto);
+    void createReviewPhoto(ReviewPhoto reviewPhoto);
 }
