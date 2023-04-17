@@ -101,10 +101,4 @@ public class ShopService implements ShopUseCase {
     public void createReviewPhoto(CreateReviewPhotoDto createReviewPhotoDto) {
         shopPort.createReviewPhoto(createReviewPhotoDto.toDomain());
     }
-
-    @Override
-    public void updateReview(String authorization, UpdateReviewDto updateReviewDto) {
-        TokenUtil.validateAuthorization(authorization);
-        shopPort.updateReview(updateReviewDto.toDomain());
-    }
 }
