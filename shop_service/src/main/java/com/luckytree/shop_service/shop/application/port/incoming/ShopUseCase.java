@@ -29,6 +29,4 @@ public interface ShopUseCase {
     void createReview(String authorization, CreateReviewDto createReviewDto);
 
     void createReviewPhoto(CreateReviewPhotoDto createReviewPhotoDto);
-
-    void updateReview(String authorization, UpdateReviewDto updateReviewDto);
 }

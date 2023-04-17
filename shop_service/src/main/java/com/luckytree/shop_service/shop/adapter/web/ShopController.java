@@ -81,7 +81,6 @@ public class ShopController {
     @Operation(summary = "샵 리뷰 수정(로그인)")
     @PatchMapping("/shop/review")
     public ResponseEntity<Object> updateReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
-        shopUseCase.updateReview(authorization, updateReviewDto);
         return ResponseEntity.ok().build();
     }
 
