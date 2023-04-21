@@ -4,14 +4,19 @@ import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.common.enums.Hashtag;
 import com.luckytree.shop_service.common.utils.TokenUtil;
 import com.luckytree.shop_service.shop.adapter.data.*;
+import com.luckytree.shop_service.shop.adapter.jpa.ReviewEntity;
+import com.luckytree.shop_service.shop.adapter.jpa.ReviewPhotoEntity;
 import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.MemberFeignClientPort;
+import com.luckytree.shop_service.shop.application.port.outgoing.ReviewPort;
 import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +25,7 @@ import java.util.List;
 public class ShopService implements ShopUseCase {
 
     private final ShopPort shopPort;
+    private final ReviewPort reviewPort;
     private final MemberFeignClientPort memberFeignClientPort;
 
     @Override
@@ -85,4 +91,22 @@ public class ShopService implements ShopUseCase {
 
         memberFeignClientPort.deleteBookmark(memberId, shopId);
     }
+
+    @Override
+    public List<ShopReviewDto> getShopReviews(String authorization, long shopId) {
+        Long memberId = TokenUtil.parseMemberId(authorization);
+        return null;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public MyReviewsDto findMyReviewsById(long memberId) {
+        return findMyReviews(memberId);
+    }
+
+    private MyReviewsDto findMyReviews(long memberId) {
+        List<ReviewDto> reviewDtos = reviewPort.findAllByMemberId(memberId).stream().map(ReviewDto::new).toList();
+        return new MyReviewsDto(reviewDtos);
+    }
+
 }

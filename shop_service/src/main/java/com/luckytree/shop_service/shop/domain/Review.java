@@ -7,5 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Review {
 
-    private final long id;
+    private long shopId;
+    private long memberId;
+    private String content;
 }

@@ -78,18 +78,10 @@ public class ShopController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "샵 리뷰 조회")
+    @Operation(summary = "샵 리뷰 조회(로그인)")
     @GetMapping("/shop/review")
-    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
-
+    public ResponseEntity<Object> getShopReviews(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") long shopId) {
+        shopUseCase.getShopReviews(authorization, shopId);
         return ResponseEntity.ok().build();
     }
-
-    @Operation(summary = "샵 리뷰 삭제(로그인)")
-    @DeleteMapping("/shop/review")
-    ResponseEntity<Object> deleteShopReview(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
-
-        return ResponseEntity.ok().build();
-    }
-
 }

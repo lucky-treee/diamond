@@ -26,4 +26,6 @@ public interface ShopPort {
     Category findCategoryById(long shopId);
 
     List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds);
+
+    List<ShopEntity> findReviewDtosByIds(List<Long> shopIds);
 }
