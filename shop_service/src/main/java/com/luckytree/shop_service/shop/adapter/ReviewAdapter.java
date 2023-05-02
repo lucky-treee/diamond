@@ -28,19 +28,6 @@ public class ReviewAdapter implements ReviewPort {
     }
 
     @Override
-    public ReviewEntity updateReview(Review review) {
-        ReviewEntity reviewEntity = reviewRepository.findById(review.getId()).orElseThrow(() -> new NotFoundException("해당 reviewId에 일치하는 ReviewEntity가 없습니다. id: " + review.getId()));
-        reviewEntity.update(review.getContent());
-        return reviewEntity;
-    }
-
-    @Override
-    public void updateReviewPhoto(ReviewPhoto reviewPhoto) {
-        //ReviewPhotoEntity reviewPhotoEntity = reviewPhotoRepository.findByReviewId(reviewPhoto.getReviewId());
-        //reviewPhotoEntity.update(reviewPhoto.getPhotoUrl());
-    }
-
-    @Override
     public ReviewEntity findReviewById(long reviewId) {
         return reviewRepository.findById(reviewId).orElseThrow(() -> new NotFoundException("해당 reviewId에 일치하는 ReviewEntity가 없습니다. id: " + reviewId));
     }

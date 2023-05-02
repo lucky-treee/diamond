@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,5 +27,5 @@ public class CreateReviewPhotoDto {
 
     @NotBlank
     @Schema(description = "리뷰 사진")
-    private MultipartFile reviewPhoto;
+    private List<MultipartFile> reviewPhoto;
 }

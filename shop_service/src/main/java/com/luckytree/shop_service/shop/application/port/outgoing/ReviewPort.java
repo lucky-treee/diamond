@@ -13,10 +13,6 @@ public interface ReviewPort {
 
     void createReviewPhoto(ReviewPhoto reviewPhoto);
 
-    ReviewEntity updateReview(Review review);
-
-    void updateReviewPhoto(ReviewPhoto reviewPhoto);
-
     ReviewEntity findReviewById(long reviewId);
 
     List<ReviewPhotoEntity> findReviewPhotoByReviewId(long reviewId);

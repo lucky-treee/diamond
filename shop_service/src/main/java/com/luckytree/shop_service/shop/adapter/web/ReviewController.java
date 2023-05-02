@@ -61,32 +61,4 @@ public class ReviewController {
 
         return ResponseEntity.ok().build();
     }
-
-    @Operation(summary = "샵 리뷰 사진 등록ㅁㄴㅇ(로그인)")
-    @PostMapping("/review/photo/test")
-    public ResponseEntity<Object> createReviewPhotoTest(@RequestPart("reviewId") Long reviewId, @RequestPart("reviewPhoto") MultipartFile reviewPhoto){
-        reviewUseCase.createReviewPhotoTest(reviewId, reviewPhoto);
-        return ResponseEntity.ok().build();
-    }
-
-    @Operation(summary = "샵 리뷰 사진 등록ㅁㄴㅇ(로그인)")
-    @PostMapping("/review/photos/test")
-    public ResponseEntity<Object> createReviewPhotosTest(@RequestPart("reviewId") Long reviewId, @RequestPart("reviewPhotos") List<MultipartFile> reviewPhotos){
-        reviewUseCase.createReviewPhotosTest(reviewId, reviewPhotos);
-        return ResponseEntity.ok().build();
-    }
-
-    @Operation(summary = "샵 리뷰 등록(로그인)")
-    @PostMapping("/review/test")
-    public ResponseEntity<Object> createReviewTest(@RequestPart("createReviewDto") @Valid CreateReviewDto createReviewDto){
-        Long reviewId = reviewUseCase.createReviewTest(createReviewDto);
-        return ResponseEntity.ok(reviewId);
-    }
-
-    @Operation(summary = "샵 리뷰 사진 업데이트")
-    @PatchMapping("/review/photos/test")
-    public ResponseEntity<Object> updateReviewPhotosTest(@RequestPart("reviewId") Long reviewId, @RequestPart("reviewPhotos") List<MultipartFile> reviewPhotos){
-        reviewUseCase.updateReviewPhotosTest(reviewId, reviewPhotos);
-        return ResponseEntity.ok().build();
-    }
 }

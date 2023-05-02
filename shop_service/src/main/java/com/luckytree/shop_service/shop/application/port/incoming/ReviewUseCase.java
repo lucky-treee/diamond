@@ -14,12 +14,4 @@ public interface ReviewUseCase {
     void updateReview(String authorization, UpdateReviewDto updateReviewDto);
 
     void updateReviewPhoto(String authorization, UpdateReviewPhotoDto updateReviewPhotoDto);
-
-    void createReviewPhotoTest(Long reviewId, MultipartFile reviewPhoto);
-
-    void createReviewPhotosTest(Long reviewId, List<MultipartFile> reviewPhotos);
-
-    Long createReviewTest(CreateReviewDto createReviewDto);
-
-    void updateReviewPhotosTest(Long reviewId, List<MultipartFile> reviewPhotos);
 }

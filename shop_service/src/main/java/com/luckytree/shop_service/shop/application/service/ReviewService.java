@@ -37,11 +37,14 @@ public class ReviewService implements ReviewUseCase {
     @Override
     public void createReviewPhoto(String authorization, CreateReviewPhotoDto createReviewPhotoDto) {
         TokenUtil.validateAuthorization(authorization);
-        //List<String> photoUrls = S3Util.upload();
         List<String> photoUrls = new ArrayList<>();
-        photoUrls.add("aelwrgijla");
-        photoUrls.add("drjydty");
-        photoUrls.add("ae4test");
+        createReviewPhotoDto.getReviewPhoto().stream().forEach(multipartFile -> {
+            try {
+                photoUrls.add(s3Util.upload(multipartFile));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         photoUrls.stream().forEach(s ->{
             reviewPort.createReviewPhoto(new ReviewPhoto(createReviewPhotoDto.getReviewId(), s));
         });
@@ -61,55 +64,12 @@ public class ReviewService implements ReviewUseCase {
     @Override
     public void updateReviewPhoto(String authorization, UpdateReviewPhotoDto updateReviewPhotoDto){
         TokenUtil.validateAuthorization(authorization);
-        //S3Util.delete();
-        reviewPort.deleteReviewPhotoByReviewId(updateReviewPhotoDto.getReviewId());
-        //List<String> photoUrls = S3Util.upload();
-        List<String> photoUrls = new ArrayList<>();
-        photoUrls.add("aelwrgijla");
-        photoUrls.add("drjydty");
-        photoUrls.add("ae4test");
-        photoUrls.stream().forEach(s ->{
-            reviewPort.createReviewPhoto(new ReviewPhoto(updateReviewPhotoDto.getReviewId(), s));
-        });
-    }
-
-    @Override
-    public Long createReviewTest(CreateReviewDto createReviewDto) {
-        return reviewPort.createReview(createReviewDto.toDomain()).getId();
-    }
-    @Override
-    public void createReviewPhotoTest(Long reviewId, MultipartFile reviewPhoto) {
-        String photoUrl = "";
-        try {
-            photoUrl = s3Util.upload(reviewPhoto);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        reviewPort.createReviewPhoto(new ReviewPhoto(reviewId, photoUrl));
-    }
-
-    @Override
-    public void createReviewPhotosTest(Long reviewId, List<MultipartFile> reviewPhotos) {
-        List<String> photoUrls = new ArrayList<>();
-        reviewPhotos.stream().forEach(multipartFile -> {
-            try {
-                photoUrls.add(s3Util.upload(multipartFile));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        photoUrls.stream().forEach(s ->{
-            reviewPort.createReviewPhoto(new ReviewPhoto(reviewId, s));
-        });
-    }
-
-    @Override
-    public void updateReviewPhotosTest(Long reviewId, List<MultipartFile> reviewPhotos){
+        Long reviewId = updateReviewPhotoDto.getReviewId();
         List<String> deletingPhotos = reviewPort.findReviewPhotoByReviewId(reviewId).stream().map(ReviewPhotoEntity :: getPhotoUrl).map(s -> s.substring(s.lastIndexOf("/")+1)).toList();
         deletingPhotos.stream().forEach(s -> s3Util.delete(s));
         reviewPort.deleteReviewPhotoByReviewId(reviewId);
         List<String> photoUrls = new ArrayList<>();
-        reviewPhotos.stream().forEach(multipartFile -> {
+        updateReviewPhotoDto.getReviewPhoto().stream().forEach(multipartFile -> {
             try {
                 photoUrls.add(s3Util.upload(multipartFile));
             } catch (IOException e) {
