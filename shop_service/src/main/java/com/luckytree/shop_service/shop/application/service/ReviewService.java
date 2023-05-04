@@ -58,7 +58,7 @@ public class ReviewService implements ReviewUseCase {
         if(reviewEntity.getCreateAt().plusDays(7).isBefore(LocalDateTime.now())){
             throw new RuntimeException("리뷰 수정은 7일 이내에만 가능합니다.");
         }
-        reviewEntity.update(updateReviewDto.getContent());
+        reviewEntity.update(updateReviewDto.getContent(), updateReviewDto.getHashtag());
     }
 
     @Override
