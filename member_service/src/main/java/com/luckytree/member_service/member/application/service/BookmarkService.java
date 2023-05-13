@@ -1,6 +1,5 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.common.utils.TokenUtil;
 import com.luckytree.member_service.member.adapter.data.BookmarksResponse;
 import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member_service.member.adapter.data.FindBookmarkedShops;
@@ -29,16 +28,14 @@ public class BookmarkService implements BookmarkUseCase {
     }
 
     @Override
-    public BookmarksResponse getBookmarks(String authorization) {
-        Long memberId = TokenUtil.parseMemberId(authorization);
+    public BookmarksResponse getBookmarks(String authorization, Long memberId) {
         List<Long> shopIds = findShopIds(memberId);
         return findBookmarkedShops(shopIds);
     }
 
     @Override
     @Transactional
-    public void delete(String authorization, long shopId) {
-        Long memberId = TokenUtil.parseMemberId(authorization);
+    public void delete(String authorization, long shopId, Long memberId) {
         bookmarkPort.deleteByMemberIdAndShopId(memberId, shopId);
     }
 

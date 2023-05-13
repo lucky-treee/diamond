@@ -1,6 +1,5 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.common.utils.TokenUtil;
 import com.luckytree.member_service.member.adapter.data.MemberResponse;
 import com.luckytree.member_service.member.adapter.data.UpdateMemberRequest;
 import com.luckytree.member_service.member.adapter.jpa.MemberEntity;
@@ -18,9 +17,7 @@ public class MemberService implements MemberUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public MemberResponse getMember(String authorization) {
-        Long memberId = TokenUtil.parseMemberId(authorization);
-
+    public MemberResponse getMember(String authorization, Long memberId) {
         MemberEntity memberEntity = memberPort.findById(memberId);
 
         return new MemberResponse(memberEntity);
@@ -28,18 +25,14 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void update(String authorization, UpdateMemberRequest updateMemberRequest) {
-        Long memberId = TokenUtil.parseMemberId(authorization);
-
+    public void update(String authorization, UpdateMemberRequest updateMemberRequest, Long memberId) {
         MemberEntity memberEntity = memberPort.findById(memberId);
         memberEntity.update(updateMemberRequest.getNickname(), updateMemberRequest.getPhoto());
     }
 
     @Transactional
     @Override
-    public void leave(String authorization) {
-        Long memberId = TokenUtil.parseMemberId(authorization);
-
+    public void leave(String authorization, Long memberId) {
         MemberEntity memberEntity = memberPort.findById(memberId);
         memberEntity.isAlreadyDeleted();
         memberPort.deleteById(memberEntity);
