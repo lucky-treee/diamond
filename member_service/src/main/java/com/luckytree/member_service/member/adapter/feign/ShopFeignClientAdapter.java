@@ -6,8 +6,6 @@ import com.luckytree.member_service.member.application.port.outgoing.ShopFeignCl
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Repository
 public class ShopFeignClientAdapter implements ShopFeignClientPort {
@@ -17,5 +15,10 @@ public class ShopFeignClientAdapter implements ShopFeignClientPort {
     @Override
     public BookmarksResponse findBookmarksByIds(FindBookmarkedShops findBookmarkedShops) {
         return shopFeignClient.findBookmarksByIds(findBookmarkedShops);
+    }
+
+    @Override
+    public void deleteReview(long reviewId) {
+        shopFeignClient.deleteReview(reviewId);
     }
 }
