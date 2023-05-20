@@ -22,29 +22,29 @@ public class ReviewController {
 
     @Operation(summary = "샵 리뷰 등록(로그인)")
     @PostMapping("/review")
-    public ResponseEntity<Object> createReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto){
-        Long reviewId = reviewUseCase.createReview(authorization, createReviewDto);
+    public ResponseEntity<Object> createReview(@RequestPart("createReviewDto") @Valid CreateReviewDto createReviewDto){
+        Long reviewId = reviewUseCase.createReview(createReviewDto);
         return ResponseEntity.ok(reviewId);
     }
 
     @Operation(summary = "샵 리뷰 사진 등록(로그인)")
     @PostMapping("/review/photo")
-    public ResponseEntity<Object> createReviewPhoto(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewPhotoDto createReviewPhotoDto){
-        reviewUseCase.createReviewPhoto(authorization, createReviewPhotoDto);
+    public ResponseEntity<Object> createReviewPhoto(@RequestPart("reviewId") @Valid Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos){
+        reviewUseCase.createReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 수정(로그인)")
     @PatchMapping("/review")
-    public ResponseEntity<Object> updateReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
-        reviewUseCase.updateReview(authorization, updateReviewDto);
+    public ResponseEntity<Object> updateReview(@RequestPart("updateReviewDto") @Valid UpdateReviewDto updateReviewDto) {
+        reviewUseCase.updateReview(updateReviewDto);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "샵 리뷰 사진 수정(로그인)")
     @PatchMapping("/review/photo")
-    public ResponseEntity<Object> updateReviewPhoto(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateReviewPhotoDto updateReviewPhotoDto) {
-        reviewUseCase.updateReviewPhoto(authorization, updateReviewPhotoDto);
+    public ResponseEntity<Object> updateReviewPhoto(@RequestPart("reviewId") @Valid Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
+        reviewUseCase.updateReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
     }
 

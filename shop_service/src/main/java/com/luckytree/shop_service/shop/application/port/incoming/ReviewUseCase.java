@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface ReviewUseCase {
 
-    Long createReview(String authorization, CreateReviewDto createReviewDto);
+    Long createReview(CreateReviewDto createReviewDto);
 
-    void createReviewPhoto(String authorization, CreateReviewPhotoDto createReviewPhotoDto);
+    void createReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
 
-    void updateReview(String authorization, UpdateReviewDto updateReviewDto);
+    void updateReview(UpdateReviewDto updateReviewDto);
 
-    void updateReviewPhoto(String authorization, UpdateReviewPhotoDto updateReviewPhotoDto);
+    void updateReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
 }

@@ -16,9 +16,9 @@ import lombok.Setter;
 @Schema(description = "샵 리뷰 수정 정보 DTO")
 public class UpdateReviewDto {
 
-    @NotBlank
+    //@NotBlank
     @Schema(description = "리뷰 아이디")
-    @Size(max = 50)
+    //@Size(max = 50)
     private long reviewId;
 
     @NotBlank
