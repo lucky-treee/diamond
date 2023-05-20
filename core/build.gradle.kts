@@ -25,6 +25,8 @@ repositories {
 extra["springCloudVersion"] = "2022.0.2"
 
 dependencies {
+	api("org.springframework.boot:spring-boot-starter-security")
+	api ("com.auth0:java-jwt:4.3.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

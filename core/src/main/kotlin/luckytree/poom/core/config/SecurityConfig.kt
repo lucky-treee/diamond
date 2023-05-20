@@ -1,8 +1,8 @@
-package com.example.auth.config
+package luckytree.poom.core.config
 
-import com.example.auth.handler.JwtAccessDeniedHandler
-import com.example.auth.handler.JwtAuthenticationEntryPoint
-import com.example.auth.util.TokenProvider
+import luckytree.poom.core.handler.JwtAccessDeniedHandler
+import luckytree.poom.core.handler.JwtAuthenticationEntryPoint
+import luckytree.poom.core.service.TokenProvider
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

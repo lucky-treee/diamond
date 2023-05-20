@@ -1,4 +1,4 @@
-package com.example.auth.handler
+package luckytree.poom.core.handler
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

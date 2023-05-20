@@ -39,7 +39,7 @@ class AuthService(
     }
 
     fun invalidate() {
-        //TODO 토큰 무효화 (강제 로그아웃)
+        TODO("토큰 무효화")
     }
 
     fun refresh(refreshToken: String): ResponseEntity<AccessTokenResponse> {
