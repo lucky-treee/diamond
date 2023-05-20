@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean
 
 class ExternalFeignConfig {
     @Bean
-    fun requestInterceptor(): RequestInterceptor? {
+    fun requestInterceptor(): RequestInterceptor {
         return RequestInterceptor { template: RequestTemplate ->
             template.header(
                 "Content-Type",
@@ -17,7 +17,7 @@ class ExternalFeignConfig {
     }
 
     @Bean
-    fun feignLoggerLevel(): Logger.Level? {
+    fun feignLoggerLevel(): Logger.Level {
         return Logger.Level.FULL
     }
 }
