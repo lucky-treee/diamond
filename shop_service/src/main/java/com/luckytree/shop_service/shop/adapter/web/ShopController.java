@@ -66,7 +66,7 @@ public class ShopController {
 
     @Operation(summary = "샵 리뷰 등록(로그인)")
     @PostMapping("/shop/review")
-    public ResponseEntity<Object> createShopReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto){
+    public ResponseEntity<Object> createShopReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto) {
 
         return ResponseEntity.ok().build();
     }
@@ -77,19 +77,4 @@ public class ShopController {
 
         return ResponseEntity.ok().build();
     }
-
-    @Operation(summary = "샵 리뷰 조회")
-    @GetMapping("/shop/review")
-    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
-
-        return ResponseEntity.ok().build();
-    }
-
-    @Operation(summary = "샵 리뷰 삭제(로그인)")
-    @DeleteMapping("/shop/review")
-    ResponseEntity<Object> deleteShopReview(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
-
-        return ResponseEntity.ok().build();
-    }
-
 }

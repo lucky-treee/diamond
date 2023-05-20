@@ -1,5 +1,7 @@
 package com.luckytree.shop_service.shop.application.port.incoming;
 
+import com.luckytree.shop_service.shop.adapter.data.MyReviewsDto;
+import org.springframework.data.domain.Pageable;
 import com.luckytree.shop_service.shop.adapter.data.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +16,8 @@ public interface ReviewUseCase {
     void updateReview(UpdateReviewDto updateReviewDto);
 
     void updateReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
+  
+    MyReviewsDto findMyReviewsById(long memberId, Pageable pageable);
     
     void deleteReview(long reviewId);
 }

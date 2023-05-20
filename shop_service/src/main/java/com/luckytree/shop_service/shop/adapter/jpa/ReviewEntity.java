@@ -1,6 +1,5 @@
 package com.luckytree.shop_service.shop.adapter.jpa;
 
-
 import com.luckytree.shop_service.common.exceptions.BadRequestException;
 import com.luckytree.shop_service.common.enums.Hashtag;
 import com.luckytree.shop_service.shop.domain.Review;
@@ -9,11 +8,11 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table(name = "review")
 @Getter
@@ -26,15 +25,20 @@ public class ReviewEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "shop_id", length = 20, unique = true, nullable = false)
-    private Long shopId;
+  
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id")
+    private ShopEntity shopEntity;
 
     @Column(name = "member_id", length = 20, unique = true, nullable = false)
     private Long memberId;
 
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
+  
+    @Column(name = "update_at")
+    @LastModifiedDate
+    private LocalDateTime updateAt;
   
     @Column(length = 50)
     @Enumerated(value = EnumType.STRING)

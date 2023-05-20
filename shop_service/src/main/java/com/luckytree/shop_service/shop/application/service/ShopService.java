@@ -80,7 +80,7 @@ public class ShopService implements ShopUseCase {
     }
 
     @Override
-    public void deleteBookmark(String authorization, long shopId){
+    public void deleteBookmark(String authorization, long shopId) {
         Long memberId = TokenUtil.parseMemberId(authorization);
 
         memberFeignClientPort.deleteBookmark(memberId, shopId);

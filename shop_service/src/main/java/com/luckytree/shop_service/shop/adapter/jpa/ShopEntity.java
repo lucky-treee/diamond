@@ -2,7 +2,6 @@ package com.luckytree.shop_service.shop.adapter.jpa;
 
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.common.enums.Hashtag;
-import com.luckytree.shop_service.shop.adapter.data.CreateShopDto;
 import com.luckytree.shop_service.common.enums.ShopStatus;
 import com.luckytree.shop_service.shop.domain.Shop;
 import jakarta.persistence.*;
@@ -76,6 +75,9 @@ public class ShopEntity extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "shopEntity")
     private List<ShopRemoveEntity> shopRemoveEntityList;
+
+    @OneToMany(mappedBy = "shopEntity")
+    private List<ReviewEntity> reviewEntityList;
 
 
     public ShopEntity(Shop shop) {

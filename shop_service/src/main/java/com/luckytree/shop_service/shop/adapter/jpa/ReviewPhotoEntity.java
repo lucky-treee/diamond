@@ -26,7 +26,7 @@ public class ReviewPhotoEntity extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id")
     private ReviewEntity reviewEntity;
-
+  
     @Column(name = "photo_url", nullable = false)
     private String photoUrl;
 

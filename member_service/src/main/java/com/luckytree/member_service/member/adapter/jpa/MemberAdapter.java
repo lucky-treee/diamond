@@ -1,6 +1,7 @@
 package com.luckytree.member_service.member.adapter.jpa;
 
 import com.luckytree.member_service.common.advice.NotFoundException;
+import com.luckytree.member_service.member.adapter.data.ReviewResponse;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -23,5 +24,4 @@ public class MemberAdapter implements MemberPort {
     public MemberEntity findById(long memberId) {
         return memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("존재하지 않는 회원입니다."));
     }
-
 }

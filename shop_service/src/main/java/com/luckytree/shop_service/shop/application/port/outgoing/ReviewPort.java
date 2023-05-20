@@ -1,6 +1,8 @@
 package com.luckytree.shop_service.shop.application.port.outgoing;
 
 import com.luckytree.shop_service.shop.adapter.jpa.ReviewEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.luckytree.shop_service.shop.adapter.jpa.ReviewPhotoEntity;
 import com.luckytree.shop_service.shop.domain.Review;
 import com.luckytree.shop_service.shop.domain.ReviewPhoto;
@@ -24,4 +26,6 @@ public interface ReviewPort {
     List<ReviewPhotoEntity> findReviewPhotoByReviewEntity(ReviewEntity reviewEntity);
 
     ReviewEntity findById(long reviewId);
+  
+    Page<ReviewEntity> findAllByMemberId(long memberId, Pageable pageable);
 }
