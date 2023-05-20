@@ -11,4 +11,6 @@ public interface ShopFeignClientPort {
     BookmarksResponse findBookmarksByIds(FindBookmarkedShops FindBookmarkedShops);
 
     ReviewsResponse findShopMyReviewsById(long memberId, Pageable pageable);
+
+    void deleteReview(long reviewId);
 }

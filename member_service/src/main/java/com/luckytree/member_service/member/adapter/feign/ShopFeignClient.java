@@ -6,6 +6,7 @@ import com.luckytree.member_service.member.adapter.data.FindBookmarkedShops;
 import com.luckytree.member_service.member.adapter.data.ReviewsResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,4 +19,7 @@ public interface ShopFeignClient {
 
     @PostMapping("v1/reviews/shops")
     ReviewsResponse findShopMyReviewsByIds(@RequestParam("member_id") long memberId, Pageable pageable);
+    
+  @DeleteMapping("/v1/reviews")
+    void deleteReview(@RequestParam("review_id") long reviewId);
 }

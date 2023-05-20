@@ -5,13 +5,18 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import com.luckytree.shop_service.shop.domain.ReviewPhoto;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Table(name = "review_photo")
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class ReviewPhotoEntity {
+@AllArgsConstructor
+@ToString
+public class ReviewPhotoEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +26,21 @@ public class ReviewPhotoEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id")
     private ReviewEntity reviewEntity;
-
-    @Column(name = "photo_url", length = 300, nullable = false)
+  
+    @Column(name = "photo_url", nullable = false)
     private String photoUrl;
 
+    public ReviewPhotoEntity(ReviewPhoto reviewPhoto) {
+        this.reviewId = reviewPhoto.getReviewId();
+        this.photoUrl = reviewPhoto.getPhotoUrl();
+    }
+
+    public void update(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public boolean isEmpty(){
+        if(photoUrl.isBlank()) return true;
+        return false;
+    }
 }

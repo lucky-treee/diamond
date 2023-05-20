@@ -22,7 +22,7 @@ public class MemberController {
     @Operation(summary = "프로필 조회(로그인)")
     @GetMapping
     public ResponseEntity<MemberResponse> getMember(@RequestHeader("Authorization") String authorization) {
-        MemberResponse memberResponse = memberUseCase.getMember(authorization);
+        MemberResponse memberResponse = memberUseCase.getMember(authorization, 0L);
         return ResponseEntity.ok(memberResponse);
     }
 
@@ -30,13 +30,13 @@ public class MemberController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping
     public void updateMember(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
-        memberUseCase.update(authorization, updateMemberRequest);
+        memberUseCase.update(authorization, updateMemberRequest, 0L);
     }
 
     @Operation(summary = "회원 탈퇴(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/leave")
     public void leaveMember(@RequestHeader("Authorization") String authorization) {
-        memberUseCase.leave(authorization);
+        memberUseCase.leave(authorization, 0L);
     }
 }

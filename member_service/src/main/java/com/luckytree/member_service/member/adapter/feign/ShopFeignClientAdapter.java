@@ -23,4 +23,9 @@ public class ShopFeignClientAdapter implements ShopFeignClientPort {
     public ReviewsResponse findShopMyReviewsById(long memberId, Pageable pageable) {
         return shopFeignClient.findShopMyReviewsByIds(memberId, pageable);
     }
+  
+    @Override
+    public void deleteReview(long reviewId) {
+        shopFeignClient.deleteReview(reviewId);
+    }
 }

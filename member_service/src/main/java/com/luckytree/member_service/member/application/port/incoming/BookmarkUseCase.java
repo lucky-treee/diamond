@@ -6,7 +6,7 @@ import com.luckytree.member_service.member.adapter.data.CreateBookmarkRequest;
 public interface BookmarkUseCase {
 
     void create(CreateBookmarkRequest createBookmarkRequest);
-    BookmarksResponse getBookmarks(String authorization);
-    void delete(String authorization, long shopId);
+    BookmarksResponse getBookmarks(String authorization, Long memberId);
+    void delete(String authorization, long shopId, Long memberId);
     void delete(long memberId, long shopId);
 }
