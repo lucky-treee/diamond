@@ -1,7 +1,6 @@
 package com.luckytree.member_service.member.adapter.jpa;
 
 import com.luckytree.member_service.common.advice.NotFoundException;
-import com.luckytree.member_service.member.adapter.data.ReviewResponse;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
