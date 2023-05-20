@@ -1,10 +1,9 @@
 package com.luckytree.shop_service.shop.adapter.web;
 
-import com.luckytree.shop_service.shop.adapter.data.ShopRequest;
-import com.luckytree.shop_service.shop.application.port.incoming.*;
-import com.luckytree.shop_service.shop.domain.Hashtag;
-import com.luckytree.shop_service.shop.domain.ShopDetail;
-import com.luckytree.shop_service.shop.domain.ShopSummary;
+import com.luckytree.shop_service.common.enums.Category;
+import com.luckytree.shop_service.common.enums.Hashtag;
+import com.luckytree.shop_service.shop.adapter.data.*;
+import com.luckytree.shop_service.shop.application.port.incoming.ShopUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -15,55 +14,67 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "샵", description = "샵 전체 API 모음")
+@Tag(name = "Shop API", description = "프론트엔드 사용")
 @RestController
-@RequestMapping("/v1/shop")
+@RequestMapping("/v1/shops")
 @RequiredArgsConstructor
 public class ShopController {
 
-    private final CreateShopUseCase createShopUseCase;
-    private final GetShopListUseCase getShopListUseCase;
-    private final RemoveShopUseCase removeShopUseCase;
+    private final ShopUseCase shopUseCase;
 
-    @Operation(summary = "샵 등록요청 API")
-    @PostMapping("/create/request")
-    public ResponseEntity requestShopRegistration(@RequestBody @Valid ShopRequest shopRequest) {
-        createShopUseCase.requestShopRegistration(shopRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @Operation(summary = "샵 등록요청 API(로그인)")
+    @PostMapping("/shop")
+    public ResponseEntity<Object> createShop(@RequestBody @Valid CreateShopDto createShopDto) {
+        shopUseCase.createShop(createShopDto);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "특정 카테고리의 샵 전체 검색")
-    @GetMapping("/get/category")
-    public ResponseEntity getShopListByCategory(@RequestParam String category) {
-        List<ShopSummary> shopSummaryList = getShopListUseCase.getShopSummaryByCategory(category);
-        return new ResponseEntity<>(shopSummaryList, HttpStatus.OK);
+    @GetMapping("/{category}")
+    public ResponseEntity<List<ShopSummaryDto>> findShopsByCategory(@PathVariable Category category) {
+        List<ShopSummaryDto> shopSummaryDtoList = shopUseCase.findShopsByCategory(category);
+        return ResponseEntity.ok(shopSummaryDtoList);
     }
 
     @Operation(summary = "범위 내 샵 전체 검색")
-    @GetMapping("/get")
-    public ResponseEntity getShopAll(@RequestParam double maxLat, @RequestParam double minLat, @RequestParam double maxLng, @RequestParam double minLng) {
-        List<ShopSummary> shopSummary = getShopListUseCase.getShopAll(maxLat, minLat, maxLng, minLng);
-        return new ResponseEntity<>(shopSummary, HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<ShopSummaryDto>> findShopsByLatAndLng(ShopSearchDto shopSearchDto) {
+        List<ShopSummaryDto> shopSummaryDto = shopUseCase.findShopsByLatAndLng(shopSearchDto);
+        return ResponseEntity.ok(shopSummaryDto);
     }
 
-    @Operation(summary = "선택된 샵 상세정보 검색")
-    @GetMapping("/get/detail")
-    public ResponseEntity getShopDetail(@RequestParam String name, @RequestParam String address) {
-        ShopDetail shopDetail = getShopListUseCase.getShopDetail(name, address);
-        return new ResponseEntity<>(shopDetail, HttpStatus.OK);
+    @Operation(summary = "샵아이디로 상세조회")
+    @GetMapping("/shop")
+    public ResponseEntity<ShopDetailDto> findShopByShopId(@RequestParam(name = "shopId") long shopId) {
+        ShopDetailDto shopDetailDto = shopUseCase.findShopById(shopId);
+        return ResponseEntity.ok(shopDetailDto);
     }
 
-    @Operation(summary = "특정 해쉬태크의 샵 상세정보 조회")
-    @GetMapping("/get/hashtag")
-    public ResponseEntity getShopSummaryByHashtag(@RequestParam Hashtag hashtag) {
-        List<ShopSummary> shopSummaryList = getShopListUseCase.getShopSummaryByHashtag(hashtag);
-        return new ResponseEntity<>(shopSummaryList, HttpStatus.OK);
+    @Operation(summary = "해쉬태그로 샵 목록 조회")
+    @GetMapping("/{hashtag}")
+    public ResponseEntity<List<ShopSummaryDto>> findShopsByHashtag(@PathVariable Hashtag hashtag) {
+        List<ShopSummaryDto> shopSummaryDtoList = shopUseCase.findShopsByHashtag(hashtag);
+        return ResponseEntity.ok(shopSummaryDtoList);
     }
 
-    @Operation(summary = "샵 삭제요청 API")
-    @PostMapping("/remove/request")
-    public ResponseEntity removeShopRequest(@RequestBody @Valid RemoveRequestForm removeRequestForm) {
-        removeShopUseCase.removeShopRequest(removeRequestForm);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @Operation(summary = "샵 삭제요청 API(로그인)")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/shop")
+    public void deleteShop(@RequestHeader("Authorization") String authorization, @RequestBody @Valid ShopDeleteDto shopDeleteDto) {
+        shopUseCase.deleteShop(authorization, shopDeleteDto);
+    }
+
+    @Operation(summary = "샵 리뷰 등록(로그인)")
+    @PostMapping("/shop/review")
+    public ResponseEntity<Object> createShopReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto) {
+
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "샵 리뷰 수정(로그인)")
+    @PutMapping("/shop/review")
+    public ResponseEntity<Object> updateReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
+
+        return ResponseEntity.ok().build();
     }
 }

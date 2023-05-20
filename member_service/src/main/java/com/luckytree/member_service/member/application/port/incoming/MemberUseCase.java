@@ -1,10 +1,11 @@
 package com.luckytree.member_service.member.application.port.incoming;
 
-import com.luckytree.member_service.member.domain.MemberProfile;
-import com.luckytree.member_service.member.domain.Photo;
+import com.luckytree.member_service.member.adapter.data.MemberResponse;
+import com.luckytree.member_service.member.adapter.data.UpdateMemberRequest;
 
 public interface MemberUseCase {
-
-    MemberProfile getMemberProfile(String nickname);
-    void updateMemberRequest(String email, String nickname, Photo photo);
+  
+    MemberResponse getMember(String authorization, Long memberId);
+    void update(String authorization, UpdateMemberRequest updateMemberRequest, Long memberId);
+    void leave(String authorization, Long memberId);
 }

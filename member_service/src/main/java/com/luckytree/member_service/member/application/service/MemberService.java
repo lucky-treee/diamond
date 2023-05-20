@@ -1,11 +1,10 @@
 package com.luckytree.member_service.member.application.service;
 
-import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
+import com.luckytree.member_service.member.adapter.data.MemberResponse;
+import com.luckytree.member_service.member.adapter.data.UpdateMemberRequest;
+import com.luckytree.member_service.member.adapter.jpa.MemberEntity;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
 import com.luckytree.member_service.member.application.port.outgoing.MemberPort;
-import com.luckytree.member_service.member.domain.Member;
-import com.luckytree.member_service.member.domain.MemberProfile;
-import com.luckytree.member_service.member.domain.Photo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,19 +17,24 @@ public class MemberService implements MemberUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public MemberProfile getMemberProfile(String nickname) {
-        return memberPort.getMemberProfile(nickname);
+    public MemberResponse getMember(String authorization, Long memberId) {
+        MemberEntity memberEntity = memberPort.findById(memberId);
+
+        return new MemberResponse(memberEntity);
     }
 
     @Transactional
     @Override
-    public void updateMemberRequest(String email, String nickname, Photo photo) {
-        Member member = getMember(email);
-        member.updateNicknameAndPhoto(nickname, photo);
-        memberPort.updateMember(member);
+    public void update(String authorization, UpdateMemberRequest updateMemberRequest, Long memberId) {
+        MemberEntity memberEntity = memberPort.findById(memberId);
+        memberEntity.update(updateMemberRequest.getNickname(), updateMemberRequest.getPhoto());
     }
 
-    private Member getMember(String email) {
-        return memberPort.findByEmail(email);
+    @Transactional
+    @Override
+    public void leave(String authorization, Long memberId) {
+        MemberEntity memberEntity = memberPort.findById(memberId);
+        memberEntity.isAlreadyDeleted();
+        memberPort.deleteById(memberEntity);
     }
 }

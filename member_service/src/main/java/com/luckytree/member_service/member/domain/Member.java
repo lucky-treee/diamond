@@ -1,8 +1,8 @@
 package com.luckytree.member_service.member.domain;
 
 
-import com.luckytree.member_service.member.adapter.data.SignupDto;
-import com.luckytree.member_service.member.adapter.persistence.MemberEntity;
+import com.luckytree.member_service.common.enums.Status;
+import com.luckytree.member_service.member.adapter.jpa.MemberEntity;
 import lombok.Getter;
 
 @Getter
@@ -14,14 +14,7 @@ public class Member {
 
     private Status status;
 
-    private Photo photo;
-
-    public Member(SignupDto signUpDto) {
-        this.nickname = signUpDto.getNickname();
-        this.email = signUpDto.getEmail();
-        this.status = Status.NORMAL;
-        this.photo = signUpDto.getPhoto();
-    }
+    private String photo;
 
     public Member(MemberEntity memberEntity) {
         this.email = memberEntity.getEmail();
@@ -30,11 +23,18 @@ public class Member {
         this.status = memberEntity.getStatus();
     }
 
+    public Member(String nickname, String email, Status status, String photo) {
+        this.nickname = nickname;
+        this.email = email;
+        this.status = status;
+        this.photo = photo;
+    }
+
     public MemberEntity toEntity() {
         return new MemberEntity(nickname, email, photo);
     }
 
-    public void updateNicknameAndPhoto(String nickname, Photo photo) {
+    public void updateNicknameAndPhoto(String nickname, String photo) {
         this.nickname = nickname;
         this.photo = photo;
     }

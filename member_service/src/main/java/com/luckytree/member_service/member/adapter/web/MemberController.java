@@ -1,8 +1,8 @@
 package com.luckytree.member_service.member.adapter.web;
 
-import com.luckytree.member_service.member.adapter.data.UpdateMemberDto;
+import com.luckytree.member_service.member.adapter.data.MemberResponse;
+import com.luckytree.member_service.member.adapter.data.UpdateMemberRequest;
 import com.luckytree.member_service.member.application.port.incoming.MemberUseCase;
-import com.luckytree.member_service.member.domain.MemberProfile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -13,23 +13,30 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "회원 정보", description = "회원 정보 API 모음")
 @RestController
-@RequestMapping("v1/member")
+@RequestMapping("/v1/members")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberUseCase memberUseCase;
 
-    @Operation(summary = "회원 상세정보 조회")
-    @GetMapping("/get/profile")
-    public ResponseEntity<MemberProfile> getMemberProfile(@RequestParam String nickname) {
-        MemberProfile memberProfile = memberUseCase.getMemberProfile(nickname);
-        return new ResponseEntity<>(memberProfile, HttpStatus.OK);
+    @Operation(summary = "프로필 조회(로그인)")
+    @GetMapping
+    public ResponseEntity<MemberResponse> getMember(@RequestHeader("Authorization") String authorization) {
+        MemberResponse memberResponse = memberUseCase.getMember(authorization, 0L);
+        return ResponseEntity.ok(memberResponse);
     }
 
-    @Operation(summary = "프로필 정보 변경")
-    @PutMapping("/update/profile")
-    public ResponseEntity<Object> updateMember(@RequestBody @Valid UpdateMemberDto updateMemberDto) {
-        memberUseCase.updateMemberRequest(updateMemberDto.getEmail(), updateMemberDto.getNickname(), updateMemberDto.getPhoto());
-        return new ResponseEntity<>(HttpStatus.OK);
+    @Operation(summary = "프로필 수정(로그인)")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping
+    public void updateMember(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
+        memberUseCase.update(authorization, updateMemberRequest, 0L);
+    }
+
+    @Operation(summary = "회원 탈퇴(로그인)")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/leave")
+    public void leaveMember(@RequestHeader("Authorization") String authorization) {
+        memberUseCase.leave(authorization, 0L);
     }
 }

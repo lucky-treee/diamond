@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: member-service
+  profiles:
+    active: develop
+  config:
+    import: "optional:configserver:http://192.168.0.14:31185/"
+  cloud:
+    config:
+      name: member, actuator, auth
+      label: develop
+      profile: develop
+server:
+  port: 10100
