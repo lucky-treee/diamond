@@ -8,6 +8,13 @@ import com.luckytree.shop_service.shop.adapter.jpa.ReviewRepository;
 import com.luckytree.shop_service.shop.application.port.outgoing.ReviewPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import com.luckytree.shop_service.shop.adapter.jpa.*;
+import com.luckytree.shop_service.shop.application.port.outgoing.ReviewPort;
+import com.luckytree.shop_service.shop.domain.Review;
+import com.luckytree.shop_service.shop.domain.ReviewPhoto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
@@ -32,4 +39,30 @@ public class ReviewAdapter implements ReviewPort {
     public ReviewEntity findById(long reviewId) {
         return reviewRepository.findById(reviewId).orElseThrow(() -> new NotFoundException("존재하지 않는 리뷰입니다"));
     }
+  
+    @Override
+    public ReviewEntity createReview(Review review) {
+        return reviewRepository.save(new ReviewEntity(review));
+    }
+
+    @Override
+    public void createReviewPhoto(ReviewPhoto reviewPhoto) {
+        reviewPhotoRepository.save(new ReviewPhotoEntity(reviewPhoto));
+    }
+
+    @Override
+    public ReviewEntity findReviewById(long reviewId) {
+        return reviewRepository.findById(reviewId).orElseThrow(() -> new NotFoundException("해당 reviewId에 일치하는 ReviewEntity가 없습니다. id: " + reviewId));
+    }
+
+    @Override
+    public List<ReviewPhotoEntity> findReviewPhotoByReviewId(long reviewId) {
+        return reviewPhotoRepository.findByReviewId(reviewId);
+    }
+
+    @Override
+    public void deleteReviewPhotoByReviewId(long reviewId) {
+        reviewPhotoRepository.deleteByReviewId(reviewId);
+    }
 }
+
