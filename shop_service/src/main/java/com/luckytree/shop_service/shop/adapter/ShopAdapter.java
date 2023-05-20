@@ -66,9 +66,4 @@ public class ShopAdapter implements ShopPort {
     public List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds) {
         return shopRepository.findAllByIdIn(shopIds);
     }
-
-    @Override
-    public List<ShopEntity> findReviewDtosByIds(List<Long> shopIds) {
-        return shopRepository.findAllByIdIn(shopIds);
-    }
 }
