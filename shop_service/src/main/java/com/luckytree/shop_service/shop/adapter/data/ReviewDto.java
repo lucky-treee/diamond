@@ -27,7 +27,6 @@ public class ReviewDto {
     public ReviewDto(ReviewEntity reviewEntity) {
         this.shopName = reviewEntity.getShopEntity().getName();
         this.category = reviewEntity.getShopEntity().getCategory();
-        this.photoUrl = reviewEntity.getReviewPhotoEntityList().stream().map(ReviewPhotoEntity::getPhotoUrl).collect(Collectors.toList());
         this.content = reviewEntity.getContent();
         this.createAt = reviewEntity.getCreateAt();
     }

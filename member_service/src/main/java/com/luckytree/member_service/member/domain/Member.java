@@ -2,7 +2,6 @@ package com.luckytree.member_service.member.domain;
 
 
 import com.luckytree.member_service.common.enums.Status;
-import com.luckytree.member_service.member.adapter.data.SignupRequest;
 import com.luckytree.member_service.member.adapter.jpa.MemberEntity;
 import lombok.Getter;
 
@@ -16,13 +15,6 @@ public class Member {
     private Status status;
 
     private String photo;
-
-    public Member(SignupRequest signUpRequest) {
-        this.nickname = signUpRequest.getNickname();
-        this.email = signUpRequest.getEmail();
-        this.status = Status.NORMAL;
-        this.photo = signUpRequest.getPhoto();
-    }
 
     public Member(MemberEntity memberEntity) {
         this.email = memberEntity.getEmail();

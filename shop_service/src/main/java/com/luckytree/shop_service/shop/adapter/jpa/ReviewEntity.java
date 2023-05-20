@@ -58,7 +58,6 @@ public class ReviewEntity extends BaseTimeEntity {
     }
 
     public ReviewEntity(Review review) {
-        this.shopId = review.getShopId();
         this.memberId = review.getMemberId();
         this.content = review.getContent();
         this.hashtag = review.getHashtag();

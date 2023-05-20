@@ -1,8 +1,7 @@
 package com.luckytree.member_service.member.adapter.jpa;
 
-import com.luckytree.member_service.member.adapter.data.SignupRequest;
-import com.luckytree.member_service.member.domain.Member;
 import com.luckytree.member_service.common.enums.Status;
+import com.luckytree.member_service.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -65,13 +64,6 @@ public class MemberEntity {
         this.email = email;
         this.status = Status.NORMAL;
         this.photo = photo;
-    }
-
-    public MemberEntity(SignupRequest signupRequest) {
-        this.nickname = signupRequest.getNickname();
-        this.email = signupRequest.getEmail();
-        this.status = Status.NORMAL;
-        this.photo = signupRequest.getPhoto();
     }
 
     public Member toDomain() {

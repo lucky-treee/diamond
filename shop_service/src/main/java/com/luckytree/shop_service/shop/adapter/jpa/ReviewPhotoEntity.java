@@ -31,7 +31,6 @@ public class ReviewPhotoEntity extends BaseTimeEntity {
     private String photoUrl;
 
     public ReviewPhotoEntity(ReviewPhoto reviewPhoto) {
-        this.reviewId = reviewPhoto.getReviewId();
         this.photoUrl = reviewPhoto.getPhotoUrl();
     }
 
