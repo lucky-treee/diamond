@@ -1,7 +1,6 @@
 package com.luckytree.shop_service.shop.adapter.jpa;
 
 import jakarta.persistence.*;
-import jdk.dynalink.linker.LinkerServices;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,6 +41,6 @@ public class ReviewEntity {
     @CreatedDate
     private LocalDateTime createAt;
 
-    @OneToMany(mappedBy = "reviewPhotoEntity")
+    @OneToMany(mappedBy = "reviewEntity")
     private List<ReviewPhotoEntity> reviewPhotoEntityList;
 }
