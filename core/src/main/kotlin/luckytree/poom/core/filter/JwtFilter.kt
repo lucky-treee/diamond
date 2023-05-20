@@ -1,11 +1,11 @@
-package com.example.auth.filter
+package luckytree.poom.core.filter
 
-import com.example.auth.util.TokenProvider
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.ServletRequest
 import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
+import luckytree.poom.core.service.TokenProvider
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.util.StringUtils

@@ -1,7 +1,7 @@
-package com.example.auth.config
+package luckytree.poom.core.config
 
-import com.example.auth.filter.JwtFilter
-import com.example.auth.util.TokenProvider
+import luckytree.poom.core.filter.JwtFilter
+import luckytree.poom.core.service.TokenProvider
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.web.DefaultSecurityFilterChain
