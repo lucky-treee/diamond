@@ -14,9 +14,6 @@ import com.luckytree.shop_service.shop.adapter.data.ReviewDto;
 import org.springframework.data.domain.Pageable;
 
 import com.luckytree.shop_service.shop.domain.ReviewPhoto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -55,7 +52,8 @@ public class ReviewService implements ReviewUseCase {
     private void s3delete(ReviewEntity reviewEntity) {
         List<String> deletingPhotos = reviewPort.findReviewPhotoByReviewEntity(reviewEntity).stream().map(ReviewPhotoEntity::getPhotoUrl).map(s -> s.substring(s.lastIndexOf("/") + 1)).toList();
         deletingPhotos.stream().forEach(s -> s3Util.delete(s));
-      
+    }
+
     @Override
     public Long createReview(CreateReviewDto createReviewDto) {
         return reviewPort.createReview(createReviewDto.toDomain()).getId();
