@@ -18,4 +18,10 @@ public interface ReviewPort {
     List<ReviewPhotoEntity> findReviewPhotoByReviewId(long reviewId);
 
     void deleteReviewPhotoByReviewId(long reviewId);
+  
+    void deleteReview(long reviewId);
+
+    List<ReviewPhotoEntity> findReviewPhotoByReviewEntity(ReviewEntity reviewEntity);
+
+    ReviewEntity findById(long reviewId);
 }

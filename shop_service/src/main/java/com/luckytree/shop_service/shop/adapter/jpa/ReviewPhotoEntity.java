@@ -1,5 +1,10 @@
 package com.luckytree.shop_service.shop.adapter.jpa;
 
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import com.luckytree.shop_service.shop.domain.ReviewPhoto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,10 +23,11 @@ public class ReviewPhotoEntity extends BaseTimeEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(length = 50, nullable = false, name = "review_id")
-    private Long reviewId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "review_id")
+    private ReviewEntity reviewEntity;
 
-    @Column(nullable = false, name = "photo_url")
+    @Column(name = "photo_url", nullable = false)
     private String photoUrl;
 
     public ReviewPhotoEntity(ReviewPhoto reviewPhoto) {

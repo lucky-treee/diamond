@@ -14,4 +14,6 @@ public interface ReviewUseCase {
     void updateReview(UpdateReviewDto updateReviewDto);
 
     void updateReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
+    
+    void deleteReview(long reviewId);
 }
