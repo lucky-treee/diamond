@@ -29,6 +29,7 @@ public class ReviewController {
     public ResponseEntity<ReviewsResponse> getMyReviews(@RequestParam("member_id") long memberId, @RequestParam(defaultValue = "0") int offset, @RequestParam(defaultValue = "10") int limit) {
         Pageable pageable = PageRequest.of(offset, limit);
         return ResponseEntity.ok(reviewUseCase.getMyReviews(memberId, pageable));
+    }
 
     @Operation(summary = "리뷰삭제(로그인)")
     @ResponseStatus(HttpStatus.NO_CONTENT)
