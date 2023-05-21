@@ -1,6 +1,5 @@
 package com.luckytree.shop.shop.adapter.feign;
 
-import com.luckytree.shop.common.enums.Category;
 import com.luckytree.shop.shop.adapter.data.MemberFeignRequestDto;
 import com.luckytree.shop.shop.application.port.outgoing.MemberFeignClientPort;
 import lombok.RequiredArgsConstructor;

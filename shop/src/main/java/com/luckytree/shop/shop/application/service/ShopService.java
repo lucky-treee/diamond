@@ -8,6 +8,8 @@ import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import lombok.RequiredArgsConstructor;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
+import luckytree.poom.core.jwt.JwtAuthentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,7 +65,7 @@ public class ShopService implements ShopUseCase {
     @Override
     public void createBookmark(String authorization, long shopId) {
         ShopCategory category = shopPort.findCategoryById(shopId);
-        memberFeignClientPort.saveBookmark(memberId, shopId, category);
+        memberFeignClientPort.saveBookmark(0L, shopId, category);
     }
 
     @Transactional(readOnly = true)
@@ -76,6 +78,6 @@ public class ShopService implements ShopUseCase {
 
     @Override
     public void deleteBookmark(String authorization, long shopId) {
-        memberFeignClientPort.deleteBookmark(memberId, shopId);
+        memberFeignClientPort.deleteBookmark(0L, shopId);
     }
 }

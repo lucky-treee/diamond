@@ -1,6 +1,5 @@
 package com.luckytree.shop.shop.adapter;
 
-import com.luckytree.shop.common.exceptions.NotFoundException;
 import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop.shop.adapter.jpa.ShopRemoveEntity;
 import com.luckytree.shop.shop.adapter.jpa.ShopRemoveRepository;
