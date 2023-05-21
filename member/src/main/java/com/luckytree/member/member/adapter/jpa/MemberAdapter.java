@@ -1,8 +1,8 @@
 package com.luckytree.member.member.adapter.jpa;
 
-import com.luckytree.member.common.advice.NotFoundException;
 import com.luckytree.member.member.application.port.outgoing.MemberPort;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.exceptions.NotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

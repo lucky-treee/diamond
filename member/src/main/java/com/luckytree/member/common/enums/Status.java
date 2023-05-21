@@ -1,8 +1,8 @@
 package com.luckytree.member.common.enums;
 
-import com.luckytree.member.common.advice.BadRequestException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import luckytree.poom.core.exceptions.BadRequestException;
 
 @Getter
 @NoArgsConstructor
