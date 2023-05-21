@@ -1,6 +1,5 @@
 package com.luckytree.shop.shop.adapter.jpa;
 
-import com.luckytree.shop.common.exceptions.BadRequestException;
 import com.luckytree.shop.shop.domain.Review;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import luckytree.poom.core.enums.ShopHashtag;
+import luckytree.poom.core.exceptions.BadRequestException;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 

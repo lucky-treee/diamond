@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
 import luckytree.poom.core.enums.ShopStatus;
+import luckytree.poom.core.exceptions.NotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,9 +1,8 @@
 package com.luckytree.shop.common.advice;
 
-import com.luckytree.shop.common.exceptions.BadRequestException;
-import com.luckytree.shop.common.exceptions.InternalServerErrorException;
-import com.luckytree.shop.common.exceptions.NotFoundException;
-import com.luckytree.shop.common.exceptions.UnAuthorizedException;
+import luckytree.poom.core.exceptions.BadRequestException;
+import luckytree.poom.core.exceptions.InternalServerErrorException;
+import luckytree.poom.core.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,10 +24,5 @@ public class ControllerAdvice {
     @ExceptionHandler(InternalServerErrorException.class)
     public ResponseEntity<Object> internalServerErrorExceptionHandler(InternalServerErrorException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(UnAuthorizedException.class)
-    public ResponseEntity<Object> unAuthorizedExceptionHandler(UnAuthorizedException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }
