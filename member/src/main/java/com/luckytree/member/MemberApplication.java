@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableDiscoveryClient
 @EnableJpaAuditing
 @SpringBootApplication(scanBasePackages = {"com.luckytree.member", "luckytree.poom.core"})
-public class MemberServiceApplication {
+public class MemberApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MemberServiceApplication.class, args);
+		SpringApplication.run(MemberApplication.class, args);
 	}
 
 }
