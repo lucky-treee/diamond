@@ -1,7 +1,7 @@
 package com.luckytree.member.member.adapter.web;
 
-import com.luckytree.member.member.adapter.data.BookmarksResponse;
-import com.luckytree.member.member.adapter.data.CreateBookmarkRequest;
+import com.luckytree.member.member.adapter.data.bookmark.BookmarksResponse;
+import com.luckytree.member.member.adapter.data.bookmark.CreateBookmarkRequest;
 import com.luckytree.member.member.application.port.incoming.BookmarkUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

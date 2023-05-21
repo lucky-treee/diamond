@@ -1,13 +1,18 @@
-package com.luckytree.member.member.adapter.data;
+package com.luckytree.member.member.adapter.data.member;
 
 import com.luckytree.member.member.adapter.jpa.MemberEntity;
 import com.luckytree.member.member.domain.member.Member;
 import lombok.*;
+import luckytree.poom.core.enums.MemberStatus;
+
+import java.time.LocalDateTime;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @ToString
 public class MemberResponse {
+
+    private Long id;
 
     private String nickname;
 
@@ -15,23 +20,19 @@ public class MemberResponse {
 
     private String photo;
 
-    public MemberResponse(MemberEntity memberEntity) {
-        this.nickname = memberEntity.getNickname();
-        this.email = memberEntity.getEmail();
-        this.photo = memberEntity.getPhoto();
-    }
+    private MemberStatus status;
+
+    private LocalDateTime updateAt;
+
+    private LocalDateTime createAt;
 
     public MemberResponse(Member member) {
+        this.id = member.getId();
         this.nickname = member.getNickname();
         this.email = member.getEmail();
         this.photo = member.getPhoto();
-    }
-
-    public void updateNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void updatePhoto(String photo) {
-        this.photo = photo;
+        this.status = member.getStatus();
+        this.updateAt = member.getUpdateAt();
+        this.createAt = member.getCreateAt();
     }
 }

@@ -1,7 +1,7 @@
 package com.luckytree.member.member.application.service;
 
-import com.luckytree.member.member.adapter.data.BookmarksResponse;
-import com.luckytree.member.member.adapter.data.FindBookmarkedShops;
+import com.luckytree.member.member.adapter.data.bookmark.BookmarksResponse;
+import com.luckytree.member.member.adapter.data.bookmark.FindBookmarkedShops;
 import com.luckytree.member.member.adapter.jpa.BookmarkEntity;
 import com.luckytree.member.member.application.port.incoming.BookmarkUseCase;
 import com.luckytree.member.member.application.port.outgoing.BookmarkPort;

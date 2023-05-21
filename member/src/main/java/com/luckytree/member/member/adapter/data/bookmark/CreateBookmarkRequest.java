@@ -1,4 +1,4 @@
-package com.luckytree.member.member.adapter.data;
+package com.luckytree.member.member.adapter.data.bookmark;
 
 import com.luckytree.member.member.domain.bookmark.Bookmark;
 import io.swagger.v3.oas.annotations.media.Schema;

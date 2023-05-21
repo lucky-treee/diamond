@@ -8,9 +8,4 @@ enum class MemberStatus {
     DORMANT,
 
     LEAVE,
-    ;
-
-    fun isAlreadyDeleted() {
-        if (this == LEAVE) throw NotFoundException()
-    }
 }

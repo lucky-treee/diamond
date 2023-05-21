@@ -1,4 +1,4 @@
-package com.luckytree.member.member.adapter.data;
+package com.luckytree.member.member.adapter.data.bookmark;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

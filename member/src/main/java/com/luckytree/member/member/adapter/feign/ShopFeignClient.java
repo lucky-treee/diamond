@@ -1,8 +1,8 @@
 package com.luckytree.member.member.adapter.feign;
 
 import com.luckytree.member.common.config.InternalFeignConfig;
-import com.luckytree.member.member.adapter.data.BookmarksResponse;
-import com.luckytree.member.member.adapter.data.FindBookmarkedShops;
+import com.luckytree.member.member.adapter.data.bookmark.BookmarksResponse;
+import com.luckytree.member.member.adapter.data.bookmark.FindBookmarkedShops;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

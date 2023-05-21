@@ -1,6 +1,5 @@
 package com.luckytree.member.member.adapter.jpa;
 
-import com.luckytree.member.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member.member.application.port.outgoing.BookmarkPort;
 import com.luckytree.member.member.domain.bookmark.Bookmark;
 import lombok.RequiredArgsConstructor;
