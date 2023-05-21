@@ -1,4 +1,4 @@
-package com.example.auth.model.dto
+package com.example.auth.domain.member
 
 data class AccessTokenResponse(
     val token: String,

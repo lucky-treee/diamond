@@ -1,4 +1,4 @@
-package com.example.auth.model.dto
+package com.example.auth.domain.member
 
 import org.jetbrains.annotations.NotNull
 

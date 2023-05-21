@@ -1,9 +1,9 @@
 package com.example.auth.controller
 
-import com.example.auth.model.dto.AccessTokenResponse
-import com.example.auth.model.dto.GetKakaoUserEmailRequest
-import com.example.auth.model.dto.GetKakaoUserEmailResponse
-import com.example.auth.model.dto.GenerateTokenRequest
+import com.example.auth.domain.member.AccessTokenResponse
+import com.example.auth.client.feign.kakao.data.GetKakaoUserEmailRequest
+import com.example.auth.client.feign.kakao.data.GetKakaoUserEmailResponse
+import com.example.auth.domain.member.GenerateTokenRequest
 import com.example.auth.service.AuthService
 import io.swagger.v3.oas.annotations.Operation
 import jakarta.validation.Valid

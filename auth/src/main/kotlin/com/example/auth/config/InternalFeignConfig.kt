@@ -5,7 +5,7 @@ import feign.RequestInterceptor
 import feign.RequestTemplate
 import org.springframework.context.annotation.Bean
 
-class ExternalFeignConfig {
+class InternalFeignConfig {
     @Bean
     fun requestInterceptor(): RequestInterceptor {
         return RequestInterceptor { template: RequestTemplate ->
