@@ -12,3 +12,6 @@ oauth2:
     clientId: c32cb7f8f1af792829701b7bbd4e5b7f
     redirectUri: https://dev-poom.c0dewave.com/auth
     secretKey: sOTe7SjI0edhG9pfqYsbF8FLcexbAkpZ
+
+feign:
+  member: 192.168.0.123
