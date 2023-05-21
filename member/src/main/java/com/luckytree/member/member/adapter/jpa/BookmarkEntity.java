@@ -1,10 +1,10 @@
 package com.luckytree.member.member.adapter.jpa;
 
-import com.luckytree.member.common.enums.Category;
 import com.luckytree.member.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member.member.domain.Bookmark;
 import jakarta.persistence.*;
 import lombok.*;
+import luckytree.poom.core.enums.ShopCategory;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -31,7 +31,7 @@ public class BookmarkEntity {
 
     @Column(length = 50)
     @Enumerated(value = EnumType.STRING)
-    private Category category;
+    private ShopCategory category;
 
     @Column(name = "create_at")
     @CreatedDate

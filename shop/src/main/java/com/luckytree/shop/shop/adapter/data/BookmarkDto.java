@@ -1,11 +1,11 @@
 package com.luckytree.shop.shop.adapter.data;
 
-import com.luckytree.shop.common.enums.Category;
 import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
-import com.luckytree.shop.common.enums.Hashtag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import luckytree.poom.core.enums.ShopCategory;
+import luckytree.poom.core.enums.ShopHashtag;
 
 @Getter
 @Setter
@@ -13,10 +13,10 @@ import lombok.Setter;
 public class BookmarkDto {
 
     private String name;
-    private Hashtag hashtag;
+    private ShopHashtag hashtag;
     private String photo;
     private String address;
-    private Category category;
+    private ShopCategory category;
 
     public BookmarkDto(ShopEntity shopEntity) {
         this.name = shopEntity.getName();

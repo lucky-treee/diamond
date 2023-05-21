@@ -1,10 +1,10 @@
 package com.luckytree.member.member.adapter.data;
 
-import com.luckytree.member.common.enums.Category;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import luckytree.poom.core.enums.ShopCategory;
 
 @Getter
 @Setter
@@ -19,5 +19,5 @@ public class CreateBookmarkRequest {
     private long shopId;
 
     @Schema(description = "샵 카테고리")
-    private Category category;
+    private ShopCategory category;
 }

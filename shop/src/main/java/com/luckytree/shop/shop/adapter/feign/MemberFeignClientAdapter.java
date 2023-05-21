@@ -4,6 +4,7 @@ import com.luckytree.shop.common.enums.Category;
 import com.luckytree.shop.shop.adapter.data.MemberFeignRequestDto;
 import com.luckytree.shop.shop.application.port.outgoing.MemberFeignClientPort;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.enums.ShopCategory;
 import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
@@ -13,7 +14,7 @@ public class MemberFeignClientAdapter implements MemberFeignClientPort {
     private final MemberFeignClient memberFeignClient;
 
     @Override
-    public void saveBookmark(long memberId, long shopId, Category category) {
+    public void saveBookmark(long memberId, long shopId, ShopCategory category) {
         memberFeignClient.saveBookmark(new MemberFeignRequestDto(memberId, shopId, category));
     }
     @Override

@@ -1,14 +1,14 @@
 package com.luckytree.shop.shop.adapter.jpa;
 
-import com.luckytree.shop.common.enums.Category;
-import com.luckytree.shop.common.enums.Hashtag;
-import com.luckytree.shop.common.enums.ShopStatus;
 import com.luckytree.shop.shop.domain.Shop;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import luckytree.poom.core.enums.ShopCategory;
+import luckytree.poom.core.enums.ShopHashtag;
+import luckytree.poom.core.enums.ShopStatus;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -30,7 +30,7 @@ public class ShopEntity extends BaseTimeEntity {
 
     @Column(length = 50)
     @Enumerated(value = EnumType.STRING)
-    private Category category;
+    private ShopCategory category;
 
     @Column(length = 10, nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -47,7 +47,7 @@ public class ShopEntity extends BaseTimeEntity {
 
     @Column(length = 50)
     @Enumerated(value = EnumType.STRING)
-    private Hashtag hashtag;
+    private ShopHashtag hashtag;
 
     @Column(length = 150)
     private String photo;

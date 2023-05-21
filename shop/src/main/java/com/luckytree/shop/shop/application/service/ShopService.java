@@ -1,14 +1,13 @@
 package com.luckytree.shop.shop.application.service;
 
-import com.luckytree.shop.common.enums.Category;
-import com.luckytree.shop.common.enums.Hashtag;
-import com.luckytree.shop.common.utils.TokenUtil;
 import com.luckytree.shop.shop.adapter.data.*;
 import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop.shop.application.port.outgoing.MemberFeignClientPort;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.enums.ShopCategory;
+import luckytree.poom.core.enums.ShopHashtag;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +28,7 @@ public class ShopService implements ShopUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummaryDto> findShopsByCategory(Category category) {
+    public List<ShopSummaryDto> findShopsByCategory(ShopCategory category) {
         return shopPort.getShopSummaryByCategory(category).stream().map(ShopSummaryDto::new).toList();
     }
 
@@ -44,7 +43,7 @@ public class ShopService implements ShopUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummaryDto> findShopsByHashtag(Hashtag hashtag) {
+    public List<ShopSummaryDto> findShopsByHashtag(ShopHashtag hashtag) {
         return shopPort.getShopSummaryByHashtag(hashtag).stream().map(ShopSummaryDto::new).toList();
     }
 
@@ -57,17 +56,13 @@ public class ShopService implements ShopUseCase {
 
     @Override
     public void deleteShop(String authorization, ShopDeleteDto shopDeleteDto) {
-        TokenUtil.validateAuthorization(authorization);
-
         ShopEntity shopEntity = shopPort.getShopEntity(shopDeleteDto.getName(), shopDeleteDto.getAddress());
         shopPort.deleteShop(shopEntity, shopDeleteDto.getComment());
     }
 
     @Override
     public void createBookmark(String authorization, long shopId) {
-        Long memberId = TokenUtil.parseMemberId(authorization);
-
-        Category category = shopPort.findCategoryById(shopId);
+        ShopCategory category = shopPort.findCategoryById(shopId);
         memberFeignClientPort.saveBookmark(memberId, shopId, category);
     }
 
@@ -81,8 +76,6 @@ public class ShopService implements ShopUseCase {
 
     @Override
     public void deleteBookmark(String authorization, long shopId) {
-        Long memberId = TokenUtil.parseMemberId(authorization);
-
         memberFeignClientPort.deleteBookmark(memberId, shopId);
     }
 }

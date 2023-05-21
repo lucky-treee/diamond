@@ -1,9 +1,9 @@
 package com.luckytree.shop.shop.adapter.data;
 
-import com.luckytree.shop.common.enums.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import luckytree.poom.core.enums.ShopCategory;
 
 @Getter
 @Setter
@@ -12,9 +12,9 @@ public class MemberFeignRequestDto {
 
     private long memberId;
     private long shopId;
-    private Category category;
+    private ShopCategory category;
 
-    public MemberFeignRequestDto(long memberId, long shopId, Category category) {
+    public MemberFeignRequestDto(long memberId, long shopId, ShopCategory category) {
         this.memberId = memberId;
         this.shopId = shopId;
         this.category = category;

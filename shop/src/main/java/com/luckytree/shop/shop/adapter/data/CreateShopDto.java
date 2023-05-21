@@ -3,8 +3,6 @@ package com.luckytree.shop.shop.adapter.data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
-import com.luckytree.shop.common.enums.Category;
-import com.luckytree.shop.common.enums.ShopStatus;
 import com.luckytree.shop.shop.domain.Shop;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +11,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import luckytree.poom.core.enums.ShopCategory;
+import luckytree.poom.core.enums.ShopStatus;
 
 import java.time.LocalTime;
 
@@ -28,7 +28,7 @@ public class CreateShopDto {
     private String shopName;
 
     @Schema(description = "샵 카테고리")
-    private Category category;
+    private ShopCategory category;
 
     @NotBlank
     @Schema(description = "샵 주소")

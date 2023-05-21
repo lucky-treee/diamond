@@ -1,13 +1,13 @@
 package com.luckytree.shop.shop.adapter.web;
 
-import com.luckytree.shop.common.enums.Category;
-import com.luckytree.shop.common.enums.Hashtag;
 import com.luckytree.shop.shop.adapter.data.*;
 import com.luckytree.shop.shop.application.port.incoming.ShopUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.enums.ShopCategory;
+import luckytree.poom.core.enums.ShopHashtag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class ShopController {
 
     @Operation(summary = "특정 카테고리의 샵 전체 검색")
     @GetMapping("/{category}")
-    public ResponseEntity<List<ShopSummaryDto>> findShopsByCategory(@PathVariable Category category) {
+    public ResponseEntity<List<ShopSummaryDto>> findShopsByCategory(@PathVariable ShopCategory category) {
         List<ShopSummaryDto> shopSummaryDtoList = shopUseCase.findShopsByCategory(category);
         return ResponseEntity.ok(shopSummaryDtoList);
     }
@@ -52,7 +52,7 @@ public class ShopController {
 
     @Operation(summary = "해쉬태그로 샵 목록 조회")
     @GetMapping("/{hashtag}")
-    public ResponseEntity<List<ShopSummaryDto>> findShopsByHashtag(@PathVariable Hashtag hashtag) {
+    public ResponseEntity<List<ShopSummaryDto>> findShopsByHashtag(@PathVariable ShopHashtag hashtag) {
         List<ShopSummaryDto> shopSummaryDtoList = shopUseCase.findShopsByHashtag(hashtag);
         return ResponseEntity.ok(shopSummaryDtoList);
     }

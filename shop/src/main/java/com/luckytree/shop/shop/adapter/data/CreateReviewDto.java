@@ -1,7 +1,6 @@
 package com.luckytree.shop.shop.adapter.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.luckytree.shop.common.enums.Hashtag;
 import com.luckytree.shop.shop.domain.Review;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import luckytree.poom.core.enums.ShopHashtag;
 
 @Getter
 @Setter
@@ -29,7 +29,7 @@ public class CreateReviewDto {
     private String content;
 
     @Schema(description = "해시태그")
-    private Hashtag hashtag;
+    private ShopHashtag hashtag;
     @JsonIgnore
     public Review toDomain() {
         return new Review(

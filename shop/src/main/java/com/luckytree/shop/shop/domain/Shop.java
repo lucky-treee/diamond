@@ -1,10 +1,10 @@
 package com.luckytree.shop.shop.domain;
 
-import com.luckytree.shop.common.enums.Category;
-import com.luckytree.shop.common.enums.Hashtag;
-import com.luckytree.shop.common.enums.ShopStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import luckytree.poom.core.enums.ShopCategory;
+import luckytree.poom.core.enums.ShopHashtag;
+import luckytree.poom.core.enums.ShopStatus;
 
 import java.time.LocalTime;
 
@@ -14,12 +14,12 @@ public class Shop {
 
     private Long id;
     private String name;
-    private Category category;
+    private ShopCategory category;
     private ShopStatus status;
     private String address;
     private double lat;
     private double lng;
-    private Hashtag hashtag;
+    private ShopHashtag hashtag;
     private String photo;
     private String contact;
     private String sns;
@@ -29,7 +29,7 @@ public class Shop {
     private LocalTime operatingEnd;
     private String holiday;
 
-    public Shop(String name, Category category, ShopStatus status,
+    public Shop(String name, ShopCategory category, ShopStatus status,
                 String address, double lat, double lng,
                 String photo, String contact, String sns,
                 String homepage, String flagshipProduct,

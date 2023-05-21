@@ -1,18 +1,17 @@
 package com.luckytree.shop.shop.adapter.jpa;
 
 import com.luckytree.shop.common.exceptions.BadRequestException;
-import com.luckytree.shop.common.enums.Hashtag;
 import com.luckytree.shop.shop.domain.Review;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import luckytree.poom.core.enums.ShopHashtag;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Table(name = "review")
 @Getter
@@ -41,7 +40,7 @@ public class ReviewEntity extends BaseTimeEntity {
   
     @Column(length = 50)
     @Enumerated(value = EnumType.STRING)
-    private Hashtag hashtag;
+    private ShopHashtag hashtag;
   
     @Column(name = "create_at")
     @CreatedDate
@@ -59,7 +58,7 @@ public class ReviewEntity extends BaseTimeEntity {
         this.hashtag = review.getHashtag();
     }
 
-    public void update(String content, Hashtag hashtag) {
+    public void update(String content, ShopHashtag hashtag) {
         this.content = content;
         this.hashtag = hashtag;
     }

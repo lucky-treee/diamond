@@ -1,10 +1,10 @@
 package com.luckytree.shop.shop.adapter.data;
 
-import com.luckytree.shop.common.enums.Category;
-import com.luckytree.shop.common.enums.Hashtag;
 import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import luckytree.poom.core.enums.ShopCategory;
+import luckytree.poom.core.enums.ShopHashtag;
 
 @Getter
 @NoArgsConstructor
@@ -18,10 +18,10 @@ public class ShopDetailDto {
     private String shopName;
 
     @Schema(description = "샵 카테고리")
-    private Category category;
+    private ShopCategory category;
 
     @Schema(description = "샵 해시태그")
-    private Hashtag hashTag;
+    private ShopHashtag hashTag;
 
     @Schema(description = "샵 주소")
     private String shopAddress;

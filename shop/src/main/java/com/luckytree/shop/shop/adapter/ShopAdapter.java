@@ -1,8 +1,5 @@
 package com.luckytree.shop.shop.adapter;
 
-import com.luckytree.shop.common.enums.Category;
-import com.luckytree.shop.common.enums.Hashtag;
-import com.luckytree.shop.common.enums.ShopStatus;
 import com.luckytree.shop.common.exceptions.NotFoundException;
 import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop.shop.adapter.jpa.ShopRemoveEntity;
@@ -11,6 +8,9 @@ import com.luckytree.shop.shop.adapter.jpa.ShopRepository;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop.shop.domain.Shop;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.enums.ShopCategory;
+import luckytree.poom.core.enums.ShopHashtag;
+import luckytree.poom.core.enums.ShopStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
-    public List<ShopEntity> getShopSummaryByCategory(Category category) {
+    public List<ShopEntity> getShopSummaryByCategory(ShopCategory category) {
         return shopRepository.findByCategoryAndStatus(category, ShopStatus.ENABLE);
     }
 
@@ -43,7 +43,7 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
-    public List<ShopEntity> getShopSummaryByHashtag(Hashtag hashtag) {
+    public List<ShopEntity> getShopSummaryByHashtag(ShopHashtag hashtag) {
         return shopRepository.findByHashtagAndStatus(hashtag, ShopStatus.ENABLE);
     }
 
@@ -58,7 +58,7 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
-    public Category findCategoryById(long shopId) {
+    public ShopCategory findCategoryById(long shopId) {
         return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId에 일치하는 ShopEntity가 없습니다. id: " + shopId)).getCategory();
     }
 

@@ -1,16 +1,14 @@
 package com.luckytree.member.member.adapter.jpa;
 
-import com.luckytree.member.common.enums.Status;
 import com.luckytree.member.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.*;
+import luckytree.poom.core.enums.MemberStatus;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-
-import static com.luckytree.member.common.enums.Status.LEAVE;
 
 @Table(name = "member")
 @EntityListeners(AuditingEntityListener.class)
@@ -33,7 +31,7 @@ public class MemberEntity {
 
     @Column(length = 20, nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private Status status;
+    private MemberStatus status;
 
     @Column(length = 200)
     private String photo;
@@ -52,7 +50,7 @@ public class MemberEntity {
     }
 
     public void leave() {
-        status = LEAVE;
+        status = MemberStatus.LEAVE;
     }
 
     public void isAlreadyDeleted() {
@@ -62,7 +60,7 @@ public class MemberEntity {
     public MemberEntity(String nickname, String email, String photo) {
         this.nickname = nickname;
         this.email = email;
-        this.status = Status.NORMAL;
+        this.status = MemberStatus.NORMAL;
         this.photo = photo;
     }
 

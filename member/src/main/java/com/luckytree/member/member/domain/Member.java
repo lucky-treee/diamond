@@ -1,9 +1,9 @@
 package com.luckytree.member.member.domain;
 
 
-import com.luckytree.member.common.enums.Status;
 import com.luckytree.member.member.adapter.jpa.MemberEntity;
 import lombok.Getter;
+import luckytree.poom.core.enums.MemberStatus;
 
 @Getter
 public class Member {
@@ -12,7 +12,7 @@ public class Member {
 
     private String email;
 
-    private Status status;
+    private MemberStatus status;
 
     private String photo;
 
@@ -23,7 +23,7 @@ public class Member {
         this.status = memberEntity.getStatus();
     }
 
-    public Member(String nickname, String email, Status status, String photo) {
+    public Member(String nickname, String email, MemberStatus status, String photo) {
         this.nickname = nickname;
         this.email = email;
         this.status = status;

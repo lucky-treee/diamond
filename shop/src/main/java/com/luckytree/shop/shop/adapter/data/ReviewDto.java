@@ -1,12 +1,12 @@
 package com.luckytree.shop.shop.adapter.data;
 
-import com.luckytree.shop.common.enums.Category;
 import com.luckytree.shop.shop.adapter.jpa.ReviewEntity;
 import com.luckytree.shop.shop.adapter.jpa.ReviewPhotoEntity;
 import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import luckytree.poom.core.enums.ShopCategory;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class ReviewDto {
 
     private String shopName;
-    private Category category;
+    private ShopCategory category;
     private List<String> photoUrl;
     private String content;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
