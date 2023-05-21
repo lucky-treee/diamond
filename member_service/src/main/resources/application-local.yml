@@ -2,9 +2,9 @@ spring:
   application:
     name: member-service
   profiles:
-    active: local
+    active: main
   config:
-    import: "optional:configserver:http://localhost:8888/"
+    import: optional:configserver:http://localhost:8888
   cloud:
     config:
       name: member, actuator, auth
