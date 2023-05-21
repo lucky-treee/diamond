@@ -76,10 +76,6 @@ public class ShopEntity extends BaseTimeEntity {
     @OneToMany(mappedBy = "shopEntity")
     private List<ShopRemoveEntity> shopRemoveEntityList;
 
-    @OneToMany(mappedBy = "shopEntity")
-    private List<ReviewEntity> reviewEntityList;
-
-
     public ShopEntity(Shop shop) {
         this.name = shop.getName();
         this.category = shop.getCategory();

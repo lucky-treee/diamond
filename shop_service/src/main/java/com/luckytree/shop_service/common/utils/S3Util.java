@@ -14,8 +14,8 @@ import java.util.UUID;
 @Service
 public class S3Util {
 
-    @Value("${cloud.aws.s3.bucket}")
-    private static String bucket;
+    //@Value("${cloud.aws.s3.bucket}")
+    private static String bucket = "zerowasteshopreviewphoto";
 
     private final AmazonS3 amazonS3;
 

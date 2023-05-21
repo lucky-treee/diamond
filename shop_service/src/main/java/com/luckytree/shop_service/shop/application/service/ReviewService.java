@@ -4,8 +4,10 @@ import com.luckytree.shop_service.common.utils.S3Util;
 import com.luckytree.shop_service.shop.adapter.data.*;
 import com.luckytree.shop_service.shop.adapter.jpa.ReviewEntity;
 import com.luckytree.shop_service.shop.adapter.jpa.ReviewPhotoEntity;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop_service.shop.application.port.incoming.ReviewUseCase;
 import com.luckytree.shop_service.shop.application.port.outgoing.ReviewPort;
+import com.luckytree.shop_service.shop.application.port.outgoing.ShopPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,7 @@ public class ReviewService implements ReviewUseCase {
 
     private final ReviewPort reviewPort;
     private final S3Util s3Util;
+    private final ShopPort shopPort;
   
     @Transactional(readOnly = true)
     @Override
@@ -36,7 +39,11 @@ public class ReviewService implements ReviewUseCase {
     }
 
     private MyReviewsDto findMyReviews(long memberId, Pageable pageable) {
-        List<ReviewDto> reviewDtos = reviewPort.findAllByMemberId(memberId, pageable).stream().map(ReviewDto::new).toList();
+        List<ReviewDto> reviewDtos = reviewPort.findAllByMemberId(memberId, pageable).stream().map(reviewEntity -> {
+            List<ReviewPhotoEntity> reviewPhotos = reviewPort.findReviewPhotoByReviewId(reviewEntity.getId());
+            ShopEntity shopEntity = shopPort.getShopDetailById(reviewEntity.getShopId());
+            return new ReviewDto(reviewEntity, reviewPhotos, shopEntity);
+        }).toList();
         return new MyReviewsDto(reviewDtos);
     }
   
@@ -50,7 +57,7 @@ public class ReviewService implements ReviewUseCase {
     }
 
     private void s3delete(ReviewEntity reviewEntity) {
-        List<String> deletingPhotos = reviewPort.findReviewPhotoByReviewEntity(reviewEntity).stream().map(ReviewPhotoEntity::getPhotoUrl).map(s -> s.substring(s.lastIndexOf("/") + 1)).toList();
+        List<String> deletingPhotos = reviewPort.findReviewPhotoByReviewId(reviewEntity.getId()).stream().map(ReviewPhotoEntity::getPhotoUrl).map(s -> s.substring(s.lastIndexOf("/") + 1)).toList();
         deletingPhotos.stream().forEach(s -> s3Util.delete(s));
     }
 

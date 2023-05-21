@@ -43,11 +43,6 @@ public class ReviewAdapter implements ReviewPort {
     }
 
     @Override
-    public List<ReviewPhotoEntity> findReviewPhotoByReviewEntity(ReviewEntity reviewEntity) {
-        return reviewPhotoRepository.findByReviewEntity(reviewEntity);
-    }
-
-    @Override
     public ReviewEntity findById(long reviewId) {
         return reviewRepository.findById(reviewId).orElseThrow(() -> new NotFoundException("존재하지 않는 리뷰입니다"));
     }

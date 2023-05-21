@@ -26,9 +26,8 @@ public class ReviewEntity extends BaseTimeEntity {
     @Column(name = "id")
     private Long id;
   
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id")
-    private ShopEntity shopEntity;
+    private Long shopId;
 
     @Column(name = "member_id", length = 20, unique = true, nullable = false)
     private Long memberId;
@@ -48,9 +47,6 @@ public class ReviewEntity extends BaseTimeEntity {
     @CreatedDate
     private LocalDateTime createAt;
 
-    @OneToMany(mappedBy = "reviewEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReviewPhotoEntity> photos;
-
     public void isAlreadyDeleted() {
         if (this == null) {
             throw new BadRequestException("이미 삭제된 리뷰입니다.");
@@ -58,6 +54,7 @@ public class ReviewEntity extends BaseTimeEntity {
     }
 
     public ReviewEntity(Review review) {
+        this.shopId = review.getShopId();
         this.memberId = review.getMemberId();
         this.content = review.getContent();
         this.hashtag = review.getHashtag();

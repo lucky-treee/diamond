@@ -23,8 +23,6 @@ public interface ReviewPort {
   
     void deleteReview(long reviewId);
 
-    List<ReviewPhotoEntity> findReviewPhotoByReviewEntity(ReviewEntity reviewEntity);
-
     ReviewEntity findById(long reviewId);
   
     Page<ReviewEntity> findAllByMemberId(long memberId, Pageable pageable);

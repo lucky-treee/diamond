@@ -19,10 +19,6 @@ public class internalReviewController {
 
     private final ReviewUseCase reviewUseCase;
 
-    @PostMapping("/shops")
-    public MyReviewsDto findMyReviewsById(@RequestParam("member_id") long memberId, Pageable pageable) {
-        return reviewUseCase.findMyReviewsById(memberId, pageable);
-    }
     @DeleteMapping
     void deleteReview(@RequestParam("review_id") long reviewId) {
         reviewUseCase.deleteReview(reviewId);

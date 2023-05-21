@@ -3,6 +3,7 @@ package com.luckytree.shop_service.shop.adapter.data;
 import com.luckytree.shop_service.common.enums.Category;
 import com.luckytree.shop_service.shop.adapter.jpa.ReviewEntity;
 import com.luckytree.shop_service.shop.adapter.jpa.ReviewPhotoEntity;
+import com.luckytree.shop_service.shop.adapter.jpa.ShopEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,9 +25,10 @@ public class ReviewDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createAt;
 
-    public ReviewDto(ReviewEntity reviewEntity) {
-        this.shopName = reviewEntity.getShopEntity().getName();
-        this.category = reviewEntity.getShopEntity().getCategory();
+    public ReviewDto(ReviewEntity reviewEntity, List<ReviewPhotoEntity> reviewPhotos, ShopEntity shopEntity) {
+        this.shopName = shopEntity.getName();
+        this.category = shopEntity.getCategory();
+        this.photoUrl = reviewPhotos.stream().map(ReviewPhotoEntity::getPhotoUrl).collect(Collectors.toList());
         this.content = reviewEntity.getContent();
         this.createAt = reviewEntity.getCreateAt();
     }
