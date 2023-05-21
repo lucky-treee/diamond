@@ -24,7 +24,7 @@ class AuthService(
     @Value("\${oauth2.kakao.clientId}")
     val clientId: String,
 
-    @Value("\${oauth2.kakao.secretKey")
+    @Value("\${oauth2.kakao.secretKey}")
     val clientSecret: String,
 ) {
     fun generate(generateTokenRequest: GenerateTokenRequest): ResponseEntity<AccessTokenResponse> {
