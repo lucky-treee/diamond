@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @Tag(name = "회원", description = "회원")
 @RestController
-@RequestMapping("/v1/members")
+@RequestMapping("v1/members")
 @RequiredArgsConstructor
 public class MemberController {
 

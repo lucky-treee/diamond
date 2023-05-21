@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "즐겨찾기", description = "회원의 즐겨찾기")
 @RestController
-@RequestMapping("/v1/bookmarks")
+@RequestMapping("v1/bookmarks")
 @RequiredArgsConstructor
 public class BookmarkController {
 

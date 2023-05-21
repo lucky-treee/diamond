@@ -16,9 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Tag(name = "Shop API", description = "프론트엔드 사용")
+@Tag(name = "Review API", description = "후기")
 @RestController
-@RequestMapping("/v1/reviews")
+@RequestMapping("v1/reviews")
 @RequiredArgsConstructor
 public class ReviewController {
 
