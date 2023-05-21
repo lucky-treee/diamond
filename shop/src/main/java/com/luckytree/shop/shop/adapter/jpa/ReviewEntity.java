@@ -26,9 +26,8 @@ public class ReviewEntity extends BaseTimeEntity {
     @Column(name = "id")
     private Long id;
   
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id")
-    private ShopEntity shopEntity;
+    private Long shopId;
 
     @Column(name = "member_id", length = 20, unique = true, nullable = false)
     private Long memberId;
@@ -47,9 +46,6 @@ public class ReviewEntity extends BaseTimeEntity {
     @Column(name = "create_at")
     @CreatedDate
     private LocalDateTime createAt;
-
-    @OneToMany(mappedBy = "reviewEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReviewPhotoEntity> photos;
 
     public void isAlreadyDeleted() {
         if (this == null) {

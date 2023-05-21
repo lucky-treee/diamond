@@ -34,8 +34,8 @@ public class ReviewAdapter implements ReviewPort {
     }
 
     @Override
-    public List<ReviewPhotoEntity> findReviewPhotoByReviewEntity(ReviewEntity reviewEntity) {
-        return reviewPhotoRepository.findByReviewEntity(reviewEntity);
+    public List<ReviewPhotoEntity> findReviewPhotoByReviewId(Long reviewId) {
+        return reviewPhotoRepository.findByReviewId(reviewId);
     }
 
     @Override

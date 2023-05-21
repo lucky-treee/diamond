@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,11 +50,11 @@ public class ReviewController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "샵 리뷰 조회")
+    @Operation(summary = "내 리뷰 조회(로그인)")
     @GetMapping("/review")
-    public ResponseEntity<Object> findShopReviewByMemberIdOrShopId(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<MyReviewsDto> getMyReviews(@RequestParam("member_id") long memberId, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
+        Pageable pageable = PageRequest.of(offset, limit);
+        return ResponseEntity.ok(reviewUseCase.findMyReviewsById(memberId, pageable));
     }
 
     @Operation(summary = "샵 리뷰 삭제(로그인)")
