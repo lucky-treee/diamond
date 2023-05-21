@@ -24,8 +24,8 @@ public class ShopController {
 
     private final ShopUseCase shopUseCase;
 
-    @Operation(summary = "샵 등록요청 API(로그인)")
-    @PostMapping("/shop")
+    @Operation(summary = "샵 등록요청 API")
+    @PostMapping
     public ResponseEntity<Object> createShop(@RequestBody @Valid CreateShopDto createShopDto) {
         shopUseCase.createShop(createShopDto);
         return ResponseEntity.ok().build();
@@ -59,9 +59,9 @@ public class ShopController {
         return ResponseEntity.ok(shopSummaryDtoList);
     }
 
-    @Operation(summary = "샵 삭제요청 API(로그인)")
+    @Operation(summary = "샵 삭제요청 API")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/shop")
+    @DeleteMapping
     public void deleteShop(@RequestHeader("Authorization") String authorization, @RequestBody @Valid ShopDeleteDto shopDeleteDto) {
         shopUseCase.deleteShop(authorization, shopDeleteDto);
     }
