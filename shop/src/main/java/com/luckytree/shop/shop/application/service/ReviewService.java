@@ -16,7 +16,7 @@ import com.luckytree.shop.shop.adapter.data.review.MyReviewsDto;
 import com.luckytree.shop.shop.adapter.data.review.ReviewDto;
 import org.springframework.data.domain.Pageable;
 
-import com.luckytree.shop.shop.domain.ReviewPhoto;
+import com.luckytree.shop.shop.domain.review.ReviewPhoto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

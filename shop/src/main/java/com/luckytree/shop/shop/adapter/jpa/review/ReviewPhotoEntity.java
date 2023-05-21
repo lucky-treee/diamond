@@ -1,6 +1,6 @@
 package com.luckytree.shop.shop.adapter.jpa.review;
 
-import com.luckytree.shop.shop.domain.ReviewPhoto;
+import com.luckytree.shop.shop.domain.review.ReviewPhoto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

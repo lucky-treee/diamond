@@ -4,8 +4,8 @@ import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
-import com.luckytree.shop.shop.domain.Review;
-import com.luckytree.shop.shop.domain.ReviewPhoto;
+import com.luckytree.shop.shop.domain.review.Review;
+import com.luckytree.shop.shop.domain.review.ReviewPhoto;
 
 import java.util.List;
 

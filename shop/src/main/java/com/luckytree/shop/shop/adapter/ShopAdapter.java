@@ -5,7 +5,7 @@ import com.luckytree.shop.shop.adapter.jpa.shop.ShopRemoveEntity;
 import com.luckytree.shop.shop.adapter.jpa.shop.ShopRemoveRepository;
 import com.luckytree.shop.shop.adapter.jpa.shop.ShopRepository;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
-import com.luckytree.shop.shop.domain.Shop;
+import com.luckytree.shop.shop.domain.shop.Shop;
 import lombok.RequiredArgsConstructor;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;

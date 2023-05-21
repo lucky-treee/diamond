@@ -1,7 +1,7 @@
 package com.luckytree.shop.shop.application.port.outgoing;
 
 import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
-import com.luckytree.shop.shop.domain.Shop;
+import com.luckytree.shop.shop.domain.shop.Shop;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
 

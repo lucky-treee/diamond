@@ -1,6 +1,6 @@
 package com.luckytree.shop.shop.adapter.jpa.shop;
 
-import com.luckytree.shop.shop.domain.Shop;
+import com.luckytree.shop.shop.domain.shop.Shop;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;

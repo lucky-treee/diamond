@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.domain;
+package com.luckytree.shop.shop.domain.shop;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

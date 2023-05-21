@@ -1,6 +1,6 @@
 package com.luckytree.shop.shop.adapter.jpa.review;
 
-import com.luckytree.shop.shop.domain.Review;
+import com.luckytree.shop.shop.domain.review.Review;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
