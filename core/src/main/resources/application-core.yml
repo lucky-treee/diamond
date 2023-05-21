@@ -1,0 +1,13 @@
+
+jwt:
+  #'junyeong-algorithm-temporary-secret-key-for-example-long-key-very-very-long'
+  secret: anVueWVvbmctYWxnb3JpdGhtLXRlbXBvcmFyeS1zZWNyZXQta2V5LWZvci1leGFtcGxlLWxvbmcta2V5LXZlcnktdmVyeS1sb25nCg==
+  header: Authorization
+  issuer: POOM
+  # minute
+  access-token-expire-minute: 10
+  refresh-token-expire-minute: 120
+
+internal:
+  api:
+    secret: test123456
