@@ -1,4 +1,4 @@
-package com.luckytree.member.member.adapter.jpa;
+package com.luckytree.member.member.adapter.mysql.member;
 
 import com.luckytree.member.member.domain.member.Member;
 import jakarta.persistence.*;

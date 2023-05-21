@@ -4,7 +4,7 @@ import com.luckytree.member.member.adapter.data.bookmark.BookmarksResponse;
 import com.luckytree.member.member.adapter.data.bookmark.FindBookmarkedShops;
 
 
-public interface ShopFeignClientPort {
+public interface ShopFeignPort {
 
     BookmarksResponse findBookmarksByIds(FindBookmarkedShops FindBookmarkedShops);
 }

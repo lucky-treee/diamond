@@ -1,6 +1,6 @@
 package com.luckytree.member.member.application.port.outgoing;
 
-import com.luckytree.member.member.adapter.jpa.BookmarkEntity;
+import com.luckytree.member.member.adapter.mysql.bookmark.BookmarkEntity;
 import com.luckytree.member.member.domain.bookmark.Bookmark;
 
 import java.util.List;

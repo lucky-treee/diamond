@@ -1,6 +1,5 @@
 package com.luckytree.member.member.adapter.data.member;
 
-import com.luckytree.member.member.adapter.jpa.MemberEntity;
 import com.luckytree.member.member.domain.member.Member;
 import lombok.*;
 import luckytree.poom.core.enums.MemberStatus;

@@ -1,4 +1,4 @@
-package com.luckytree.member.member.adapter.jpa;
+package com.luckytree.member.member.adapter.mysql.bookmark;
 
 import com.luckytree.member.member.domain.bookmark.Bookmark;
 import jakarta.persistence.*;

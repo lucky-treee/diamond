@@ -2,13 +2,13 @@ package com.luckytree.member.member.adapter.feign;
 
 import com.luckytree.member.member.adapter.data.bookmark.BookmarksResponse;
 import com.luckytree.member.member.adapter.data.bookmark.FindBookmarkedShops;
-import com.luckytree.member.member.application.port.outgoing.ShopFeignClientPort;
+import com.luckytree.member.member.application.port.outgoing.ShopFeignPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
-public class ShopFeignClientAdapter implements ShopFeignClientPort {
+public class ShopFeignAdapter implements ShopFeignPort {
 
     private final ShopFeignClient shopFeignClient;
 

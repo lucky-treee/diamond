@@ -1,7 +1,7 @@
 package com.luckytree.member.member.domain.member;
 
 
-import com.luckytree.member.member.adapter.jpa.MemberEntity;
+import com.luckytree.member.member.adapter.mysql.member.MemberEntity;
 import lombok.Getter;
 import luckytree.poom.core.enums.MemberStatus;
 import luckytree.poom.core.jwt.Role;
