@@ -2,9 +2,12 @@ package luckytree.poom.core.config
 
 import feign.Request.HttpMethod
 import feign.Request.HttpMethod.*
+import luckytree.poom.core.filter.InternalKeyFilter
+import luckytree.poom.core.filter.InternalKeyManager
 import luckytree.poom.core.filter.JwtFilter
 import luckytree.poom.core.handler.JwtAccessDeniedHandler
 import luckytree.poom.core.handler.JwtAuthenticationEntryPoint
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -22,7 +25,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 class SecurityConfig(
     private val jwtConfiguration: JwtConfiguration,
     private val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint,
-    private val jwtAccessDeniedHandler: JwtAccessDeniedHandler
+    private val jwtAccessDeniedHandler: JwtAccessDeniedHandler,
+
+    @Value("\${internal.api.secret}")
+    private val internalApiSecret: String,
 ) {
     @Bean
     fun filterChain(httpSecurity: HttpSecurity): SecurityFilterChain {
@@ -50,8 +56,12 @@ class SecurityConfig(
                 it.anyRequest().authenticated()
             }
             .addFilterBefore(
+                InternalKeyFilter(InternalKeyManager(internalApiSecret)),
+                UsernamePasswordAuthenticationFilter::class.java,
+            )
+            .addFilterBefore(
                 JwtFilter(jwtConfiguration),
-                UsernamePasswordAuthenticationFilter::class.java
+                InternalKeyFilter::class.java,
             )
 
         return httpSecurity.build()
