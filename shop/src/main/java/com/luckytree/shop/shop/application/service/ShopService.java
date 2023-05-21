@@ -8,8 +8,6 @@ import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import lombok.RequiredArgsConstructor;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
-import luckytree.poom.core.jwt.JwtAuthentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

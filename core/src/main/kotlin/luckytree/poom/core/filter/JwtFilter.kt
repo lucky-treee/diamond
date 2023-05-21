@@ -1,7 +1,6 @@
 package luckytree.poom.core.filter
 
 import com.auth0.jwt.JWT
-import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.algorithms.Algorithm.HMAC512
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
@@ -9,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse
 import luckytree.poom.core.config.JwtConfiguration
 import luckytree.poom.core.jwt.AuthenticationToken
 import luckytree.poom.core.jwt.Claims
-import luckytree.poom.core.jwt.JwtAuthentication
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
@@ -41,7 +39,7 @@ class JwtFilter(private val jwtConfiguration: JwtConfiguration) : OncePerRequest
 
     private fun changeAuthentication(token: String, httpServletRequest: HttpServletRequest) {
         with(verify(token)) {
-            val principal = JwtAuthentication(token, memberId)
+            val principal = memberId
             val authorities = listOf(SimpleGrantedAuthority(role))
             AuthenticationToken(principal = principal, authorities = authorities)
                 .apply { details = WebAuthenticationDetailsSource().buildDetails(httpServletRequest) }
