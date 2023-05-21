@@ -63,7 +63,7 @@ public class ReviewController {
 
     @Operation(summary = "리뷰 삭제")
     @DeleteMapping
-    ResponseEntity<Object> deleteShopReview(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
+    ResponseEntity<Object> deleteReview(@RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
     }
