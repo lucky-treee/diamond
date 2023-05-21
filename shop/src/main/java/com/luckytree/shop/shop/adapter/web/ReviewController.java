@@ -24,43 +24,45 @@ public class ReviewController {
 
     private final ReviewUseCase reviewUseCase;
 
-    @Operation(summary = "샵 리뷰 등록(로그인)")
-    @PostMapping("/review")
+    @Operation(summary = "리뷰 등록")
+    @PostMapping
     public ResponseEntity<Object> createReview(@RequestPart("createReviewDto") @Valid CreateReviewDto createReviewDto){
         Long reviewId = reviewUseCase.createReview(createReviewDto);
         return ResponseEntity.ok(reviewId);
     }
+    // 리턴 타입을 ReviewResponse 로 구현
 
-    @Operation(summary = "샵 리뷰 사진 등록(로그인)")
-    @PostMapping("/review/photo/{reviewId}")
-    public ResponseEntity<Object> createReviewPhoto(@PathVariable("reviewId") @Valid Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos){
+    @Operation(summary = "리뷰 사진 등록")
+    @PostMapping("/{id}/photos")
+    public ResponseEntity<Object> createReviewPhoto(@PathVariable("id") Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos){
         reviewUseCase.createReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "샵 리뷰 수정(로그인)")
-    @PatchMapping("/review")
-    public ResponseEntity<Object> updateReview(@RequestPart("updateReviewDto") @Valid UpdateReviewDto updateReviewDto) {
+    @Operation(summary = "리뷰 수정")
+    @PatchMapping
+    public ResponseEntity<Object> updateReview(@RequestBody @Valid UpdateReviewDto updateReviewDto) {
         reviewUseCase.updateReview(updateReviewDto);
         return ResponseEntity.ok().build();
     }
+    // 리턴 타입을 ReviewResponse 로 구현
 
-    @Operation(summary = "샵 리뷰 사진 수정(로그인)")
-    @PatchMapping("/review/photo/{reviewId}")
-    public ResponseEntity<Object> updateReviewPhoto(@PathVariable("reviewId") @Valid Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
+    @Operation(summary = "리뷰 사진 수정")
+    @PatchMapping("/{id}/photos")
+    public ResponseEntity<Object> updateReviewPhoto(@PathVariable("id") Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
         reviewUseCase.updateReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "내 리뷰 조회(로그인)")
-    @GetMapping("/review")
+    @Operation(summary = "내 리뷰 조회")
+    @GetMapping
     public ResponseEntity<MyReviewsDto> getMyReviews(@RequestParam("member_id") long memberId, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
         Pageable pageable = PageRequest.of(offset, limit);
         return ResponseEntity.ok(reviewUseCase.findMyReviewsById(memberId, pageable));
     }
 
-    @Operation(summary = "샵 리뷰 삭제(로그인)")
-    @DeleteMapping("/review")
+    @Operation(summary = "리뷰 삭제")
+    @DeleteMapping
     ResponseEntity<Object> deleteShopReview(@RequestHeader("Authorization") String authorization, @RequestParam(name = "shopId") String shopId) {
 
         return ResponseEntity.ok().build();
