@@ -1,9 +1,9 @@
 package com.luckytree.shop.shop.application.port.outgoing;
 
-import com.luckytree.shop.shop.adapter.jpa.ReviewEntity;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import com.luckytree.shop.shop.adapter.jpa.ReviewPhotoEntity;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
 import com.luckytree.shop.shop.domain.Review;
 import com.luckytree.shop.shop.domain.ReviewPhoto;
 

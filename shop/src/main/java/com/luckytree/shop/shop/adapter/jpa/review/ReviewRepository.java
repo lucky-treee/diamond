@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.adapter.jpa;
+package com.luckytree.shop.shop.adapter.jpa.review;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

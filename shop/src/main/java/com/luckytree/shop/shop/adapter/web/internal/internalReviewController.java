@@ -1,6 +1,6 @@
 package com.luckytree.shop.shop.adapter.web.internal;
 
-import com.luckytree.shop.shop.adapter.data.MyReviewsDto;
+import com.luckytree.shop.shop.adapter.data.review.MyReviewsDto;
 import com.luckytree.shop.shop.application.port.incoming.ReviewUseCase;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

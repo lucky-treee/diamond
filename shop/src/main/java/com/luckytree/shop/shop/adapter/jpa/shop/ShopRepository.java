@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.adapter.jpa;
+package com.luckytree.shop.shop.adapter.jpa.shop;
 
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;

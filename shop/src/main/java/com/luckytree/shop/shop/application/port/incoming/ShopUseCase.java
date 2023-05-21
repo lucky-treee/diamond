@@ -1,6 +1,7 @@
 package com.luckytree.shop.shop.application.port.incoming;
 
-import com.luckytree.shop.shop.adapter.data.*;
+import com.luckytree.shop.shop.adapter.data.bookmark.MyBookmarksDto;
+import com.luckytree.shop.shop.adapter.data.shop.*;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
 

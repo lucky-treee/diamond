@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.adapter.data;
+package com.luckytree.shop.shop.adapter.data.shop;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,8 +1,8 @@
-package com.luckytree.shop.shop.adapter.data;
+package com.luckytree.shop.shop.adapter.data.review;
 
-import com.luckytree.shop.shop.adapter.jpa.ReviewEntity;
-import com.luckytree.shop.shop.adapter.jpa.ReviewPhotoEntity;
-import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

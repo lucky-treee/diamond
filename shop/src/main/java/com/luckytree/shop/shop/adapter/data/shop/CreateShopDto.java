@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.adapter.data;
+package com.luckytree.shop.shop.adapter.data.shop;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

@@ -1,6 +1,6 @@
-package com.luckytree.shop.shop.adapter.data;
+package com.luckytree.shop.shop.adapter.data.shop;
 
-import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import luckytree.poom.core.enums.ShopCategory;

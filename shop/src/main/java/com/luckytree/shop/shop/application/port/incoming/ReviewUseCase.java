@@ -1,8 +1,9 @@
 package com.luckytree.shop.shop.application.port.incoming;
 
-import com.luckytree.shop.shop.adapter.data.MyReviewsDto;
+import com.luckytree.shop.shop.adapter.data.review.MyReviewsDto;
+import com.luckytree.shop.shop.adapter.data.review.CreateReviewDto;
+import com.luckytree.shop.shop.adapter.data.review.UpdateReviewDto;
 import org.springframework.data.domain.Pageable;
-import com.luckytree.shop.shop.adapter.data.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.luckytree.shop.shop.adapter.web.internal;
 
-import com.luckytree.shop.shop.adapter.data.MyBookmarksDto;
-import com.luckytree.shop.shop.adapter.data.ShopFeignResponseDto;
+import com.luckytree.shop.shop.adapter.data.bookmark.MyBookmarksDto;
+import com.luckytree.shop.shop.adapter.data.shop.ShopFeignResponseDto;
 import com.luckytree.shop.shop.application.port.incoming.ShopUseCase;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

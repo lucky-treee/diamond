@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.adapter.jpa;
+package com.luckytree.shop.shop.adapter.jpa.shop;
 
 import com.luckytree.shop.shop.domain.Shop;
 import jakarta.persistence.*;
@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
 import luckytree.poom.core.enums.ShopStatus;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -18,7 +21,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class ShopEntity extends BaseTimeEntity {
+public class ShopEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,6 +75,14 @@ public class ShopEntity extends BaseTimeEntity {
 
     @Column(length = 20)
     private String holiday;
+
+    @Column(name = "update_at")
+    @LastModifiedDate
+    private LocalDateTime updateAt;
+
+    @Column(name = "create_at")
+    @CreatedDate
+    private LocalDateTime createAt;
 
     @OneToMany(mappedBy = "shopEntity")
     private List<ShopRemoveEntity> shopRemoveEntityList;

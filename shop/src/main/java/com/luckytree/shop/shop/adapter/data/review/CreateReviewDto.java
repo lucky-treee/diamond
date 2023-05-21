@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.adapter.data;
+package com.luckytree.shop.shop.adapter.data.review;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luckytree.shop.shop.domain.Review;

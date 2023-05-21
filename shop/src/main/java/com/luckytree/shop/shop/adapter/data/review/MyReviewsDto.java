@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.adapter.data;
+package com.luckytree.shop.shop.adapter.data.review;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyBookmarksDto {
+public class MyReviewsDto {
 
-    private List<BookmarkDto> bookmarks;
+    private List<ReviewDto> reviews;
 }

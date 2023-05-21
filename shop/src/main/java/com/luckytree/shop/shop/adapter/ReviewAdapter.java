@@ -1,9 +1,9 @@
 package com.luckytree.shop.shop.adapter;
 
-import com.luckytree.shop.shop.adapter.jpa.ReviewEntity;
-import com.luckytree.shop.shop.adapter.jpa.ReviewPhotoEntity;
-import com.luckytree.shop.shop.adapter.jpa.ReviewPhotoRepository;
-import com.luckytree.shop.shop.adapter.jpa.ReviewRepository;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoRepository;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewRepository;
 import com.luckytree.shop.shop.application.port.outgoing.ReviewPort;
 import com.luckytree.shop.shop.domain.Review;
 import com.luckytree.shop.shop.domain.ReviewPhoto;

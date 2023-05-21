@@ -1,9 +1,9 @@
 package com.luckytree.shop.shop.adapter;
 
-import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
-import com.luckytree.shop.shop.adapter.jpa.ShopRemoveEntity;
-import com.luckytree.shop.shop.adapter.jpa.ShopRemoveRepository;
-import com.luckytree.shop.shop.adapter.jpa.ShopRepository;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopRemoveEntity;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopRemoveRepository;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopRepository;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop.shop.domain.Shop;
 import lombok.RequiredArgsConstructor;

@@ -1,12 +1,12 @@
-package com.luckytree.shop.shop.adapter.jpa;
+package com.luckytree.shop.shop.adapter.jpa.review;
 
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import com.luckytree.shop.shop.domain.ReviewPhoto;
+import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Table(name = "review_photo")
 @Getter
@@ -15,7 +15,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @ToString
-public class ReviewPhotoEntity extends BaseTimeEntity {
+public class ReviewPhotoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,14 @@ public class ReviewPhotoEntity extends BaseTimeEntity {
   
     @Column(name = "photo_url", nullable = false)
     private String photoUrl;
+
+    @Column(name = "update_at")
+    @LastModifiedDate
+    private LocalDateTime updateAt;
+
+    @Column(name = "create_at")
+    @CreatedDate
+    private LocalDateTime createAt;
 
     public ReviewPhotoEntity(ReviewPhoto reviewPhoto) {
         this.reviewId = reviewPhoto.getReviewId();

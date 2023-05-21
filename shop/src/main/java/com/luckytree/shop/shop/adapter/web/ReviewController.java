@@ -1,6 +1,8 @@
 package com.luckytree.shop.shop.adapter.web;
 
-import com.luckytree.shop.shop.adapter.data.*;
+import com.luckytree.shop.shop.adapter.data.review.CreateReviewDto;
+import com.luckytree.shop.shop.adapter.data.review.MyReviewsDto;
+import com.luckytree.shop.shop.adapter.data.review.UpdateReviewDto;
 import com.luckytree.shop.shop.application.port.incoming.ReviewUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

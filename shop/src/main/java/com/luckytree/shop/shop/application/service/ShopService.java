@@ -1,7 +1,9 @@
 package com.luckytree.shop.shop.application.service;
 
-import com.luckytree.shop.shop.adapter.data.*;
-import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
+import com.luckytree.shop.shop.adapter.data.bookmark.BookmarkDto;
+import com.luckytree.shop.shop.adapter.data.bookmark.MyBookmarksDto;
+import com.luckytree.shop.shop.adapter.data.shop.*;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
 import com.luckytree.shop.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import lombok.RequiredArgsConstructor;

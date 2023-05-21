@@ -1,6 +1,6 @@
-package com.luckytree.shop.shop.adapter.data;
+package com.luckytree.shop.shop.adapter.data.bookmark;
 
-import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

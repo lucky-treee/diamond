@@ -1,18 +1,19 @@
 package com.luckytree.shop.shop.application.service;
 
 import com.luckytree.shop.common.utils.S3Util;
-import com.luckytree.shop.shop.adapter.data.*;
-import com.luckytree.shop.shop.adapter.jpa.ReviewEntity;
-import com.luckytree.shop.shop.adapter.jpa.ReviewPhotoEntity;
-import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
+import com.luckytree.shop.shop.adapter.data.review.CreateReviewDto;
+import com.luckytree.shop.shop.adapter.data.review.UpdateReviewDto;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
+import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
+import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
 import com.luckytree.shop.shop.application.port.incoming.ReviewUseCase;
 import com.luckytree.shop.shop.application.port.outgoing.ReviewPort;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.luckytree.shop.shop.adapter.data.MyReviewsDto;
-import com.luckytree.shop.shop.adapter.data.ReviewDto;
+import com.luckytree.shop.shop.adapter.data.review.MyReviewsDto;
+import com.luckytree.shop.shop.adapter.data.review.ReviewDto;
 import org.springframework.data.domain.Pageable;
 
 import com.luckytree.shop.shop.domain.ReviewPhoto;
