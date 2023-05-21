@@ -1,13 +1,17 @@
 package com.luckytree.member.member.application.port.outgoing;
 
-import com.luckytree.member.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member.member.adapter.jpa.BookmarkEntity;
+import com.luckytree.member.member.domain.bookmark.Bookmark;
 
 import java.util.List;
 
 public interface BookmarkPort {
 
-    void create(CreateBookmarkRequest createBookmarkRequest);
-    void deleteByMemberIdAndShopId(long memberId, long shopId);
+    void create(Bookmark bookmark);
+
+    Bookmark findByMemberIdAndShopId(Long memberId, Long shopId);
+
+    void delete(Bookmark bookmark);
+
     List<BookmarkEntity> findAllByMemberId(long memberId);
 }

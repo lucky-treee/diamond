@@ -2,11 +2,13 @@ package com.luckytree.member.member.application.port.incoming;
 
 import com.luckytree.member.member.adapter.data.BookmarksResponse;
 import com.luckytree.member.member.adapter.data.CreateBookmarkRequest;
+import com.luckytree.member.member.domain.bookmark.Bookmark;
 
 public interface BookmarkUseCase {
 
-    void create(CreateBookmarkRequest createBookmarkRequest);
-    BookmarksResponse getBookmarks(String authorization, Long memberId);
-    void delete(String authorization, long shopId, Long memberId);
-    void delete(long memberId, long shopId);
+    void create(Bookmark bookmark);
+
+    void delete(Long shopId);
+
+    BookmarksResponse getBookmarks(Long memberId);
 }

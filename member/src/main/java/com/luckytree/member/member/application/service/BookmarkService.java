@@ -1,13 +1,14 @@
 package com.luckytree.member.member.application.service;
 
 import com.luckytree.member.member.adapter.data.BookmarksResponse;
-import com.luckytree.member.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member.member.adapter.data.FindBookmarkedShops;
 import com.luckytree.member.member.adapter.jpa.BookmarkEntity;
 import com.luckytree.member.member.application.port.incoming.BookmarkUseCase;
 import com.luckytree.member.member.application.port.outgoing.BookmarkPort;
 import com.luckytree.member.member.application.port.outgoing.ShopFeignClientPort;
+import com.luckytree.member.member.domain.bookmark.Bookmark;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,25 +24,20 @@ public class BookmarkService implements BookmarkUseCase {
 
     @Override
     @Transactional
-    public void create(CreateBookmarkRequest createBookmarkRequest) {
-        bookmarkPort.create(createBookmarkRequest);
-    }
-
-    @Override
-    public BookmarksResponse getBookmarks(String authorization, Long memberId) {
-        List<Long> shopIds = findShopIds(memberId);
-        return findBookmarkedShops(shopIds);
+    public void create(Bookmark bookmark) {
+        bookmarkPort.create(bookmark);
     }
 
     @Override
     @Transactional
-    public void delete(String authorization, long shopId, Long memberId) {
-        bookmarkPort.deleteByMemberIdAndShopId(memberId, shopId);
+    public void delete(Long shopId) {
+        bookmarkPort.delete(bookmarkPort.findByMemberIdAndShopId((Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal(), shopId));
     }
 
     @Override
-    public void delete(long memberId, long shopId) {
-        bookmarkPort.deleteByMemberIdAndShopId(memberId, shopId);
+    public BookmarksResponse getBookmarks(Long memberId) {
+        List<Long> shopIds = findShopIds(memberId);
+        return findBookmarkedShops(shopIds);
     }
 
     private List<Long> findShopIds(long memberId) {

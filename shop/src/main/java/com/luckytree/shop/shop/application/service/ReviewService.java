@@ -50,7 +50,6 @@ public class ReviewService implements ReviewUseCase {
     @Override
     public void deleteReview(long reviewId) {
         ReviewEntity reviewEntity = reviewPort.findById(reviewId);
-        reviewEntity.isAlreadyDeleted();
 
         s3delete(reviewEntity);
         reviewPort.deleteReview(reviewId);
@@ -58,7 +57,7 @@ public class ReviewService implements ReviewUseCase {
 
     private void s3delete(ReviewEntity reviewEntity) {
         List<String> deletingPhotos = reviewPort.findReviewPhotoByReviewId(reviewEntity.getId()).stream().map(ReviewPhotoEntity::getPhotoUrl).map(s -> s.substring(s.lastIndexOf("/") + 1)).toList();
-        deletingPhotos.stream().forEach(s -> s3Util.delete(s));
+        deletingPhotos.forEach(s3Util::delete);
     }
 
     @Override
@@ -69,14 +68,14 @@ public class ReviewService implements ReviewUseCase {
     @Override
     public void createReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos) {
         List<String> photoUrls = new ArrayList<>();
-        reviewPhotos.stream().forEach(multipartFile -> {
+        reviewPhotos.forEach(multipartFile -> {
             try {
                 photoUrls.add(s3Util.upload(multipartFile));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-        photoUrls.stream().forEach(s ->{
+        photoUrls.forEach(s ->{
             reviewPort.createReviewPhoto(new ReviewPhoto(reviewId, s));
         });
     }
@@ -93,17 +92,17 @@ public class ReviewService implements ReviewUseCase {
     @Override
     public void updateReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos){
         List<String> deletingPhotos = reviewPort.findReviewPhotoByReviewId(reviewId).stream().map(ReviewPhotoEntity :: getPhotoUrl).map(s -> s.substring(s.lastIndexOf("/")+1)).toList();
-        deletingPhotos.stream().forEach(s -> s3Util.delete(s));
+        deletingPhotos.forEach(s3Util::delete);
         reviewPort.deleteReviewPhotoByReviewId(reviewId);
         List<String> photoUrls = new ArrayList<>();
-        reviewPhotos.stream().forEach(multipartFile -> {
+        reviewPhotos.forEach(multipartFile -> {
             try {
                 photoUrls.add(s3Util.upload(multipartFile));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-        photoUrls.stream().forEach(s ->{
+        photoUrls.forEach(s ->{
             reviewPort.createReviewPhoto(new ReviewPhoto(reviewId, s));
         });
     }

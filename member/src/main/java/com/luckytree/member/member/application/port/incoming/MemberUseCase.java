@@ -5,7 +5,7 @@ import com.luckytree.member.member.adapter.data.UpdateMemberRequest;
 
 public interface MemberUseCase {
   
-    MemberResponse getMember(String authorization, Long memberId);
-    void update(String authorization, UpdateMemberRequest updateMemberRequest, Long memberId);
-    void leave(String authorization, Long memberId);
+    MemberResponse getMember(Long memberId);
+    void update(UpdateMemberRequest updateMemberRequest, Long memberId);
+    void leave(Long memberId);
 }

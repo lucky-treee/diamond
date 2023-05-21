@@ -1,6 +1,8 @@
 package com.luckytree.member.member.adapter.data;
 
+import com.luckytree.member.member.domain.bookmark.Bookmark;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,15 +11,19 @@ import luckytree.poom.core.enums.ShopCategory;
 @Getter
 @Setter
 @NoArgsConstructor
-@Schema(description = "즐겨찾기 등록 DTO")
+@Schema(description = "즐겨찾기 등록 요청")
 public class CreateBookmarkRequest {
 
-    @Schema(description = "멤버 id")
+    @NotNull
     private long memberId;
 
-    @Schema(description = "샵 id")
+    @NotNull
     private long shopId;
 
     @Schema(description = "샵 카테고리")
     private ShopCategory category;
+
+    public Bookmark toDomain() {
+        return new Bookmark(memberId, shopId, category);
+    }
 }

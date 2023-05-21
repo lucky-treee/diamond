@@ -17,7 +17,7 @@ public class MemberService implements MemberUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public MemberResponse getMember(String authorization, Long memberId) {
+    public MemberResponse getMember(Long memberId) {
         MemberEntity memberEntity = memberPort.findById(memberId);
 
         return new MemberResponse(memberEntity);
@@ -25,14 +25,14 @@ public class MemberService implements MemberUseCase {
 
     @Transactional
     @Override
-    public void update(String authorization, UpdateMemberRequest updateMemberRequest, Long memberId) {
+    public void update(UpdateMemberRequest updateMemberRequest, Long memberId) {
         MemberEntity memberEntity = memberPort.findById(memberId);
         memberEntity.update(updateMemberRequest.getNickname(), updateMemberRequest.getPhoto());
     }
 
     @Transactional
     @Override
-    public void leave(String authorization, Long memberId) {
+    public void leave(Long memberId) {
         MemberEntity memberEntity = memberPort.findById(memberId);
         memberEntity.isAlreadyDeleted();
         memberPort.deleteById(memberEntity);

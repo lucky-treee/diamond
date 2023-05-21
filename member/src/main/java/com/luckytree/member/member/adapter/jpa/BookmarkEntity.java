@@ -1,7 +1,7 @@
 package com.luckytree.member.member.adapter.jpa;
 
 import com.luckytree.member.member.adapter.data.CreateBookmarkRequest;
-import com.luckytree.member.member.domain.Bookmark;
+import com.luckytree.member.member.domain.bookmark.Bookmark;
 import jakarta.persistence.*;
 import lombok.*;
 import luckytree.poom.core.enums.ShopCategory;
@@ -38,14 +38,14 @@ public class BookmarkEntity {
     private LocalDateTime createAt;
 
     public BookmarkEntity(Bookmark bookmark) {
+        this.id = bookmark.getId();
         this.memberId = bookmark.getMemberId();
         this.shopId = bookmark.getShopId();
         this.category = bookmark.getCategory();
+        this.createAt = bookmark.getCreateAt();
     }
 
-    public BookmarkEntity(CreateBookmarkRequest createBookmarkRequest) {
-        this.memberId = createBookmarkRequest.getMemberId();
-        this.shopId = createBookmarkRequest.getShopId();
-        this.category = createBookmarkRequest.getCategory();
+    public Bookmark toDomain() {
+        return new Bookmark(id, memberId, shopId, category, createAt);
     }
 }

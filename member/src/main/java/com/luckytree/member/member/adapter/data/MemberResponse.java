@@ -1,7 +1,7 @@
 package com.luckytree.member.member.adapter.data;
 
 import com.luckytree.member.member.adapter.jpa.MemberEntity;
-import com.luckytree.member.member.domain.Member;
+import com.luckytree.member.member.domain.member.Member;
 import lombok.*;
 
 @Getter

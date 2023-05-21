@@ -3,7 +3,6 @@ package com.luckytree.shop.shop.application.service;
 import com.luckytree.shop.shop.adapter.data.*;
 import com.luckytree.shop.shop.adapter.jpa.ShopEntity;
 import com.luckytree.shop.shop.application.port.incoming.ShopUseCase;
-import com.luckytree.shop.shop.application.port.outgoing.MemberFeignClientPort;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import lombok.RequiredArgsConstructor;
 import luckytree.poom.core.enums.ShopCategory;
@@ -19,7 +18,6 @@ import java.util.List;
 public class ShopService implements ShopUseCase {
 
     private final ShopPort shopPort;
-    private final MemberFeignClientPort memberFeignClientPort;
 
     @Override
     public void createShop(CreateShopDto createShopDto) {
@@ -60,22 +58,11 @@ public class ShopService implements ShopUseCase {
         shopPort.deleteShop(shopEntity, shopDeleteDto.getComment());
     }
 
-    @Override
-    public void createBookmark(String authorization, long shopId) {
-        ShopCategory category = shopPort.findCategoryById(shopId);
-        memberFeignClientPort.saveBookmark(0L, shopId, category);
-    }
-
     @Transactional(readOnly = true)
     @Override
     public MyBookmarksDto findMyBookmarksDtoByIds(List<Long> shopIds) {
         List<ShopEntity> shopEntities = shopPort.findBookmarkDtosByIds(shopIds);
         List<BookmarkDto> bookmarkDtos = shopEntities.stream().map(BookmarkDto::new).toList();
         return new MyBookmarksDto(bookmarkDtos);
-    }
-
-    @Override
-    public void deleteBookmark(String authorization, long shopId) {
-        memberFeignClientPort.deleteBookmark(0L, shopId);
     }
 }

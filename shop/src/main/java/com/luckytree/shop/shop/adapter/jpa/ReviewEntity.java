@@ -46,12 +46,6 @@ public class ReviewEntity extends BaseTimeEntity {
     @CreatedDate
     private LocalDateTime createAt;
 
-    public void isAlreadyDeleted() {
-        if (this == null) {
-            throw new BadRequestException("이미 삭제된 리뷰입니다.");
-        }
-    }
-
     public ReviewEntity(Review review) {
         this.memberId = review.getMemberId();
         this.content = review.getContent();

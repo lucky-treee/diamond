@@ -2,8 +2,11 @@ package com.luckytree.member.member.adapter.jpa;
 
 import com.luckytree.member.member.adapter.data.CreateBookmarkRequest;
 import com.luckytree.member.member.application.port.outgoing.BookmarkPort;
+import com.luckytree.member.member.domain.bookmark.Bookmark;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.exceptions.NotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,8 +17,14 @@ public class BookmarkAdapter implements BookmarkPort {
     private final BookmarkRepository bookmarkRepository;
 
     @Override
-    public void create(CreateBookmarkRequest createBookmarkRequest) {
-        bookmarkRepository.save(new BookmarkEntity(createBookmarkRequest));
+    @Transactional
+    public void create(Bookmark bookmark) {
+        bookmarkRepository.save(new BookmarkEntity(bookmark));
+    }
+
+    @Override
+    public Bookmark findByMemberIdAndShopId(Long memberId, Long shopId) {
+        return bookmarkRepository.findByMemberIdAndShopId(memberId, shopId).orElseThrow(NotFoundException::new).toDomain();
     }
 
     @Override
@@ -24,7 +33,8 @@ public class BookmarkAdapter implements BookmarkPort {
     }
 
     @Override
-    public void deleteByMemberIdAndShopId(long memberId, long shopId){
-        bookmarkRepository.deleteByMemberIdAndShopId(memberId, shopId);
+    @Transactional
+    public void delete(Bookmark bookmark){
+        bookmarkRepository.delete(new BookmarkEntity(bookmark));
     }
 }

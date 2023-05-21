@@ -1,4 +1,4 @@
-package com.luckytree.member.member.domain;
+package com.luckytree.member.member.domain.member;
 
 
 import com.luckytree.member.member.adapter.jpa.MemberEntity;
