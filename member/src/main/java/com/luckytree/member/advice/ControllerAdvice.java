@@ -1,4 +1,4 @@
-package com.luckytree.member.common.advice;
+package com.luckytree.member.advice;
 
 import luckytree.poom.core.exceptions.BadRequestException;
 import luckytree.poom.core.exceptions.InternalServerErrorException;

@@ -1,6 +1,6 @@
 package com.luckytree.member.member.adapter.feign;
 
-import com.luckytree.member.common.config.InternalFeignConfig;
+import com.luckytree.member.config.InternalFeignConfig;
 import com.luckytree.member.member.adapter.data.bookmark.BookmarksResponse;
 import com.luckytree.member.member.adapter.data.bookmark.FindBookmarkedShops;
 import org.springframework.cloud.openfeign.FeignClient;
