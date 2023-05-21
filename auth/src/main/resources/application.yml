@@ -14,4 +14,4 @@ oauth2:
     secretKey: sOTe7SjI0edhG9pfqYsbF8FLcexbAkpZ
 
 feign:
-  member: 192.168.0.123
+  member: https://192.168.0.123:10100
