@@ -56,7 +56,7 @@ public class ReviewController {
 
     @Operation(summary = "내 리뷰 조회")
     @GetMapping
-    public ResponseEntity<MyReviewsDto> getMyReviews(@RequestParam("member_id") long memberId, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
+    public ResponseEntity<MyReviewsDto> getMyReviews(@RequestParam("memberId") long memberId, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
         Pageable pageable = PageRequest.of(offset, limit);
         return ResponseEntity.ok(reviewUseCase.findMyReviewsById(memberId, pageable));
     }
