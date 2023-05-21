@@ -65,18 +65,4 @@ public class ShopController {
     public void deleteShop(@RequestHeader("Authorization") String authorization, @RequestBody @Valid ShopDeleteDto shopDeleteDto) {
         shopUseCase.deleteShop(authorization, shopDeleteDto);
     }
-
-    @Operation(summary = "샵 리뷰 등록(로그인)")
-    @PostMapping("/shop/review")
-    public ResponseEntity<Object> createShopReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid CreateReviewDto createReviewDto) {
-
-        return ResponseEntity.ok().build();
-    }
-
-    @Operation(summary = "샵 리뷰 수정(로그인)")
-    @PutMapping("/shop/review")
-    public ResponseEntity<Object> updateReview(@RequestHeader("Authorization") String authorization, @RequestBody @Valid UpdateReviewDto updateReviewDto) {
-
-        return ResponseEntity.ok().build();
-    }
 }
