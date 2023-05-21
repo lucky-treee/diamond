@@ -1,7 +1,7 @@
-package com.example.auth.util
+package com.example.auth.client.feign.kakao
 
-import com.example.auth.config.ExternalFeignConfig
-import com.example.auth.model.dto.GetKakaoUserResponse
+import com.example.auth.config.InternalFeignConfig
+import com.example.auth.client.feign.kakao.data.GetKakaoUserResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader
 @FeignClient(
     name = "ExternalUserFeignClient",
     url = "\${oauth2.kakao.infoUrl}",
-    configuration = [ExternalFeignConfig::class]
+    configuration = [InternalFeignConfig::class]
 )
 interface KakaoUserFeignClient {
     @GetMapping("/v2/user/me")

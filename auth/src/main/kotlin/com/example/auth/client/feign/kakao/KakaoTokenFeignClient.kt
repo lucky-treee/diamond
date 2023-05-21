@@ -1,8 +1,7 @@
-package com.example.auth.util
+package com.example.auth.client.feign.kakao
 
-import com.example.auth.config.ExternalFeignConfig
-import com.example.auth.model.dto.GetKakaoTokenRequest
-import com.example.auth.model.dto.GetKakaoTokenResponse
+import com.example.auth.config.InternalFeignConfig
+import com.example.auth.client.feign.kakao.data.GetKakaoTokenResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.PostMapping
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody
 @FeignClient(
     name = "ExternalTokenFeignClient",
     url = "\${oauth2.kakao.baseUrl}",
-    configuration = [ExternalFeignConfig::class]
+    configuration = [InternalFeignConfig::class]
 )
 interface KakaoTokenFeignClient {
     @PostMapping("/oauth/token")
