@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableFeignClients
 @EnableDiscoveryClient
 @EnableJpaAuditing
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.luckytree.member", "luckytree.poom.core"})
 public class MemberServiceApplication {
 
 	public static void main(String[] args) {
