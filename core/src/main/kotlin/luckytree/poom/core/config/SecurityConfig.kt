@@ -53,7 +53,7 @@ class SecurityConfig(
                     AntPathRequestMatcher("/api-docs"),
                     AntPathRequestMatcher("/api-docs/**"),
                 ).permitAll()
-                it.anyRequest().authenticated()
+                it.anyRequest().permitAll()
             }
             .addFilterBefore(
                 InternalKeyFilter(InternalKeyManager(internalApiSecret)),
