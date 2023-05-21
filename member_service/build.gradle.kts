@@ -22,6 +22,7 @@ repositories {
 extra["springCloudVersion"] = "2022.0.0-RC2"
 
 dependencies {
+	implementation(project(":core"))
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-security")
