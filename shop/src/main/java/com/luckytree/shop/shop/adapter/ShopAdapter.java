@@ -58,11 +58,6 @@ public class ShopAdapter implements ShopPort {
     }
 
     @Override
-    public ShopCategory findCategoryById(long shopId) {
-        return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId에 일치하는 ShopEntity가 없습니다. id: " + shopId)).getCategory();
-    }
-
-    @Override
     public List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds) {
         return shopRepository.findAllByIdIn(shopIds);
     }
