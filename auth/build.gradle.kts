@@ -19,7 +19,6 @@ repositories {
 dependencies {
 	implementation(project(":core"))
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.1")
 	implementation("org.springframework.boot:spring-boot-starter-web")
