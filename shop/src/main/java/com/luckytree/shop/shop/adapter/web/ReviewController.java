@@ -30,8 +30,8 @@ public class ReviewController {
     }
 
     @Operation(summary = "샵 리뷰 사진 등록(로그인)")
-    @PostMapping("/review/photo")
-    public ResponseEntity<Object> createReviewPhoto(@RequestPart("reviewId") @Valid Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos){
+    @PostMapping("/review/photo/{reviewId}")
+    public ResponseEntity<Object> createReviewPhoto(@PathVariable("reviewId") @Valid Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos){
         reviewUseCase.createReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
     }
@@ -44,8 +44,8 @@ public class ReviewController {
     }
 
     @Operation(summary = "샵 리뷰 사진 수정(로그인)")
-    @PatchMapping("/review/photo")
-    public ResponseEntity<Object> updateReviewPhoto(@RequestPart("reviewId") @Valid Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
+    @PatchMapping("/review/photo/{reviewId}")
+    public ResponseEntity<Object> updateReviewPhoto(@PathVariable("reviewId") @Valid Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
         reviewUseCase.updateReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
     }
