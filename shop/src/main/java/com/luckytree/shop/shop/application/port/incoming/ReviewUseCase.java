@@ -19,6 +19,4 @@ public interface ReviewUseCase {
     void updateReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
   
     MyReviewsDto findMyReviewsById(long memberId, Pageable pageable);
-    
-    void deleteReview(long reviewId);
 }

@@ -47,14 +47,6 @@ public class ReviewService implements ReviewUseCase {
         }).toList();
         return new MyReviewsDto(reviewDtos);
     }
-  
-    @Override
-    public void deleteReview(long reviewId) {
-        ReviewEntity reviewEntity = reviewPort.findById(reviewId);
-
-        s3delete(reviewEntity);
-        reviewPort.deleteReview(reviewId);
-    }
 
     private void s3delete(ReviewEntity reviewEntity) {
         List<String> deletingPhotos = reviewPort.findReviewPhotoByReviewId(reviewEntity.getId()).stream().map(ReviewPhotoEntity::getPhotoUrl).map(s -> s.substring(s.lastIndexOf("/") + 1)).toList();
