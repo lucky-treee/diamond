@@ -3,6 +3,7 @@ package com.luckytree.shop.shop.adapter.data.review;
 import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
 import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
 import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,8 +17,10 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ReviewResponse {
 
+    private Long id;
     private String shopName;
     private ShopCategory category;
     private List<String> photoUrl;
@@ -29,6 +32,12 @@ public class ReviewResponse {
         this.shopName = shopEntity.getName();
         this.category = shopEntity.getCategory();
         this.photoUrl = reviewPhotos.stream().map(ReviewPhotoEntity::getPhotoUrl).collect(Collectors.toList());
+        this.content = reviewEntity.getContent();
+        this.createAt = reviewEntity.getCreateAt();
+    }
+
+    public ReviewResponse(ReviewEntity reviewEntity){
+        this.id = reviewEntity.getId();
         this.content = reviewEntity.getContent();
         this.createAt = reviewEntity.getCreateAt();
     }

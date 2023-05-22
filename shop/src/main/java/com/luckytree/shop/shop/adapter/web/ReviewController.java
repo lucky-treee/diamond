@@ -2,6 +2,7 @@ package com.luckytree.shop.shop.adapter.web;
 
 import com.luckytree.shop.shop.adapter.data.review.CreateReviewRequest;
 import com.luckytree.shop.shop.adapter.data.review.MyReviewsResponse;
+import com.luckytree.shop.shop.adapter.data.review.ReviewResponse;
 import com.luckytree.shop.shop.adapter.data.review.UpdateReviewRequest;
 import com.luckytree.shop.shop.application.port.incoming.ReviewUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,11 +27,10 @@ public class ReviewController {
 
     @Operation(summary = "리뷰 등록")
     @PostMapping
-    public ResponseEntity<Object> createReview(@RequestPart("createReviewRequest") @Valid CreateReviewRequest createReviewRequest){
-        Long reviewId = reviewUseCase.createReview(createReviewRequest.toDomain());
-        return ResponseEntity.ok(reviewId);
+    public ResponseEntity<ReviewResponse> createReview(@RequestPart("createReviewRequest") @Valid CreateReviewRequest createReviewRequest){
+        ReviewResponse reviewResponse = reviewUseCase.createReview(createReviewRequest.toDomain());
+        return ResponseEntity.ok(reviewResponse);
     }
-    // 리턴 타입을 ReviewResponse 로 구현
 
     @Operation(summary = "리뷰 사진 등록")
     @PostMapping("/{id}/photos")
@@ -41,11 +41,10 @@ public class ReviewController {
 
     @Operation(summary = "리뷰 수정")
     @PatchMapping
-    public ResponseEntity<Object> updateReview(@RequestBody @Valid UpdateReviewRequest updateReviewRequest) {
-        Long reviewId = reviewUseCase.updateReview(updateReviewRequest.toDomain());
-        return ResponseEntity.ok(reviewId);
+    public ResponseEntity<ReviewResponse> updateReview(@RequestBody @Valid UpdateReviewRequest updateReviewRequest) {
+        ReviewResponse reviewResponse = reviewUseCase.updateReview(updateReviewRequest.toDomain());
+        return ResponseEntity.ok(reviewResponse);
     }
-    // 리턴 타입을 ReviewResponse 로 구현
 
     @Operation(summary = "리뷰 사진 수정")
     @PatchMapping("/{id}/photos")

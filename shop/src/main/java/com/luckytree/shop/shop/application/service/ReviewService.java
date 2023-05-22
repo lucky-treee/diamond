@@ -39,8 +39,8 @@ public class ReviewService implements ReviewUseCase {
     }
 
     @Override
-    public Long createReview(Review review) {
-        return reviewPort.createReview(review).getId();
+    public ReviewResponse createReview(Review review) {
+        return new ReviewResponse(reviewPort.createReview(review));
     }
 
     @Override
@@ -49,12 +49,12 @@ public class ReviewService implements ReviewUseCase {
     }
 
     @Override
-    public Long updateReview(Review review) {
+    public ReviewResponse updateReview(Review review) {
         ReviewEntity reviewEntity = reviewPort.findReviewById(review.getId());
         if(reviewEntity.getCreateAt().plusDays(7).isBefore(LocalDateTime.now())){
             throw new RuntimeException("리뷰 수정은 7일 이내에만 가능합니다.");
         }
-        return reviewEntity.update(review.getContent(), review.getHashtag());
+        return new ReviewResponse(reviewEntity.update(review.getContent(), review.getHashtag()));
     }
 
     @Override
