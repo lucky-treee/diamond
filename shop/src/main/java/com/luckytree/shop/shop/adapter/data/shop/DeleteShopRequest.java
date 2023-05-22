@@ -1,5 +1,6 @@
 package com.luckytree.shop.shop.adapter.data.shop;
 
+import com.luckytree.shop.shop.domain.shop.DeleteShop;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Schema(description = "샵 삭제 요청")
 @NoArgsConstructor
-public class ShopDeleteDto {
+public class DeleteShopRequest {
 
     @NotBlank
     @Size(max = 50)
@@ -26,4 +27,8 @@ public class ShopDeleteDto {
     @NotBlank
     @Schema(description = "샵 삭제사유")
     private String comment;
+
+    public DeleteShop toDomain(){
+        return new DeleteShop(name, address, comment);
+    }
 }

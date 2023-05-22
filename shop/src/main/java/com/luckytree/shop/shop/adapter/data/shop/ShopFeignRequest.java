@@ -1,4 +1,4 @@
-package com.luckytree.shop.shop.adapter.data.review;
+package com.luckytree.shop.shop.adapter.data.shop;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class MyReviewsDto {
+@NoArgsConstructor
+public class ShopFeignRequest {
 
-    private List<ReviewDto> reviews;
+    private List<Long> shopIds;
 }

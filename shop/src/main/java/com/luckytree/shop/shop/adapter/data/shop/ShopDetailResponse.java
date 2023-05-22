@@ -12,7 +12,7 @@ import luckytree.poom.core.enums.ShopHashtag;
 @Schema(description = "샵 상세정보")
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class ShopDetailDto {
+public class ShopDetailResponse {
 
     @Schema(description = "샵 이름")
     private String shopName;
@@ -56,7 +56,7 @@ public class ShopDetailDto {
     @Schema(description = "샵 휴무일")
     private String holiday;
 
-    public ShopDetailDto(ShopEntity shopEntity){
+    public ShopDetailResponse(ShopEntity shopEntity){
         this.shopName = shopEntity.getName();
         this.category = shopEntity.getCategory();
         this.hashTag = shopEntity.getHashtag();

@@ -1,11 +1,13 @@
 package com.luckytree.shop.shop.application.service;
 
-import com.luckytree.shop.shop.adapter.data.bookmark.BookmarkDto;
-import com.luckytree.shop.shop.adapter.data.bookmark.MyBookmarksDto;
+import com.luckytree.shop.shop.adapter.data.bookmark.BookmarkResponse;
+import com.luckytree.shop.shop.adapter.data.bookmark.MyBookmarksResponse;
 import com.luckytree.shop.shop.adapter.data.shop.*;
 import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
 import com.luckytree.shop.shop.application.port.incoming.ShopUseCase;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
+import com.luckytree.shop.shop.domain.shop.DeleteShop;
+import com.luckytree.shop.shop.domain.shop.Shop;
 import lombok.RequiredArgsConstructor;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
@@ -22,49 +24,48 @@ public class ShopService implements ShopUseCase {
     private final ShopPort shopPort;
 
     @Override
-    public void createShop(CreateShopDto createShopDto) {
-        shopPort.createShop(createShopDto.toDomain());
+    public void createShop(Shop shop) {
+        shopPort.createShop(shop);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummaryDto> findShopsByCategory(ShopCategory category) {
-        return shopPort.getShopSummaryByCategory(category).stream().map(ShopSummaryDto::new).toList();
+    public List<ShopSummaryResponse> findShopsByCategory(ShopCategory category) {
+        return shopPort.getShopSummaryByCategory(category).stream().map(ShopSummaryResponse::new).toList();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummaryDto> findShopsByLatAndLng(ShopSearchDto shopSearchDto) {
-        return shopPort.getShopAll(shopSearchDto.getMaxLat(), shopSearchDto.getMinLat(), shopSearchDto.getMaxLng(), shopSearchDto.getMinLng())
+    public List<ShopSummaryResponse> findShopsByLatAndLng(SearchShopRequest searchShopRequest) {
+        return shopPort.getShopAll(searchShopRequest.getMaxLat(), searchShopRequest.getMinLat(), searchShopRequest.getMaxLng(), searchShopRequest.getMinLng())
                 .stream()
-                .map(ShopSummaryDto::new)
+                .map(ShopSummaryResponse::new)
                 .toList();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<ShopSummaryDto> findShopsByHashtag(ShopHashtag hashtag) {
-        return shopPort.getShopSummaryByHashtag(hashtag).stream().map(ShopSummaryDto::new).toList();
+    public List<ShopSummaryResponse> findShopsByHashtag(ShopHashtag hashtag) {
+        return shopPort.getShopSummaryByHashtag(hashtag).stream().map(ShopSummaryResponse::new).toList();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public ShopDetailDto findShopById(long shopId) {
+    public ShopDetailResponse findShopById(Long shopId) {
         ShopEntity shopEntity = shopPort.getShopDetailById(shopId);
-        return new ShopDetailDto(shopEntity);
+        return new ShopDetailResponse(shopEntity);
     }
 
     @Override
-    public void deleteShop(String authorization, ShopDeleteDto shopDeleteDto) {
-        ShopEntity shopEntity = shopPort.getShopEntity(shopDeleteDto.getName(), shopDeleteDto.getAddress());
-        shopPort.deleteShop(shopEntity, shopDeleteDto.getComment());
+    public void deleteShop(String authorization, DeleteShop deleteShop) {
+        ShopEntity shopEntity = shopPort.getShopEntity(deleteShop.getName(), deleteShop.getAddress());
+        shopPort.deleteShop(shopEntity, deleteShop.getComment());
     }
 
     @Transactional(readOnly = true)
     @Override
-    public MyBookmarksDto findMyBookmarksDtoByIds(List<Long> shopIds) {
-        List<ShopEntity> shopEntities = shopPort.findBookmarkDtosByIds(shopIds);
-        List<BookmarkDto> bookmarkDtos = shopEntities.stream().map(BookmarkDto::new).toList();
-        return new MyBookmarksDto(bookmarkDtos);
+    public MyBookmarksResponse findMyBookmarksResponseByIds(List<Long> shopIds) {
+        return new MyBookmarksResponse(shopPort.findBookmarksByIds(shopIds).stream().
+                map(BookmarkResponse::new).toList());
     }
 }

@@ -13,7 +13,7 @@ import luckytree.poom.core.enums.ShopStatus;
 @Schema(description = "샵 요약정보")
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class ShopSummaryDto {
+public class ShopSummaryResponse {
 
     @Schema(description = "샵 이름")
     private String name;
@@ -33,7 +33,7 @@ public class ShopSummaryDto {
     @Schema(description = "샵 해시태그")
     private ShopHashtag hashtag;
 
-    public ShopSummaryDto(ShopEntity shopEntity) {
+    public ShopSummaryResponse(ShopEntity shopEntity) {
         this.name = shopEntity.getName();
         this.status = shopEntity.getStatus();
         this.lat = shopEntity.getLat();

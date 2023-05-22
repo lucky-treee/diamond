@@ -20,7 +20,7 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 @Schema(description = "샵 등록 DTO")
-public class CreateShopDto {
+public class CreateShopRequest {
 
     @NotBlank
     @Schema(description = "샵 이름")

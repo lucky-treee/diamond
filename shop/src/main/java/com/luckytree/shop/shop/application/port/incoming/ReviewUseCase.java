@@ -1,8 +1,7 @@
 package com.luckytree.shop.shop.application.port.incoming;
 
-import com.luckytree.shop.shop.adapter.data.review.MyReviewsDto;
-import com.luckytree.shop.shop.adapter.data.review.CreateReviewDto;
-import com.luckytree.shop.shop.adapter.data.review.UpdateReviewDto;
+import com.luckytree.shop.shop.adapter.data.review.MyReviewsResponse;
+import com.luckytree.shop.shop.domain.review.Review;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,13 +9,13 @@ import java.util.List;
 
 public interface ReviewUseCase {
 
-    Long createReview(CreateReviewDto createReviewDto);
+    Long createReview(Review review);
 
     void createReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
 
-    void updateReview(UpdateReviewDto updateReviewDto);
+    Long updateReview(Review review);
 
     void updateReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
   
-    MyReviewsDto findMyReviewsById(long memberId, Pageable pageable);
+    MyReviewsResponse findMyReviewsById(Long memberId, Pageable pageable);
 }

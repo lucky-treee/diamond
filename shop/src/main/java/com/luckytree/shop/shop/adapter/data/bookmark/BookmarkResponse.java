@@ -10,7 +10,7 @@ import luckytree.poom.core.enums.ShopHashtag;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookmarkDto {
+public class BookmarkResponse {
 
     private String name;
     private ShopHashtag hashtag;
@@ -18,7 +18,7 @@ public class BookmarkDto {
     private String address;
     private ShopCategory category;
 
-    public BookmarkDto(ShopEntity shopEntity) {
+    public BookmarkResponse(ShopEntity shopEntity) {
         this.name = shopEntity.getName();
         this.hashtag = shopEntity.getHashtag();
         this.photo = shopEntity.getPhoto();

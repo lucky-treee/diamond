@@ -14,15 +14,15 @@ import luckytree.poom.core.enums.ShopHashtag;
 @Setter
 @NoArgsConstructor
 @Schema(description = "샵 리뷰 등록 DTO")
-public class CreateReviewDto {
+public class CreateReviewRequest {
 
     @NotNull
     @Schema(description = "샵 아이디")
-    private long shopId;
+    private Long shopId;
 
     @NotNull
     @Schema(description = "멤버 아이디")
-    private long memberId;
+    private Long memberId;
 
     @NotBlank
     @Schema(description = "리뷰 내용")

@@ -1,7 +1,9 @@
 package com.luckytree.shop.shop.application.port.incoming;
 
-import com.luckytree.shop.shop.adapter.data.bookmark.MyBookmarksDto;
+import com.luckytree.shop.shop.adapter.data.bookmark.MyBookmarksResponse;
 import com.luckytree.shop.shop.adapter.data.shop.*;
+import com.luckytree.shop.shop.domain.shop.DeleteShop;
+import com.luckytree.shop.shop.domain.shop.Shop;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
 
@@ -9,17 +11,17 @@ import java.util.List;
 
 public interface ShopUseCase {
 
-    void createShop(CreateShopDto createShopDto);
+    void createShop(Shop shop);
 
-    List<ShopSummaryDto> findShopsByCategory(ShopCategory category);
+    List<ShopSummaryResponse> findShopsByCategory(ShopCategory category);
 
-    List<ShopSummaryDto> findShopsByLatAndLng(ShopSearchDto shopSearchDto);
+    List<ShopSummaryResponse> findShopsByLatAndLng(SearchShopRequest searchShopRequest);
 
-    List<ShopSummaryDto> findShopsByHashtag(ShopHashtag hashtag);
+    List<ShopSummaryResponse> findShopsByHashtag(ShopHashtag hashtag);
 
-    ShopDetailDto findShopById(long shopId);
+    ShopDetailResponse findShopById(Long shopId);
 
-    void deleteShop(String authorization, ShopDeleteDto shopDeleteDto);
+    void deleteShop(String authorization, DeleteShop deleteShop);
 
-    MyBookmarksDto findMyBookmarksDtoByIds(List<Long> ids);
+    MyBookmarksResponse findMyBookmarksResponseByIds(List<Long> ids);
 }

@@ -7,7 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ShopSearchDto {
+public class SearchShopRequest {
 
    private double maxLat;
    private double minLat;

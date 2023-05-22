@@ -51,8 +51,9 @@ public class ReviewEntity {
         this.hashtag = review.getHashtag();
     }
 
-    public void update(String content, ShopHashtag hashtag) {
+    public Long update(String content, ShopHashtag hashtag) {
         this.content = content;
         this.hashtag = hashtag;
+        return this.id;
     }
 }

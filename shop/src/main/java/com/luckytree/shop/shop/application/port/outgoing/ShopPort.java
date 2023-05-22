@@ -17,11 +17,11 @@ public interface ShopPort {
 
     List<ShopEntity> getShopSummaryByHashtag(ShopHashtag hashtag);
 
-    ShopEntity getShopDetailById(long shopId);
+    ShopEntity getShopDetailById(Long shopId);
 
     void deleteShop(ShopEntity shopEntity, String comment);
 
     ShopEntity getShopEntity(String name, String address);
 
-    List<ShopEntity> findBookmarkDtosByIds(List<Long> shopIds);
+    List<ShopEntity> findBookmarksByIds(List<Long> shopIds);
 }

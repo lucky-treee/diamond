@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "shop-service", configuration = {InternalFeignConfig.class})
 public interface ShopFeignClient {
 
-    @PostMapping("/v1/bookmarks/shops")
+    @PostMapping("/v1/shops/bookmarks")
     BookmarksResponse findBookmarksByIds(@RequestBody FindBookmarkedShops FindBookmarkedShops);
 }

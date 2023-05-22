@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ReviewDto {
+public class ReviewResponse {
 
     private String shopName;
     private ShopCategory category;
@@ -25,7 +25,7 @@ public class ReviewDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createAt;
 
-    public ReviewDto(ReviewEntity reviewEntity, List<ReviewPhotoEntity> reviewPhotos, ShopEntity shopEntity) {
+    public ReviewResponse(ReviewEntity reviewEntity, List<ReviewPhotoEntity> reviewPhotos, ShopEntity shopEntity) {
         this.shopName = shopEntity.getName();
         this.category = shopEntity.getCategory();
         this.photoUrl = reviewPhotos.stream().map(ReviewPhotoEntity::getPhotoUrl).collect(Collectors.toList());

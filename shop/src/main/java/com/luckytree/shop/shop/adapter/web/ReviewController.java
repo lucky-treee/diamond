@@ -1,8 +1,8 @@
 package com.luckytree.shop.shop.adapter.web;
 
-import com.luckytree.shop.shop.adapter.data.review.CreateReviewDto;
-import com.luckytree.shop.shop.adapter.data.review.MyReviewsDto;
-import com.luckytree.shop.shop.adapter.data.review.UpdateReviewDto;
+import com.luckytree.shop.shop.adapter.data.review.CreateReviewRequest;
+import com.luckytree.shop.shop.adapter.data.review.MyReviewsResponse;
+import com.luckytree.shop.shop.adapter.data.review.UpdateReviewRequest;
 import com.luckytree.shop.shop.application.port.incoming.ReviewUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,8 +26,8 @@ public class ReviewController {
 
     @Operation(summary = "리뷰 등록")
     @PostMapping
-    public ResponseEntity<Object> createReview(@RequestPart("createReviewDto") @Valid CreateReviewDto createReviewDto){
-        Long reviewId = reviewUseCase.createReview(createReviewDto);
+    public ResponseEntity<Object> createReview(@RequestPart("createReviewRequest") @Valid CreateReviewRequest createReviewRequest){
+        Long reviewId = reviewUseCase.createReview(createReviewRequest.toDomain());
         return ResponseEntity.ok(reviewId);
     }
     // 리턴 타입을 ReviewResponse 로 구현
@@ -41,9 +41,9 @@ public class ReviewController {
 
     @Operation(summary = "리뷰 수정")
     @PatchMapping
-    public ResponseEntity<Object> updateReview(@RequestBody @Valid UpdateReviewDto updateReviewDto) {
-        reviewUseCase.updateReview(updateReviewDto);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Object> updateReview(@RequestBody @Valid UpdateReviewRequest updateReviewRequest) {
+        Long reviewId = reviewUseCase.updateReview(updateReviewRequest.toDomain());
+        return ResponseEntity.ok(reviewId);
     }
     // 리턴 타입을 ReviewResponse 로 구현
 
@@ -56,7 +56,7 @@ public class ReviewController {
 
     @Operation(summary = "내 리뷰 조회")
     @GetMapping
-    public ResponseEntity<MyReviewsDto> getMyReviews(@RequestParam("memberId") long memberId, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
+    public ResponseEntity<MyReviewsResponse> getMyReviews(@RequestParam("memberId") Long memberId, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
         Pageable pageable = PageRequest.of(offset, limit);
         return ResponseEntity.ok(reviewUseCase.findMyReviewsById(memberId, pageable));
     }

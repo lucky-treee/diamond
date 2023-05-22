@@ -1,8 +1,8 @@
 package com.luckytree.shop.shop.adapter.data.review;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,14 +13,15 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Schema(description = "샵 리뷰 사진 등록 DTO")
-public class CreateReviewPhotoDto {
+@Schema(description = "샵 리뷰 사진 수정 정보 DTO")
+public class UpdateReviewPhotoRequest {
 
+    @NotBlank
     @Schema(description = "리뷰 아이디")
+    @Size(max = 50)
     private long reviewId;
 
-    @NotNull
+    @NotBlank
     @Schema(description = "리뷰 사진")
     private List<MultipartFile> reviewPhoto;
 }

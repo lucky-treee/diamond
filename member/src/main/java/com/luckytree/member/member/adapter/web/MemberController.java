@@ -5,13 +5,11 @@ import com.luckytree.member.member.application.port.incoming.MemberUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @Tag(name = "회원", description = "회원")
@@ -47,7 +45,7 @@ public class MemberController {
     @ResponseStatus(NO_CONTENT)
     @DeleteMapping
     public void leave() {
-        memberUseCase.leave((Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        memberUseCase.leave((Long)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
     @Operation(summary = "회원 가입")
