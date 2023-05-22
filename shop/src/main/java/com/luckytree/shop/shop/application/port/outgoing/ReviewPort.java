@@ -21,7 +21,7 @@ public interface ReviewPort {
 
     void deleteReviewPhotoByReviewId(long reviewId);
   
-    void deleteReview(long reviewId);
+    void delete(Long reviewId);
 
     List<ReviewPhotoEntity> findReviewPhotoByReviewId(Long reviewId);
 

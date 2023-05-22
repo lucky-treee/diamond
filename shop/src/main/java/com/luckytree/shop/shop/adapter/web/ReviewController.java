@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 @Tag(name = "Review API", description = "후기")
 @RestController
 @RequestMapping("v1/reviews")
@@ -61,9 +63,9 @@ public class ReviewController {
     }
 
     @Operation(summary = "리뷰 삭제")
+    @ResponseStatus(NO_CONTENT)
     @DeleteMapping
-    ResponseEntity<Object> deleteReview(@RequestParam(name = "shopId") String shopId) {
-
-        return ResponseEntity.ok().build();
+    public void deleteReview(@RequestParam(name = "reviewId") Long reviewId) {
+        reviewUseCase.delete(reviewId);
     }
 }

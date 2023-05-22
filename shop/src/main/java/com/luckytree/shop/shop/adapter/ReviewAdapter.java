@@ -28,8 +28,7 @@ public class ReviewAdapter implements ReviewPort {
     }
 
     @Override
-    public void deleteReview(long reviewId) {
-        reviewRepository.deleteById(reviewId);
+    public void delete(Long reviewId) {reviewRepository.deleteById(reviewId);
     }
 
     @Override

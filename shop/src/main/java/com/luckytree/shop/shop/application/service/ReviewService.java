@@ -64,6 +64,13 @@ public class ReviewService implements ReviewUseCase {
         uploadPhotoToS3(reviewId, reviewPhotos);
     }
 
+    @Override
+    public void delete(Long reviewId) {
+        deletePhotoFromS3(reviewId);
+        reviewPort.deleteReviewPhotoByReviewId(reviewId);
+        reviewPort.delete(reviewId);
+    }
+
     private void uploadPhotoToS3(Long reviewId, List<MultipartFile> reviewPhotos){
         List<String> photoUrls = new ArrayList<>();
         reviewPhotos.forEach(multipartFile -> {
