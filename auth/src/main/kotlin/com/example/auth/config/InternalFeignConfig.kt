@@ -11,7 +11,7 @@ class InternalFeignConfig {
         return RequestInterceptor { template: RequestTemplate ->
             template.header(
                 "Content-Type",
-                "application/x-www-form-urlencoded"
+                "application/JSON"
             )
         }
     }
