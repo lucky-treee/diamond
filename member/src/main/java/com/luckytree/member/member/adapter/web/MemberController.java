@@ -49,7 +49,7 @@ public class MemberController {
     }
 
     @Operation(summary = "회원 가입")
-    @PostMapping
+    @PostMapping("signup")
     public ResponseEntity<MemberResponse> create(@RequestBody @Valid CreateMemberRequest createMemberRequest) {
         MemberResponse memberResponse = memberUseCase.create(createMemberRequest.toDomain());
         return ResponseEntity.ok(memberResponse);
