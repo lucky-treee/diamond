@@ -29,6 +29,7 @@ public class ReviewResponse {
     private LocalDateTime createAt;
 
     public ReviewResponse(ReviewEntity reviewEntity, List<ReviewPhotoEntity> reviewPhotos, ShopEntity shopEntity) {
+        this.id = reviewEntity.getId();
         this.shopName = shopEntity.getName();
         this.category = shopEntity.getCategory();
         this.photoUrl = reviewPhotos.stream().map(ReviewPhotoEntity::getPhotoUrl).collect(Collectors.toList());

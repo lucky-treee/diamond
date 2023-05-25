@@ -9,9 +9,10 @@ import com.luckytree.shop.shop.application.port.outgoing.ReviewPort;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop.shop.domain.review.Review;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.luckytree.shop.shop.adapter.data.review.MyReviewsResponse;
 import com.luckytree.shop.shop.adapter.data.review.ReviewResponse;
 import org.springframework.data.domain.Pageable;
 
@@ -34,7 +35,7 @@ public class ReviewService implements ReviewUseCase {
   
     @Transactional(readOnly = true)
     @Override
-    public MyReviewsResponse findMyReviewsById(Long memberId, Pageable pageable) {
+    public Page<ReviewResponse> findMyReviewsById(Long memberId, Pageable pageable) {
         return findMyReviews(memberId, pageable);
     }
 
@@ -90,12 +91,12 @@ public class ReviewService implements ReviewUseCase {
         deletingPhotos.forEach(s3Util::delete);
     }
 
-    private MyReviewsResponse findMyReviews(Long memberId, Pageable pageable) {
+    private Page<ReviewResponse> findMyReviews(Long memberId, Pageable pageable) {
         List<ReviewResponse> reviewResponses = reviewPort.findAllByMemberId(memberId, pageable).stream().map(reviewEntity -> {
             List<ReviewPhotoEntity> reviewPhotos = reviewPort.findReviewPhotoByReviewId(reviewEntity.getId());
             ShopEntity shopEntity = shopPort.getShopDetailById(reviewEntity.getShopId());
             return new ReviewResponse(reviewEntity, reviewPhotos, shopEntity);
         }).toList();
-        return new MyReviewsResponse(reviewResponses);
+        return new PageImpl<>(reviewResponses);
     }
 }
