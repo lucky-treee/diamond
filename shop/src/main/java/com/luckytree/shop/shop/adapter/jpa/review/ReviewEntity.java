@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import luckytree.poom.core.enums.ShopHashtag;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class ReviewEntity {
 
     @Id
@@ -49,6 +51,7 @@ public class ReviewEntity {
         this.memberId = review.getMemberId();
         this.content = review.getContent();
         this.hashtag = review.getHashtag();
+        this.shopId = review.getShopId();
     }
 
     public ReviewEntity update(String content, ShopHashtag hashtag) {

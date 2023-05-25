@@ -9,8 +9,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +36,7 @@ public class ReviewController {
     }
 
     @Operation(summary = "리뷰 사진 등록")
-    @PostMapping("/{id}/photos")
+    @PostMapping(value = "/{id}/photos", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> createReviewPhoto(@PathVariable("id") Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos){
         reviewUseCase.createReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
@@ -49,7 +50,7 @@ public class ReviewController {
     }
 
     @Operation(summary = "리뷰 사진 수정")
-    @PatchMapping("/{id}/photos")
+    @PatchMapping(value = "/{id}/photos", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> updateReviewPhoto(@PathVariable("id") Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
         reviewUseCase.updateReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
@@ -57,8 +58,7 @@ public class ReviewController {
 
     @Operation(summary = "내 리뷰 조회")
     @GetMapping
-    public ResponseEntity<MyReviewsResponse> getMyReviews(@RequestParam("memberId") Long memberId, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
-        Pageable pageable = PageRequest.of(offset, limit);
+    public ResponseEntity<Page<ReviewResponse>> getMyReviews(@RequestParam("memberId") Long memberId, Pageable pageable) {
         return ResponseEntity.ok(reviewUseCase.findMyReviewsById(memberId, pageable));
     }
 
