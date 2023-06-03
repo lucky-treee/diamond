@@ -55,7 +55,7 @@ public class MemberEntity {
         this.role = Role.MEMBER;
         this.nickname = member.getNickname();
         this.email = member.getEmail();
-        this.status = member.getStatus();
+        this.status = MemberStatus.NORMAL;
         this.photo = member.getPhoto();
     }
 
