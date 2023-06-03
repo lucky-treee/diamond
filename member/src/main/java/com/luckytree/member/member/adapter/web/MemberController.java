@@ -29,7 +29,7 @@ public class MemberController {
 
     @Operation(summary = "회원 조회 by 아이디 이메일")
     @GetMapping
-    public ResponseEntity<GetMemberResponse> getMemberByIdAndEmail(@RequestParam GetMemberRequest getMemberRequest) {
+    public ResponseEntity<GetMemberResponse> getMemberByIdAndEmail(GetMemberRequest getMemberRequest) {
         GetMemberResponse getMemberResponse = memberUseCase.getMember(getMemberRequest.toDomain());
         return ResponseEntity.ok(getMemberResponse);
     }
