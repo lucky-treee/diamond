@@ -10,4 +10,4 @@ jwt:
 
 internal:
   api:
-    secret: test123456
+    secret: dev-test-internal-key

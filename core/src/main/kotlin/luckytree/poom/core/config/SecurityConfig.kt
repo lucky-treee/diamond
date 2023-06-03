@@ -35,7 +35,6 @@ class SecurityConfig(
         httpSecurity
             .csrf().disable()
             .cors().and()
-            .headers().disable()
             .httpBasic().disable()
             .rememberMe().disable()
             .logout().disable()
@@ -49,12 +48,14 @@ class SecurityConfig(
             .authorizeHttpRequests {
                 it.requestMatchers(
                     AntPathRequestMatcher("/v1/auth/**"),
+                    AntPathRequestMatcher("/v1/shops/**"),
+                    AntPathRequestMatcher("/v1/members/signup"),
                     AntPathRequestMatcher("/swagger-ui/**"),
                     AntPathRequestMatcher("/swagger-resources/**"),
                     AntPathRequestMatcher("/api-docs"),
                     AntPathRequestMatcher("/api-docs/**"),
                 ).permitAll()
-                it.anyRequest().permitAll()
+                it.anyRequest().authenticated()
             }
             .addFilterBefore(
                 InternalKeyFilter(InternalKeyManager(internalApiSecret)),
