@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestParam
 @FeignClient(value = "member", url = "\${feign.member}", configuration = [InternalFeignConfig::class])
 interface MemberFeignClient {
     @GetMapping("v1/members")
-    fun findByIdAndEmail(@RequestParam memberFeignRequest: MemberFeignRequest): MemberFeignResponse
+    fun findByIdAndEmail(@RequestParam(value = "getMemberRequest") memberFeignRequest: MemberFeignRequest): MemberFeignResponse
 }
