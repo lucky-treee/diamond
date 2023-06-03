@@ -52,8 +52,7 @@ class SecurityConfig(
                     AntPathRequestMatcher("/v1/members/signup"),
                     AntPathRequestMatcher("/swagger-ui/**"),
                     AntPathRequestMatcher("/swagger-resources/**"),
-                    AntPathRequestMatcher("/api-docs"),
-                    AntPathRequestMatcher("/api-docs/**"),
+                    AntPathRequestMatcher("/v3/api-docs/**"),
                 ).permitAll()
                 it.anyRequest().authenticated()
             }
