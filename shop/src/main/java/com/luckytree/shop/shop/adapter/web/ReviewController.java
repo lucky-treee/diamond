@@ -64,7 +64,7 @@ public class ReviewController {
         return ResponseEntity.ok(reviewUseCase.findMyReviewsById(authenticationToken, pageable));
     }
 
-    @Operation(summary = "리뷰 사진 삭제")
+    @Operation(summary = "리뷰 삭제")
     @ResponseStatus(NO_CONTENT)
     @DeleteMapping
     public void deleteReview(@RequestParam(name = "reviewId") Long reviewId) {

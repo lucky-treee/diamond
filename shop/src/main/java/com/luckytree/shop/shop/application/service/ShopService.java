@@ -11,6 +11,7 @@ import com.luckytree.shop.shop.domain.shop.Shop;
 import lombok.RequiredArgsConstructor;
 import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
+import luckytree.poom.core.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +47,8 @@ public class ShopService implements ShopUseCase {
     @Transactional(readOnly = true)
     @Override
     public List<ShopSummaryResponse> findShopsByHashtag(ShopHashtag hashtag) {
+        if((shopPort.getShopSummaryByHashtag(hashtag).stream().map(ShopSummaryResponse::new).toList()).isEmpty())
+            throw new NotFoundException("해당 해시태그에 맞는 가게가 없습니다.");
         return shopPort.getShopSummaryByHashtag(hashtag).stream().map(ShopSummaryResponse::new).toList();
     }
 
