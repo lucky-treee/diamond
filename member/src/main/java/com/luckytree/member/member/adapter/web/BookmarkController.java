@@ -27,14 +27,14 @@ public class BookmarkController {
     @Operation(summary = "즐겨찾기 등록")
     @ResponseStatus(CREATED)
     @PostMapping
-    public void createBookmark(@AuthenticationPrincipal AuthenticationToken authenticationToken, @RequestBody CreateBookmarkRequest createBookmarkRequest) {
-        bookmarkUseCase.create(createBookmarkRequest.toDomain(Long.parseLong(authenticationToken.getPrincipal())));
+    public void createBookmark(@RequestBody CreateBookmarkRequest createBookmarkRequest) {
+        bookmarkUseCase.create(createBookmarkRequest.toDomain(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString())));
     }
 
     @Operation(summary = "즐겨찾기 목록 조회")
     @GetMapping
-    public ResponseEntity<BookmarksResponse> getBookmarks(@AuthenticationPrincipal AuthenticationToken authenticationToken) {
-        return ResponseEntity.ok(bookmarkUseCase.getBookmarks(Long.parseLong(authenticationToken.getPrincipal())));
+    public ResponseEntity<BookmarksResponse> getBookmarks() {
+        return ResponseEntity.ok(bookmarkUseCase.getBookmarks(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString())));
     }
 
     @Operation(summary = "즐겨찾기 해제")

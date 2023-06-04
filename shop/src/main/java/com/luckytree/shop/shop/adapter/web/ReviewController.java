@@ -17,6 +17,7 @@ import luckytree.poom.core.jwt.AuthenticationToken;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,9 +37,8 @@ public class ReviewController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<CreateReviewResponse> createReview(
             @RequestBody @Valid CreateReviewRequest createReviewRequest,
-            @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos,
-            @AuthenticationPrincipal AuthenticationToken authenticationToken) {
-        Review review = reviewUseCase.create(createReviewRequest.toDomain(Long.valueOf(authenticationToken.getPrincipal())));
+            @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
+        Review review = reviewUseCase.create(createReviewRequest.toDomain(Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString())));
 
         List<ReviewPhoto> reviewPhotoList = reviewUseCase.createReviewPhoto(review.getId(), reviewPhotos);
 
@@ -47,8 +47,8 @@ public class ReviewController {
 
     @Operation(summary = "내 리뷰 목록 조회")
     @GetMapping("my")
-    public ResponseEntity<PagedReview> getMyReviews(@AuthenticationPrincipal AuthenticationToken authenticationToken, PageRequest pageRequest) {
-        return ResponseEntity.ok(reviewUseCase.getReviewsByMemberId(Long.valueOf(authenticationToken.getPrincipal()), pageRequest.toDomain()));
+    public ResponseEntity<PagedReview> getMyReviews(PageRequest pageRequest) {
+        return ResponseEntity.ok(reviewUseCase.getReviewsByMemberId(Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString()), pageRequest.toDomain()));
     }
 
     @Operation(summary = "리뷰 목록 조회 by shop id")

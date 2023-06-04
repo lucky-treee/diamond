@@ -31,8 +31,8 @@ public class MemberController {
 
     @Operation(summary = "내 정보 조회")
     @GetMapping("my")
-    public ResponseEntity<MemberResponse> getMyMember(@AuthenticationPrincipal AuthenticationToken authenticationToken) {
-        MemberResponse memberResponse = memberUseCase.getMember(Long.parseLong(authenticationToken.getPrincipal()));
+    public ResponseEntity<MemberResponse> getMyMember() {
+        MemberResponse memberResponse = memberUseCase.getMember(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString()));
         return ResponseEntity.ok(memberResponse);
     }
 
@@ -46,15 +46,15 @@ public class MemberController {
     @Operation(summary = "회원 수정")
     @ResponseStatus(NO_CONTENT)
     @PatchMapping
-    public void update(@AuthenticationPrincipal AuthenticationToken authenticationToken, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
-        memberUseCase.update(updateMemberRequest.toMemberDetail(Long.parseLong(authenticationToken.getPrincipal())));
+    public void update(@RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
+        memberUseCase.update(updateMemberRequest.toMemberDetail(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString())));
     }
 
     @Operation(summary = "회원 탈퇴")
     @ResponseStatus(NO_CONTENT)
     @DeleteMapping
-    public void leave(@AuthenticationPrincipal AuthenticationToken authenticationToken) {
-        memberUseCase.leave(Long.parseLong(authenticationToken.getPrincipal()));
+    public void leave() {
+        memberUseCase.leave(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString()));
     }
 
     @Operation(summary = "회원 가입")
