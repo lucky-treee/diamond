@@ -8,5 +8,8 @@ class MemberFeignRepository(
     private val memberFeignClient: MemberFeignClient,
 ) {
     fun findByIdAndEmail(memberFeignRequest: MemberFeignRequest) =
-        memberFeignClient.findByIdAndEmail(memberFeignRequest)
+        memberFeignClient.findByIdAndEmail(
+            id = memberFeignRequest.id,
+            email = memberFeignRequest.email,
+        )
 }

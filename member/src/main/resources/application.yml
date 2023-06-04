@@ -9,7 +9,7 @@ spring:
       - "optional:classpath:application-core.yml"
   cloud:
     config:
-      name: member, actuator, auth
+      name: member, actuator
       label: develop
       profile: develop
 server:

@@ -6,6 +6,8 @@ server:
 spring:
   config:
     import: optional:classpath:application-core.yml
+  application:
+    name: auth
 
 oauth2:
   kakao:
@@ -15,5 +17,22 @@ oauth2:
     redirectUri: https://dev-poom.c0dewave.com/auth
     secretKey: sOTe7SjI0edhG9pfqYsbF8FLcexbAkpZ
 
-feign:
-  member: http://192.168.0.123:10100/member
+# eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      #defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-server.luckytree-zwsm.svc.cluster.local:8761/eureka
+
+
+# actuator 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
