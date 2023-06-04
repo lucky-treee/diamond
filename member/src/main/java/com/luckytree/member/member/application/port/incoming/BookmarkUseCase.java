@@ -7,7 +7,7 @@ public interface BookmarkUseCase {
 
     void create(Bookmark bookmark);
 
-    void delete(Long shopId);
+    void delete(Long memberId, Long shopId);
 
     BookmarksResponse getBookmarks(Long memberId);
 }

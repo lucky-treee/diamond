@@ -6,8 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ShopRemoveDetail {
-
-    private Long id;
-
+    private Long shopId;
     private String comment;
 }

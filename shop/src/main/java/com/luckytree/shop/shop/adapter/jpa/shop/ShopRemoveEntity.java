@@ -23,6 +23,9 @@ public class ShopRemoveEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "shop_id")
+    private Long shopId;
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String comment;
 
@@ -31,6 +34,7 @@ public class ShopRemoveEntity {
     private LocalDateTime createAt;
 
     public ShopRemoveEntity(ShopRemoveDetail shopRemoveDetail) {
+        this.shopId = shopRemoveDetail.getShopId();
         this.comment = shopRemoveDetail.getComment();
     }
 }

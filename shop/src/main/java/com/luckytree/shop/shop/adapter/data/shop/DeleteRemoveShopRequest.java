@@ -13,14 +13,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DeleteRemoveShopRequest {
 
-    @NotBlank
-    private Long id;
+    private Long shopId;
 
     @NotBlank
     @Schema(description = "샵 삭제사유")
     private String comment;
 
     public ShopRemoveDetail toDomain() {
-        return new ShopRemoveDetail(id, comment);
+        return new ShopRemoveDetail(shopId, comment);
     }
 }

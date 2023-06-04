@@ -40,7 +40,7 @@ public class BookmarkController {
     @Operation(summary = "즐겨찾기 해제")
     @ResponseStatus(NO_CONTENT)
     @DeleteMapping
-    public void deleteBookmark(@RequestParam(name = "shopId") long shopId) {
-        bookmarkUseCase.delete(shopId);
+    public void deleteBookmark(@RequestParam(name = "shopId") Long shopId) {
+        bookmarkUseCase.delete(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString()), shopId);
     }
 }

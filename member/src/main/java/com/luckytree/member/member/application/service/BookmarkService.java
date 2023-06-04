@@ -30,8 +30,8 @@ public class BookmarkService implements BookmarkUseCase {
 
     @Override
     @Transactional
-    public void delete(Long shopId) {
-        bookmarkPort.delete(bookmarkPort.findByMemberIdAndShopId((Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal(), shopId));
+    public void delete(Long memberId, Long shopId) {
+        bookmarkPort.delete(bookmarkPort.findByMemberIdAndShopId(memberId, shopId));
     }
 
     @Override

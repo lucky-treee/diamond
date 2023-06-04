@@ -29,19 +29,19 @@ public class ShopSpecification {
             }
 
             if (searchShopsCondition.getMaxLat() != null) {
-                predicates.add(criteriaBuilder.lessThan(root.get("maxLat"), searchShopsCondition.getMaxLat()));
+                predicates.add(criteriaBuilder.lessThan(root.get("lat"), searchShopsCondition.getMaxLat()));
             }
 
             if (searchShopsCondition.getMinLat() != null) {
-                predicates.add(criteriaBuilder.greaterThan(root.get("minLat"), searchShopsCondition.getMinLat()));
+                predicates.add(criteriaBuilder.greaterThan(root.get("lat"), searchShopsCondition.getMinLat()));
             }
 
             if (searchShopsCondition.getMaxLng() != null) {
-                predicates.add(criteriaBuilder.lessThan(root.get("maxLng"), searchShopsCondition.getMaxLng()));
+                predicates.add(criteriaBuilder.lessThan(root.get("lng"), searchShopsCondition.getMaxLng()));
             }
 
             if (searchShopsCondition.getMinLng() != null) {
-                predicates.add(criteriaBuilder.greaterThan(root.get("minLng"), searchShopsCondition.getMinLng()));
+                predicates.add(criteriaBuilder.greaterThan(root.get("lng"), searchShopsCondition.getMinLng()));
             }
 
             predicates.add(criteriaBuilder.equal(root.get("status"), ShopStatus.ENABLE));

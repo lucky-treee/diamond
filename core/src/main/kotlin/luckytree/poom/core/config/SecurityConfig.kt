@@ -50,6 +50,7 @@ class SecurityConfig(
                     AntPathRequestMatcher("/v1/auth/**"),
                     AntPathRequestMatcher("/v1/shops/**"),
                     AntPathRequestMatcher("/v1/members/signup"),
+                    AntPathRequestMatcher("/v1/shops/bookmarks"),
                     AntPathRequestMatcher("/v1/members"),
                     AntPathRequestMatcher("/swagger-ui/**"),
                     AntPathRequestMatcher("/swagger-resources/**"),
