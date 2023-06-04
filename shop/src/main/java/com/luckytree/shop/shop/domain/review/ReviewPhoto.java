@@ -1,17 +1,21 @@
 package com.luckytree.shop.shop.domain.review;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class ReviewPhoto {
 
-    private long id;
-    private long reviewId;
+    private Long id;
+    private Long reviewId;
     private String photoUrl;
 
-    public ReviewPhoto(long reviewId, String photoUrl) {
+    public ReviewPhoto(Long reviewId, String photoUrl) {
+        this.reviewId = reviewId;
+        this.photoUrl = photoUrl;
+    }
+
+    public ReviewPhoto(Long id, Long reviewId, String photoUrl) {
+        this.id = id;
         this.reviewId = reviewId;
         this.photoUrl = photoUrl;
     }

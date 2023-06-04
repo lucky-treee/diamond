@@ -18,7 +18,7 @@ public class ShopSummaryResponse {
     @Schema(description = "샵 이름")
     private String name;
 
-    @Schema(description ="샵 상태", hidden = true)
+    @Schema(description = "샵 상태", hidden = true)
     private ShopStatus status;
 
     @Schema(description = "샵 위도")

@@ -1,6 +1,6 @@
 package com.luckytree.shop.shop.adapter.data.review;
 
-import com.luckytree.shop.shop.domain.review.Review;
+import com.luckytree.shop.shop.domain.review.ReviewDetail;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -11,17 +11,10 @@ import luckytree.poom.core.enums.ShopHashtag;
 @Getter
 @Setter
 @NoArgsConstructor
-@Schema(description = "샵 리뷰 수정 정보 DTO")
+@Schema(description = "샵 리뷰 수정 DTO")
 public class UpdateReviewRequest {
 
-    //@NotBlank
-    @Schema(description = "리뷰 아이디")
-    //@Size(max = 50)
-    private long reviewId;
-
-    private long shopId;
-
-    private long memberId;
+    private long id;
 
     @NotBlank
     @Schema(description = "리뷰 내용")
@@ -30,10 +23,9 @@ public class UpdateReviewRequest {
     @Schema(description = "해시태그")
     private ShopHashtag hashtag;
 
-    public Review toDomain(){
-        return new Review(
-                shopId,
-                memberId,
+    public ReviewDetail toReviewDetail() {
+        return new ReviewDetail(
+                id,
                 content,
                 hashtag
         );

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class InternalFeignConfig {
 
     /**
-     *  feign logging level setting
+     * feign logging level setting
      */
     @Bean
     Logger.Level feignLoggerLever() {

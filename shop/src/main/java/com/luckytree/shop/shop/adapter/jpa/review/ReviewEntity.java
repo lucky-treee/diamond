@@ -25,7 +25,7 @@ public class ReviewEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-  
+
     @JoinColumn(name = "shop_id")
     private Long shopId;
 
@@ -34,29 +34,27 @@ public class ReviewEntity {
 
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
-  
-    @Column(name = "update_at")
-    @LastModifiedDate
-    private LocalDateTime updateAt;
-  
+
     @Column(length = 50)
     @Enumerated(value = EnumType.STRING)
     private ShopHashtag hashtag;
-  
+
+    @Column(name = "update_at")
+    @LastModifiedDate
+    private LocalDateTime updateAt;
+
     @Column(name = "create_at")
     @CreatedDate
     private LocalDateTime createAt;
 
     public ReviewEntity(Review review) {
+        this.shopId = review.getShopId();
         this.memberId = review.getMemberId();
         this.content = review.getContent();
         this.hashtag = review.getHashtag();
-        this.shopId = review.getShopId();
     }
 
-    public ReviewEntity update(String content, ShopHashtag hashtag) {
-        this.content = content;
-        this.hashtag = hashtag;
-        return this;
+    public Review toDomain() {
+        return new Review(id, shopId, memberId, content, hashtag, updateAt, createAt);
     }
 }

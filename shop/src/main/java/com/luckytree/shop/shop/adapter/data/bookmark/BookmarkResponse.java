@@ -1,6 +1,6 @@
 package com.luckytree.shop.shop.adapter.data.bookmark;
 
-import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
+import com.luckytree.shop.shop.domain.shop.Shop;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,11 +18,11 @@ public class BookmarkResponse {
     private String address;
     private ShopCategory category;
 
-    public BookmarkResponse(ShopEntity shopEntity) {
-        this.name = shopEntity.getName();
-        this.hashtag = shopEntity.getHashtag();
-        this.photo = shopEntity.getPhoto();
-        this.address = shopEntity.getAddress();
-        this.category = shopEntity.getCategory();
+    public BookmarkResponse(Shop shop) {
+        this.name = shop.getName();
+        this.hashtag = shop.getHashtag();
+        this.photo = shop.getPhoto();
+        this.address = shop.getAddress();
+        this.category = shop.getCategory();
     }
 }

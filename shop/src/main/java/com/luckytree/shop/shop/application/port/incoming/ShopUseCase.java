@@ -1,27 +1,20 @@
 package com.luckytree.shop.shop.application.port.incoming;
 
-import com.luckytree.shop.shop.adapter.data.bookmark.MyBookmarksResponse;
-import com.luckytree.shop.shop.adapter.data.shop.*;
-import com.luckytree.shop.shop.domain.shop.DeleteShop;
+import com.luckytree.shop.shop.domain.shop.SearchShopsCondition;
 import com.luckytree.shop.shop.domain.shop.Shop;
-import luckytree.poom.core.enums.ShopCategory;
-import luckytree.poom.core.enums.ShopHashtag;
+import com.luckytree.shop.shop.domain.shop.ShopRemoveDetail;
 
 import java.util.List;
 
 public interface ShopUseCase {
 
-    void createShop(Shop shop);
+    void create(Shop shop);
 
-    List<ShopSummaryResponse> findShopsByCategory(ShopCategory category);
+    Shop getById(Long id);
 
-    List<ShopSummaryResponse> findShopsByLatAndLng(SearchShopRequest searchShopRequest);
+    List<Shop> getShops(SearchShopsCondition searchShopsCondition);
 
-    List<ShopSummaryResponse> findShopsByHashtag(ShopHashtag hashtag);
+    void delete(ShopRemoveDetail shopRemoveDetail);
 
-    ShopDetailResponse findShopById(Long shopId);
-
-    void deleteShop(DeleteShop deleteShop);
-
-    MyBookmarksResponse findMyBookmarksResponseByIds(List<Long> ids);
+    List<Shop> getShopsByIds(List<Long> ids);
 }

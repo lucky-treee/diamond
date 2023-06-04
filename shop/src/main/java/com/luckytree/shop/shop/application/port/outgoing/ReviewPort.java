@@ -1,31 +1,18 @@
 package com.luckytree.shop.shop.application.port.outgoing;
 
-import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
+import com.luckytree.shop.shop.domain.Page;
+import com.luckytree.shop.shop.domain.review.PagedReview;
 import com.luckytree.shop.shop.domain.review.Review;
-import com.luckytree.shop.shop.domain.review.ReviewPhoto;
-
-import java.util.List;
 
 public interface ReviewPort {
 
-    ReviewEntity createReview(Review review);
+    Review save(Review review);
 
-    ReviewPhotoEntity createReviewPhoto(ReviewPhoto reviewPhoto);
+    Review findById(Long id);
 
-    ReviewEntity findReviewById(long reviewId);
+    PagedReview findAllByShopId(Long shopId, Page page);
 
-    List<ReviewPhotoEntity> findReviewPhotoByReviewId(long reviewId);
-
-    void deleteReviewPhotoByPhotoUrl(String photoUrl);
-  
     void delete(Long reviewId);
 
-    List<ReviewPhotoEntity> findReviewPhotoByReviewId(Long reviewId);
-
-    ReviewEntity findById(long reviewId);
-  
-    Page<ReviewEntity> findAllByMemberId(long memberId, Pageable pageable);
+    PagedReview findAllByMemberId(Long memberId, Page page);
 }

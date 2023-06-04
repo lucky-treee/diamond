@@ -3,13 +3,13 @@ package com.luckytree.shop.shop.domain.shop;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @AllArgsConstructor
-public class DeleteShop {
-
-    private String name;
-
-    private String address;
-
+public class ShopRemove {
+    private Long id;
+    private Long shopId;
     private String comment;
+    private LocalDateTime createAt;
 }

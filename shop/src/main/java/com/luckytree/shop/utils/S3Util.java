@@ -14,10 +14,9 @@ import java.util.UUID;
 @Service
 public class S3Util {
 
+    private final AmazonS3 amazonS3;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-
-    private final AmazonS3 amazonS3;
 
     public String upload(MultipartFile multipartFile) throws IOException {
         String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();

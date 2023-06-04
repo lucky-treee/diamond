@@ -17,14 +17,12 @@ import luckytree.poom.core.enums.ShopHashtag;
 public class CreateReviewRequest {
 
     @NotNull
-    @Schema(description = "샵 아이디")
     private Long shopId;
 
     @NotBlank
     @Schema(description = "리뷰 내용")
     private String content;
 
-    @Schema(description = "해시태그")
     private ShopHashtag hashtag;
 
     @JsonIgnore

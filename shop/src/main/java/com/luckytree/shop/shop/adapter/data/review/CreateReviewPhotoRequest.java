@@ -17,10 +17,8 @@ import java.util.List;
 @Schema(description = "샵 리뷰 사진 등록 DTO")
 public class CreateReviewPhotoRequest {
 
-    @Schema(description = "리뷰 아이디")
     private long reviewId;
 
     @NotNull
-    @Schema(description = "리뷰 사진")
     private List<MultipartFile> reviewPhoto;
 }

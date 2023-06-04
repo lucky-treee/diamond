@@ -15,7 +15,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 @Table(name = "shop")
 @Getter
@@ -66,9 +65,6 @@ public class ShopEntity {
     @Column(length = 50)
     private String homepage;
 
-    @Column(name = "flagship_product", length = 50)
-    private String flagshipProduct;
-
     @Column(name = "operating_start")
     private LocalTime operatingStart;
 
@@ -86,9 +82,6 @@ public class ShopEntity {
     @CreatedDate
     private LocalDateTime createAt;
 
-    @OneToMany(mappedBy = "shopEntity")
-    private List<ShopRemoveEntity> shopRemoveEntityList;
-
     public ShopEntity(Shop shop) {
         this.name = shop.getName();
         this.category = shop.getCategory();
@@ -100,9 +93,30 @@ public class ShopEntity {
         this.contact = shop.getContact();
         this.sns = shop.getSns();
         this.homepage = shop.getHomepage();
-        this.flagshipProduct = shop.getFlagshipProduct();
         this.operatingStart = shop.getOperatingStart();
         this.operatingEnd = shop.getOperatingEnd();
         this.holiday = shop.getHoliday();
+    }
+
+    public Shop toDomain() {
+        return new Shop(
+                id,
+                name,
+                category,
+                status,
+                address,
+                lat,
+                lng,
+                hashtag,
+                photo,
+                contact,
+                sns,
+                homepage,
+                operatingStart,
+                operatingEnd,
+                holiday,
+                updateAt,
+                createAt
+        );
     }
 }

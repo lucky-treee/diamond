@@ -26,7 +26,7 @@ public class ReviewPhotoEntity {
 
     @JoinColumn(name = "review_id")
     private Long reviewId;
-  
+
     @Column(name = "photo_url", nullable = false)
     private String photoUrl;
 
@@ -38,17 +38,7 @@ public class ReviewPhotoEntity {
     @CreatedDate
     private LocalDateTime createAt;
 
-    public ReviewPhotoEntity(ReviewPhoto reviewPhoto) {
-        this.reviewId = reviewPhoto.getReviewId();
-        this.photoUrl = reviewPhoto.getPhotoUrl();
-    }
-
-    public void update(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    public boolean isEmpty(){
-        if(photoUrl.isBlank()) return true;
-        return false;
+    public ReviewPhoto toDomain() {
+        return new ReviewPhoto(id, reviewId, photoUrl);
     }
 }

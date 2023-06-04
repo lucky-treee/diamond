@@ -6,6 +6,7 @@ import luckytree.poom.core.enums.ShopCategory;
 import luckytree.poom.core.enums.ShopHashtag;
 import luckytree.poom.core.enums.ShopStatus;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.regex.Pattern;
 
@@ -25,16 +26,17 @@ public class Shop {
     private String contact;
     private String sns;
     private String homepage;
-    private String flagshipProduct;
     private LocalTime operatingStart;
     private LocalTime operatingEnd;
     private String holiday;
+    private LocalDateTime updateAt;
+    private LocalDateTime createAt;
 
     public Shop(String name, ShopCategory category, ShopStatus status,
                 String address, double lat, double lng,
                 String photo, String contact, String sns,
-                String homepage, String flagshipProduct,
-                LocalTime operatingStart, LocalTime operatingEnd, String holiday) {
+                String homepage,
+                LocalTime operatingStart, LocalTime operatingEnd, String holiday, LocalDateTime updateAt, LocalDateTime createAt) {
         this.name = name;
         this.category = category;
         this.status = status;
@@ -45,22 +47,23 @@ public class Shop {
         this.contact = contact;
         this.sns = sns;
         this.homepage = homepage;
-        this.flagshipProduct = flagshipProduct;
         this.operatingStart = operatingStart;
         this.operatingEnd = operatingEnd;
         this.holiday = holiday;
+        this.updateAt = updateAt;
+        this.createAt = createAt;
     }
 
-    public String valid(Shop shop){
-        if(!(Pattern.matches("^\\d{2,3}\\d{3,4}\\d{4}$", shop.getContact()))){
-            return "전화번호가 잘못되었습니다.";
+    public Boolean valid(Shop shop) {
+        if (!(Pattern.matches("^\\d{2,3}\\d{3,4}\\d{4}$", shop.getContact()))) {
+            return false;
         }
-        if(shop.getLng()<124 || shop.getLng()>132){
-            return "경도가 잘못되었습니다.";
+        if (shop.getLng() < 124 || shop.getLng() > 132) {
+            return false;
         }
-        if(shop.getLat()<33 || shop.getLat()>43){
-            return "위도가 잘못되었습니다.";
+        if (shop.getLat() < 33 || shop.getLat() > 43) {
+            return false;
         }
-        return "success";
+        return true;
     }
 }

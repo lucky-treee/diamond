@@ -46,10 +46,6 @@ public class CreateShopRequest {
     @Size(max = 50)
     private String homepage;
 
-    @Schema(description = "샵 대표상품")
-    @Size(max = 50)
-    private String flagshipProduct;
-
     @Schema(description = "샵 SNS")
     @Size(max = 50)
     private String sns;
@@ -87,10 +83,11 @@ public class CreateShopRequest {
                 contact,
                 sns,
                 homepage,
-                flagshipProduct,
                 operatingStart,
                 operatingEnd,
-                holiday
+                holiday,
+                null,
+                null
         );
     }
 }

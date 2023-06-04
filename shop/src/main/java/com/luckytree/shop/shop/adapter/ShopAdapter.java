@@ -1,64 +1,49 @@
 package com.luckytree.shop.shop.adapter;
 
-import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
-import com.luckytree.shop.shop.adapter.jpa.shop.ShopRemoveEntity;
-import com.luckytree.shop.shop.adapter.jpa.shop.ShopRemoveRepository;
-import com.luckytree.shop.shop.adapter.jpa.shop.ShopRepository;
+import com.luckytree.shop.shop.adapter.jpa.shop.*;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
+import com.luckytree.shop.shop.application.port.outgoing.ShopRemovePort;
+import com.luckytree.shop.shop.domain.shop.SearchShopsCondition;
 import com.luckytree.shop.shop.domain.shop.Shop;
+import com.luckytree.shop.shop.domain.shop.ShopRemoveDetail;
 import lombok.RequiredArgsConstructor;
-import luckytree.poom.core.enums.ShopCategory;
-import luckytree.poom.core.enums.ShopHashtag;
-import luckytree.poom.core.enums.ShopStatus;
 import luckytree.poom.core.exceptions.NotFoundException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class ShopAdapter implements ShopPort {
+public class ShopAdapter implements ShopPort, ShopRemovePort {
 
     private final ShopRepository shopRepository;
     private final ShopRemoveRepository shopRemoveRepository;
 
     @Override
-    public void createShop(Shop shop) {
+    public void save(Shop shop) {
         shopRepository.save(new ShopEntity(shop));
     }
 
     @Override
-    public List<ShopEntity> getShopSummaryByCategory(ShopCategory category) {
-        return shopRepository.findByCategoryAndStatus(category, ShopStatus.ENABLE);
+    public Shop findById(Long id) {
+        return shopRepository.findById(id).orElseThrow(NotFoundException::new).toDomain();
     }
 
     @Override
-    public List<ShopEntity> getShopAll(double maxLat, double minLat, double maxLng, double minLng) {
-        return shopRepository.findByStatusAndLatLessThanEqualAndLatGreaterThanEqualAndLngLessThanEqualAndLngGreaterThanEqual(ShopStatus.ENABLE, maxLat, minLat, maxLng, minLng);
+    public List<Shop> findAll(SearchShopsCondition searchShopsCondition) {
+        Specification<ShopEntity> shopEntityOf = ShopSpecification.searchByIdOrHashtagOrCategoryOrMaxLatOrMinLatOrMaxLngOrMinLng(searchShopsCondition);
+        List<ShopEntity> shopEntities = shopRepository.findAll(shopEntityOf);
+        return shopEntities.stream().map(ShopEntity::toDomain).toList();
     }
 
     @Override
-    public ShopEntity getShopDetailById(Long shopId) {
-        return shopRepository.findById(shopId).orElseThrow(() -> new NotFoundException("해당 shopId와 일치하는 ShopEntity가 없습니다. shopID: " + shopId));
+    public void saveShopRemove(ShopRemoveDetail shopRemoveDetail) {
+        shopRemoveRepository.save(new ShopRemoveEntity(shopRemoveDetail));
     }
 
     @Override
-    public List<ShopEntity> getShopSummaryByHashtag(ShopHashtag hashtag) {
-        return shopRepository.findByHashtagAndStatus(hashtag, ShopStatus.ENABLE);
-    }
-
-    @Override
-    public void deleteShop(ShopEntity shopEntity, String comment) {
-        shopRemoveRepository.save(new ShopRemoveEntity(shopEntity, comment));
-    }
-
-    @Override
-    public ShopEntity getShopEntity(String name, String address) {
-        return shopRepository.findByNameAndAddress(name, address).orElseThrow(() -> new NotFoundException("해당 shopName과 address애 일치하는 ShopEntity가 없습니다. name: " + name + ", address: " + address));
-    }
-
-    @Override
-    public List<ShopEntity> findBookmarksByIds(List<Long> shopIds) {
-        return shopRepository.findAllByIdIn(shopIds);
+    public List<Shop> findShopsByIds(List<Long> shopIds) {
+        return shopRepository.findAllByIdIn(shopIds).stream().map(ShopEntity::toDomain).toList();
     }
 }
