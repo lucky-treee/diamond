@@ -2,6 +2,7 @@ package com.luckytree.member.member.domain.member;
 
 
 import com.luckytree.member.member.adapter.mysql.member.MemberEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import luckytree.poom.core.enums.MemberStatus;
 import luckytree.poom.core.jwt.Role;
@@ -9,6 +10,7 @@ import luckytree.poom.core.jwt.Role;
 import java.time.LocalDateTime;
 
 @Getter
+@AllArgsConstructor
 public class Member {
 
     private Long id;
@@ -27,17 +29,6 @@ public class Member {
 
     private LocalDateTime createAt;
 
-    public Member(MemberEntity memberEntity) {
-        this.id = memberEntity.getId();
-        this.role = memberEntity.getRole();
-        this.email = memberEntity.getEmail();
-        this.nickname = memberEntity.getNickname();
-        this.photo = memberEntity.getPhoto();
-        this.status = memberEntity.getStatus();
-        this.updateAt = memberEntity.getUpdateAt();
-        this.createAt = memberEntity.getCreateAt();
-    }
-
     public Member(String nickname, String email, String photo) {
         this.nickname = nickname;
         this.email = email;
@@ -50,11 +41,13 @@ public class Member {
     }
 
     public void update(MemberDetail memberDetail) {
+        this.id = memberDetail.getId();
         this.nickname = memberDetail.getNickname();
         this.photo = memberDetail.getPhoto();
     }
 
-    public void update(MemberStatus status) {
+    public void update(MemberStatus status, Long id) {
+        this.id = id;
         this.status = status;
     }
 }

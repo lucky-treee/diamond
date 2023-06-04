@@ -6,7 +6,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.jwt.AuthenticationToken;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +22,17 @@ public class MemberController {
 
     private final MemberUseCase memberUseCase;
 
-    @Operation(summary = "회원 조회")
+    @Operation(summary = "회원 정보 조회")
     @GetMapping("{id}")
     public ResponseEntity<MemberResponse> getMember(@PathVariable Long id) {
         MemberResponse memberResponse = memberUseCase.getMember(id);
+        return ResponseEntity.ok(memberResponse);
+    }
+
+    @Operation(summary = "내 정보 조회")
+    @GetMapping("my")
+    public ResponseEntity<MemberResponse> getMyMember(@AuthenticationPrincipal AuthenticationToken authenticationToken) {
+        MemberResponse memberResponse = memberUseCase.getMember(Long.parseLong(authenticationToken.getPrincipal()));
         return ResponseEntity.ok(memberResponse);
     }
 
@@ -36,16 +45,16 @@ public class MemberController {
 
     @Operation(summary = "회원 수정")
     @ResponseStatus(NO_CONTENT)
-    @PatchMapping("{id}")
-    public void update(@PathVariable Long id, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
-        memberUseCase.update(updateMemberRequest.toMemberDetail(id));
+    @PatchMapping
+    public void update(@AuthenticationPrincipal AuthenticationToken authenticationToken, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
+        memberUseCase.update(updateMemberRequest.toMemberDetail(Long.parseLong(authenticationToken.getPrincipal())));
     }
 
     @Operation(summary = "회원 탈퇴")
     @ResponseStatus(NO_CONTENT)
     @DeleteMapping
-    public void leave() {
-        memberUseCase.leave((Long)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public void leave(@AuthenticationPrincipal AuthenticationToken authenticationToken) {
+        memberUseCase.leave(Long.parseLong(authenticationToken.getPrincipal()));
     }
 
     @Operation(summary = "회원 가입")

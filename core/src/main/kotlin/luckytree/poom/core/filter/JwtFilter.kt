@@ -41,7 +41,7 @@ class JwtFilter(private val jwtConfiguration: JwtConfiguration) : OncePerRequest
         with(verify(token)) {
             val principal = memberId
             val authorities = listOf(SimpleGrantedAuthority(role))
-            AuthenticationToken(principal = principal, authorities = authorities)
+            AuthenticationToken(principal = principal.toString(), authorities = authorities)
                 .apply { details = WebAuthenticationDetailsSource().buildDetails(httpServletRequest) }
                 .also {
                     SecurityContextHolder.getContext().authentication = it

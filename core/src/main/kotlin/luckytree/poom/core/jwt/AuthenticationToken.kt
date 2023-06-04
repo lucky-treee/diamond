@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority
 class AuthenticationToken(
     private val credentials: String? = null,
 
-    private val principal: Any,
+    private val principal: String,
 
     authorities: List<GrantedAuthority>,
 ) : AbstractAuthenticationToken(authorities) {

@@ -11,6 +11,8 @@ import luckytree.poom.core.enums.MemberStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static luckytree.poom.core.enums.MemberStatus.LEAVE;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService implements MemberUseCase {
@@ -42,7 +44,7 @@ public class MemberService implements MemberUseCase {
     @Override
     public void leave(Long memberId) {
         Member member = memberPort.findById(memberId);
-        member.update(MemberStatus.LEAVE);
+        member.update(MemberStatus.LEAVE, member.getId());
         memberPort.save(member);
     }
 

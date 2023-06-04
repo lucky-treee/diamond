@@ -60,6 +60,6 @@ public class MemberEntity {
     }
 
     public Member toDomain() {
-        return new Member(this);
+        return new Member(id, role, nickname, email, status, photo, updateAt, createAt);
     }
 }
