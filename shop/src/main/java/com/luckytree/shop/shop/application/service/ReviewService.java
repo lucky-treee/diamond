@@ -1,6 +1,6 @@
 package com.luckytree.shop.shop.application.service;
 
-import com.luckytree.shop.common.utils.S3Util;
+import com.luckytree.shop.utils.S3Util;
 import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
 import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
 import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;

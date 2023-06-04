@@ -1,4 +1,4 @@
-package com.luckytree.shop.common.config;
+package com.luckytree.shop.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

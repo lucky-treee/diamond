@@ -1,4 +1,4 @@
-package com.luckytree.shop.common.utils;
+package com.luckytree.shop.utils;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -30,6 +30,7 @@ public class S3Util {
         return amazonS3.getUrl(bucket, s3FileName).toString();
     }
 
-    public void delete(String s3FileName) {amazonS3.deleteObject(bucket, s3FileName);
+    public void delete(String s3FileName) {
+        amazonS3.deleteObject(bucket, s3FileName);
     }
 }

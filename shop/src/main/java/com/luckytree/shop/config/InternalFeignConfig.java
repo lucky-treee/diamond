@@ -1,4 +1,4 @@
-package com.luckytree.shop.common.config;
+package com.luckytree.shop.config;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;
