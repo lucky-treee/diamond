@@ -9,10 +9,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.jwt.AuthenticationToken;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,17 +51,17 @@ public class ReviewController {
         return ResponseEntity.ok(reviewResponse);
     }
 
-    @Operation(summary = "리뷰 사진 수정")
-    @PatchMapping(value = "/{id}/photos", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Object> updateReviewPhoto(@PathVariable("id") Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
-        reviewUseCase.updateReviewPhoto(reviewId, reviewPhotos);
+    @Operation(summary = "리뷰 사진 삭제")
+    @DeleteMapping(value = "/{id}/photos", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Object> deleteReviewPhoto(@PathVariable("id") Long reviewId, @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
+        reviewUseCase.deleteReviewPhoto(reviewId, reviewPhotos);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "내 리뷰 조회")
     @GetMapping
-    public ResponseEntity<Page<ReviewResponse>> getMyReviews(@RequestParam("memberId") Long memberId, Pageable pageable) {
-        return ResponseEntity.ok(reviewUseCase.findMyReviewsById(memberId, pageable));
+    public ResponseEntity<Page<ReviewResponse>> getMyReviews(@AuthenticationPrincipal AuthenticationToken authenticationToken, Pageable pageable) {
+        return ResponseEntity.ok(reviewUseCase.findMyReviewsById(authenticationToken, pageable));
     }
 
     @Operation(summary = "리뷰 삭제")
