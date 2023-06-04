@@ -2,6 +2,7 @@ package com.luckytree.member.member.adapter.mysql.member;
 
 import com.luckytree.member.member.application.port.outgoing.MemberPort;
 import com.luckytree.member.member.domain.member.Member;
+import com.luckytree.member.member.domain.member.MemberDetail;
 import lombok.RequiredArgsConstructor;
 import luckytree.poom.core.exceptions.NotFoundException;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ public class MemberAdapter implements MemberPort {
     }
 
     @Override
-    public Member findById(long id) {
+    public Member findById(Long id) {
         return memberRepository.findById(id).orElseThrow(NotFoundException::new).toDomain();
     }
 

@@ -15,10 +15,10 @@ public class SearchShopsRequest {
     private Long id;
     private ShopHashtag hashtag;
     private ShopCategory category;
-    private double maxLat;
-    private double minLat;
-    private double maxLng;
-    private double minLng;
+    private Double maxLat;
+    private Double minLat;
+    private Double maxLng;
+    private Double minLng;
 
     public SearchShopsCondition toSearchShopsCondition() {
         return new SearchShopsCondition(

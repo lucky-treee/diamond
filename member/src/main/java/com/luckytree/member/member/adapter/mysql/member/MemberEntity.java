@@ -1,6 +1,7 @@
 package com.luckytree.member.member.adapter.mysql.member;
 
 import com.luckytree.member.member.domain.member.Member;
+import com.luckytree.member.member.domain.member.MemberDetail;
 import jakarta.persistence.*;
 import lombok.*;
 import luckytree.poom.core.enums.MemberStatus;
@@ -24,7 +25,7 @@ public class MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Enumerated(STRING)
     @Column(length = 10, nullable = false)
@@ -52,11 +53,13 @@ public class MemberEntity {
     private LocalDateTime createAt;
 
     public MemberEntity(Member member) {
-        this.role = Role.MEMBER;
+        this.id = member.getId();
+        this.role = (member.getRole() == null) ? Role.MEMBER : member.getRole();
         this.nickname = member.getNickname();
         this.email = member.getEmail();
-        this.status = MemberStatus.NORMAL;
+        this.status = (member.getStatus() == null) ? MemberStatus.NORMAL : member.getStatus();
         this.photo = member.getPhoto();
+        this.createAt = member.getCreateAt();
     }
 
     public Member toDomain() {

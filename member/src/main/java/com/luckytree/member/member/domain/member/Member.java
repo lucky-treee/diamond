@@ -41,13 +41,11 @@ public class Member {
     }
 
     public void update(MemberDetail memberDetail) {
-        this.id = memberDetail.getId();
         this.nickname = memberDetail.getNickname();
         this.photo = memberDetail.getPhoto();
     }
 
-    public void update(MemberStatus status, Long id) {
-        this.id = id;
+    public void update(MemberStatus status) {
         this.status = status;
     }
 }
