@@ -6,10 +6,15 @@ import com.luckytree.member.member.application.port.incoming.BookmarkUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.jwt.AuthenticationToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @Tag(name = "즐겨찾기", description = "회원의 즐겨찾기")
 @RestController
@@ -20,20 +25,20 @@ public class BookmarkController {
     private final BookmarkUseCase bookmarkUseCase;
 
     @Operation(summary = "즐겨찾기 등록")
+    @ResponseStatus(CREATED)
     @PostMapping
-    public ResponseEntity<Object> createBookmark(@RequestBody CreateBookmarkRequest createBookmarkRequest) {
-        bookmarkUseCase.create(createBookmarkRequest.toDomain());
-        return ResponseEntity.ok().build();
+    public void createBookmark(@AuthenticationPrincipal AuthenticationToken authenticationToken, @RequestBody CreateBookmarkRequest createBookmarkRequest) {
+        bookmarkUseCase.create(createBookmarkRequest.toDomain(Long.parseLong(authenticationToken.getPrincipal())));
     }
 
     @Operation(summary = "즐겨찾기 목록 조회")
     @GetMapping
-    public ResponseEntity<BookmarksResponse> getBookmarks() {
-        return ResponseEntity.ok(bookmarkUseCase.getBookmarks((Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
+    public ResponseEntity<BookmarksResponse> getBookmarks(@AuthenticationPrincipal AuthenticationToken authenticationToken) {
+        return ResponseEntity.ok(bookmarkUseCase.getBookmarks(Long.parseLong(authenticationToken.getPrincipal())));
     }
 
     @Operation(summary = "즐겨찾기 해제")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(NO_CONTENT)
     @DeleteMapping
     public void deleteBookmark(@RequestParam(name = "shopId") long shopId) {
         bookmarkUseCase.delete(shopId);
