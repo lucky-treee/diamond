@@ -21,7 +21,7 @@ public interface ShopUseCase {
 
     ShopDetailResponse findShopById(Long shopId);
 
-    void deleteShop(String authorization, DeleteShop deleteShop);
+    void deleteShop(DeleteShop deleteShop);
 
     MyBookmarksResponse findMyBookmarksResponseByIds(List<Long> ids);
 }
