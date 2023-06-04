@@ -43,7 +43,7 @@ public class Review {
     }
 
     public void check() {
-        if (this.createAt.plusDays(7).isAfter(LocalDateTime.now())) {
+        if (this.createAt.plusDays(7).isBefore(LocalDateTime.now())) {
             throw new BadRequestException("수정 가능 기간 초과");
         }
     }
