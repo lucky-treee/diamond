@@ -14,6 +14,6 @@ public class PageRequest {
     private Long offset;
 
     public Page toDomain() {
-        return new Page(total, limit, offset);
+        return new Page(total, limit, offset - 1);
     }
 }
