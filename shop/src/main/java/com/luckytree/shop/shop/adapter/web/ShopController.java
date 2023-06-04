@@ -30,28 +30,28 @@ public class ShopController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "특정 카테고리의 샵 전체 검색")
+    @Operation(summary = "샵 목록 조회 by 카테고리")
     @GetMapping("/category")
     public ResponseEntity<List<ShopSummaryResponse>> findShopsByCategory(@RequestParam(name = "category") ShopCategory category) {
         List<ShopSummaryResponse> shopSummaryResponseList = shopUseCase.findShopsByCategory(category);
         return ResponseEntity.ok(shopSummaryResponseList);
     }
 
-    @Operation(summary = "범위 내 샵 전체 검색")
+    @Operation(summary = "샵 목록 조회 by 위도경도")
     @GetMapping
     public ResponseEntity<List<ShopSummaryResponse>> findShopsByLatAndLng(SearchShopRequest searchShopRequest) {
         List<ShopSummaryResponse> shopSummaryResponse = shopUseCase.findShopsByLatAndLng(searchShopRequest);
         return ResponseEntity.ok(shopSummaryResponse);
     }
 
-    @Operation(summary = "샵아이디로 상세조회")
+    @Operation(summary = "샵 조회 by Id")
     @GetMapping("/shop")
     public ResponseEntity<ShopDetailResponse> findShopByShopId(@RequestParam(name = "shopId") Long shopId) {
         ShopDetailResponse shopDetailResponse = shopUseCase.findShopById(shopId);
         return ResponseEntity.ok(shopDetailResponse);
     }
 
-    @Operation(summary = "해쉬태그로 샵 목록 조회")
+    @Operation(summary = "샵 목록 조회 by 해쉬태그")
     @GetMapping("/hashtag")
     public ResponseEntity<List<ShopSummaryResponse>> findShopsByHashtag(@RequestParam(name = "hashtag") ShopHashtag hashtag) {
         List<ShopSummaryResponse> shopSummaryResponseList = shopUseCase.findShopsByHashtag(hashtag);

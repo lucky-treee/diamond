@@ -12,11 +12,11 @@ public interface ReviewUseCase {
 
     ReviewResponse createReview(Review review);
 
-    void createReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
+    List<String> createReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
 
     ReviewResponse updateReview(Review review);
 
-    void deleteReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos);
+    void deleteReviewPhoto(String photoUrl);
   
     Page<ReviewResponse> findMyReviewsById(Object authenticationToken, Pageable pageable);
 

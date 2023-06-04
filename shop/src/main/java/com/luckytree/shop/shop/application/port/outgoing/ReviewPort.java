@@ -13,13 +13,13 @@ public interface ReviewPort {
 
     ReviewEntity createReview(Review review);
 
-    void createReviewPhoto(ReviewPhoto reviewPhoto);
+    ReviewPhotoEntity createReviewPhoto(ReviewPhoto reviewPhoto);
 
     ReviewEntity findReviewById(long reviewId);
 
     List<ReviewPhotoEntity> findReviewPhotoByReviewId(long reviewId);
 
-    void deleteReviewPhotoByReviewId(long reviewId);
+    void deleteReviewPhotoByPhotoUrl(String photoUrl);
   
     void delete(Long reviewId);
 

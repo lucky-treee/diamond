@@ -1,6 +1,6 @@
 package com.luckytree.shop.shop.application.service;
 
-import com.luckytree.shop.utils.S3Util;
+import com.luckytree.shop.shop.adapter.data.review.ReviewResponse;
 import com.luckytree.shop.shop.adapter.jpa.review.ReviewEntity;
 import com.luckytree.shop.shop.adapter.jpa.review.ReviewPhotoEntity;
 import com.luckytree.shop.shop.adapter.jpa.shop.ShopEntity;
@@ -8,15 +8,15 @@ import com.luckytree.shop.shop.application.port.incoming.ReviewUseCase;
 import com.luckytree.shop.shop.application.port.outgoing.ReviewPort;
 import com.luckytree.shop.shop.application.port.outgoing.ShopPort;
 import com.luckytree.shop.shop.domain.review.Review;
+import com.luckytree.shop.shop.domain.review.ReviewPhoto;
+import com.luckytree.shop.utils.S3Util;
 import lombok.RequiredArgsConstructor;
+import luckytree.poom.core.exceptions.InternalServerErrorException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.luckytree.shop.shop.adapter.data.review.ReviewResponse;
-import org.springframework.data.domain.Pageable;
-
-import com.luckytree.shop.shop.domain.review.ReviewPhoto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -46,8 +46,8 @@ public class ReviewService implements ReviewUseCase {
     }
 
     @Override
-    public void createReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos) {
-        uploadPhotoToS3(reviewId, reviewPhotos);
+    public List<String> createReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos) {
+        return uploadPhotoToS3(reviewId, reviewPhotos);
     }
 
     @Override
@@ -60,35 +60,39 @@ public class ReviewService implements ReviewUseCase {
     }
 
     @Override
-    public void deleteReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos){
-        deletePhotoFromS3(reviewId);
-        reviewPort.deleteReviewPhotoByReviewId(reviewId);
+    public void deleteReviewPhoto(String photoUrl){
+        String fileName = photoUrl.substring(photoUrl.lastIndexOf("/") + 1);
+        s3Util.delete(fileName);
+        reviewPort.deleteReviewPhotoByPhotoUrl(photoUrl);
     }
 
     @Override
     public void delete(Long reviewId) {
-        deletePhotoFromS3(reviewId);
-        reviewPort.deleteReviewPhotoByReviewId(reviewId);
+        List<String> photoUrls = reviewPort.findReviewPhotoByReviewId(reviewId).stream().map(ReviewPhotoEntity::getPhotoUrl).toList();
+        photoUrls.forEach(photoUrl -> {
+                    String fileName = photoUrl.substring(photoUrl.lastIndexOf("/") + 1);
+                    s3Util.delete(fileName);
+                    reviewPort.deleteReviewPhotoByPhotoUrl(photoUrl);
+                }
+        );
         reviewPort.delete(reviewId);
     }
 
-    private void uploadPhotoToS3(Long reviewId, List<MultipartFile> reviewPhotos){
+    private List<String> uploadPhotoToS3(Long reviewId, List<MultipartFile> reviewPhotos) {
+        List<String> resultPhotoUrls = new ArrayList<>();
         List<String> photoUrls = new ArrayList<>();
+
         reviewPhotos.forEach(multipartFile -> {
             try {
                 photoUrls.add(s3Util.upload(multipartFile));
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new InternalServerErrorException(e.getMessage());
             }
         });
-        photoUrls.forEach(s ->{
-            reviewPort.createReviewPhoto(new ReviewPhoto(reviewId, s));
-        });
-    }
 
-    private void deletePhotoFromS3(Long reviewId){
-        List<String> deletingPhotos = reviewPort.findReviewPhotoByReviewId(reviewId).stream().map(ReviewPhotoEntity :: getPhotoUrl).map(s -> s.substring(s.lastIndexOf("/")+1)).toList();
-        deletingPhotos.forEach(s3Util::delete);
+        photoUrls.forEach(photoUrl -> resultPhotoUrls.add(reviewPort.createReviewPhoto(new ReviewPhoto(reviewId, photoUrl)).getPhotoUrl()));
+
+        return resultPhotoUrls;
     }
 
     private Page<ReviewResponse> findMyReviews(Long memberId, Pageable pageable) {

@@ -20,18 +20,15 @@ public class CreateReviewRequest {
     @Schema(description = "샵 아이디")
     private Long shopId;
 
-    @NotNull
-    @Schema(description = "멤버 아이디")
-    private Long memberId;
-
     @NotBlank
     @Schema(description = "리뷰 내용")
     private String content;
 
     @Schema(description = "해시태그")
     private ShopHashtag hashtag;
+
     @JsonIgnore
-    public Review toDomain() {
+    public Review toDomain(Long memberId) {
         return new Review(
                 shopId,
                 memberId,

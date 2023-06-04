@@ -47,8 +47,8 @@ public class ReviewAdapter implements ReviewPort {
     }
 
     @Override
-    public void createReviewPhoto(ReviewPhoto reviewPhoto) {
-        reviewPhotoRepository.save(new ReviewPhotoEntity(reviewPhoto));
+    public ReviewPhotoEntity createReviewPhoto(ReviewPhoto reviewPhoto) {
+        return reviewPhotoRepository.save(new ReviewPhotoEntity(reviewPhoto));
     }
 
     @Override
@@ -62,8 +62,8 @@ public class ReviewAdapter implements ReviewPort {
     }
 
     @Override
-    public void deleteReviewPhotoByReviewId(long reviewId) {
-        reviewPhotoRepository.deleteByReviewId(reviewId);
+    public void deleteReviewPhotoByPhotoUrl(String photoUrl) {
+        reviewPhotoRepository.deleteByPhotoUrl(photoUrl);
     }
 }
 
