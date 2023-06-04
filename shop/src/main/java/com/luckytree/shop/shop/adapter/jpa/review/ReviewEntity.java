@@ -48,10 +48,12 @@ public class ReviewEntity {
     private LocalDateTime createAt;
 
     public ReviewEntity(Review review) {
+        this.id = review.getId();
         this.shopId = review.getShopId();
         this.memberId = review.getMemberId();
         this.content = review.getContent();
         this.hashtag = review.getHashtag();
+        this.createAt = review.getCreateAt();
     }
 
     public Review toDomain() {

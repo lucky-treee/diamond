@@ -14,8 +14,6 @@ import luckytree.poom.core.enums.ShopHashtag;
 @Schema(description = "샵 리뷰 수정 DTO")
 public class UpdateReviewRequest {
 
-    private long id;
-
     @NotBlank
     @Schema(description = "리뷰 내용")
     private String content;
@@ -23,7 +21,7 @@ public class UpdateReviewRequest {
     @Schema(description = "해시태그")
     private ShopHashtag hashtag;
 
-    public ReviewDetail toReviewDetail() {
+    public ReviewDetail toReviewDetail(Long id) {
         return new ReviewDetail(
                 id,
                 content,

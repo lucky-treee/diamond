@@ -13,10 +13,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import luckytree.poom.core.jwt.AuthenticationToken;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,9 +56,9 @@ public class ReviewController {
     }
 
     @Operation(summary = "리뷰 수정")
-    @PatchMapping
-    public ResponseEntity<ReviewResponse> updateReview(@RequestBody @Valid UpdateReviewRequest updateReviewRequest) {
-        Review review = reviewUseCase.update(updateReviewRequest.toReviewDetail());
+    @PatchMapping("{id}")
+    public ResponseEntity<ReviewResponse> updateReview(@PathVariable("id") Long id, @RequestBody @Valid UpdateReviewRequest updateReviewRequest) {
+        Review review = reviewUseCase.update(updateReviewRequest.toReviewDetail(id));
         return ResponseEntity.ok(new ReviewResponse(review));
     }
 

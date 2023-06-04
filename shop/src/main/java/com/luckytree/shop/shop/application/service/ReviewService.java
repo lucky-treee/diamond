@@ -56,7 +56,7 @@ public class ReviewService implements ReviewUseCase {
         Review review = reviewPort.findById(reviewDetail.getId());
         review.check();
         review.update(reviewDetail);
-        return review;
+        return reviewPort.save(review);
     }
 
     @Override
