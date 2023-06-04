@@ -25,7 +25,7 @@ public class ShopService implements ShopUseCase {
 
     @Override
     public void createShop(Shop shop) {
-        shopPort.createShop(shop);
+        if(shop.valid(shop).equals("success")) shopPort.createShop(shop);
     }
 
     @Transactional(readOnly = true)

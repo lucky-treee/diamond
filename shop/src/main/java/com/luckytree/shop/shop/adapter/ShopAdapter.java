@@ -44,7 +44,7 @@ public class ShopAdapter implements ShopPort {
 
     @Override
     public List<ShopEntity> getShopSummaryByHashtag(ShopHashtag hashtag) {
-        return shopRepository.findByHashtagAndStatus(hashtag, ShopStatus.ENABLE);
+        return shopRepository.findByHashtagAndStatus(hashtag, ShopStatus.ENABLE).orElseThrow(() -> new NotFoundException("해당 hashtag를 가진 ShopEntity가 없습니다. hashtag: " + hashtag.toString()));
     }
 
     @Override

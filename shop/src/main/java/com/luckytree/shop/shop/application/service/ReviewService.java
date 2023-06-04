@@ -32,10 +32,11 @@ public class ReviewService implements ReviewUseCase {
     private final ReviewPort reviewPort;
     private final S3Util s3Util;
     private final ShopPort shopPort;
-  
+
     @Transactional(readOnly = true)
     @Override
-    public Page<ReviewResponse> findMyReviewsById(Long memberId, Pageable pageable) {
+    public Page<ReviewResponse> findMyReviewsById(Object authenticationToken, Pageable pageable) {
+        Long memberId = (Long) authenticationToken;
         return findMyReviews(memberId, pageable);
     }
 
@@ -59,10 +60,9 @@ public class ReviewService implements ReviewUseCase {
     }
 
     @Override
-    public void updateReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos){
+    public void deleteReviewPhoto(Long reviewId, List<MultipartFile> reviewPhotos){
         deletePhotoFromS3(reviewId);
         reviewPort.deleteReviewPhotoByReviewId(reviewId);
-        uploadPhotoToS3(reviewId, reviewPhotos);
     }
 
     @Override
