@@ -31,8 +31,8 @@ public class ShopController {
     }
 
     @Operation(summary = "특정 카테고리의 샵 전체 검색")
-    @GetMapping("/{category}")
-    public ResponseEntity<List<ShopSummaryResponse>> findShopsByCategory(@PathVariable ShopCategory category) {
+    @GetMapping("/category")
+    public ResponseEntity<List<ShopSummaryResponse>> findShopsByCategory(@RequestParam(name = "category") ShopCategory category) {
         List<ShopSummaryResponse> shopSummaryResponseList = shopUseCase.findShopsByCategory(category);
         return ResponseEntity.ok(shopSummaryResponseList);
     }
@@ -52,8 +52,8 @@ public class ShopController {
     }
 
     @Operation(summary = "해쉬태그로 샵 목록 조회")
-    @GetMapping("/{hashtag}")
-    public ResponseEntity<List<ShopSummaryResponse>> findShopsByHashtag(@PathVariable ShopHashtag hashtag) {
+    @GetMapping("/hashtag")
+    public ResponseEntity<List<ShopSummaryResponse>> findShopsByHashtag(@RequestParam(name = "hashtag") ShopHashtag hashtag) {
         List<ShopSummaryResponse> shopSummaryResponseList = shopUseCase.findShopsByHashtag(hashtag);
         return ResponseEntity.ok(shopSummaryResponseList);
     }
