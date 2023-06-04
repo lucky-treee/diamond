@@ -57,7 +57,7 @@ public class ShopService implements ShopUseCase {
     }
 
     @Override
-    public void deleteShop(String authorization, DeleteShop deleteShop) {
+    public void deleteShop(DeleteShop deleteShop) {
         ShopEntity shopEntity = shopPort.getShopEntity(deleteShop.getName(), deleteShop.getAddress());
         shopPort.deleteShop(shopEntity, deleteShop.getComment());
     }

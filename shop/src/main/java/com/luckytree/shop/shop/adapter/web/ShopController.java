@@ -61,8 +61,8 @@ public class ShopController {
     @Operation(summary = "샵 삭제요청 API")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping
-    public void deleteShop(@RequestHeader("Authorization") String authorization, @RequestBody @Valid DeleteShopRequest deleteShopRequest) {
-        shopUseCase.deleteShop(authorization, deleteShopRequest.toDomain());
+    public void deleteShop(@RequestBody @Valid DeleteShopRequest deleteShopRequest) {
+        shopUseCase.deleteShop(deleteShopRequest.toDomain());
     }
 
     @PostMapping("/bookmarks")
