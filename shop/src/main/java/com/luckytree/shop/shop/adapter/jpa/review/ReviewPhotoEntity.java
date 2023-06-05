@@ -41,4 +41,10 @@ public class ReviewPhotoEntity {
     public ReviewPhoto toDomain() {
         return new ReviewPhoto(id, reviewId, photoUrl);
     }
+
+    public ReviewPhotoEntity(ReviewPhoto reviewPhoto) {
+        this.id = reviewPhoto.getId();
+        this.reviewId = reviewPhoto.getReviewId();
+        this.photoUrl = reviewPhoto.getPhotoUrl();
+    }
 }

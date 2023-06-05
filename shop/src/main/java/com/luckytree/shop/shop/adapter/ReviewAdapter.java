@@ -46,7 +46,7 @@ public class ReviewAdapter implements ReviewPort, ReviewPhotoPort {
 
     @Override
     public ReviewPhoto save(ReviewPhoto reviewPhoto) {
-        return null;
+        return reviewPhotoRepository.save(new ReviewPhotoEntity(reviewPhoto)).toDomain();
     }
 
     @Override

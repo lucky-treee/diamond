@@ -32,12 +32,11 @@ public class ReviewController {
     private final ReviewUseCase reviewUseCase;
 
     @Operation(summary = "리뷰 등록")
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<CreateReviewResponse> createReview(
-            @RequestBody @Valid CreateReviewRequest createReviewRequest,
-            @RequestPart("reviewPhotos") @Valid List<MultipartFile> reviewPhotos) {
+            @RequestPart("createReviewRequest") @Valid CreateReviewRequest createReviewRequest,
+            @RequestPart(value = "reviewPhotos", required = false) @Valid List<MultipartFile> reviewPhotos) {
         Review review = reviewUseCase.create(createReviewRequest.toDomain(Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString())));
-
         List<ReviewPhoto> reviewPhotoList = reviewUseCase.createReviewPhoto(review.getId(), reviewPhotos);
 
         return ResponseEntity.ok(new CreateReviewResponse(review, reviewPhotoList));
