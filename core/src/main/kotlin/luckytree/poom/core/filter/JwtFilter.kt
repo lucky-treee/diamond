@@ -2,6 +2,7 @@ package luckytree.poom.core.filter
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm.HMAC512
+import com.auth0.jwt.exceptions.TokenExpiredException
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -22,7 +23,14 @@ class JwtFilter(private val jwtConfiguration: JwtConfiguration) : OncePerRequest
         filterChain: FilterChain
     ) {
         if (SecurityContextHolder.getContext().authentication == null) {
-            request.getToken()?.let { changeAuthentication(it, request) }
+            request.getToken()?.let {
+                runCatching { changeAuthentication(it, request) }.onFailure {
+                    response.sendError(
+                        401,
+                        "token expired exception occurred"
+                    )
+                }
+            }
         }
 
         filterChain.doFilter(request, response)
@@ -38,16 +46,21 @@ class JwtFilter(private val jwtConfiguration: JwtConfiguration) : OncePerRequest
     }
 
     private fun changeAuthentication(token: String, httpServletRequest: HttpServletRequest) {
-        with(verify(token)) {
-            val principal = memberId
-            val authorities = listOf(SimpleGrantedAuthority(role))
-            AuthenticationToken(principal = principal.toString(), authorities = authorities)
-                .apply { details = WebAuthenticationDetailsSource().buildDetails(httpServletRequest) }
-                .also {
-                    SecurityContextHolder.getContext().authentication = it
-                    SecurityContextHolder.getContext().authentication.isAuthenticated = true
+        runCatching { verify(token) }
+            .onSuccess {
+                val principal = it.memberId
+                val authorities = listOf(SimpleGrantedAuthority(it.role))
+                AuthenticationToken(principal = principal.toString(), authorities = authorities)
+                    .apply { details = WebAuthenticationDetailsSource().buildDetails(httpServletRequest) }
+                    .also {
+                        SecurityContextHolder.getContext().authentication = it
+                        SecurityContextHolder.getContext().authentication.isAuthenticated = true
+                    }
+            }.onFailure {
+                if (it is TokenExpiredException) {
+                    throw it
                 }
-        }
+            }
     }
 
     private fun verify(token: String): Claims {
