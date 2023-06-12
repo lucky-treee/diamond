@@ -7,6 +7,7 @@ import luckytree.poom.core.enums.ShopHashtag;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class CreateReviewResponse {
@@ -25,7 +26,7 @@ public class CreateReviewResponse {
         this.memberId = review.getMemberId();
         this.content = review.getContent();
         this.hashtag = review.getHashtag();
-        this.photoUrl = reviewPhotos.stream().map(ReviewPhoto::getPhotoUrl).toList();
+        this.photoUrl = reviewPhotos.stream().map(ReviewPhoto::getPhotoUrl).collect(Collectors.toList());
         this.updateAt = review.getUpdateAt();
         this.createAt = review.getCreateAt();
     }

@@ -78,6 +78,7 @@ public class ReviewService implements ReviewUseCase {
         List<ReviewPhoto> reviewPhotoList = new ArrayList<>();
         List<String> photoUrls = new ArrayList<>();
 
+        if(reviewPhotos == null) return reviewPhotoList;
         reviewPhotos.forEach(multipartFile -> {
             try {
                 photoUrls.add(s3Util.upload(multipartFile));
@@ -87,7 +88,6 @@ public class ReviewService implements ReviewUseCase {
         });
 
         photoUrls.forEach(photoUrl -> reviewPhotoList.add(reviewPhotoPort.save(new ReviewPhoto(reviewId, photoUrl))));
-
         return reviewPhotoList;
     }
 
