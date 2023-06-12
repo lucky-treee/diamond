@@ -56,7 +56,7 @@ class SecurityConfig(
                     AntPathRequestMatcher("/swagger-resources/**"),
                     AntPathRequestMatcher("/v3/api-docs/**"),
                 ).permitAll()
-                it.anyRequest().authenticated()
+                it.anyRequest().permitAll()
             }
             .addFilterBefore(
                 InternalKeyFilter(InternalKeyManager(internalApiSecret)),
