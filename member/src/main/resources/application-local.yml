@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: member-service
+  profiles:
+    active: main
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      name: member, actuator, auth
+      label: local
+      profile: local
+server:
+  port: 10100

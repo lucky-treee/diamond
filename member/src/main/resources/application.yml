@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: member
+  profiles:
+    active: develop
+  config:
+    import:
+      - "optional:configserver:http://192.168.0.14:31185/"
+      - "optional:classpath:application-core.yml"
+  cloud:
+    config:
+      name: member, actuator
+      label: develop
+      profile: develop
+server:
+  port: 10100
+  servlet:
+    contextPath: /member
